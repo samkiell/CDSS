@@ -13,13 +13,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
-
         await connectDB();
-
         const user = await User.findOne({
           email: credentials.email.toLowerCase(),
         }).select('password email firstName lastName avatar role isVerified');
-        console.log('User found during authorization:', user);
         if (!user) {
           return null;
         }
@@ -31,8 +28,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
 
         if (!user.isVerified) {
-          // Returning null signals invalid credentials.
-          // Custom error messages in v5 are best handled by redirecting to a custom page or using callbacks.
           return null;
         }
 
