@@ -31,6 +31,10 @@ export async function getAiPreliminaryAnalysis(data) {
     Clearly state that this is a preliminary analysis and not a final medical diagnosis.
     Include recommendations for next steps.
     
+    CRITICAL INSTRUCTION:
+    Do NOT include any internal question IDs, technical codes, or raw data keys (e.g., "ankle_q1", "achilles_pop") in your response. 
+    The patient should only see natural clinical language. Instead of referencing IDs, describe the finding (e.g., write "based on the sharp pain mentioned" instead of "based on q1").
+    
     FORMAT:
     Return your response in clear sections:
     1. Preliminary Analysis (Potential condition)
