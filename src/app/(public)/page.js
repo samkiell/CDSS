@@ -50,7 +50,11 @@ export default function SplashPage() {
           isAnimating ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'
         }`}
       >
-        <Button size="lg" onClick={() => router.push('/login')} className="min-w-[200px]">
+        <Button
+          size="lg"
+          onClick={() => router.push('/login')}
+          className="min-w-50 cursor-pointer"
+        >
           Get Started
         </Button>
       </div>

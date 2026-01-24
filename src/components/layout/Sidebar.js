@@ -6,8 +6,9 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, Settings, HelpCircle, Shield, LogOut, User } from 'lucide-react';
 import { cn } from '@/lib/cn';
+import { signOut } from 'next-auth/react';
 
-function Sidebar({ links = [], secondaryLinks = [], className }) {
+export default function Sidebar({ links = [], secondaryLinks = [], className, user }) {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -114,10 +115,10 @@ function Sidebar({ links = [], secondaryLinks = [], className }) {
                 <li key={link.label}>
                   {link.action ? (
                     <button
-                      className="text-muted-foreground hover:bg-muted hover:text-foreground flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors"
-                      onClick={() => {
+                      className="text-muted-foreground hover:bg-muted hover:text-foreground flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors"
+                      onClick={async () => {
                         setIsMobileOpen(false);
-                        // Handle logout or other actions
+                        await signOut({ redirectTo: '/' });
                       }}
                     >
                       {Icon && <Icon className="h-5 w-5" />}
@@ -148,12 +149,17 @@ function Sidebar({ links = [], secondaryLinks = [], className }) {
             <div className="bg-muted flex h-10 w-10 items-center justify-center rounded-full">
               <User className="text-muted-foreground h-5 w-5" />
             </div>
-            <span className="text-foreground text-sm font-medium">Profile</span>
+            <div className="flex flex-col">
+              <span className="text-foreground text-sm font-medium">
+                {user ? `${user?.firstName} ${user?.lastName}` : 'Unkonwn User'}
+              </span>
+              <span className="text-[12px] font-medium capitalize">
+                {user ? `${user?.role.toLowerCase()}` : null}
+              </span>
+            </div>
           </Link>
         </div>
       </aside>
     </>
   );
 }
-
-export { Sidebar };

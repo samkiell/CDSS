@@ -1,18 +1,28 @@
 'use client';
-
 import {
   LayoutDashboard,
+  ClipboardPlus,
+  FlaskConical,
+  TrendingUp,
+  MessageSquare,
+  Bell,
+  FileOutput,
+  ClipboardList,
   Users,
   FolderOpen,
   Compass,
-  ClipboardList,
-  FileOutput,
-  MessageSquare,
-  Bell,
 } from 'lucide-react';
-import { Sidebar, TopNav } from '@/components/layout';
 
-const clinicianLinks = [
+export const patientLinks = [
+  { href: '/patient/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/patient/assessment', label: 'New assessment', icon: ClipboardPlus },
+  { href: '/patient/self-test', label: 'Guided Self Test', icon: FlaskConical },
+  { href: '/patient/progress', label: 'Progress', icon: TrendingUp },
+  { href: '/patient/messages', label: 'Messages', icon: MessageSquare },
+  { href: '/patient/notifications', label: 'Notifications', icon: Bell },
+];
+
+export const clinicianLinks = [
   { href: '/clinician/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/clinician/patients', label: 'Patient List', icon: Users },
   { href: '/clinician/cases', label: 'Case View', icon: FolderOpen },
@@ -22,17 +32,3 @@ const clinicianLinks = [
   { href: '/clinician/messages', label: 'Messages', icon: MessageSquare },
   { href: '/clinician/notifications', label: 'Notifications', icon: Bell },
 ];
-
-export default function ClinicianLayout({ children }) {
-  return (
-    <div className="bg-background min-h-screen">
-      <Sidebar links={clinicianLinks} />
-
-      <div className="lg:pl-64">
-        <TopNav title="Therapist's Dashboard" />
-
-        <main className="p-4 lg:p-6">{children}</main>
-      </div>
-    </div>
-  );
-}
