@@ -4,3 +4,4 @@
  */
 
 export { default as AuthProvider } from './AuthProvider.js';
+export { ThemeProvider } from './ThemeProvider.js';

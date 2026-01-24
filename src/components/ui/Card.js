@@ -1,36 +1,41 @@
-/**
- * Card Component
- * Reusable card container
- */
+import { cn } from '@/lib/cn';
 
-import { cn } from '@/lib/utils';
-
-export default function Card({ children, className, ...props }) {
+function Card({ className, ...props }) {
   return (
-    <div className={cn('rounded-xl bg-white p-6 shadow-md', className)} {...props}>
-      {children}
-    </div>
+    <div
+      className={cn(
+        'border-border bg-card text-card-foreground rounded-xl border shadow-sm',
+        className
+      )}
+      {...props}
+    />
   );
 }
 
-export function CardHeader({ children, className }) {
-  return <div className={cn('mb-4', className)}>{children}</div>;
+function CardHeader({ className, ...props }) {
+  return <div className={cn('flex flex-col space-y-1.5 p-6', className)} {...props} />;
 }
 
-export function CardTitle({ children, className }) {
+function CardTitle({ className, ...props }) {
   return (
-    <h3 className={cn('text-xl font-semibold text-gray-900', className)}>{children}</h3>
+    <h3
+      className={cn('text-xl leading-none font-semibold tracking-tight', className)}
+      {...props}
+    />
   );
 }
 
-export function CardDescription({ children, className }) {
-  return <p className={cn('mt-1 text-sm text-gray-500', className)}>{children}</p>;
+function CardDescription({ className, ...props }) {
+  return <p className={cn('text-muted-foreground text-sm', className)} {...props} />;
 }
 
-export function CardContent({ children, className }) {
-  return <div className={cn('', className)}>{children}</div>;
+function CardContent({ className, ...props }) {
+  return <div className={cn('p-6 pt-0', className)} {...props} />;
 }
 
-export function CardFooter({ children, className }) {
-  return <div className={cn('mt-4 flex items-center', className)}>{children}</div>;
+function CardFooter({ className, ...props }) {
+  return <div className={cn('flex items-center p-6 pt-0', className)} {...props} />;
 }
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent };
+export default Card;

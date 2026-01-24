@@ -3,14 +3,18 @@
  * Central export for all UI components
  */
 
-export { default as Button } from './Button.js';
+export { Button, buttonVariants } from './Button.js';
 export {
-  default as Card,
+  Card,
   CardHeader,
   CardTitle,
   CardDescription,
   CardContent,
   CardFooter,
 } from './Card.js';
-export { default as Input } from './Input.js';
-export { default as Badge } from './Badge.js';
+export { Input } from './Input.js';
+export { PasswordInput } from './PasswordInput.js';
+export { Badge, badgeVariants } from './Badge.js';
+export { ThemeToggle } from './ThemeToggle.js';
+export { Logo } from './Logo.js';
+export { OTPInput } from './OTPInput.js';

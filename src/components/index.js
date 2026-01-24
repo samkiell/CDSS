@@ -6,5 +6,8 @@
 // UI Components
 export * from './ui/index.js';
 
+// Layout Components
+export * from './layout/index.js';
+
 // Providers
 export * from './providers/index.js';
