@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import connectDB from '@/lib/db/connect';
 import User, { ROLES } from '@/models/User';
+import encryptPassword from '@/lib/encryptPassword';
 
 export async function POST(req) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -90,11 +91,48 @@ export async function POST(req) {
   }
 
   try {
-    return NextResponse.json({ message: 'POST a new User' }, { status: '200' });
+    // connect to database
+    await connectDB();
+    // check if the user already exist
+    const existingUser = await User.findOne({ email: email });
+    // if user exist return an error
+    if (existingUser) {
+      return NextResponse.json(
+        { error: 'Account already exists' },
+        {
+          status: 401,
+        }
+      );
+    }
+    // create a new user
+    const newUser = await User.create({
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      password: await encryptPassword(password),
+    });
+
+    // success
+    return NextResponse.json(
+      {
+        message: 'POST a new User',
+        user: {
+          id: newUser._id,
+        },
+      },
+      { status: '200' }
+    );
   } catch (err) {
     if (err.name === 'ValidationError') {
       const messages = Object.values(err.errors).map((e) => e.message);
-      return NextResponse.json({ error: messages.join(', ') }, { status: 400 });
+      return NextResponse.json(
+        {
+          error: messages.join(', '),
+        },
+        {
+          status: 400,
+        }
+      );
     }
     return NextResponse.json(
       {
