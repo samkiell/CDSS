@@ -13,10 +13,19 @@ import {
   Clipboard,
   Upload,
   Clock,
+  AlertCircle,
 } from 'lucide-react';
 import PainChart from '@/components/dashboard/PainChart';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  Badge,
+  Button,
+} from '@/components/ui';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default async function PatientDashboardPage() {
   const session = await auth();
@@ -42,8 +51,8 @@ export default async function PatientDashboardPage() {
 
   // Aggregate pain history for the chart
   const painHistory = pastSessions
+    .filter((sess) => sess.symptoms?.some((s) => s.questionCategory === 'pain_intensity'))
     .map((sess) => {
-      // Look for pain intensity in symptoms or default to 0
       const intensityScore = sess.symptoms?.find(
         (s) => s.questionCategory === 'pain_intensity'
       )?.response;
@@ -57,437 +66,382 @@ export default async function PatientDashboardPage() {
   const nextAppointment = appointments[0];
 
   return (
-    <div className="space-y-8">
-      {/* Header / Welcome Section */}
+    <div className="animate-fade-in space-y-6 pb-8">
+      {/* Welcome Header */}
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h1 className="border-none text-2xl font-bold text-slate-900">
-            Welcome Back, {patient?.firstName || session.user.firstName}!
-          </h1>
-          <p className="mt-1 text-slate-500">
-            Here's a summary of your health progress and upcoming sessions.
+          <h2 className="text-2xl font-bold tracking-tight">
+            Welcome back, {patient?.firstName || session.user.firstName}!
+          </h2>
+          <p className="text-muted-foreground text-sm">
+            Keep track of your symptoms and recovery progress here.
           </p>
-        </div>
-        <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-2 pr-4 shadow-sm">
-          <div className="relative h-10 w-10 overflow-hidden rounded-full border border-blue-200 bg-blue-100">
-            {patient?.avatar ? (
-              <Image src={patient.avatar} alt="Profile" fill className="object-cover" />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center text-lg font-bold text-blue-600">
-                {patient?.firstName?.[0] || 'U'}
-              </div>
-            )}
-          </div>
-          <div>
-            <p className="text-sm leading-none font-semibold text-slate-900">
-              {patient?.firstName} {patient?.lastName}
-            </p>
-            <p className="mt-1 text-[10px] font-medium tracking-wider text-slate-500 uppercase">
-              Patient Account
-            </p>
-          </div>
         </div>
       </div>
 
-      {/* Top Stats Row */}
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-        <div className="flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-          <div className="rounded-xl bg-blue-50 p-3">
-            <Calendar className="h-6 w-6 text-blue-600" />
-          </div>
-          <div>
-            <p className="text-xs font-semibold tracking-tight text-slate-400 uppercase">
-              Next Appointment
-            </p>
-            <p className="mt-1 text-lg font-bold text-slate-900">
-              {nextAppointment
-                ? new Date(nextAppointment.date).toLocaleDateString(undefined, {
-                    month: 'short',
-                    day: 'numeric',
-                  })
-                : 'None scheduled'}
-            </p>
-            {nextAppointment && (
-              <p className="text-sm font-medium text-slate-500">
-                {new Date(nextAppointment.date).toLocaleTimeString([], {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                })}
+      {/* Top Stats Cards */}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Card className="border-l-primary border-l-4">
+          <CardContent className="flex items-center gap-4 p-6">
+            <div className="bg-primary/10 rounded-xl p-3">
+              <Calendar className="text-primary h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
+                Next Appointment
               </p>
-            )}
-          </div>
-        </div>
+              <h3 className="text-lg font-bold">
+                {nextAppointment
+                  ? new Date(nextAppointment.date).toLocaleDateString(undefined, {
+                      month: 'short',
+                      day: 'numeric',
+                    })
+                  : 'No upcoming'}
+              </h3>
+              {nextAppointment && (
+                <p className="text-muted-foreground text-xs">
+                  {new Date(nextAppointment.date).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </p>
+              )}
+            </div>
+          </CardContent>
+        </Card>
 
-        <div className="flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-          <div className="rounded-xl bg-indigo-50 p-3">
-            <UserIcon className="h-6 w-6 text-indigo-600" />
-          </div>
-          <div>
-            <p className="text-xs font-semibold tracking-tight text-slate-400 uppercase">
-              Assigned Therapist
-            </p>
-            <p className="mt-1 text-lg font-bold text-slate-900">
-              {treatmentPlan?.therapistName ||
-                nextAppointment?.therapistName ||
-                'Pending'}
-            </p>
-            <p className="text-sm font-medium text-slate-500">Physiotherapy Care</p>
-          </div>
-        </div>
+        <Card className="border-l-4 border-l-indigo-500">
+          <CardContent className="flex items-center gap-4 p-6">
+            <div className="rounded-xl bg-indigo-500/10 p-3">
+              <UserIcon className="h-6 w-6 text-indigo-500" />
+            </div>
+            <div>
+              <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
+                Assigned Therapist
+              </p>
+              <h3 className="max-w-[150px] truncate text-lg font-bold">
+                {treatmentPlan?.therapistName ||
+                  nextAppointment?.therapistName ||
+                  'None assigned'}
+              </h3>
+            </div>
+          </CardContent>
+        </Card>
 
-        <div className="flex items-start gap-4 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-          <div className="rounded-xl bg-emerald-50 p-3">
-            <Activity className="h-6 w-6 text-emerald-600" />
-          </div>
-          <div>
-            <p className="text-xs font-semibold tracking-tight text-slate-400 uppercase">
-              Current Condition
-            </p>
-            <p className="mt-1 max-w-[180px] truncate text-lg font-bold text-slate-900">
-              {latestSession?.temporalDiagnosis?.primaryDiagnosis?.conditionName ||
-                'Lower back pain'}
-            </p>
-            <p className="text-sm font-medium text-slate-500 capitalize">
-              Status: {latestSession?.sessionStatus?.replace('_', ' ') || 'Evaluation'}
-            </p>
-          </div>
-        </div>
+        <Card className="border-l-4 border-l-emerald-500">
+          <CardContent className="flex items-center gap-4 p-6">
+            <div className="rounded-xl bg-emerald-500/10 p-3">
+              <Activity className="h-6 w-6 text-emerald-500" />
+            </div>
+            <div>
+              <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
+                Active Case
+              </p>
+              <h3 className="max-w-[150px] truncate text-lg font-bold">
+                {latestSession?.temporalDiagnosis?.primaryDiagnosis?.conditionName ||
+                  'No active case'}
+              </h3>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
-        {/* Main Content Area */}
+        {/* Left Section: Main Highlights */}
         <div className="space-y-6 md:col-span-8">
-          {/* Hero Assessment Card */}
-          <div className="relative overflow-hidden rounded-3xl bg-blue-600 p-8 text-white shadow-lg shadow-blue-100">
-            <div className="relative z-10 flex flex-col justify-between gap-8 md:flex-row md:items-center">
-              <div className="max-w-md">
-                <div className="mb-6 flex items-center gap-3">
-                  <span className="rounded-full bg-yellow-400 px-3 py-1 text-[10px] font-black tracking-widest text-blue-900 uppercase">
-                    {latestSession?.sessionStatus === 'in_progress'
-                      ? 'In Progress'
-                      : 'Recovery Active'}
-                  </span>
-                  <div className="h-1 w-1 rounded-full bg-blue-300"></div>
-                  <span className="text-xs font-medium text-blue-100">
-                    Last active{' '}
-                    {latestSession
-                      ? new Date(latestSession.updatedAt).toLocaleDateString()
-                      : 'Today'}
-                  </span>
-                </div>
-                <h2 className="mb-3 text-3xl font-bold tracking-tight">
-                  {latestSession?.temporalDiagnosis?.primaryDiagnosis?.conditionName ||
-                    'Ongoing Assessment'}
-                </h2>
-                <p className="mb-8 text-sm leading-relaxed text-blue-100 opacity-90">
-                  Your recovery is our priority. Complete your current assessment or
-                  follow your personalized exercise plan to speed up your healing process.
-                </p>
-                <div className="flex flex-col gap-4">
-                  <div className="mb-2 flex items-center justify-between text-xs font-bold">
-                    <span className="text-blue-100">Current Progress</span>
-                    <span>
-                      {latestSession?.sessionStatus === 'in_progress' ? '65%' : '100%'}
-                    </span>
+          {/* Ongoing Assessment Hero Card */}
+          <Card className="bg-primary text-primary-foreground overflow-hidden">
+            <CardContent className="p-0">
+              <div className="relative p-8">
+                <div className="relative z-10 flex flex-col justify-between gap-6 md:flex-row md:items-center">
+                  <div className="max-w-md space-y-4">
+                    <div className="flex items-center gap-2">
+                      <Badge
+                        variant="outline"
+                        className="border-white/20 bg-white/20 text-white"
+                      >
+                        {latestSession?.sessionStatus === 'in_progress'
+                          ? 'Assessment in progress'
+                          : 'Assessment Result'}
+                      </Badge>
+                      <span className="text-xs text-white/60">
+                        Updated{' '}
+                        {latestSession
+                          ? new Date(latestSession.updatedAt).toLocaleDateString()
+                          : 'recently'}
+                      </span>
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tight">
+                      {latestSession?.temporalDiagnosis?.primaryDiagnosis
+                        ?.conditionName || 'Start a New Assessment'}
+                    </h2>
+                    <p className="text-primary-foreground/80 text-sm leading-relaxed">
+                      {latestSession?.sessionStatus === 'in_progress'
+                        ? 'Finish your assessment to get a comprehensive diagnostic report and personalized treatment plan.'
+                        : 'Track your symptoms and complete daily check-ins to monitor your recovery journey effectively.'}
+                    </p>
+                    <div className="pt-2">
+                      <Button asChild variant="secondary" size="lg" className="font-bold">
+                        <Link href="/patient/assessment">
+                          {latestSession?.sessionStatus === 'in_progress'
+                            ? 'Continue Assessment'
+                            : 'Start New Assessment'}
+                          <ChevronRight className="ml-2 h-4 w-4" />
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
-                  <div className="h-2.5 w-full rounded-full bg-blue-500/30">
-                    <div
-                      className="h-full rounded-full bg-white transition-all duration-1000 ease-out"
-                      style={{
-                        width: `${latestSession?.sessionStatus === 'in_progress' ? 65 : 100}%`,
-                      }}
-                    ></div>
+                  <div className="hidden opacity-20 lg:block">
+                    <Activity className="h-40 w-40" />
                   </div>
                 </div>
-                <div className="mt-8">
-                  <Link
-                    href="/patient/assessment"
-                    className="inline-flex items-center gap-2 rounded-2xl bg-white px-8 py-3.5 font-bold text-blue-600 shadow-sm transition-all hover:bg-blue-50 active:scale-95"
-                  >
-                    {latestSession?.sessionStatus === 'in_progress'
-                      ? 'Continue Assessment'
-                      : 'View Full Report'}
-                    <ChevronRight className="h-5 w-5" />
-                  </Link>
-                </div>
+                {/* Background Pattern */}
+                <div className="absolute top-0 right-0 -mt-32 -mr-32 h-64 w-64 rounded-full bg-white/5 blur-3xl"></div>
               </div>
-              <div className="hidden lg:block">
-                <div className="rounded-full border border-white/10 bg-white/10 p-10 backdrop-blur-sm">
-                  <Activity className="h-20 w-20 text-white opacity-80" />
-                </div>
-              </div>
-            </div>
-            {/* Abstract Background Shapes */}
-            <div className="absolute top-0 right-0 -mt-20 -mr-20 h-80 w-80 rounded-full bg-gradient-to-br from-blue-400/20 to-transparent blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 -mb-10 -ml-10 h-40 w-40 rounded-full bg-blue-400/10 blur-2xl"></div>
-          </div>
+            </CardContent>
+          </Card>
 
-          {/* Progress Chart Section */}
-          <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
-            <div className="mb-8 flex items-center justify-between">
+          {/* Recovery Progress Chart */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0">
               <div>
-                <h3 className="text-xl font-bold tracking-tight text-slate-900">
-                  Pain Recovery Journey
-                </h3>
-                <p className="mt-1 text-sm font-medium text-slate-500">
-                  Tracking your pain intensity levels over time
-                </p>
+                <CardTitle className="text-xl">Pain Progress</CardTitle>
+                <CardDescription>
+                  Visualizing your pain levels over the last few assessments
+                </CardDescription>
               </div>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2 text-xs font-bold tracking-wider text-slate-400 uppercase">
-                  <div className="h-2 w-2 rounded-full bg-blue-600"></div>
-                  Intensity Score
-                </div>
-              </div>
-            </div>
-            <PainChart history={painHistory} />
-          </div>
+              <Activity className="text-muted-foreground h-5 w-5" />
+            </CardHeader>
+            <CardContent>
+              <PainChart history={painHistory} />
+            </CardContent>
+          </Card>
 
-          {/* Weekly Treatment Plan Table */}
-          <div className="overflow-hidden rounded-3xl border border-slate-100 bg-white shadow-sm">
-            <div className="flex items-center justify-between border-b border-slate-100 p-8">
+          {/* Treatment Plan Table */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0">
               <div>
-                <h3 className="text-xl font-bold tracking-tight text-slate-900">
-                  Active Treatment Plan
-                </h3>
-                <p className="mt-1 text-sm font-medium text-slate-500">
-                  Personalized activities for your recovery
-                </p>
+                <CardTitle className="text-xl">Current Treatment Activities</CardTitle>
+                <CardDescription>
+                  Scheduled exercises and clinical sessions
+                </CardDescription>
               </div>
-              <Link
-                href="/patient/progress"
-                className="rounded-xl px-4 py-2 text-sm font-bold text-blue-600 transition-colors hover:bg-blue-50"
-              >
-                View Full Plan
-              </Link>
-            </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left">
-                <thead className="border-b border-slate-100 bg-slate-50/50">
-                  <tr>
-                    <th className="px-8 py-5 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                      Target Date
-                    </th>
-                    <th className="px-8 py-5 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                      Main Goal
-                    </th>
-                    <th className="px-8 py-5 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                      Clinical Treatment
-                    </th>
-                    <th className="px-8 py-5 text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                      Home Exercise
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {treatmentPlan?.activities?.length > 0 ? (
-                    treatmentPlan.activities.map((activity, idx) => (
-                      <tr key={idx} className="transition-colors hover:bg-slate-50/30">
-                        <td className="px-8 py-6 text-sm font-bold whitespace-nowrap text-slate-900">
-                          {new Date(activity.date).toLocaleDateString(undefined, {
-                            month: 'short',
-                            day: 'numeric',
-                          })}
-                        </td>
-                        <td className="px-8 py-6 text-sm font-medium text-slate-600">
-                          {activity.goal}
-                        </td>
-                        <td className="px-8 py-6 text-sm font-medium text-slate-600">
-                          {activity.activeTreatment}
-                        </td>
-                        <td className="px-8 py-6 text-sm">
-                          <span className="inline-flex items-center gap-2 rounded-xl bg-blue-50 px-4 py-1.5 text-xs font-bold text-blue-700">
-                            <Play className="h-3 w-3 fill-current" />
-                            {activity.homeExercise}
-                          </span>
+              <Button variant="ghost" size="sm" asChild>
+                <Link href="/patient/progress" className="text-primary text-xs font-bold">
+                  View Full Plan
+                </Link>
+              </Button>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <table className="w-full text-left">
+                  <thead className="bg-muted/50 border-border border-y">
+                    <tr>
+                      <th className="text-muted-foreground px-6 py-3 text-[10px] font-bold tracking-widest uppercase">
+                        Date
+                      </th>
+                      <th className="text-muted-foreground px-6 py-3 text-[10px] font-bold tracking-widest uppercase">
+                        Goal
+                      </th>
+                      <th className="text-muted-foreground px-6 py-3 text-[10px] font-bold tracking-widest uppercase">
+                        Treatment
+                      </th>
+                      <th className="text-muted-foreground px-6 py-3 text-[10px] font-bold tracking-widest uppercase">
+                        Home Exercise
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-border divide-y">
+                    {treatmentPlan?.activities?.length > 0 ? (
+                      treatmentPlan.activities.map((activity, idx) => (
+                        <tr key={idx} className="hover:bg-muted/30 transition-colors">
+                          <td className="px-6 py-4 text-sm font-bold whitespace-nowrap">
+                            {new Date(activity.date).toLocaleDateString(undefined, {
+                              month: 'short',
+                              day: 'numeric',
+                            })}
+                          </td>
+                          <td className="text-muted-foreground px-6 py-4 text-sm font-medium">
+                            {activity.goal}
+                          </td>
+                          <td className="text-muted-foreground px-6 py-4 text-sm font-medium">
+                            {activity.activeTreatment}
+                          </td>
+                          <td className="px-6 py-4">
+                            <Badge
+                              variant="secondary"
+                              className="flex w-fit items-center gap-1.5 font-bold"
+                            >
+                              <Play className="h-3 w-3 fill-current" />
+                              {activity.homeExercise}
+                            </Badge>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td
+                          colSpan="4"
+                          className="text-muted-foreground px-6 py-12 text-center text-sm italic"
+                        >
+                          No treatment activities found. Please complete an assessment or
+                          wait for your therapist's assignment.
                         </td>
                       </tr>
-                    ))
-                  ) : (
-                    <tr>
-                      <td colSpan="4" className="px-8 py-20 text-center">
-                        <div className="flex flex-col items-center justify-center">
-                          <Clipboard className="mb-4 h-10 w-10 text-slate-200" />
-                          <p className="font-medium text-slate-400 italic">
-                            No specific activities scheduled for this period.
-                          </p>
-                          <button className="mt-4 text-xs font-bold text-blue-600 hover:underline">
-                            Request Plan Update
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Sidebar / Secondary Content */}
+        {/* Right Section: Actions & Details */}
         <div className="space-y-6 md:col-span-4">
-          {/* Quick Actions Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            <Link
-              href="/patient/assessment"
-              className="group rounded-3xl border border-orange-100 bg-orange-50 p-5 transition-all hover:shadow-md"
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-500 text-white shadow-lg shadow-orange-200 transition-transform group-hover:rotate-6">
-                <PlusCircle className="h-6 w-6" />
-              </div>
-              <p className="text-sm leading-tight font-bold text-slate-900">
-                Start New Assessment
-              </p>
-            </Link>
-            <Link
-              href="/patient/assessment"
-              className="group rounded-3xl border border-yellow-100 bg-yellow-50 p-5 transition-all hover:shadow-md"
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-yellow-500 text-white shadow-lg shadow-yellow-200 transition-transform group-hover:-rotate-6">
-                <Clock className="h-6 w-6" />
-              </div>
-              <p className="text-sm leading-tight font-bold text-slate-900">
-                Continue Case
-              </p>
-            </Link>
-            <Link
-              href="/patient/appointments"
-              className="group rounded-3xl border border-emerald-100 bg-emerald-50 p-5 transition-all hover:shadow-md"
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-500 text-white shadow-lg shadow-emerald-200 transition-transform group-hover:scale-110">
-                <Calendar className="h-6 w-6" />
-              </div>
-              <p className="text-sm leading-tight font-bold text-slate-900">
-                Book Appointment
-              </p>
-            </Link>
-            <Link
-              href="/patient/self-test"
-              className="group rounded-3xl border border-blue-100 bg-blue-50 p-5 transition-all hover:shadow-md"
-            >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-500 text-white shadow-lg shadow-blue-200 transition-transform group-hover:translate-y-[-4px]">
-                <Video className="h-6 w-6" />
-              </div>
-              <p className="text-sm leading-tight font-bold text-slate-900">
-                Do Self-Test
-              </p>
-            </Link>
-            <Link
-              href="/patient/documents"
-              className="group col-span-2 flex items-center justify-center rounded-3xl border-2 border-dashed border-slate-200 p-4 py-6 transition-all hover:border-blue-300 hover:bg-blue-50/30"
-            >
-              <div className="flex items-center gap-3">
-                <Upload className="h-5 w-5 text-slate-400 group-hover:animate-bounce group-hover:text-blue-500" />
-                <span className="font-bold text-slate-500 group-hover:text-slate-900">
-                  Upload Medical Docs
-                </span>
-              </div>
+          {/* Quick Action Grid */}
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              {
+                href: '/patient/assessment',
+                label: 'New Assessment',
+                icon: PlusCircle,
+                bg: 'bg-orange-500',
+              },
+              {
+                href: '/patient/assessment',
+                label: 'Continue Case',
+                icon: Clock,
+                bg: 'bg-yellow-500',
+              },
+              {
+                href: '/patient/appointments',
+                label: 'Book Session',
+                icon: Calendar,
+                bg: 'bg-emerald-500',
+              },
+              {
+                href: '/patient/self-test',
+                label: 'Self Test',
+                icon: Video,
+                bg: 'bg-blue-500',
+              },
+            ].map((action, i) => (
+              <Link key={i} href={action.href} className="group animate-scale-up">
+                <Card className="hover:border-primary/50 h-full transition-all hover:shadow-md">
+                  <CardContent className="flex flex-col items-center p-4 text-center">
+                    <div
+                      className={`${action.bg} mb-3 rounded-xl p-3 text-white transition-transform group-hover:scale-110`}
+                    >
+                      <action.icon className="h-5 w-5" />
+                    </div>
+                    <span className="text-xs leading-tight font-bold">
+                      {action.label}
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+            <Link href="/patient/documents" className="group col-span-2">
+              <Card className="hover:border-primary hover:bg-primary/5 border-dashed transition-all">
+                <CardContent className="flex items-center justify-center gap-2 p-4">
+                  <Upload className="text-muted-foreground group-hover:text-primary h-4 w-4 group-hover:animate-bounce" />
+                  <span className="text-muted-foreground group-hover:text-foreground text-xs font-bold">
+                    Upload Medical Documents
+                  </span>
+                </CardContent>
+              </Card>
             </Link>
           </div>
 
-          {/* Appointments Card */}
-          <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
-            <h3 className="mb-6 text-lg font-bold tracking-tight text-slate-900">
-              Upcoming Schedule
-            </h3>
-            <div className="space-y-4">
+          {/* Upcoming Appointment Details */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Upcoming Schedule</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
               {appointments.length > 0 ? (
                 appointments.map((appt, idx) => (
                   <div
                     key={idx}
-                    className="rounded-2xl border border-slate-100 bg-slate-50/80 p-5 transition-all hover:bg-white hover:shadow-md"
+                    className="bg-muted/30 border-border space-y-3 rounded-xl border p-4"
                   >
-                    <div className="mb-4 flex items-start justify-between">
+                    <div className="flex items-start justify-between">
                       <div>
-                        <p className="leading-tight font-bold text-slate-900">
-                          {appt.type}
-                        </p>
-                        <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-slate-500">
-                          <span className="inline-block h-1.5 w-1.5 rounded-full bg-blue-400"></span>
-                          Dr. {appt.therapistName}
+                        <p className="text-sm leading-none font-bold">{appt.type}</p>
+                        <p className="text-muted-foreground mt-1.5 flex items-center gap-1.5 text-[11px] font-medium">
+                          <UserIcon className="h-3 w-3" /> Dr. {appt.therapistName}
                         </p>
                       </div>
-                      <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-black tracking-wider text-emerald-700 uppercase">
+                      <Badge
+                        variant="outline"
+                        className="bg-success/10 text-success border-success/20 text-[10px] font-black uppercase"
+                      >
                         {appt.status}
-                      </span>
+                      </Badge>
                     </div>
-                    <div className="flex items-center justify-between border-t border-slate-100 pt-4 text-[11px] font-bold text-slate-400">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-3.5 w-3.5" />
+                    <div className="text-muted-foreground flex items-center justify-between pt-1 text-[11px] font-bold">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar className="h-3 w-3" />
                         {new Date(appt.date).toLocaleDateString(undefined, {
                           month: 'short',
                           day: 'numeric',
                         })}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-3.5 w-3.5" />
+                      <div className="flex items-center gap-1.5">
+                        <Clock className="h-3 w-3" />
                         {new Date(appt.date).toLocaleTimeString([], {
                           hour: '2-digit',
                           minute: '2-digit',
                         })}
                       </div>
                     </div>
-                    <div className="mt-5 flex gap-2">
-                      <button className="flex-1 rounded-xl bg-blue-600 py-3 text-xs font-black text-white shadow-md shadow-blue-100 transition-colors hover:bg-blue-700 active:scale-95">
-                        JOIN SESSION
-                      </button>
-                    </div>
+                    <Button size="sm" className="w-full text-xs font-bold">
+                      JOIN SESSION
+                    </Button>
                   </div>
                 ))
               ) : (
-                <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-10 text-center">
-                  <Calendar className="mx-auto mb-3 h-8 w-8 text-slate-200" />
-                  <p className="text-sm font-medium text-slate-400">
+                <div className="rounded-xl border border-dashed px-4 py-6 text-center">
+                  <AlertCircle className="text-muted-foreground/30 mx-auto mb-2 h-8 w-8" />
+                  <p className="text-muted-foreground text-xs font-medium">
                     No sessions booked.
                   </p>
-                  <Link
-                    href="/patient/appointments"
-                    className="mt-2 inline-block text-xs font-bold text-blue-600 hover:underline"
+                  <Button
+                    variant="link"
+                    size="sm"
+                    className="text-primary mt-1 h-auto p-0 text-[11px] font-bold"
+                    asChild
                   >
-                    Schedule Now
-                  </Link>
+                    <Link href="/patient/appointments">Schedule one now</Link>
+                  </Button>
                 </div>
               )}
-            </div>
-          </div>
+            </CardContent>
+          </Card>
 
-          {/* Clinical Tests Mini List */}
-          <div className="rounded-3xl border border-slate-100 bg-white p-8 shadow-sm">
-            <h3 className="mb-6 text-lg font-bold tracking-tight text-slate-900">
-              Clinical Tests
-            </h3>
-            <div className="space-y-3">
-              {[
-                {
-                  type: 'X-Ray: Lumbar Spine',
-                  status: 'Scheduled',
-                  color: 'bg-purple-100 text-purple-700',
-                },
-                {
-                  type: 'MRI: Request Sent',
-                  status: 'Pending',
-                  color: 'bg-yellow-100 text-yellow-700',
-                },
-              ].map((test, idx) => (
-                <div
-                  key={idx}
-                  className="flex items-center justify-between rounded-2xl border border-transparent p-4 transition-colors hover:border-slate-100 hover:bg-slate-50"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-50">
-                      <Clipboard className="h-4 w-4 text-slate-400" />
-                    </div>
-                    <span className="text-sm font-bold text-slate-700">{test.type}</span>
-                  </div>
-                  <span
-                    className={`rounded-md px-2 py-0.5 text-[9px] font-black uppercase ${test.color} tracking-tighter`}
-                  >
-                    {test.status}
-                  </span>
+          {/* Clinical Tests */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-lg">Clinical Tests</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="border-border bg-muted/20 flex items-center justify-between rounded-lg border p-3">
+                <div className="flex items-center gap-3">
+                  <Clipboard className="text-muted-foreground h-4 w-4" />
+                  <span className="text-xs font-bold">Lumbar X-Ray</span>
                 </div>
-              ))}
-            </div>
-          </div>
+                <Badge
+                  variant="outline"
+                  className="bg-warning/10 text-warning border-warning/20 text-[9px] font-black uppercase"
+                >
+                  Pending
+                </Badge>
+              </div>
+              <p className="text-muted-foreground text-center text-[10px] italic">
+                Recent lab results and imaging orders will appear here.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
