@@ -181,11 +181,13 @@ export default async function PatientDashboardPage() {
                         : 'Track your symptoms and complete daily check-ins to monitor your recovery journey effectively.'}
                     </p>
                     <div className="pt-2">
-                      <Link 
-                        href="/patient/assessment" 
-                        className="bg-secondary text-secondary-foreground border border-primary h-12 flex items-center justify-center rounded-lg px-8 text-base font-bold transition-colors hover:bg-primary/10"
+                      <Link
+                        href="/patient/assessment?new=true"
+                        className="bg-secondary text-secondary-foreground border-primary hover:bg-primary/10 flex h-12 items-center justify-center rounded-lg border px-8 text-base font-bold transition-colors"
                       >
-                        {latestSession?.sessionStatus === 'in_progress' ? 'Continue Assessment' : 'Start New Assessment'}
+                        {latestSession?.sessionStatus === 'in_progress'
+                          ? 'Continue Assessment'
+                          : 'Start New Assessment'}
                         <ChevronRight className="ml-2 h-4 w-4" />
                       </Link>
                     </div>
@@ -225,7 +227,12 @@ export default async function PatientDashboardPage() {
                   Scheduled exercises and clinical sessions
                 </CardDescription>
               </div>
-              <Link href="/patient/progress" className="text-primary text-xs font-bold hover:underline">View Full Plan</Link>
+              <Link
+                href="/patient/progress"
+                className="text-primary text-xs font-bold hover:underline"
+              >
+                View Full Plan
+              </Link>
             </CardHeader>
             <CardContent className="p-0">
               <div className="overflow-x-auto">
@@ -297,7 +304,7 @@ export default async function PatientDashboardPage() {
           <div className="grid grid-cols-2 gap-3">
             {[
               {
-                href: '/patient/assessment',
+                href: '/patient/assessment?new=true',
                 label: 'New Assessment',
                 icon: PlusCircle,
                 bg: 'bg-orange-500',
@@ -401,7 +408,12 @@ export default async function PatientDashboardPage() {
                   <p className="text-muted-foreground text-xs font-medium">
                     No sessions booked.
                   </p>
-                  <Link href="/patient/appointments" className="text-primary text-[11px] font-bold p-0 h-auto mt-1 hover:underline">Schedule one now</Link>
+                  <Link
+                    href="/patient/appointments"
+                    className="text-primary mt-1 h-auto p-0 text-[11px] font-bold hover:underline"
+                  >
+                    Schedule one now
+                  </Link>
                 </div>
               )}
             </CardContent>
