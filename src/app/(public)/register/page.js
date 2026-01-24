@@ -78,7 +78,7 @@ export default function RegisterPage() {
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
       toast.success('Account created successfully!');
-      router.push('/verify');
+      router.push(`/verify?email=${encodeURIComponent(formData.email)}`);
     } catch {
       toast.error('Registration failed. Please try again.');
     } finally {
