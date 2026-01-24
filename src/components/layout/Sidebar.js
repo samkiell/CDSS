@@ -8,7 +8,7 @@ import { Menu, X, Settings, HelpCircle, Shield, LogOut, User } from 'lucide-reac
 import { cn } from '@/lib/cn';
 import { signOut } from 'next-auth/react';
 
-function Sidebar({ links = [], secondaryLinks = [], className }) {
+function Sidebar({ links = [], secondaryLinks = [], className, user }) {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -149,7 +149,14 @@ function Sidebar({ links = [], secondaryLinks = [], className }) {
             <div className="bg-muted flex h-10 w-10 items-center justify-center rounded-full">
               <User className="text-muted-foreground h-5 w-5" />
             </div>
-            <span className="text-foreground text-sm font-medium">Profile</span>
+            <div className="flex flex-col">
+              <span className="text-foreground text-sm font-medium">
+                {user ? `${user?.firstName} ${user?.lastName}` : 'Unkonwn User'}
+              </span>
+              <span className="text-[12px] font-medium capitalize">
+                {user ? `${user?.role.toLowerCase()}` : null}
+              </span>
+            </div>
           </Link>
         </div>
       </aside>

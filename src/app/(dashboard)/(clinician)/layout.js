@@ -12,7 +12,7 @@ export default async function ClinicianLayout({ children }) {
   }
   return (
     <>
-      <Sidebar links={clinicianLinks} />
+      <Sidebar links={clinicianLinks} user={session?.user} />
       <div className="lg:pl-64">
         <TopNav title="Therapist's Dashboard" />
 
