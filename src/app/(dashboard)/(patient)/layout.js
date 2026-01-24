@@ -1,25 +1,15 @@
-'use client';
-
-import {
-  LayoutDashboard,
-  ClipboardPlus,
-  FlaskConical,
-  TrendingUp,
-  MessageSquare,
-  Bell,
-} from 'lucide-react';
 import { Sidebar, TopNav } from '@/components/layout';
+import { patientLinks } from '@/components/layout/navLink';
+import { auth } from '../../../../auth';
+import { redirect } from 'next/navigation';
 
-const patientLinks = [
-  { href: '/patient/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/patient/assessment', label: 'New assessment', icon: ClipboardPlus },
-  { href: '/patient/self-test', label: 'Guided Self Test', icon: FlaskConical },
-  { href: '/patient/progress', label: 'Progress', icon: TrendingUp },
-  { href: '/patient/messages', label: 'Messages', icon: MessageSquare },
-  { href: '/patient/notifications', label: 'Notifications', icon: Bell },
-];
-
-export default function PatientLayout({ children }) {
+export default async function PatientLayout({ children }) {
+  const session = await auth();
+  console.log(session);
+  if (!session || !session.user) redirect('/login');
+  if (session?.user?.role !== 'PATIENT' && session?.user.role === 'CLINICIAN') {
+    redirect('/clinician/dashboard');
+  }
   return (
     <>
       <Sidebar links={patientLinks} />
