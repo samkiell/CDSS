@@ -1,8 +1,3 @@
-/**
- * User Model
- * Supports three roles: PATIENT, CLINICIAN, ADMIN
- */
-
 import mongoose from 'mongoose';
 
 const ROLES = {
