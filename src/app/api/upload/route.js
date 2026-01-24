@@ -18,10 +18,7 @@ export async function POST(request) {
     const sessionId = formData.get('sessionId');
 
     if (!file) {
-      return NextResponse.json(
-        { error: 'No file provided' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
     // Convert file to buffer for upload
@@ -58,10 +55,7 @@ export async function POST(request) {
     });
   } catch (error) {
     console.error('Upload error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -82,9 +76,6 @@ export async function GET(request) {
     });
   } catch (error) {
     console.error('Get upload params error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

@@ -20,10 +20,7 @@ const UPLOAD_PRESETS = {
   medical_image: {
     folder: 'cdss/medical_images',
     allowed_formats: ['jpg', 'jpeg', 'png', 'dicom', 'dcm'],
-    transformation: [
-      { quality: 'auto:best' },
-      { fetch_format: 'auto' },
-    ],
+    transformation: [{ quality: 'auto:best' }, { fetch_format: 'auto' }],
     resource_type: 'image',
   },
   document: {

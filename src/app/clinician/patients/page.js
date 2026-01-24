@@ -67,9 +67,9 @@ export default function PatientsPage() {
           <input
             type="search"
             placeholder="Search patients..."
-            className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
           />
-          <select className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500">
+          <select className="rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none">
             <option value="">All Statuses</option>
             <option value="pending_review">Pending Review</option>
             <option value="reviewed">Reviewed</option>
@@ -82,22 +82,22 @@ export default function PatientsPage() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+              <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                 Patient
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+              <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                 Age
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+              <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                 Condition
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+              <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                 Last Visit
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+              <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                 Status
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+              <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                 Actions
               </th>
             </tr>
@@ -105,7 +105,7 @@ export default function PatientsPage() {
           <tbody className="divide-y divide-gray-200 bg-white">
             {patients.map((patient) => (
               <tr key={patient.id} className="hover:bg-gray-50">
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
                     <div className="h-10 w-10 flex-shrink-0 rounded-full bg-gray-200" />
                     <div className="ml-4">
@@ -114,19 +114,19 @@ export default function PatientsPage() {
                     </div>
                   </div>
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-gray-500">
+                <td className="px-6 py-4 whitespace-nowrap text-gray-500">
                   {patient.age}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-gray-900">
+                <td className="px-6 py-4 whitespace-nowrap text-gray-900">
                   {patient.condition}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-gray-500">
+                <td className="px-6 py-4 whitespace-nowrap text-gray-500">
                   {patient.lastVisit}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4">
+                <td className="px-6 py-4 whitespace-nowrap">
                   {getStatusBadge(patient.status)}
                 </td>
-                <td className="whitespace-nowrap px-6 py-4 text-sm">
+                <td className="px-6 py-4 text-sm whitespace-nowrap">
                   <button className="font-medium text-blue-600 hover:text-blue-800">
                     View Details
                   </button>

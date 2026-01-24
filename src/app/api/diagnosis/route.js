@@ -49,10 +49,7 @@ export async function GET(request) {
     });
   } catch (error) {
     console.error('Get diagnosis sessions error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -97,9 +94,6 @@ export async function POST(request) {
     );
   } catch (error) {
     console.error('Create diagnosis session error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

@@ -23,10 +23,7 @@ export async function GET(request, { params }) {
       .lean();
 
     if (!session) {
-      return NextResponse.json(
-        { error: 'Session not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Session not found' }, { status: 404 });
     }
 
     return NextResponse.json({
@@ -35,10 +32,7 @@ export async function GET(request, { params }) {
     });
   } catch (error) {
     console.error('Get diagnosis session error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -56,18 +50,11 @@ export async function PATCH(request, { params }) {
     const session = await DiagnosisSession.findById(id);
 
     if (!session) {
-      return NextResponse.json(
-        { error: 'Session not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Session not found' }, { status: 404 });
     }
 
     // Update allowed fields
-    const allowedUpdates = [
-      'sessionStatus',
-      'clinicianReview',
-      'finalDiagnosis',
-    ];
+    const allowedUpdates = ['sessionStatus', 'clinicianReview', 'finalDiagnosis'];
 
     for (const key of allowedUpdates) {
       if (body[key] !== undefined) {
@@ -89,10 +76,7 @@ export async function PATCH(request, { params }) {
     });
   } catch (error) {
     console.error('Update diagnosis session error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }
 
@@ -109,10 +93,7 @@ export async function DELETE(request, { params }) {
     const session = await DiagnosisSession.findById(id);
 
     if (!session) {
-      return NextResponse.json(
-        { error: 'Session not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'Session not found' }, { status: 404 });
     }
 
     // Soft delete by setting status to archived
@@ -125,9 +106,6 @@ export async function DELETE(request, { params }) {
     });
   } catch (error) {
     console.error('Delete diagnosis session error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

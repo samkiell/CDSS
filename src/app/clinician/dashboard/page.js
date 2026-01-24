@@ -130,9 +130,7 @@ export default function ClinicianDashboard() {
           </div>
           <div>
             <h2 className="text-xl font-semibold text-gray-900">Patient List</h2>
-            <p className="text-gray-600">
-              View and manage all assigned patients
-            </p>
+            <p className="text-gray-600">View and manage all assigned patients</p>
           </div>
         </Link>
 
@@ -156,21 +154,15 @@ export default function ClinicianDashboard() {
             </svg>
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">
-              Pending Reviews
-            </h2>
-            <p className="text-gray-600">
-              Review and confirm AI-generated diagnoses
-            </p>
+            <h2 className="text-xl font-semibold text-gray-900">Pending Reviews</h2>
+            <p className="text-gray-600">Review and confirm AI-generated diagnoses</p>
           </div>
         </Link>
       </div>
 
       {/* Recent Activity Placeholder */}
       <div className="rounded-xl bg-white p-6 shadow-md">
-        <h2 className="mb-4 text-xl font-semibold text-gray-900">
-          Recent Activity
-        </h2>
+        <h2 className="mb-4 text-xl font-semibold text-gray-900">Recent Activity</h2>
         <div className="space-y-4">
           {/* Placeholder items */}
           {[1, 2, 3].map((i) => (

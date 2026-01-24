@@ -13,7 +13,7 @@ import { useAuthStore } from '@/store';
 export default function LoginPage() {
   const router = useRouter();
   const login = useAuthStore((state) => state.login);
-  
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -87,9 +87,7 @@ export default function LoginPage() {
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
           <h1 className="mb-2 text-2xl font-bold text-white">Welcome back</h1>
-          <p className="mb-6 text-slate-400">
-            Sign in to access your account
-          </p>
+          <p className="mb-6 text-slate-400">Sign in to access your account</p>
 
           {error && (
             <div className="mb-4 rounded-lg bg-red-500/10 p-3 text-sm text-red-400">
@@ -112,7 +110,7 @@ export default function LoginPage() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
                 placeholder="you@example.com"
               />
             </div>
@@ -131,7 +129,7 @@ export default function LoginPage() {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-slate-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 focus:outline-none"
                 placeholder="••••••••"
               />
             </div>

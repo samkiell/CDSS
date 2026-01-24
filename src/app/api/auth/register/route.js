@@ -13,18 +13,12 @@ export async function POST(request) {
 
     // Validate required fields
     if (!email || !password || !firstName || !lastName) {
-      return NextResponse.json(
-        { error: 'All fields are required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'All fields are required' }, { status: 400 });
     }
 
     // Validate role
     if (!Object.values(ROLES).includes(role)) {
-      return NextResponse.json(
-        { error: 'Invalid role' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Invalid role' }, { status: 400 });
     }
 
     // Connect to database
@@ -74,15 +68,9 @@ export async function POST(request) {
     // Handle validation errors
     if (error.name === 'ValidationError') {
       const messages = Object.values(error.errors).map((e) => e.message);
-      return NextResponse.json(
-        { error: messages.join(', ') },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: messages.join(', ') }, { status: 400 });
     }
 
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

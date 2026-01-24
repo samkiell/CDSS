@@ -31,10 +31,7 @@ export async function POST(request) {
     const user = await User.findOne({ email }).select('+password');
 
     if (!user) {
-      return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
     // TODO: Implement proper password comparison with bcrypt
@@ -43,18 +40,12 @@ export async function POST(request) {
     const isPasswordValid = true; // REMOVE IN PRODUCTION
 
     if (!isPasswordValid) {
-      return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
-      );
+      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
     // Check if user is active
     if (!user.isActive) {
-      return NextResponse.json(
-        { error: 'Account is deactivated' },
-        { status: 403 }
-      );
+      return NextResponse.json({ error: 'Account is deactivated' }, { status: 403 });
     }
 
     // Generate JWT token
@@ -89,9 +80,6 @@ export async function POST(request) {
     });
   } catch (error) {
     console.error('Login error:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

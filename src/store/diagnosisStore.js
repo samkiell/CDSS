@@ -57,7 +57,7 @@ const useDiagnosisStore = create((set, get) => ({
     const symptoms = get().symptoms;
     set({
       symptoms: symptoms.map((s) =>
-        s.questionId === questionId ? { ...s, ...updates } : s,
+        s.questionId === questionId ? { ...s, ...updates } : s
       ),
     });
   },
@@ -142,8 +142,7 @@ const useDiagnosisStore = create((set, get) => ({
    * @returns {Object} Session data ready for API
    */
   getSessionData: () => {
-    const { currentSession, symptoms, affectedRegions, temporalDiagnosis } =
-      get();
+    const { currentSession, symptoms, affectedRegions, temporalDiagnosis } = get();
     return {
       ...currentSession,
       symptoms,

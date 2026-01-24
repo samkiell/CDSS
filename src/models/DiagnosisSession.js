@@ -49,7 +49,7 @@ const SymptomResponseSchema = new mongoose.Schema(
       default: Date.now,
     },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const DiagnosisResultSchema = new mongoose.Schema(
@@ -81,7 +81,7 @@ const DiagnosisResultSchema = new mongoose.Schema(
     ],
     recommendations: [String],
   },
-  { _id: false },
+  { _id: false }
 );
 
 const DiagnosisSessionSchema = new mongoose.Schema(
@@ -186,7 +186,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 // Indexes for common queries

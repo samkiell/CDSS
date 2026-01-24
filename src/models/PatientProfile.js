@@ -25,7 +25,7 @@ const MedicalHistorySchema = new mongoose.Schema(
       default: null,
     },
   },
-  { _id: false },
+  { _id: false }
 );
 
 const PatientProfileSchema = new mongoose.Schema(
@@ -102,7 +102,7 @@ const PatientProfileSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  },
+  }
 );
 
 // Index for faster lookups
