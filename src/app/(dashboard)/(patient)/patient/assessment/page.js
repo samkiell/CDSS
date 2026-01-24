@@ -9,11 +9,19 @@ import SupportingMediaGrid from './components/SupportingMediaGrid';
 import DisclaimerModal from './components/DisclaimerModal';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { CheckCircle2, ChevronRight, FileJson } from 'lucide-react';
+import {
+  CheckCircle2,
+  ChevronRight,
+  FileJson,
+  ClipboardList,
+  Image as ImageIcon,
+  AlertTriangle,
+  Loader2,
+} from 'lucide-react';
 import { toast } from 'sonner';
 import { useEffect, useRef } from 'react';
-import { Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import { cn } from '@/lib/cn';
 
 import { useSearchParams } from 'next/navigation';
 import { MEDICAL_RULES } from '@/constants/medicalRules';
@@ -151,30 +159,58 @@ export default function PatientAssessmentPage() {
                   </span>
                 </div>
 
-                {/* Detailed Symptom Summary */}
-                <div className="py-4">
+                {/* Compact Assessment Overview */}
+                <div className="py-6">
                   <span className="mb-4 block text-xs font-bold tracking-wider text-slate-400 uppercase">
-                    Symptom Summary
+                    Assessment Overview
                   </span>
-                  <div className="space-y-4">
-                    {Object.entries(responses).map(([questionId, answer]) => {
-                      const question =
-                        MEDICAL_RULES[selectedRegion]?.questions[questionId];
-                      if (!question) return null;
-                      return (
-                        <div
-                          key={questionId}
-                          className="flex flex-col gap-1 border-l-2 border-slate-100 pl-4 dark:border-slate-800"
-                        >
-                          <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
-                            {question.text}
-                          </span>
-                          <span className="text-primary text-sm font-medium">
-                            {answer}
-                          </span>
-                        </div>
-                      );
-                    })}
+                  <div className="grid grid-cols-3 gap-4">
+                    <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50 p-4 text-center dark:border-slate-800 dark:bg-slate-900/50">
+                      <ClipboardList className="text-primary mb-2" size={20} />
+                      <span className="text-xl font-bold">
+                        {Object.keys(responses).length}
+                      </span>
+                      <span className="text-[10px] font-medium tracking-tight text-slate-500 uppercase">
+                        Answers
+                      </span>
+                    </div>
+
+                    <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50 p-4 text-center dark:border-slate-800 dark:bg-slate-900/50">
+                      <ImageIcon className="mb-2 text-indigo-500" size={20} />
+                      <span className="text-xl font-bold">{files.length}</span>
+                      <span className="text-[10px] font-medium tracking-tight text-slate-500 uppercase">
+                        Images
+                      </span>
+                    </div>
+
+                    <div
+                      className={cn(
+                        'flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition-colors',
+                        redFlags.length > 0
+                          ? 'border-red-100 bg-red-50 dark:border-red-900/30 dark:bg-red-900/10'
+                          : 'border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50'
+                      )}
+                    >
+                      <AlertTriangle
+                        className={
+                          redFlags.length > 0
+                            ? 'mb-2 text-red-500'
+                            : 'mb-2 text-slate-400'
+                        }
+                        size={20}
+                      />
+                      <span
+                        className={cn(
+                          'text-xl font-bold',
+                          redFlags.length > 0 && 'text-red-600 dark:text-red-400'
+                        )}
+                      >
+                        {redFlags.length}
+                      </span>
+                      <span className="text-[10px] font-medium tracking-tight text-slate-500 uppercase">
+                        Alerts
+                      </span>
+                    </div>
                   </div>
                 </div>
 
