@@ -45,24 +45,24 @@
  */
 const CONDITION_PATTERNS = {
   lumbar_disc_herniation: {
-    code: "FB83.1",
-    name: "Lumbar Disc Herniation",
-    category: "lumbar_spine",
+    code: 'FB83.1',
+    name: 'Lumbar Disc Herniation',
+    category: 'lumbar_spine',
     expectedPatterns: [
-      { symptom: "pain_location", expected: "lower_back", weight: 0.8 },
-      { symptom: "radiation", expected: "leg", weight: 0.9 },
-      { symptom: "pain_character", expected: "sharp", weight: 0.6 },
+      { symptom: 'pain_location', expected: 'lower_back', weight: 0.8 },
+      { symptom: 'radiation', expected: 'leg', weight: 0.9 },
+      { symptom: 'pain_character', expected: 'sharp', weight: 0.6 },
       {
-        symptom: "aggravating",
-        expected: ["sitting", "bending_forward"],
+        symptom: 'aggravating',
+        expected: ['sitting', 'bending_forward'],
         weight: 0.7,
       },
       {
-        symptom: "neurological",
-        expected: ["numbness", "tingling"],
+        symptom: 'neurological',
+        expected: ['numbness', 'tingling'],
         weight: 0.85,
       },
-      { symptom: "positive_slr", expected: true, weight: 0.9 },
+      { symptom: 'positive_slr', expected: true, weight: 0.9 },
     ],
     severityIndicators: {
       mild: { minScore: 0.3, maxScore: 0.5 },
@@ -71,20 +71,20 @@ const CONDITION_PATTERNS = {
     },
   },
   rotator_cuff_tear: {
-    code: "FB54.0",
-    name: "Rotator Cuff Tear",
-    category: "shoulder",
+    code: 'FB54.0',
+    name: 'Rotator Cuff Tear',
+    category: 'shoulder',
     expectedPatterns: [
-      { symptom: "pain_location", expected: "shoulder", weight: 0.9 },
-      { symptom: "pain_character", expected: ["deep", "aching"], weight: 0.6 },
-      { symptom: "weakness", expected: "arm_elevation", weight: 0.85 },
-      { symptom: "night_pain", expected: true, weight: 0.7 },
+      { symptom: 'pain_location', expected: 'shoulder', weight: 0.9 },
+      { symptom: 'pain_character', expected: ['deep', 'aching'], weight: 0.6 },
+      { symptom: 'weakness', expected: 'arm_elevation', weight: 0.85 },
+      { symptom: 'night_pain', expected: true, weight: 0.7 },
       {
-        symptom: "mechanism",
-        expected: ["trauma", "repetitive_overhead"],
+        symptom: 'mechanism',
+        expected: ['trauma', 'repetitive_overhead'],
         weight: 0.6,
       },
-      { symptom: "age_group", expected: "over_40", weight: 0.4 },
+      { symptom: 'age_group', expected: 'over_40', weight: 0.4 },
     ],
     severityIndicators: {
       mild: { minScore: 0.3, maxScore: 0.5 },
@@ -93,25 +93,25 @@ const CONDITION_PATTERNS = {
     },
   },
   knee_osteoarthritis: {
-    code: "FA00.0",
-    name: "Knee Osteoarthritis",
-    category: "knee",
+    code: 'FA00.0',
+    name: 'Knee Osteoarthritis',
+    category: 'knee',
     expectedPatterns: [
-      { symptom: "pain_location", expected: "knee", weight: 0.9 },
-      { symptom: "pain_character", expected: "aching", weight: 0.5 },
+      { symptom: 'pain_location', expected: 'knee', weight: 0.9 },
+      { symptom: 'pain_character', expected: 'aching', weight: 0.5 },
       {
-        symptom: "stiffness",
-        expected: "morning_stiffness_short",
+        symptom: 'stiffness',
+        expected: 'morning_stiffness_short',
         weight: 0.8,
       },
-      { symptom: "crepitus", expected: true, weight: 0.7 },
+      { symptom: 'crepitus', expected: true, weight: 0.7 },
       {
-        symptom: "aggravating",
-        expected: ["stairs", "prolonged_walking"],
+        symptom: 'aggravating',
+        expected: ['stairs', 'prolonged_walking'],
         weight: 0.7,
       },
-      { symptom: "swelling", expected: "intermittent", weight: 0.6 },
-      { symptom: "age_group", expected: "over_50", weight: 0.5 },
+      { symptom: 'swelling', expected: 'intermittent', weight: 0.6 },
+      { symptom: 'age_group', expected: 'over_50', weight: 0.5 },
     ],
     severityIndicators: {
       mild: { minScore: 0.3, maxScore: 0.5 },
@@ -135,7 +135,7 @@ function calculateSimilarity(response, expected) {
   }
 
   // Boolean comparison
-  if (typeof expected === "boolean") {
+  if (typeof expected === 'boolean') {
     return response === expected ? 1.0 : 0.0;
   }
 
@@ -149,7 +149,7 @@ function calculateSimilarity(response, expected) {
   }
 
   // String partial matching (for fuzzy cases)
-  if (typeof expected === "string" && typeof response === "string") {
+  if (typeof expected === 'string' && typeof response === 'string') {
     const normalizedExpected = expected.toLowerCase();
     const normalizedResponse = response.toLowerCase();
     if (
@@ -171,7 +171,7 @@ function calculateSimilarity(response, expected) {
  */
 function calculateConditionScore(symptoms, conditionPattern) {
   const symptomMap = new Map(
-    symptoms.map((s) => [s.questionCategory || s.questionId, s.response]),
+    symptoms.map((s) => [s.questionCategory || s.questionId, s.response])
   );
 
   let totalWeight = 0;
@@ -213,18 +213,15 @@ function calculateConditionScore(symptoms, conditionPattern) {
  * @returns {string} Severity level
  */
 function determineSeverity(confidence, severityIndicators) {
-  if (!severityIndicators) return "unknown";
+  if (!severityIndicators) return 'unknown';
 
   for (const [level, thresholds] of Object.entries(severityIndicators)) {
-    if (
-      confidence >= thresholds.minScore &&
-      confidence <= thresholds.maxScore
-    ) {
+    if (confidence >= thresholds.minScore && confidence <= thresholds.maxScore) {
       return level;
     }
   }
 
-  return "unknown";
+  return 'unknown';
 }
 
 /**
@@ -235,20 +232,20 @@ function determineSeverity(confidence, severityIndicators) {
  */
 function generateRecommendations(conditionCode, severity) {
   const baseRecommendations = [
-    "Follow up with a healthcare provider for clinical examination",
-    "Avoid activities that aggravate symptoms",
+    'Follow up with a healthcare provider for clinical examination',
+    'Avoid activities that aggravate symptoms',
   ];
 
   const severityRecommendations = {
-    mild: ["Consider conservative management", "Monitor symptoms for changes"],
+    mild: ['Consider conservative management', 'Monitor symptoms for changes'],
     moderate: [
-      "Clinical evaluation recommended within 1-2 weeks",
-      "Consider imaging studies if symptoms persist",
+      'Clinical evaluation recommended within 1-2 weeks',
+      'Consider imaging studies if symptoms persist',
     ],
     severe: [
-      "Urgent clinical evaluation recommended",
-      "Imaging studies likely warranted",
-      "Consider specialist referral",
+      'Urgent clinical evaluation recommended',
+      'Imaging studies likely warranted',
+      'Consider specialist referral',
     ],
   };
 
@@ -269,27 +266,22 @@ export function calculateTemporalDiagnosis(symptoms, options = {}) {
       primaryDiagnosis: null,
       differentialDiagnoses: [],
       calculatedAt: new Date().toISOString(),
-      engineVersion: "1.0.0",
-      error: "No symptoms provided",
+      engineVersion: '1.0.0',
+      error: 'No symptoms provided',
     };
   }
 
   // Calculate scores for all conditions
   const results = [];
 
-  for (const [conditionKey, conditionData] of Object.entries(
-    CONDITION_PATTERNS,
-  )) {
+  for (const conditionData of Object.values(CONDITION_PATTERNS)) {
     const { confidence, matchedPatterns } = calculateConditionScore(
       symptoms,
-      conditionData,
+      conditionData
     );
 
     if (confidence >= minConfidence) {
-      const severity = determineSeverity(
-        confidence,
-        conditionData.severityIndicators,
-      );
+      const severity = determineSeverity(confidence, conditionData.severityIndicators);
 
       results.push({
         conditionCode: conditionData.code,
@@ -313,7 +305,7 @@ export function calculateTemporalDiagnosis(symptoms, options = {}) {
     primaryDiagnosis,
     differentialDiagnoses,
     calculatedAt: new Date().toISOString(),
-    engineVersion: "1.0.0",
+    engineVersion: '1.0.0',
   };
 }
 
@@ -326,7 +318,7 @@ export function validateSymptoms(symptoms) {
   const errors = [];
 
   if (!Array.isArray(symptoms)) {
-    return { valid: false, errors: ["Symptoms must be an array"] };
+    return { valid: false, errors: ['Symptoms must be an array'] };
   }
 
   symptoms.forEach((symptom, index) => {
@@ -361,9 +353,11 @@ export function getConditionCategories() {
  */
 export const conditionPatterns = CONDITION_PATTERNS;
 
-export default {
+const decisionEngine = {
   calculateTemporalDiagnosis,
   validateSymptoms,
   getConditionCategories,
   conditionPatterns,
 };
+
+export default decisionEngine;

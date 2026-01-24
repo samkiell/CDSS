@@ -3,14 +3,14 @@
  * Manages authentication state across the application
  */
 
-import { create } from "zustand";
-import { persist, createJSONStorage } from "zustand/middleware";
+import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
 
-const STORAGE_KEY = "cdss-auth";
+const STORAGE_KEY = 'cdss-auth';
 
 const initialState = {
   user: null,
-  role: "guest", // 'guest' | 'patient' | 'clinician' | 'admin'
+  role: 'guest', // 'guest' | 'patient' | 'clinician' | 'admin'
   token: null,
   isAuthenticated: false,
   isLoading: true,
@@ -29,7 +29,7 @@ const useAuthStore = create(
       login: (userData, token) => {
         set({
           user: userData,
-          role: userData?.role?.toLowerCase() || "guest",
+          role: userData?.role?.toLowerCase() || 'guest',
           token: token,
           isAuthenticated: true,
           isLoading: false,
@@ -41,7 +41,7 @@ const useAuthStore = create(
        */
       logout: () => {
         // Clear localStorage
-        if (typeof window !== "undefined") {
+        if (typeof window !== 'undefined') {
           localStorage.removeItem(STORAGE_KEY);
         }
         set({
@@ -74,7 +74,7 @@ const useAuthStore = create(
             });
           }
         } catch (error) {
-          console.error("Error hydrating auth state:", error);
+          console.error('Error hydrating auth state:', error);
           set({
             ...initialState,
             isLoading: false,

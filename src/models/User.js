@@ -97,8 +97,7 @@ UserSchema.virtual('fullName').get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
 
-// Index for faster queries
-UserSchema.index({ email: 1 });
+// Index for faster queries (email index handled by unique: true)
 UserSchema.index({ role: 1 });
 
 // Prevent model recompilation in development

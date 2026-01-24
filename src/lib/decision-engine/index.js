@@ -9,4 +9,4 @@ export {
   getConditionCategories,
   conditionPatterns,
   default as heuristic,
-} from "./heuristic.js";
+} from './heuristic.js';

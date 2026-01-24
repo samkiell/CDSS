@@ -3,7 +3,7 @@
  * Manages the current diagnosis session state
  */
 
-import { create } from "zustand";
+import { create } from 'zustand';
 
 const initialState = {
   currentSession: null,
@@ -29,7 +29,7 @@ const useDiagnosisStore = create((set, get) => ({
       currentSession: {
         patientId,
         startedAt: new Date().toISOString(),
-        status: "in_progress",
+        status: 'in_progress',
       },
     });
   },

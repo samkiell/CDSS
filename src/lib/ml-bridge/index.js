@@ -1,34 +1,34 @@
 /**
  * ML Bridge Module
  * Placeholder for future Python/Bayesian network integration
- * 
+ *
  * ============================================================================
  * FUTURE INTEGRATION ARCHITECTURE
  * ============================================================================
- * 
+ *
  * This module will serve as the interface between the JavaScript frontend
  * and Python-based machine learning models. Planned integration approaches:
- * 
+ *
  * 1. REST API Integration:
  *    - Python FastAPI/Flask server hosting ML models
  *    - This module calls the ML server endpoints
  *    - Async processing with result caching
- * 
+ *
  * 2. Bayesian Network Integration:
  *    - pgmpy (Python) for probabilistic graphical models
  *    - Pre-trained networks for MSK diagnosis
  *    - Posterior probability calculations
- * 
+ *
  * 3. Neural Network Integration:
  *    - TensorFlow/PyTorch models for pattern recognition
  *    - Potentially ONNX.js for client-side inference
  *    - Transfer learning from medical imaging datasets
- * 
+ *
  * 4. Ensemble Approach:
  *    - Combine heuristic engine output with ML predictions
  *    - Weighted voting or stacking
  *    - Confidence calibration
- * 
+ *
  * IMPLEMENTATION TIMELINE:
  * - Phase 1: Heuristic engine only (current)
  * - Phase 2: Basic Bayesian network integration
@@ -55,7 +55,7 @@ const ML_CONFIG = {
 export async function requestMLDiagnosis(symptoms, heuristicResult) {
   // TODO: Implement actual ML API call
   console.warn('ML Bridge: requestMLDiagnosis is not yet implemented');
-  
+
   return {
     available: false,
     message: 'ML diagnosis not yet available. Using heuristic engine only.',
@@ -82,10 +82,10 @@ export async function checkMLServiceHealth() {
  * @param {string} conditionCode - Condition to evaluate
  * @returns {Promise<Object>} Bayesian metrics
  */
-export async function getBayesianPosterior(symptoms, conditionCode) {
+export async function getBayesianPosterior(_symptoms, _conditionCode) {
   // TODO: Implement Bayesian network query
   console.warn('ML Bridge: getBayesianPosterior is not yet implemented');
-  
+
   return {
     posteriorProbability: null,
     uncertaintyRange: { lower: null, upper: null },
@@ -98,10 +98,10 @@ export async function getBayesianPosterior(symptoms, conditionCode) {
  * @param {Object[]} trainingData - Labeled diagnosis sessions
  * @returns {Promise<Object>} Training result
  */
-export async function updateModel(trainingData) {
+export async function updateModel(_trainingData) {
   // TODO: Implement model update endpoint
   console.warn('ML Bridge: updateModel is not yet implemented');
-  
+
   return {
     success: false,
     message: 'Model training not yet available',
@@ -113,7 +113,7 @@ export async function updateModel(trainingData) {
  * @param {string} sessionId - Diagnosis session ID
  * @returns {Promise<Object>} Model explanation
  */
-export async function getModelExplanation(sessionId) {
+export async function getModelExplanation(_sessionId) {
   // TODO: Implement SHAP/LIME explanations
   return {
     available: false,
@@ -121,7 +121,7 @@ export async function getModelExplanation(sessionId) {
   };
 }
 
-export default {
+const mlBridge = {
   requestMLDiagnosis,
   checkMLServiceHealth,
   getBayesianPosterior,
@@ -129,3 +129,5 @@ export default {
   getModelExplanation,
   config: ML_CONFIG,
 };
+
+export default mlBridge;

@@ -10,7 +10,7 @@ import { useDiagnosisStore } from '@/store';
 
 export default function AssessmentPage() {
   const [currentStep, setCurrentStep] = useState(0);
-  const { addSymptom, symptoms, setAffectedRegions } = useDiagnosisStore();
+  const { addSymptom } = useDiagnosisStore();
 
   // Placeholder questions - will be loaded from database
   const steps = [

@@ -3,7 +3,7 @@
  * Captures the diagnostic journey from symptom intake to final diagnosis
  */
 
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const SymptomResponseSchema = new mongoose.Schema(
   {
@@ -18,22 +18,22 @@ const SymptomResponseSchema = new mongoose.Schema(
     questionCategory: {
       type: String,
       enum: [
-        "pain_location",
-        "pain_character",
-        "pain_intensity",
-        "duration",
-        "aggravating_factors",
-        "relieving_factors",
-        "associated_symptoms",
-        "functional_impact",
-        "medical_history",
-        "other",
+        'pain_location',
+        'pain_character',
+        'pain_intensity',
+        'duration',
+        'aggravating_factors',
+        'relieving_factors',
+        'associated_symptoms',
+        'functional_impact',
+        'medical_history',
+        'other',
       ],
       required: true,
     },
     responseType: {
       type: String,
-      enum: ["single_choice", "multiple_choice", "scale", "text", "boolean"],
+      enum: ['single_choice', 'multiple_choice', 'scale', 'text', 'boolean'],
       required: true,
     },
     response: {
@@ -70,8 +70,8 @@ const DiagnosisResultSchema = new mongoose.Schema(
     },
     severity: {
       type: String,
-      enum: ["mild", "moderate", "severe", "unknown"],
-      default: "unknown",
+      enum: ['mild', 'moderate', 'severe', 'unknown'],
+      default: 'unknown',
     },
     matchedPatterns: [
       {
@@ -88,15 +88,15 @@ const DiagnosisSessionSchema = new mongoose.Schema(
   {
     patientId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
       index: true,
     },
     // Session metadata
     sessionStatus: {
       type: String,
-      enum: ["in_progress", "completed", "reviewed", "archived"],
-      default: "in_progress",
+      enum: ['in_progress', 'completed', 'reviewed', 'archived'],
+      default: 'in_progress',
     },
     startedAt: {
       type: Date,
@@ -113,16 +113,16 @@ const DiagnosisSessionSchema = new mongoose.Schema(
       {
         type: String,
         enum: [
-          "cervical_spine",
-          "thoracic_spine",
-          "lumbar_spine",
-          "shoulder",
-          "elbow",
-          "wrist_hand",
-          "hip",
-          "knee",
-          "ankle_foot",
-          "other",
+          'cervical_spine',
+          'thoracic_spine',
+          'lumbar_spine',
+          'shoulder',
+          'elbow',
+          'wrist_hand',
+          'hip',
+          'knee',
+          'ankle_foot',
+          'other',
         ],
       },
     ],
@@ -131,7 +131,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
       primaryDiagnosis: DiagnosisResultSchema,
       differentialDiagnoses: [DiagnosisResultSchema],
       calculatedAt: { type: Date, default: null },
-      engineVersion: { type: String, default: "1.0.0" },
+      engineVersion: { type: String, default: '1.0.0' },
     },
     // Future ML-based diagnosis output
     finalDiagnosis: {
@@ -152,7 +152,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
     clinicianReview: {
       reviewedBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        ref: 'User',
         default: null,
       },
       reviewedAt: { type: Date, default: null },
@@ -167,7 +167,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
       {
         type: {
           type: String,
-          enum: ["xray", "mri", "ct_scan", "ultrasound", "photo", "document"],
+          enum: ['xray', 'mri', 'ct_scan', 'ultrasound', 'photo', 'document'],
         },
         url: String, // Cloudinary URL
         publicId: String, // Cloudinary public ID
@@ -178,7 +178,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
     // Chat transcript (if conversational intake used)
     chatTranscript: [
       {
-        role: { type: String, enum: ["system", "patient", "assistant"] },
+        role: { type: String, enum: ['system', 'patient', 'assistant'] },
         content: String,
         timestamp: { type: Date, default: Date.now },
       },
@@ -192,10 +192,10 @@ const DiagnosisSessionSchema = new mongoose.Schema(
 // Indexes for common queries
 DiagnosisSessionSchema.index({ patientId: 1, createdAt: -1 });
 DiagnosisSessionSchema.index({ sessionStatus: 1 });
-DiagnosisSessionSchema.index({ "clinicianReview.reviewedBy": 1 });
+DiagnosisSessionSchema.index({ 'clinicianReview.reviewedBy': 1 });
 
 const DiagnosisSession =
   mongoose.models.DiagnosisSession ||
-  mongoose.model("DiagnosisSession", DiagnosisSessionSchema);
+  mongoose.model('DiagnosisSession', DiagnosisSessionSchema);
 
 export default DiagnosisSession;

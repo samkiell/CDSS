@@ -1,33 +1,232 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CDSS Platform - Clinical Decision Support System
 
-## Getting Started
+A modular diagnostic application for musculoskeletal diagnosis built for academic institutions.
 
-First, run the development server:
+## 🏗️ Project Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+This project uses Next.js 16+ App Router with route groups to separate patient and clinician interfaces:
+
+```
+src/
+├── app/
+│   ├── assessment/          # Symptom questionnaire
+│   ├── dashboard/           # Patient dashboard
+│   ├── login/               # Login page
+│   ├── register/            # Registration page
+│   │
+│   ├── clinician/           # Clinician-facing routes
+│   │   ├── layout.js        # Clinician portal layout
+│   │   ├── dashboard/       # Clinician dashboard
+│   │   └── patients/        # Patient list & management
+│   │
+│   ├── api/                 # Backend API routes
+│   │   ├── auth/            # Authentication endpoints
+│   │   ├── diagnosis/       # Diagnosis session CRUD
+│   │   ├── upload/          # File upload (Cloudinary)
+│   │   └── health/          # Health check
+│   │
+│   ├── layout.js            # Root layout
+│   ├── page.js              # Landing page
+│   └── globals.css          # Global styles
+│
+├── lib/
+│   ├── db/                  # Database utilities
+│   │   └── connect.js       # Mongoose connection singleton
+│   │
+│   ├── decision-engine/     # Diagnostic logic (framework-agnostic)
+│   │   ├── heuristic.js     # Rule-based diagnosis engine
+│   │   └── index.js         # Module exports
+│   │
+│   ├── ml-bridge/           # Future ML integration placeholder
+│   │   └── index.js         # Bayesian network bridge
+│   │
+│   ├── cloudinary.js        # Cloudinary SDK configuration
+│   └── utils.js             # Shared utility functions
+│
+├── models/                  # Mongoose schemas
+│   ├── User.js              # User model (PATIENT, CLINICIAN, ADMIN)
+│   ├── PatientProfile.js    # Extended patient information
+│   ├── DiagnosisSession.js  # Diagnosis session with symptoms
+│   └── index.js             # Model exports
+│
+├── store/                   # Zustand state management
+│   ├── authStore.js         # Authentication state
+│   ├── diagnosisStore.js    # Diagnosis session state
+│   └── index.js             # Store exports
+│
+├── components/              # React components
+│   ├── ui/                  # Reusable UI components
+│   └── providers/           # Context providers
+│
+└── middleware.js            # Route protection middleware
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Route Structure
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **`/dashboard`**: Patient dashboard - main hub for authenticated patients
+- **`/assessment`**: Symptom questionnaire for diagnostic intake
+- **`/clinician/*`**: All clinician routes under `/clinician` prefix
+  - `/clinician/dashboard` - Clinician overview and stats
+  - `/clinician/patients` - Patient management
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Getting Started
 
-## Learn More
+### Prerequisites
 
-To learn more about Next.js, take a look at the following resources:
+- Node.js 18+
+- MongoDB (local or Atlas)
+- Cloudinary account
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Installation
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/New-PiedPiperr/CDSS.git
+   cd CDSS
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   Edit `.env.local` with your configuration:
+   - `MONGODB_URI` - MongoDB connection string
+   - `JWT_SECRET` - Secret for JWT signing (generate with `openssl rand -base64 32`)
+   - `CLOUDINARY_*` - Cloudinary credentials
+   - `NEXT_PUBLIC_API_URL` - API base URL
+
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000)
+
+### Available Scripts
+
+```bash
+npm run dev       # Start development server
+npm run build     # Build for production
+npm run start     # Start production server
+npm run lint      # Run ESLint
+npm run lint:fix  # Fix ESLint issues
+npm run format    # Format code with Prettier
+```
+
+## 👥 Team Workflow
+
+### Branching Strategy
+
+```
+main                    # Production-ready code
+  └── dev               # Integration branch
+       ├── feat/patient-ui        # Patient interface features
+       ├── feat/clinician-ui      # Clinician dashboard features
+       ├── feat/backend-api       # API development
+       ├── feat/diagnostic-logic  # Decision engine work
+       └── fix/[issue-id]         # Bug fixes
+```
+
+### Branch Naming Convention
+
+- `feat/[feature-name]` - New features
+- `fix/[issue-id]` - Bug fixes
+- `refactor/[area]` - Code refactoring
+- `docs/[area]` - Documentation updates
+
+### Contribution Rules
+
+1. **Never push directly to `main` or `dev`**
+2. **Create feature branches from `dev`**
+3. **Pull Requests require 1 approval before merge**
+4. **Run `npm run lint` before committing**
+5. **Write descriptive commit messages**
+
+### PR Workflow
+
+```bash
+# 1. Create feature branch from dev
+git checkout dev
+git pull origin dev
+git checkout -b feat/your-feature
+
+# 2. Make changes and commit
+git add .
+git commit -m "feat: add symptom questionnaire component"
+
+# 3. Push and create PR
+git push origin feat/your-feature
+# Create PR on GitHub: feat/your-feature → dev
+
+# 4. After approval, squash and merge to dev
+# 5. Periodically merge dev → main for releases
+```
+
+### Commit Message Format
+
+```
+<type>: <description>
+
+Types:
+- feat: New feature
+- fix: Bug fix
+- docs: Documentation
+- style: Formatting (no code change)
+- refactor: Code restructuring
+- test: Adding tests
+- chore: Maintenance
+```
+
+## 🔧 Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Framework | Next.js 16+ (App Router) |
+| Language | JavaScript (ES2022+) |
+| Database | MongoDB + Mongoose |
+| State | Zustand |
+| Styling | Tailwind CSS |
+| Storage | Cloudinary |
+| Auth | JWT (scaffolded) |
+
+## 📁 Key Files
+
+| File | Purpose |
+|------|---------|
+| `src/lib/db/connect.js` | MongoDB connection with hot-reload handling |
+| `src/lib/decision-engine/heuristic.js` | Rule-based diagnostic algorithm |
+| `src/store/authStore.js` | Authentication state management |
+| `src/models/DiagnosisSession.js` | Core data model for diagnoses |
+
+## 🩺 Decision Engine
+
+The diagnostic engine (`src/lib/decision-engine/heuristic.js`) implements a **weighted matching paradigm**:
+
+1. Patient symptoms are collected as response vectors
+2. Responses are compared against condition-specific patterns
+3. Weighted similarity scores determine diagnosis confidence
+4. Primary and differential diagnoses are ranked
+
+**This module is framework-agnostic** - no React hooks, pure JavaScript functions.
+
+## 🔮 Future ML Integration
+
+The `src/lib/ml-bridge/` module is a placeholder for:
+- Bayesian network integration (Python pgmpy)
+- Neural network models for pattern recognition
+- Ensemble methods combining heuristic + ML approaches
+
+## 📝 License
+
+MIT License - See LICENSE file
+
+---
+
+**Team**: 5 developers | **Timeline**: 7 days | **Last Updated**: January 2026
 
 ## Deploy on Vercel
 

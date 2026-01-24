@@ -3,7 +3,7 @@
  * Extended profile information for patient users
  */
 
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const MedicalHistorySchema = new mongoose.Schema(
   {
@@ -17,8 +17,8 @@ const MedicalHistorySchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["active", "resolved", "managed"],
-      default: "active",
+      enum: ['active', 'resolved', 'managed'],
+      default: 'active',
     },
     notes: {
       type: String,
@@ -32,18 +32,18 @@ const PatientProfileSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
       unique: true,
     },
     // Physical characteristics relevant to MSK assessment
     height: {
       value: { type: Number, default: null },
-      unit: { type: String, enum: ["cm", "in"], default: "cm" },
+      unit: { type: String, enum: ['cm', 'in'], default: 'cm' },
     },
     weight: {
       value: { type: Number, default: null },
-      unit: { type: String, enum: ["kg", "lb"], default: "kg" },
+      unit: { type: String, enum: ['kg', 'lb'], default: 'kg' },
     },
     // Occupation (relevant for MSK diagnosis)
     occupation: {
@@ -52,7 +52,7 @@ const PatientProfileSchema = new mongoose.Schema(
     },
     activityLevel: {
       type: String,
-      enum: ["sedentary", "light", "moderate", "active", "very_active", null],
+      enum: ['sedentary', 'light', 'moderate', 'active', 'very_active', null],
       default: null,
     },
     // Medical history
@@ -72,8 +72,8 @@ const PatientProfileSchema = new mongoose.Schema(
         allergen: { type: String, required: true },
         severity: {
           type: String,
-          enum: ["mild", "moderate", "severe"],
-          default: "moderate",
+          enum: ['mild', 'moderate', 'severe'],
+          default: 'moderate',
         },
       },
     ],
@@ -86,7 +86,7 @@ const PatientProfileSchema = new mongoose.Schema(
     // Assigned clinician
     assignedClinician: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       default: null,
     },
     // Profile completion status
@@ -111,6 +111,6 @@ PatientProfileSchema.index({ assignedClinician: 1 });
 
 const PatientProfile =
   mongoose.models.PatientProfile ||
-  mongoose.model("PatientProfile", PatientProfileSchema);
+  mongoose.model('PatientProfile', PatientProfileSchema);
 
 export default PatientProfile;

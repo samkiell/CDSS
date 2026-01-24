@@ -3,5 +3,5 @@
  * Central export for all Zustand stores
  */
 
-export { default as useAuthStore } from "./authStore.js";
-export { default as useDiagnosisStore } from "./diagnosisStore.js";
+export { default as useAuthStore } from './authStore.js';
+export { default as useDiagnosisStore } from './diagnosisStore.js';
