@@ -54,7 +54,11 @@ export const MEDICAL_RULES = {
       ankle_achilles_q1: {
         text: 'Do you feel the pain about 4 cm above your heel?',
         options: [
-          { text: 'Yes', next: 'ankle_achilles_q2', category: 'Achilles Tendinopathy' },
+          {
+            text: 'Yes',
+            next: 'ankle_achilles_q2',
+            tags: ['Achilles Tendinopathy Indicator'],
+          },
           { text: 'No', next: 'ankle_achilles_q2' },
         ],
       },
@@ -63,13 +67,41 @@ export const MEDICAL_RULES = {
         options: [
           {
             text: 'Sudden',
-            next: 'ankle_achilles_q3',
+            next: 'ankle_achilles_pop',
             tags: ['Rule out Achilles tendon rupture'],
           },
-          { text: 'Gradual', next: 'ankle_achilles_q3' },
+          { text: 'Gradual', next: 'ankle_achilles_pop' },
         ],
       },
-      // ... more Ankle rules
+      ankle_achilles_pop: {
+        text: 'Did you hear a ripping or popping sensation accompanying the pain at onset?',
+        options: [
+          {
+            text: 'Yes',
+            next: 'ankle_fracture_q1',
+            tags: ['RED FLAG: Potential Rupture'],
+          },
+          { text: 'No', next: 'ankle_fracture_q1' },
+        ],
+      },
+      ankle_fracture_q1: {
+        text: 'Can you walk with the affected foot and bear weight on it?',
+        options: [
+          { text: 'Yes', next: 'ankle_next_region' },
+          {
+            text: 'No',
+            next: 'ankle_next_region',
+            tags: ['CRITICAL RED FLAG: Potential Fracture'],
+          },
+        ],
+      },
+      ankle_next_region: {
+        text: 'Is there tenderness at the medial aspect beneath the heel / mid-foot?',
+        options: [
+          { text: 'Yes', next: null, tags: ['Plantar Fasciitis Indicator'] },
+          { text: 'No', next: null },
+        ],
+      },
     },
   },
   lumbar: {
@@ -87,7 +119,7 @@ export const MEDICAL_RULES = {
           },
           {
             text: 'Radiates down both legs',
-            next: 'lumbar_q2',
+            next: 'lumbar_q_redflag',
             tags: ['RED FLAG: Rule out cauda equina syndrome'],
           },
         ],
@@ -97,10 +129,10 @@ export const MEDICAL_RULES = {
         options: [
           {
             text: 'Sudden',
-            next: 'lumbar_q3',
+            next: 'lumbar_q_redflag',
             tags: ['Rule out lumbar disc herniation'],
           },
-          { text: 'Gradual', next: 'lumbar_q3' },
+          { text: 'Gradual', next: 'lumbar_q_redflag' },
         ],
       },
       lumbar_q_redflag: {
@@ -108,13 +140,30 @@ export const MEDICAL_RULES = {
         options: [
           {
             text: 'Yes',
-            next: 'lumbar_next',
+            next: 'lumbar_q_numb',
             tags: ['CRITICAL RED FLAG: Cauda Equina Syndrome'],
           },
-          { text: 'No', next: 'lumbar_next' },
+          { text: 'No', next: 'lumbar_q_numb' },
         ],
       },
-      // ... more Lumbar rules
+      lumbar_q_numb: {
+        text: 'Do you experience any numbness or tingling sensation in your legs or feet?',
+        options: [
+          {
+            text: 'Yes',
+            next: 'lumbar_q_weak',
+            tags: ['Rule out lumbar disc herniation or cauda equina'],
+          },
+          { text: 'No', next: 'lumbar_q_weak' },
+        ],
+      },
+      lumbar_q_weak: {
+        text: 'Have you experienced any weakness in your legs?',
+        options: [
+          { text: 'Yes', next: null, tags: ['Rule out cauda equina'] },
+          { text: 'No', next: null },
+        ],
+      },
     },
   },
   // Placeholder for others to be extracted verbatim
