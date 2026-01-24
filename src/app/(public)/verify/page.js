@@ -40,7 +40,7 @@ export default function VerifyPage() {
 
       toast.success('Email verified successfully!');
       router.push('/login');
-    } catch (_) {
+    } catch {
       toast.error('Verification failed. Please try again.');
     } finally {
       setIsLoading(false);
@@ -52,7 +52,7 @@ export default function VerifyPage() {
       // Placeholder for resend logic
       await new Promise((resolve) => setTimeout(resolve, 1000));
       toast.success('Verification code resent!');
-    } catch (_) {
+    } catch {
       toast.error('Failed to resend code. Please try again.');
     }
   };

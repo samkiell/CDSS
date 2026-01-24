@@ -5,24 +5,24 @@
   /* Primary Colors */
   --primary: 217 91% 50%;
   --primary-foreground: 0 0% 100%;
-  
+
   /* Background & Foreground */
   --background: 0 0% 100%;
   --foreground: 222 47% 11%;
-  
+
   /* Card */
   --card: 0 0% 100%;
   --card-foreground: 222 47% 11%;
-  
+
   /* Muted */
   --muted: 210 40% 96%;
   --muted-foreground: 215 16% 47%;
-  
+
   /* Border & Input */
   --border: 214 32% 91%;
   --input: 214 32% 91%;
   --ring: 217 91% 50%;
-  
+
   /* Status Colors */
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
@@ -30,16 +30,16 @@
   --success-foreground: 0 0% 100%;
   --warning: 38 92% 50%;
   --warning-foreground: 0 0% 100%;
-  
+
   /* Accent */
   --accent: 210 40% 96%;
   --accent-foreground: 222 47% 11%;
-  
+
   /* Sidebar */
   --sidebar: 217 91% 50%;
   --sidebar-foreground: 0 0% 100%;
   --sidebar-muted: 217 91% 45%;
-  
+
   /* Radius */
   --radius: 0.5rem;
 }
@@ -48,24 +48,24 @@
   /* Primary Colors */
   --primary: 217 91% 60%;
   --primary-foreground: 0 0% 100%;
-  
+
   /* Background & Foreground */
   --background: 222 47% 6%;
   --foreground: 210 40% 98%;
-  
+
   /* Card */
   --card: 222 47% 9%;
   --card-foreground: 210 40% 98%;
-  
+
   /* Muted */
   --muted: 217 33% 17%;
   --muted-foreground: 215 20% 65%;
-  
+
   /* Border & Input */
   --border: 217 33% 17%;
   --input: 217 33% 17%;
   --ring: 217 91% 60%;
-  
+
   /* Status Colors */
   --destructive: 0 62% 50%;
   --destructive-foreground: 0 0% 100%;
@@ -73,11 +73,11 @@
   --success-foreground: 0 0% 100%;
   --warning: 38 92% 50%;
   --warning-foreground: 0 0% 100%;
-  
+
   /* Accent */
   --accent: 217 33% 17%;
   --accent-foreground: 210 40% 98%;
-  
+
   /* Sidebar */
   --sidebar: 217 91% 45%;
   --sidebar-foreground: 0 0% 100%;
@@ -126,7 +126,7 @@ body {
 
 /* Focus ring utility */
 .focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
+  @apply focus:ring-ring focus:ring-offset-background focus:ring-2 focus:ring-offset-2 focus:outline-none;
 }
 
 /* Custom scrollbar */

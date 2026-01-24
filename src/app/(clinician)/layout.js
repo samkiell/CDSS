@@ -12,8 +12,8 @@ import { Sidebar, TopNav } from '@/components/layout';
 
 const clinicianLinks = [
   { href: '/clinician/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/clinician/patients', label: 'Patients', icon: Users },
   { href: '/clinician/cases', label: 'Cases', icon: FolderKanban },
-  { href: '/clinician/users', label: 'Users', icon: Users },
   { href: '/clinician/therapists', label: 'Therapists', icon: UserCog },
   { href: '/clinician/reports', label: 'Reports', icon: FileBarChart },
   { href: '/clinician/settings', label: 'Settings', icon: Settings },

@@ -42,7 +42,7 @@ export default function LoginPage() {
 
       toast.success('Login successful!');
       router.push('/patient/dashboard');
-    } catch (_) {
+    } catch {
       toast.error('Invalid credentials. Please try again.');
     } finally {
       setIsLoading(false);

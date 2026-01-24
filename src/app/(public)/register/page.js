@@ -79,7 +79,7 @@ export default function RegisterPage() {
 
       toast.success('Account created successfully!');
       router.push('/verify');
-    } catch (_) {
+    } catch {
       toast.error('Registration failed. Please try again.');
     } finally {
       setIsLoading(false);

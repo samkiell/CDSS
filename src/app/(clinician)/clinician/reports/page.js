@@ -6,11 +6,9 @@ export default function ReportsPage() {
     <div className="flex min-h-[60vh] items-center justify-center">
       <Card className="w-full max-w-md">
         <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-          <Construction className="mb-4 h-12 w-12 text-muted-foreground" />
-          <h2 className="text-lg font-semibold text-foreground">
-            Reports
-          </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
+          <Construction className="text-muted-foreground mb-4 h-12 w-12" />
+          <h2 className="text-foreground text-lg font-semibold">Reports</h2>
+          <p className="text-muted-foreground mt-2 text-sm">
             This page is not implemented yet.
             <br />
             Waiting for assigned developer.
