@@ -11,12 +11,58 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { CheckCircle2, ChevronRight, FileJson } from 'lucide-react';
 import { toast } from 'sonner';
+import { useEffect } from 'react';
+import { Loader2 } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 export default function PatientAssessmentPage() {
-  const { currentStep, responses, redFlags, files, resetAssessment, setStep } =
-    useAssessmentStore();
+  const {
+    currentStep,
+    selectedRegion,
+    responses,
+    redFlags,
+    files,
+    resetAssessment,
+    setStep,
+    aiAnalysis,
+    setAiAnalysis,
+  } = useAssessmentStore();
   const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  useEffect(() => {
+    if (currentStep === 'summary' && !aiAnalysis && !isAnalyzing) {
+      handleAiAnalysis();
+    }
+  }, [currentStep]);
+
+  const handleAiAnalysis = async () => {
+    setIsAnalyzing(true);
+    try {
+      const response = await fetch('/api/diagnosis/ai-analysis', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          selectedRegion,
+          responses,
+          redFlags,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setAiAnalysis(data.analysis);
+      } else {
+        throw new Error(data.error);
+      }
+    } catch (error) {
+      console.error('AI Analysis Error:', error);
+      toast.error('Could not generate preliminary AI analysis.');
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
 
   const handleSubmitClick = () => {
     setIsDisclaimerOpen(true);
@@ -30,6 +76,7 @@ export default function PatientAssessmentPage() {
       const payload = {
         responses,
         redFlags,
+        aiAnalysis,
         timestamp: new Date().toISOString(),
         assessmentType: 'MSK_HEURISTIC_V1',
         filesCount: files.length,
@@ -73,28 +120,62 @@ export default function PatientAssessmentPage() {
             <Card className="border-2 border-slate-100 dark:border-slate-800">
               <CardContent className="divide-y divide-slate-100 p-6 dark:divide-slate-800">
                 <div className="flex justify-between py-4">
-                  <span className="text-slate-500">Selected Region</span>
+                  <span className="font-medium text-slate-500">Assessment Region</span>
                   <span className="text-primary font-bold tracking-wide uppercase">
-                    {useAssessmentStore.getState().selectedRegion}
+                    {selectedRegion}
                   </span>
                 </div>
-                <div className="flex justify-between py-4">
-                  <span className="text-slate-500">Questions Answered</span>
-                  <span className="font-bold">{Object.keys(responses).length}</span>
+                <div className="py-4">
+                  <span className="mb-3 block font-medium text-slate-500">
+                    Preliminary AI Analysis
+                  </span>
+                  {isAnalyzing ? (
+                    <div className="flex items-center justify-center gap-3 rounded-xl bg-slate-50 p-6 dark:bg-slate-900">
+                      <Loader2 className="text-primary animate-spin" size={20} />
+                      <span className="animate-pulse text-sm font-medium">
+                        Our AI is analyzing your symptoms...
+                      </span>
+                    </div>
+                  ) : aiAnalysis ? (
+                    <div className="prose prose-sm dark:prose-invert max-w-none rounded-2xl border border-blue-100 bg-blue-50/50 p-6 dark:border-blue-900/30 dark:bg-blue-900/10">
+                      <ReactMarkdown className="leading-relaxed font-medium text-slate-700 dark:text-slate-300">
+                        {aiAnalysis}
+                      </ReactMarkdown>
+                    </div>
+                  ) : (
+                    <div className="p-4 text-center text-sm text-slate-400 italic">
+                      Analysis unavailable. You can still proceed with submission.
+                    </div>
+                  )}
                 </div>
-                <div className="flex justify-between py-4 text-red-500">
-                  <span className="font-medium">Red Flags Tagged</span>
-                  <span className="font-bold">{redFlags.length}</span>
-                </div>
-                <div className="flex justify-between py-4">
-                  <span className="text-slate-500">Supporting Files</span>
-                  <span className="font-bold">{files.length}</span>
-                </div>
+                {redFlags.length > 0 && (
+                  <div className="py-4">
+                    <span className="mb-2 block text-xs font-bold tracking-wider text-red-500 uppercase">
+                      Clinical Alerts
+                    </span>
+                    <ul className="space-y-1">
+                      {redFlags.map((flag, idx) => (
+                        <li
+                          key={idx}
+                          className="flex items-center gap-2 text-sm font-medium text-red-600 dark:text-red-400"
+                        >
+                          <div className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                          {flag}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </CardContent>
             </Card>
 
             <div className="flex flex-col gap-4">
-              <Button size="lg" onClick={handleSubmitClick} loading={isSubmitting}>
+              <Button
+                size="lg"
+                onClick={handleSubmitClick}
+                loading={isSubmitting}
+                disabled={isAnalyzing}
+              >
                 Confirm and Send for AI Analysis
                 <ChevronRight size={18} />
               </Button>
