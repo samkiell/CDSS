@@ -15,7 +15,13 @@ import { useEffect } from 'react';
 import { Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
+import { useSearchParams } from 'next/navigation';
+import { MEDICAL_RULES } from '@/constants/medicalRules';
+
 export default function PatientAssessmentPage() {
+  const searchParams = useSearchParams();
+  const isNewAssessment = searchParams.get('new') === 'true';
+
   const {
     currentStep,
     selectedRegion,
@@ -132,13 +138,43 @@ export default function PatientAssessmentPage() {
 
             <Card className="border-2 border-slate-100 dark:border-slate-800">
               <CardContent className="divide-y divide-slate-100 p-6 dark:divide-slate-800">
+                {/* Region Header */}
                 <div className="flex justify-between py-4">
                   <span className="font-medium text-slate-500">Assessment Region</span>
                   <span className="text-primary font-bold tracking-wide uppercase">
                     {selectedRegion}
                   </span>
                 </div>
+
+                {/* Detailed Symptom Summary */}
                 <div className="py-4">
+                  <span className="mb-4 block text-xs font-bold tracking-wider text-slate-400 uppercase">
+                    Symptom Summary
+                  </span>
+                  <div className="space-y-4">
+                    {Object.entries(responses).map(([questionId, answer]) => {
+                      const question =
+                        MEDICAL_RULES[selectedRegion]?.questions[questionId];
+                      if (!question) return null;
+                      return (
+                        <div
+                          key={questionId}
+                          className="flex flex-col gap-1 border-l-2 border-slate-100 pl-4 dark:border-slate-800"
+                        >
+                          <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">
+                            {question.text}
+                          </span>
+                          <span className="text-primary text-sm font-medium">
+                            {answer}
+                          </span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* AI Analysis Section */}
+                <div className="py-6">
                   <span className="mb-3 block font-medium text-slate-500">
                     Preliminary AI Analysis
                   </span>
