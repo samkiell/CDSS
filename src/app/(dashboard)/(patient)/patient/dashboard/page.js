@@ -16,6 +16,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import PainChart from '@/components/dashboard/PainChart';
+import AssessmentHero from '@/components/dashboard/AssessmentHero';
 import {
   Card,
   CardContent,
@@ -149,58 +150,7 @@ export default async function PatientDashboardPage() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-12">
         {/* Left Section: Main Highlights */}
         <div className="space-y-6 md:col-span-8">
-          {/* Ongoing Assessment Hero Card */}
-          <Card className="bg-primary text-primary-foreground overflow-hidden">
-            <CardContent className="p-0">
-              <div className="relative p-8">
-                <div className="relative z-10 flex flex-col justify-between gap-6 md:flex-row md:items-center">
-                  <div className="max-w-md space-y-4">
-                    <div className="flex items-center gap-2">
-                      <Badge
-                        variant="outline"
-                        className="border-white/20 bg-white/20 text-white"
-                      >
-                        {latestSession?.sessionStatus === 'in_progress'
-                          ? 'Assessment in progress'
-                          : 'Assessment Result'}
-                      </Badge>
-                      <span className="text-xs text-white/60">
-                        Updated{' '}
-                        {latestSession
-                          ? new Date(latestSession.updatedAt).toLocaleDateString()
-                          : 'recently'}
-                      </span>
-                    </div>
-                    <h2 className="text-3xl font-bold tracking-tight">
-                      {latestSession?.temporalDiagnosis?.primaryDiagnosis
-                        ?.conditionName || 'Start a New Assessment'}
-                    </h2>
-                    <p className="text-primary-foreground/80 text-sm leading-relaxed">
-                      {latestSession?.sessionStatus === 'in_progress'
-                        ? 'Finish your assessment to get a comprehensive diagnostic report and personalized treatment plan.'
-                        : 'Track your symptoms and complete daily check-ins to monitor your recovery journey effectively.'}
-                    </p>
-                    <div className="pt-2">
-                      <Link
-                        href="/patient/assessment?new=true"
-                        className="bg-secondary text-secondary-foreground border-primary hover:bg-primary/10 flex h-12 items-center justify-center rounded-lg border px-8 text-base font-bold transition-colors"
-                      >
-                        {latestSession?.sessionStatus === 'in_progress'
-                          ? 'Continue Assessment'
-                          : 'Start New Assessment'}
-                        <ChevronRight className="ml-2 h-4 w-4" />
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="hidden opacity-20 lg:block">
-                    <Activity className="h-40 w-40" />
-                  </div>
-                </div>
-                {/* Background Pattern */}
-                <div className="absolute top-0 right-0 -mt-32 -mr-32 h-64 w-64 rounded-full bg-white/5 blur-3xl"></div>
-              </div>
-            </CardContent>
-          </Card>
+          <AssessmentHero latestSession={latestSession} />
 
           {/* Recovery Progress Chart */}
           <Card>
