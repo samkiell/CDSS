@@ -5,7 +5,6 @@ import { redirect } from 'next/navigation';
 
 export default async function PatientLayout({ children }) {
   const session = await auth();
-  console.log(session);
   if (!session || !session.user) redirect('/login');
   if (session?.user?.role !== 'PATIENT' && session?.user.role === 'CLINICIAN') {
     redirect('/clinician/dashboard');
