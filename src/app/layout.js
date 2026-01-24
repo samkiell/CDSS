@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import { Toaster } from 'sonner';
+import OfflineStatus from '@/components/OfflineStatus';
 import './globals.css';
 
 const inter = Inter({
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
         >
           {children}
           <Toaster position="top-right" richColors />
+          <OfflineStatus />
         </ThemeProvider>
       </body>
     </html>
