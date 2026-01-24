@@ -66,12 +66,10 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen w-full flex-col items-center justify-center px-4 py-8">
-      {/* Logo */}
       <div className="animate-fade-in mb-8">
         <Logo size="lg" />
       </div>
 
-      {/* Login Card */}
       <Card className="animate-slide-up w-full max-w-md">
         <CardHeader className="text-center">
           <CardTitle>Welcome Back</CardTitle>
@@ -80,7 +78,6 @@ export default function LoginPage() {
 
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Email Field */}
             <div className="space-y-2">
               <label htmlFor="email" className="text-foreground text-sm font-medium">
                 Email Address
@@ -97,7 +94,6 @@ export default function LoginPage() {
               />
             </div>
 
-            {/* Password Field */}
             <div className="space-y-2">
               <label htmlFor="password" className="text-foreground text-sm font-medium">
                 Password
@@ -113,14 +109,12 @@ export default function LoginPage() {
               />
             </div>
 
-            {/* Forgot Password Link */}
             <div className="text-right">
               <Link href="#" className="text-primary text-sm hover:underline">
                 Forgot password?
               </Link>
             </div>
 
-            {/* Submit Button */}
             <Button type="submit" className="w-full" size="lg" loading={isLoading}>
               Sign In
             </Button>
