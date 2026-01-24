@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
-import { Logo } from '@/components/ui';
 
 function Sidebar({ links = [], className }) {
   const pathname = usePathname();
@@ -39,12 +39,16 @@ function Sidebar({ links = [], className }) {
         )}
       >
         {/* Logo */}
-        <div className="border-sidebar-muted flex h-16 items-center justify-center border-b px-4">
-          <Logo
-            size="sm"
-            showText
-            className="text-sidebar-foreground [&_span]:text-sidebar-foreground [&_svg]:text-sidebar-foreground"
+        <div className="border-sidebar-muted flex h-16 items-center justify-center gap-2 border-b px-4">
+          <Image
+            src="/logo.png"
+            alt="CDSS Logo"
+            width={36}
+            height={36}
+            priority
+            className="object-contain"
           />
+          <span className="text-sidebar-foreground text-lg font-semibold">CDSS</span>
         </div>
 
         {/* Navigation Links */}
