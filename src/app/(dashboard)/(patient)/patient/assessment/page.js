@@ -11,7 +11,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { CheckCircle2, ChevronRight, FileJson } from 'lucide-react';
 import { toast } from 'sonner';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Loader2 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 
@@ -38,14 +38,17 @@ export default function PatientAssessmentPage() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [justSubmitted, setJustSubmitted] = useState(false);
 
+  const hasResetOnce = useRef(false);
+
   useEffect(() => {
-    // We only reset if:
-    // 1. It's a fresh manual visit (?new=true)
-    // 2. We land on the page (not just submitted) and it's marked complete
-    if (isNewAssessment || (currentStep === 'complete' && !justSubmitted)) {
-      resetAssessment();
+    // Perform reset strictly once on mount if requested via URL OR if landing on a complete screen
+    if (!hasResetOnce.current) {
+      if (isNewAssessment || currentStep === 'complete') {
+        resetAssessment();
+      }
+      hasResetOnce.current = true;
     }
-  }, [isNewAssessment, currentStep, resetAssessment, justSubmitted]);
+  }, [isNewAssessment, resetAssessment]); // Keep dependency list stable to mount logic
 
   const handleAiAnalysis = async () => {
     setIsAnalyzing(true);
