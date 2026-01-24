@@ -33,7 +33,6 @@ export default function SelfTestPage() {
   ];
   return (
     <div className="mx-auto max-w-4xl">
-      {/* Header */}
       <div className="mb-8">
         <h1 className="mb-2 text-3xl font-bold text-gray-800 dark:text-gray-200">
           Guided Self-Tests
@@ -44,14 +43,12 @@ export default function SelfTestPage() {
         </p>
       </div>
 
-      {/* Tests List */}
       <div className="space-y-8">
         {tests.map((test) => (
           <div
             key={test.id}
             className="rounded-lg border border-gray-100 bg-white p-8 shadow-sm dark:border-gray-700 dark:bg-gray-800"
           >
-            {/* Test Title and Purpose */}
             <div className="mb-8">
               <h2 className="mb-3 text-xl font-semibold text-gray-800 dark:text-gray-200">
                 {test.title}
