@@ -54,7 +54,7 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
       >
         {/* Logo & Close Button */}
         <div className="border-border bg-background flex h-24 shrink-0 items-center justify-between border-b px-6">
-          <Link href="/" className="relative h-12 w-32">
+          <Link href="/" className="relative h-27 w-32">
             <Image
               src="/logo.png"
               alt="CDSS Logo"
