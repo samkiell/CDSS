@@ -35,12 +35,13 @@ export async function getAiPreliminaryAnalysis(data) {
     Do NOT include any internal question IDs, technical codes, or raw data keys (e.g., "ankle_q1", "achilles_pop") in your response. 
     The patient should only see natural clinical language. Instead of referencing IDs, describe the finding (e.g., write "based on the sharp pain mentioned" instead of "based on q1").
     
+    Do NOT include any "Clinical Notes for the Doctor" or doctor-specific jargon. This response is strictly for the patient.
+
     FORMAT:
     Return your response in clear sections:
     1. Preliminary Analysis (Potential condition)
     2. Confidence Level
     3. Recommended Immediate Action
-    4. Clinical Notes for the Doctor
   `;
 
   try {

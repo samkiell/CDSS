@@ -23,10 +23,11 @@ import { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { cn } from '@/lib/cn';
 
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { MEDICAL_RULES } from '@/constants/medicalRules';
 
 export default function PatientAssessmentPage() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const isNewAssessment = searchParams.get('new') === 'true';
 
@@ -312,7 +313,14 @@ export default function PatientAssessmentPage() {
               Your preliminary report is being processed by our AI agent and will be
               shared with your assigned clinician shortly.
             </p>
-            <Button className="mt-10" variant="secondary" onClick={resetAssessment}>
+            <Button
+              className="mt-10"
+              variant="secondary"
+              onClick={() => {
+                resetAssessment();
+                router.push('/patient/dashboard');
+              }}
+            >
               Return to Dashboard
             </Button>
           </div>
