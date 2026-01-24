@@ -19,7 +19,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const user = await User.findOne({
           email: credentials.email.toLowerCase(),
         }).select('password email firstName lastName avatar role isVerified');
-
+        console.log('User found during authorization:', user);
         if (!user) {
           return null;
         }
