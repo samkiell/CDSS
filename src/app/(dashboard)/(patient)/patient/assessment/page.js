@@ -232,10 +232,12 @@ export default function PatientAssessmentPage() {
                       </div>
                     </div>
                   ) : aiAnalysis ? (
-                    <div className="prose prose-sm dark:prose-invert animate-in slide-in-from-bottom-4 max-w-none rounded-2xl border border-blue-100 bg-blue-50/50 p-6 duration-500 dark:border-blue-900/30 dark:bg-blue-900/10">
-                      <div className="leading-relaxed font-medium text-slate-700 dark:text-slate-300">
-                        <ReactMarkdown>{aiAnalysis}</ReactMarkdown>
-                      </div>
+                    <div className="prose prose-blue dark:prose-invert prose-p:leading-relaxed prose-headings:mb-4 prose-headings:mt-6 animate-in slide-in-from-bottom-4 max-w-none rounded-2xl border border-blue-100 bg-blue-50/50 p-8 duration-500 dark:border-blue-900/30 dark:bg-blue-900/10">
+                      <ReactMarkdown>
+                        {aiAnalysis
+                          .replace(/^```(markdown|md)?\n/, '')
+                          .replace(/\n```$/, '')}
+                      </ReactMarkdown>
                     </div>
                   ) : (
                     <div className="rounded-2xl border-2 border-dashed border-slate-100 bg-slate-50/30 p-8 text-center dark:border-slate-800/50 dark:bg-slate-900/10">
