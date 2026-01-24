@@ -8,7 +8,7 @@ import { Menu, X, Settings, HelpCircle, Shield, LogOut, User } from 'lucide-reac
 import { cn } from '@/lib/cn';
 import { signOut } from 'next-auth/react';
 
-function Sidebar({ links = [], secondaryLinks = [], className, user }) {
+export default function Sidebar({ links = [], secondaryLinks = [], className, user }) {
   const pathname = usePathname();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
@@ -163,5 +163,3 @@ function Sidebar({ links = [], secondaryLinks = [], className, user }) {
     </>
   );
 }
-
-export { Sidebar };

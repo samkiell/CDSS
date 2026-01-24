@@ -1,7 +1,8 @@
-import { Sidebar, TopNav } from '@/components/layout';
+import { TopNav } from '@/components/layout';
 import { clinicianLinks } from '@/components/layout/navLink';
 import { auth } from '../../../../auth';
 import { redirect } from 'next/navigation';
+import Sidebar from '@/components/layout/Sidebar';
 
 export default async function ClinicianLayout({ children }) {
   const session = await auth();
