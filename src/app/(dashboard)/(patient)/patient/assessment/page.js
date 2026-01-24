@@ -90,6 +90,9 @@ export default function PatientAssessmentPage() {
 
       toast.success('Assessment submitted successfully! A clinician will review it.');
       setStep('complete');
+      // Clear the store session so the patient can start fresh next time
+      resetAssessment();
+      setStep('complete'); // Ensure we stay on the complete step despite the reset
     } catch (error) {
       toast.error('Failed to submit assessment. Please try again.');
     } finally {
@@ -138,9 +141,9 @@ export default function PatientAssessmentPage() {
                     </div>
                   ) : aiAnalysis ? (
                     <div className="prose prose-sm dark:prose-invert max-w-none rounded-2xl border border-blue-100 bg-blue-50/50 p-6 dark:border-blue-900/30 dark:bg-blue-900/10">
-                      <ReactMarkdown className="leading-relaxed font-medium text-slate-700 dark:text-slate-300">
-                        {aiAnalysis}
-                      </ReactMarkdown>
+                      <div className="leading-relaxed font-medium text-slate-700 dark:text-slate-300">
+                        <ReactMarkdown>{aiAnalysis}</ReactMarkdown>
+                      </div>
                     </div>
                   ) : (
                     <div className="p-4 text-center text-sm text-slate-400 italic">
