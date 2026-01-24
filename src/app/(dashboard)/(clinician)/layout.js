@@ -1,7 +1,15 @@
 import { Sidebar, TopNav } from '@/components/layout';
 import { clinicianLinks } from '@/components/layout/navLink';
+import { auth } from '../../../../auth';
+import { redirect } from 'next/navigation';
 
-export default function ClinicianLayout({ children }) {
+export default async function ClinicianLayout({ children }) {
+  const session = await auth();
+  console.log(session);
+  if (!session || !session.user) redirect('/login');
+  if (session?.user?.role !== 'CLINICIAN' && session?.user.role === 'PATIENT') {
+    redirect('/patient/dashboard');
+  }
   return (
     <>
       <Sidebar links={clinicianLinks} />
