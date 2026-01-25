@@ -109,26 +109,35 @@ export default function PatientAssessmentPage() {
 
     try {
       const payload = {
-        responses,
-        redFlags,
-        aiAnalysis,
-        timestamp: new Date().toISOString(),
-        assessmentType: 'MSK_HEURISTIC_V1',
-        filesCount: files.length,
+        bodyRegion: selectedRegion,
+        symptomData: Object.entries(responses).map(([questionId, answer]) => {
+          // Find the question text from MEDICAL_RULES if possible
+          const regionRules = MEDICAL_RULES[selectedRegion];
+          const question = regionRules?.questions[questionId]?.text || questionId;
+          return { question, answer };
+        }),
+        mediaUrls: [], // For now, handle media separately if needed or add here
       };
 
-      // Mock API call to Mistral AI endpoint
-      console.log('Sending to Mistral AI Agent:', payload);
+      const response = await fetch('/api/assessment/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
 
-      // Simulate delay
-      await new Promise((r) => setTimeout(r, 2000));
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to submit assessment');
+      }
 
       toast.success('Assessment submitted successfully! A clinician will review it.');
 
       resetAssessment();
       setStep('complete');
     } catch (error) {
-      toast.error('Failed to submit assessment. Please try again.');
+      console.error('Submission Error:', error);
+      toast.error(error.message || 'Failed to submit assessment. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
