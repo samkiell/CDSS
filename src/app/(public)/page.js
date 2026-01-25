@@ -14,7 +14,7 @@ export default function SplashPage() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4">
+    <div className="flex flex-col items-center justify-center px-4">
       {/* Logo with Animation */}
       <div
         className={`transition-all duration-700 ease-out ${

@@ -1,16 +1,16 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Menu, X, Settings, HelpCircle, Shield, LogOut, User } from 'lucide-react';
+import { Settings, HelpCircle, Shield, LogOut, User, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { signOut } from 'next-auth/react';
+import { useUIStore } from '@/store';
 
 export default function Sidebar({ links = [], secondaryLinks = [], className, user }) {
   const pathname = usePathname();
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { isSidebarOpen, setSidebarOpen } = useUIStore();
 
   const defaultSecondaryLinks = [
     { href: '#', label: 'Settings', icon: Settings },
@@ -24,51 +24,39 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
 
   return (
     <>
-      {/* Mobile Menu Button - Only visible when closed */}
-      <button
-        className={cn(
-          'bg-primary text-primary-foreground fixed top-4 left-4 z-50 rounded-lg p-2 shadow-lg transition-opacity duration-200 lg:hidden',
-          isMobileOpen ? 'pointer-events-none opacity-0' : 'opacity-100'
-        )}
-        onClick={() => setIsMobileOpen(true)}
-        aria-label="Open menu"
-      >
-        <Menu className="h-6 w-6" />
-      </button>
-
       {/* Mobile Overlay */}
-      {isMobileOpen && (
+      {isSidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
-          onClick={() => setIsMobileOpen(false)}
+          className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm lg:hidden"
+          onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <aside
         className={cn(
-          'bg-card border-border fixed inset-y-0 left-0 z-40 flex w-64 flex-col border-r transition-transform duration-300 lg:translate-x-0',
-          isMobileOpen ? 'translate-x-0' : '-translate-x-full',
+          'bg-card border-border fixed inset-y-0 left-0 z-50 flex w-64 flex-col border-r transition-transform duration-300 ease-in-out lg:translate-x-0',
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full',
           className
         )}
       >
         {/* Logo & Close Button */}
-        <div className="border-border bg-background flex h-24 shrink-0 items-center justify-between border-b px-6">
-          <Link href="/" className="relative h-12 w-32">
+        <div className="border-border bg-background flex h-20 shrink-0 items-center justify-between border-b px-6">
+          <Link href="/" className="relative h-23 w-28">
             <Image
               src="/logo.png"
               alt="CDSS Logo"
               fill
               priority
               className="object-contain object-left"
-              sizes="(max-width: 768px) 100vw, 128px"
+              sizes="(max-width: 768px) 100vw, 112px"
             />
           </Link>
 
           {/* Close Button (Mobile Only) */}
           <button
             className="text-muted-foreground hover:bg-muted hover:text-foreground rounded-lg p-2 transition-colors lg:hidden"
-            onClick={() => setIsMobileOpen(false)}
+            onClick={() => setSidebarOpen(false)}
             aria-label="Close menu"
           >
             <X className="h-6 w-6" />
@@ -76,7 +64,7 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
         </div>
 
         {/* Primary Navigation Links */}
-        <nav className="flex-1 overflow-y-auto px-4 py-2">
+        <nav className="flex-1 overflow-y-auto px-4 py-4">
           <ul className="space-y-1">
             {links.map((link) => {
               const isActive =
@@ -93,7 +81,7 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
                         ? 'bg-primary text-primary-foreground'
                         : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                     )}
-                    onClick={() => setIsMobileOpen(false)}
+                    onClick={() => setSidebarOpen(false)}
                   >
                     {Icon && <Icon className="h-5 w-5" />}
                     <span>{link.label}</span>
@@ -104,7 +92,7 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
           </ul>
 
           {/* Divider */}
-          <div className="border-border my-4 border-t" />
+          <div className="border-border my-6 border-t" />
 
           {/* Secondary Navigation Links */}
           <ul className="space-y-1">
@@ -117,7 +105,7 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
                     <button
                       className="text-muted-foreground hover:bg-muted hover:text-foreground flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors"
                       onClick={async () => {
-                        setIsMobileOpen(false);
+                        setSidebarOpen(false);
                         await signOut({ redirectTo: '/' });
                       }}
                     >
@@ -128,7 +116,7 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
                     <Link
                       href={link.href}
                       className="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors"
-                      onClick={() => setIsMobileOpen(false)}
+                      onClick={() => setSidebarOpen(false)}
                     >
                       {Icon && <Icon className="h-5 w-5" />}
                       <span>{link.label}</span>
@@ -149,11 +137,11 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
             <div className="bg-muted flex h-10 w-10 items-center justify-center rounded-full">
               <User className="text-muted-foreground h-5 w-5" />
             </div>
-            <div className="flex flex-col">
-              <span className="text-foreground text-sm font-medium">
-                {user ? `${user?.firstName} ${user?.lastName}` : 'Unkonwn User'}
+            <div className="flex flex-col overflow-hidden">
+              <span className="text-foreground truncate text-sm font-medium">
+                {user ? `${user?.firstName} ${user?.lastName}` : 'Unknown User'}
               </span>
-              <span className="text-[12px] font-medium capitalize">
+              <span className="text-[12px] font-medium capitalize opacity-70">
                 {user ? `${user?.role.toLowerCase()}` : null}
               </span>
             </div>

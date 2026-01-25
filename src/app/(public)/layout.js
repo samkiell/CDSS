@@ -1,15 +1,13 @@
-import { ThemeToggle } from '@/components/ui';
+import { TopNav } from '@/components/layout';
 
 export default function PublicLayout({ children }) {
   return (
     <div className="bg-background relative min-h-screen">
-      {/* Theme Toggle - Fixed Position */}
-      <div className="fixed top-4 right-4 z-50">
-        <ThemeToggle />
-      </div>
+      {/* Top Navigation for Public Pages */}
+      <TopNav showSidebarTrigger={false} showUser={false} />
 
       {/* Main Content */}
-      <main className="flex min-h-screen flex-col items-center justify-center">
+      <main className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center py-10">
         {children}
       </main>
     </div>
