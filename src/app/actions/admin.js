@@ -45,8 +45,11 @@ export async function assignPatientToClinician(sessionId, clinicianId) {
   }
 }
 
+import CaseFile from '@/models/CaseFile';
+
 /**
  * Fetch new cases (pending review) for the admin dashboard.
+ * This now fetches from the 'CaseFile' collection which is 'sent' to admin.
  */
 export async function getNewCases() {
   try {
@@ -57,21 +60,30 @@ export async function getNewCases() {
 
     await connectDB();
 
-    const cases = await DiagnosisSession.find({ status: 'pending_review' })
-      .populate('patientId', 'firstName lastName gender')
-      .sort({ 'aiAnalysis.riskLevel': -1, createdAt: 1 }) // Urgent first
+    // Fetch CaseFiles that are linked to sessions pending review
+    const caseFiles = await CaseFile.find()
+      .populate('patientId', 'firstName lastName gender email')
+      .populate({
+        path: 'sessionId',
+        match: { status: 'pending_review' },
+        select: 'aiAnalysis bodyRegion status createdAt',
+      })
+      .sort({ createdAt: -1 })
       .lean();
 
-    // Map risk levels to sort correctly (Urgent > Moderate > Low)
+    // Filter out case files without a pending session (if we only want new cases)
+    const newCases = caseFiles.filter((cf) => cf.sessionId !== null);
+
+    // Sort by risk level (Urgent first)
     const riskPriority = { Urgent: 3, Moderate: 2, Low: 1 };
-    cases.sort((a, b) => {
-      const priorityA = riskPriority[a.aiAnalysis.riskLevel] || 0;
-      const priorityB = riskPriority[b.aiAnalysis.riskLevel] || 0;
+    newCases.sort((a, b) => {
+      const priorityA = riskPriority[a.sessionId?.aiAnalysis?.riskLevel] || 0;
+      const priorityB = riskPriority[b.sessionId?.aiAnalysis?.riskLevel] || 0;
       if (priorityB !== priorityA) return priorityB - priorityA;
-      return new Date(a.createdAt) - new Date(b.createdAt);
+      return new Date(b.createdAt) - new Date(a.createdAt);
     });
 
-    return { success: true, cases: JSON.parse(JSON.stringify(cases)) };
+    return { success: true, cases: JSON.parse(JSON.stringify(newCases)) };
   } catch (error) {
     console.error('Fetch New Cases Error:', error);
     return { success: false, error: error.message };
