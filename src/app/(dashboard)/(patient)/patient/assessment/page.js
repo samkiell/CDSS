@@ -45,11 +45,16 @@ export default function PatientAssessmentPage() {
   const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [justSubmitted, setJustSubmitted] = useState(false);
-
+  const [isHydrated, setIsHydrated] = useState(false);
   const hasResetOnce = useRef(false);
 
   useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+
     // Perform reset strictly once on mount if requested via URL OR if landing on a complete screen
     if (!hasResetOnce.current) {
       if (isNewAssessment || currentStep === 'complete') {
@@ -57,7 +62,7 @@ export default function PatientAssessmentPage() {
       }
       hasResetOnce.current = true;
     }
-  }, [isNewAssessment, resetAssessment]); // Keep dependency list stable to mount logic
+  }, [isNewAssessment, resetAssessment, isHydrated, currentStep]);
 
   const handleAiAnalysis = async () => {
     setIsAnalyzing(true);
@@ -120,7 +125,6 @@ export default function PatientAssessmentPage() {
 
       toast.success('Assessment submitted successfully! A clinician will review it.');
 
-      setJustSubmitted(true);
       resetAssessment();
       setStep('complete');
     } catch (error) {
@@ -130,9 +134,40 @@ export default function PatientAssessmentPage() {
     }
   };
 
+  if (!isHydrated) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <Loader2 className="text-primary animate-spin" size={40} />
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto min-h-screen max-w-5xl px-4 py-8 pb-32">
       <ProgressBar />
+
+      {currentStep === 'body-map' && selectedRegion && !isNewAssessment && (
+        <div className="animate-in slide-in-from-top-4 mb-8 duration-500">
+          <Card className="border-primary/20 bg-primary/5">
+            <CardContent className="flex items-center justify-between p-4">
+              <div className="flex items-center gap-3">
+                <div className="bg-primary/10 rounded-full p-2">
+                  <ClipboardList className="text-primary" size={20} />
+                </div>
+                <div>
+                  <p className="text-sm font-bold">Unfinished Assessment Found</p>
+                  <p className="text-xs text-slate-500">
+                    You were previously assessing your {selectedRegion}.
+                  </p>
+                </div>
+              </div>
+              <Button size="sm" onClick={() => setStep('questions')}>
+                Resume Session
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      )}
 
       <main className="transform-gpu transition-all duration-300">
         {currentStep === 'body-map' && <BodyMapPicker />}
