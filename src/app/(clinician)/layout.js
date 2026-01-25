@@ -2,11 +2,14 @@
 
 import React from 'react';
 import { LayoutDashboard, FileText, ClipboardList } from 'lucide-react';
-import Sidebar from '@/components/layout/Sidebar';
 import { TopNav } from '@/components/layout/TopNav';
+import Sidebar from '@/components/layout/Sidebar';
+import { useUIStore } from '@/store';
+import { cn } from '@/lib/cn';
 import { useSession } from 'next-auth/react';
 
-export default function ClinicianLayout({ children }) {
+export default function DashboardLayout({ children }) {
+  const { isSidebarOpen } = useUIStore();
   const { data: session } = useSession();
 
   const clinicianLinks = [
@@ -28,7 +31,8 @@ export default function ClinicianLayout({ children }) {
   ];
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
+    <div className="bg-background text-foreground flex h-screen overflow-hidden">
+      {/* App Sidebar (Navigation) */}
       <Sidebar
         links={clinicianLinks}
         user={
@@ -36,19 +40,16 @@ export default function ClinicianLayout({ children }) {
         }
       />
 
-      <div className="flex flex-1 flex-col transition-all duration-300 ease-in-out lg:pl-64">
-        <TopNav title="" className="lg:hidden" />{' '}
-        {/* Sidebar is visible on desktop, TopNav mainly for mobile trigger or extra actions */}
-        {/* On desktop, we might want a TopNav or just header. 
-            The Sidebar pushes content. 
-            The existing Sidebar component has 'fixed inset-y-0' and logic for mobile.
-            It also has 'lg:translate-x-0' so it's always visible on desktop.
-            We need to add margin-left to the content to avoid overlap.
-            Wait, I added 'lg:pl-64' to the wrapper div.
-            Let's check Sidebar css again.
-            Sidebar has 'fixed ... w-64'. Yes, so we need padding on content.
-        */}
-        <main className="flex-1 overflow-y-auto">{children}</main>
+      {/* Main Content Area */}
+      <div
+        className={cn(
+          'flex h-full flex-1 flex-col overflow-hidden transition-all duration-300 ease-in-out',
+          isSidebarOpen ? 'lg:ml-64' : 'lg:ml-20' // Adjust based on Sidebar collapsed state width
+        )}
+      >
+        <TopNav title="Clinician Overview" showSidebarTrigger={true} />
+
+        <main className="relative flex-1 overflow-hidden">{children}</main>
       </div>
     </div>
   );
