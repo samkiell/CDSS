@@ -2,6 +2,7 @@
 
 import { User, Menu } from 'lucide-react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { ThemeToggle } from '@/components/ui';
 import { Logo } from '@/components/ui/Logo';
 import { cn } from '@/lib/cn';
@@ -9,6 +10,7 @@ import { useUIStore } from '@/store';
 
 function TopNav({ title, className, showSidebarTrigger = true, showUser = true }) {
   const { toggleSidebar } = useUIStore();
+  const { data: session } = useSession();
 
   return (
     <header
@@ -29,9 +31,15 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
           </button>
         )}
 
-        {/* Logo - Always visible now */}
-        <Link href="/" className="flex items-center transition-opacity hover:opacity-80">
-          <Logo size="lg" showText={false} />
+        {/* Logo - Hide on PC if logged in (Sidebar has it) */}
+        <Link
+          href="/"
+          className={cn(
+            'flex items-center transition-opacity hover:opacity-80',
+            session && 'lg:hidden'
+          )}
+        >
+          <Logo size="md" showText={false} />
         </Link>
 
         {/* Page Title */}
