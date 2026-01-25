@@ -1,5 +1,5 @@
-import React from 'react';
-import PatientQueue from '@/components/dashboard/PatientQueue';
+import { Card, CardContent } from '@/components/ui';
+import { Construction } from 'lucide-react';
 
 export const metadata = {
   title: 'Clinician Dashboard - CDSS',
@@ -7,19 +7,18 @@ export const metadata = {
 
 export default function ClinicianDashboardPage() {
   return (
-    <div className="min-h-screen bg-gray-50 pb-12">
-      <div className="border-b border-gray-200 bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-gray-900">Assigned Caseload</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Review and manage your active patient assessments.
+    <div className="flex min-h-[60vh] items-center justify-center">
+      <Card className="w-full max-w-md">
+        <CardContent className="flex flex-col items-center justify-center py-12 text-center">
+          <Construction className="text-muted-foreground mb-4 h-12 w-12" />
+          <h2 className="text-foreground text-lg font-semibold">Clinician Dashboard</h2>
+          <p className="text-muted-foreground mt-2 text-sm">
+            This page is not implemented yet.
+            <br />
+            Waiting for assigned developer.
           </p>
-        </div>
-      </div>
-
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <PatientQueue />
-      </main>
+        </CardContent>
+      </Card>
     </div>
   );
 }
