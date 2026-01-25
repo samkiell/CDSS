@@ -278,11 +278,57 @@ export default function PatientAssessmentPage() {
                     </div>
                   ) : aiAnalysis ? (
                     <div className="prose prose-blue dark:prose-invert prose-p:leading-relaxed prose-headings:mb-4 prose-headings:mt-6 animate-in slide-in-from-bottom-4 max-w-none rounded-2xl border border-blue-100 bg-blue-50/50 p-8 duration-500 dark:border-blue-900/30 dark:bg-blue-900/10">
-                      <ReactMarkdown>
-                        {aiAnalysis
-                          .replace(/^```(markdown|md)?\n/, '')
-                          .replace(/\n```$/, '')}
-                      </ReactMarkdown>
+                      {typeof aiAnalysis === 'string' ? (
+                        <ReactMarkdown>
+                          {aiAnalysis
+                            .replace(/^```(markdown|md)?\n/, '')
+                            .replace(/\n```$/, '')}
+                        </ReactMarkdown>
+                      ) : (
+                        <div className="space-y-4 text-slate-900 dark:text-white">
+                          <div className="flex items-center justify-between">
+                            <h3 className="text-xl font-bold">
+                              {aiAnalysis.temporalDiagnosis}
+                            </h3>
+                            <span
+                              className={cn(
+                                'rounded-full px-3 py-1 text-xs font-bold tracking-wider uppercase',
+                                aiAnalysis.riskLevel === 'Urgent'
+                                  ? 'bg-red-100 text-red-700'
+                                  : aiAnalysis.riskLevel === 'Moderate'
+                                    ? 'bg-orange-100 text-orange-700'
+                                    : 'bg-green-100 text-green-700'
+                              )}
+                            >
+                              {aiAnalysis.riskLevel} Risk
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-sm font-medium text-slate-500">
+                              Confidence:
+                            </span>
+                            <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
+                              <div
+                                className="bg-primary h-full"
+                                style={{ width: `${aiAnalysis.confidenceScore}%` }}
+                              />
+                            </div>
+                            <span className="text-sm font-bold">
+                              {aiAnalysis.confidenceScore}%
+                            </span>
+                          </div>
+                          <div className="space-y-2">
+                            <p className="text-xs font-bold tracking-tight text-slate-400 uppercase">
+                              Clinical Reasoning
+                            </p>
+                            <ul className="list-inside list-disc space-y-1 text-sm text-slate-600 dark:text-slate-400">
+                              {aiAnalysis.reasoning?.map((item, i) => (
+                                <li key={i}>{item}</li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <div className="rounded-2xl border-2 border-dashed border-slate-100 bg-slate-50/30 p-8 text-center dark:border-slate-800/50 dark:bg-slate-900/10">
