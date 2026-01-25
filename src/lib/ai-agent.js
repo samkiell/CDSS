@@ -38,6 +38,12 @@ export async function getAiPreliminaryAnalysis({
       Symptoms:
       ${symptomText}
       
+      Instructions:
+      1. Analyze the symptoms.
+      2. Provide a temporal diagnosis.
+      3. For "reasoning", provide clear clinical indicators found in the symptoms.
+      4. CRITICAL: Do NOT include any internal tags, question IDs, or technical codes (e.g., "(lumbar_q_redflag)") in the reasoning. Use natural language only.
+
       Output JSON only:
       {
         "temporalDiagnosis": "String (e.g., Lumbar Disc Herniation)",
@@ -55,7 +61,7 @@ export async function getAiPreliminaryAnalysis({
           {
             role: 'system',
             content:
-              'You are a diagnostic engine using the Weighted Matching Paradigm. Compare symptoms against clinical heuristics. Output JSON only.',
+              'You are a diagnostic engine using the Weighted Matching Paradigm. Compare symptoms against clinical heuristics. Output JSON only. Do not include internal question IDs or tags in your reasoning.',
           },
           { role: 'user', content: prompt },
         ],
@@ -70,6 +76,13 @@ export async function getAiPreliminaryAnalysis({
     );
 
     const aiResult = JSON.parse(response.data.choices[0].message.content);
+
+    // Safety cleanup: Strip any (question_id) tags if they leaked into reasoning
+    if (aiResult.reasoning && Array.isArray(aiResult.reasoning)) {
+      aiResult.reasoning = aiResult.reasoning.map((item) =>
+        item.replace(/\((?:[a-z0-9_]+(?:,\s*)?)+\)/gi, '').trim()
+      );
+    }
 
     return {
       success: true,
