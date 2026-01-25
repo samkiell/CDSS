@@ -31,7 +31,7 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
 
         {/* Logo - Always visible now */}
         <Link href="/" className="flex items-center transition-opacity hover:opacity-80">
-          <Logo size="sm" showText={false} />
+          <Logo size="lg" showText={false} />
         </Link>
 
         {/* Page Title */}
