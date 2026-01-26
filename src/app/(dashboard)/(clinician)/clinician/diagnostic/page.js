@@ -65,6 +65,7 @@ export default function DiagnosticModePage() {
           patients={patients}
           searchQuery={searchQuery}
           url={'/clinician/diagnostic'}
+          buttonLabel={'View'}
         />
         {/* {filteredPatients.map((patient) => (
           <div
