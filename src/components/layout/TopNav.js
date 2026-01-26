@@ -31,7 +31,7 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
           </button>
         )}
 
-        {/* Logo - Hide on PC if logged in (Sidebar has it) */}
+        {/* Logo - Hide onn PC if logged in (Sidebar has it) */}
         <Link
           href="/"
           className={cn(
