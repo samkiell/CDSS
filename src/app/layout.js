@@ -20,7 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <SessionProvider>
+        <SessionProvider basePath="/api/auth">
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
