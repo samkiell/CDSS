@@ -12,10 +12,13 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
   const pathname = usePathname();
   const { isSidebarOpen, setSidebarOpen } = useUIStore();
 
+  // Determine base path from current pathname for settings route
+  const basePath = pathname.startsWith('/clinician') ? '/clinician' : '/patient';
+
   const defaultSecondaryLinks = [
-    { href: '#', label: 'Settings', icon: Settings },
-    { href: '#', label: 'Help & Center', icon: HelpCircle },
-    { href: '#', label: 'Privacy', icon: Shield },
+    { href: `${basePath}/settings`, label: 'Settings', icon: Settings },
+    { href: `${basePath}/settings/help`, label: 'Help & Center', icon: HelpCircle },
+    { href: `${basePath}/settings/privacy`, label: 'Privacy', icon: Shield },
     { href: '#', label: 'Logout', icon: LogOut, action: true },
   ];
 
@@ -98,6 +101,13 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
           <ul className="space-y-1">
             {secondaryNavLinks.map((link) => {
               const Icon = link.icon;
+              // For settings main page, only match exact path
+              // For sub-pages (help, privacy), match exact or children
+              const isActive = !link.action && (
+                link.href === `${basePath}/settings`
+                  ? pathname === link.href
+                  : pathname === link.href || pathname.startsWith(`${link.href}/`)
+              );
 
               return (
                 <li key={link.label}>
@@ -131,7 +141,12 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-muted-foreground hover:bg-muted hover:text-foreground flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors"
+                      className={cn(
+                        'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors',
+                        isActive
+                          ? 'bg-primary text-primary-foreground'
+                          : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                      )}
                       onClick={() => setSidebarOpen(false)}
                     >
                       {Icon && <Icon className="h-5 w-5" />}
