@@ -7,15 +7,15 @@ import { DashboardCard } from './DashboardCard';
 
 const data = [
   { name: 'Active', value: 65, color: '#3da9f5' },
-  { name: 'Inactive', value: 35, color: '#e5e7eb' },
+  { name: 'Inactive', value: 35, color: 'currentColor' }, // Using currentColor for inactive to match theme
 ];
 
 export default function ActivityDonutChart({ title, type = 'Users' }) {
   const headerAction = (
     <div className="flex items-center gap-3">
-      <span className="text-[11px] font-bold text-gray-400">9:30am</span>
-      <button className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-900 text-white shadow-lg transition-transform hover:scale-110 active:scale-90">
-        <Play className="ml-0.5 h-3 w-3 fill-white" />
+      <span className="text-muted-foreground text-[11px] font-bold">9:30am</span>
+      <button className="bg-foreground text-background flex h-8 w-8 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-110 active:scale-90">
+        <Play className="ml-0.5 h-3 w-3 fill-current" />
       </button>
     </div>
   );
@@ -35,7 +35,12 @@ export default function ActivityDonutChart({ title, type = 'Users' }) {
                 stroke="none"
               >
                 {data.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={
+                      entry.name === 'Active' ? entry.color : 'rgba(156, 163, 175, 0.2)'
+                    }
+                  />
                 ))}
               </Pie>
             </PieChart>
@@ -43,8 +48,10 @@ export default function ActivityDonutChart({ title, type = 'Users' }) {
 
           {/* Center Label */}
           <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-2xl leading-none font-black text-gray-900">Today</span>
-            <span className="mt-1 text-[10px] font-bold tracking-widest text-gray-400 uppercase">
+            <span className="text-foreground text-2xl leading-none font-black">
+              Today
+            </span>
+            <span className="text-muted-foreground mt-1 text-[10px] font-bold tracking-widest uppercase">
               {type}
             </span>
           </div>
@@ -56,10 +63,13 @@ export default function ActivityDonutChart({ title, type = 'Users' }) {
             <div key={item.name} className="flex items-center gap-2">
               <div
                 className="h-2 w-2 rounded-full"
-                style={{ backgroundColor: item.color }}
+                style={{
+                  backgroundColor:
+                    item.name === 'Active' ? item.color : 'rgba(156, 163, 175, 0.4)',
+                }}
               />
-              <span className="text-xs font-bold text-gray-600">{item.name}</span>
-              <span className="ml-auto text-xs font-black text-gray-900">
+              <span className="text-muted-foreground text-xs font-bold">{item.name}</span>
+              <span className="text-foreground ml-auto text-xs font-black">
                 {item.value}%
               </span>
             </div>

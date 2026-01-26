@@ -8,7 +8,7 @@ import { DashboardCard } from '@/components/dashboard/DashboardCard';
 
 export default function ClinicianDashboardPage() {
   return (
-    <div className="animate-fade-in mx-auto max-w-[1600px] space-y-8 pb-12">
+    <div className="animate-fade-in text-foreground mx-auto max-w-[1600px] space-y-8 pb-12">
       {/* Row 1: Users Activity & New Cases */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         <div className="lg:col-span-4">
@@ -46,7 +46,7 @@ export default function ClinicianDashboardPage() {
 
       {/* Section: New Approved Therapists */}
       <div className="space-y-4">
-        <h3 className="px-2 text-xl font-black tracking-tight text-gray-900">
+        <h3 className="text-foreground px-2 text-xl font-black tracking-tight">
           New Approved Therapists
         </h3>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -73,7 +73,7 @@ export default function ClinicianDashboardPage() {
 
       {/* Section: Pending Therapists */}
       <div className="space-y-4">
-        <h3 className="px-2 text-xl font-black tracking-tight text-gray-900">
+        <h3 className="text-foreground px-2 text-xl font-black tracking-tight">
           Pending Therapists
         </h3>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

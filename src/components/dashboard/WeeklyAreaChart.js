@@ -37,7 +37,11 @@ export default function WeeklyAreaChart() {
                 <stop offset="95%" stopColor="#f97316" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+            <CartesianGrid
+              strokeDasharray="3 3"
+              vertical={false}
+              stroke="rgba(156, 163, 175, 0.1)"
+            />
             <XAxis
               dataKey="name"
               axisLine={false}
@@ -53,11 +57,13 @@ export default function WeeklyAreaChart() {
             />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#ffffff',
+                backgroundColor: 'var(--card)',
+                color: 'var(--card-foreground)',
                 borderRadius: '1.5rem',
-                border: 'none',
+                border: '1px solid var(--border)',
                 boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
               }}
+              itemStyle={{ fontWeight: 700 }}
             />
             <Legend
               verticalAlign="top"
