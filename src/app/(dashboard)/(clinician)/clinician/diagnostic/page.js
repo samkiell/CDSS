@@ -130,7 +130,7 @@ export default function DiagnosticModePage() {
             <img
               src="/medical-records-svgrepo-com.svg"
               alt="No patients"
-              className="mb-6 h-32 w-32 sm:h-40 sm:w-40"
+              className="mb-6 h-32 w-32 opacity-40 sm:h-40 sm:w-40 dark:opacity-30 dark:invert"
             />
             <p className="text-center text-sm font-medium text-gray-600 sm:text-base dark:text-gray-400">
               No Patient Available For Diagnostic Assessment
