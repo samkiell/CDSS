@@ -11,6 +11,7 @@ import {
   Users,
   FolderOpen,
   Compass,
+  Settings,
 } from 'lucide-react';
 
 export const patientLinks = [

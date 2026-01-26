@@ -23,22 +23,30 @@ export default function QuestionCard() {
     redFlags,
   } = useAssessmentStore();
 
+  const resetAssessment = useAssessmentStore((state) => state.resetAssessment);
+
   if (!selectedRegion || !currentQuestionId) return null;
 
   const regionRules = MEDICAL_RULES[selectedRegion];
-  const question = regionRules.questions[currentQuestionId];
+  const question = regionRules?.questions?.[currentQuestionId];
 
-  // If question doesn't exist, we might have reached the end
+  // If question doesn't exist, we might have reached the end or logic is missing
   if (!question) {
     return (
-      <div className="py-20 text-center">
-        <h2 className="text-xl font-semibold">Assessment Complete</h2>
-        <Button
-          className="mt-4"
-          onClick={() => useAssessmentStore.getState().setStep('upload')}
-        >
-          Proceed to Document Upload
-        </Button>
+      <div className="animate-fade-in flex flex-col items-center justify-center py-20 text-center">
+        <div className="bg-primary/10 mb-6 flex h-20 w-20 items-center justify-center rounded-full">
+          <AlertCircle className="text-primary" size={40} />
+        </div>
+        <h2 className="text-2xl font-black">Assessment Logic Pending</h2>
+        <p className="text-muted-foreground mt-2 max-w-xs">
+          The questionnaire for the <strong>{selectedRegion}</strong> region is currently
+          being finalized.
+        </p>
+        <div className="mt-8 flex gap-4">
+          <Button variant="outline" onClick={resetAssessment}>
+            Choose Another Region
+          </Button>
+        </div>
       </div>
     );
   }

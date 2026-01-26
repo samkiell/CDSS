@@ -37,18 +37,26 @@ export default async function PatientDashboardPage() {
 
   await dbConnect();
 
-  const [patient, latestSession, appointments, treatmentPlan, pastSessions] =
+  const [patientData, latestSessionData, appointmentsData, treatmentPlanData, pastSessionsData] =
     await Promise.all([
-      User.findById(session.user.id).select('firstName lastName avatar'),
-      DiagnosisSession.findOne({ patientId: session.user.id }).sort({ createdAt: -1 }),
+      User.findById(session.user.id).select('firstName lastName avatar').lean(),
+      DiagnosisSession.findOne({ patientId: session.user.id }).sort({ createdAt: -1 }).lean(),
       Appointment.find({ patient: session.user.id, date: { $gte: new Date() } }).sort({
         date: 1,
-      }),
-      TreatmentPlan.findOne({ patient: session.user.id, status: 'active' }),
+      }).lean(),
+      TreatmentPlan.findOne({ patient: session.user.id, status: 'active' }).lean(),
       DiagnosisSession.find({ patientId: session.user.id })
         .sort({ createdAt: -1 })
-        .limit(7),
+        .limit(7)
+        .lean(),
     ]);
+
+  // Serialize to plain objects for Client Components
+  const patient = JSON.parse(JSON.stringify(patientData));
+  const latestSession = JSON.parse(JSON.stringify(latestSessionData));
+  const appointments = JSON.parse(JSON.stringify(appointmentsData));
+  const treatmentPlan = JSON.parse(JSON.stringify(treatmentPlanData));
+  const pastSessions = JSON.parse(JSON.stringify(pastSessionsData));
 
   // Aggregate pain history for the chart
   const painHistory = pastSessions
@@ -68,13 +76,11 @@ export default async function PatientDashboardPage() {
 
   return (
     <div className="animate-fade-in space-y-6 pb-8">
-      {/* Welcome Header */}
+      {/* Header */}
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">
-            Welcome back, {patient?.firstName || session.user.firstName}!
-          </h2>
-          <p className="text-muted-foreground text-sm">
+          <h2 className="text-2xl font-black tracking-tight">Dashboard Overview</h2>
+          <p className="text-muted-foreground text-sm font-medium">
             Keep track of your symptoms and recovery progress here.
           </p>
         </div>

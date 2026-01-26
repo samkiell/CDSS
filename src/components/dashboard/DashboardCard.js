@@ -1,24 +1,20 @@
 'use client';
 
+import { Card, CardContent } from '@/components/ui';
 import { cn } from '@/lib/cn';
 
 export function DashboardCard({ children, title, className, headerAction }) {
   return (
-    <div
-      className={cn(
-        'flex h-full flex-col rounded-[2rem] border border-gray-50 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)]',
-        className
-      )}
-    >
+    <Card className={cn('overflow-hidden rounded-2xl', className)}>
       {(title || headerAction) && (
-        <div className="mb-6 flex items-center justify-between px-2">
-          {title && (
-            <h3 className="text-lg font-black tracking-tight text-gray-900">{title}</h3>
-          )}
+        <div className="flex items-center justify-between p-6 pb-0">
+          {title && <h3 className="text-lg font-black tracking-tight">{title}</h3>}
           {headerAction && <div>{headerAction}</div>}
         </div>
       )}
-      <div className="flex-1">{children}</div>
-    </div>
+      <CardContent className={cn('p-6', (title || headerAction) && 'pt-6')}>
+        {children}
+      </CardContent>
+    </Card>
   );
 }

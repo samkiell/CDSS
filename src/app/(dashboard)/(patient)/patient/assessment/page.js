@@ -55,14 +55,20 @@ export default function PatientAssessmentPage() {
   useEffect(() => {
     if (!isHydrated) return;
 
-    // Perform reset strictly once on mount if requested via URL OR if landing on a complete screen
-    if (!hasResetOnce.current) {
-      if (isNewAssessment || currentStep === 'complete') {
-        resetAssessment();
-      }
-      hasResetOnce.current = true;
+    if (isNewAssessment) {
+      resetAssessment();
+      // Remove the query param to prevent accidental resets on refreshes
+      const timeout = setTimeout(() => {
+        router.replace('/patient/assessment');
+      }, 100);
+      return () => clearTimeout(timeout);
     }
-  }, [isNewAssessment, resetAssessment, isHydrated, currentStep]);
+
+    if (currentStep === 'complete' && !isNewAssessment) {
+      // If we are finished but not starting fresh, don't auto-reset 
+      // unless we want to allow viewing the complete screen only once.
+    }
+  }, [isNewAssessment, resetAssessment, isHydrated, router]);
 
   const handleAiAnalysis = async () => {
     setIsAnalyzing(true);
