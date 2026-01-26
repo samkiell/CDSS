@@ -10,7 +10,7 @@ export default function PaitentInfoCard({ patient }) {
   };
   return (
     <div
-      key={patient.id}
+      key={patient?.id}
       className="flex items-center justify-between gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:gap-4 sm:p-5 dark:border-gray-700 dark:bg-gray-800"
     >
       <div className="flex flex-1 items-center gap-3 sm:gap-4">
