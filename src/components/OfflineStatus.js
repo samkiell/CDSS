@@ -46,7 +46,7 @@ export default function OfflineStatus() {
   return (
     <div
       className={cn(
-        'fixed bottom-6 left-1/2 z-[100] w-[90%] max-w-md -translate-x-1/2 transform transition-all duration-500 ease-out sm:w-auto',
+        'fixed bottom-6 left-1/2 z-100 w-[90%] max-w-md -translate-x-1/2 transform transition-all duration-500 ease-out sm:w-auto',
         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
       )}
     >
