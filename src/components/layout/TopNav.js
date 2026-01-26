@@ -15,9 +15,11 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
 
   const isClinician = session?.user?.role?.toLowerCase() === 'clinician';
   const userName = session?.user?.firstName
-    ? `${isClinician ? 'Dr. ' : ''}${session.user.lastName || session.user.firstName}`
-    : isClinician
-      ? 'Dr. Ajayi'
+    ? isClinician 
+      ? `Dr. ${session.user.lastName || session.user.firstName}` 
+      : session.user.firstName
+    : isClinician 
+      ? 'Dr. Ajayi' 
       : 'User';
 
   return (
