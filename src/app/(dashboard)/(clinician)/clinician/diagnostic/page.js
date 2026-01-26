@@ -2,6 +2,8 @@
 import { Search } from 'lucide-react';
 import { useState } from 'react';
 import Link from 'next/link';
+import SearchPaitent from '@/components/dashboard/clinician/search';
+import PatientInfoContainer from '@/components/dashboard/clinician/paitentContainer';
 
 export default function DiagnosticModePage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -56,27 +58,15 @@ export default function DiagnosticModePage() {
 
   return (
     <div className="mx-auto max-w-4xl">
-      {/* Search Bar */}
-      <div className="mb-6">
-        <div className="flex items-center gap-3">
-          <div className="relative flex-1">
-            <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              placeholder="Enter patient's Full Name"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-gray-300 bg-white py-3 pr-4 pl-12 text-sm text-gray-800 placeholder-gray-400 focus:border-cyan-500 focus:outline-none dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:placeholder-gray-500"
-            />
-          </div>
-          <button className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
-            <Search size={20} />
-          </button>
-        </div>
-      </div>
+      <SearchPaitent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       <div className="space-y-4">
-        {filteredPatients.map((patient) => (
+        <PatientInfoContainer
+          patients={patients}
+          searchQuery={searchQuery}
+          url={'/clinician/diagnostic'}
+        />
+        {/* {filteredPatients.map((patient) => (
           <div
             key={patient.id}
             className="flex items-center justify-between gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md sm:gap-4 sm:p-5 dark:border-gray-700 dark:bg-gray-800"
@@ -113,7 +103,7 @@ export default function DiagnosticModePage() {
 
             <div className="flex items-center gap-3 sm:gap-4">
               <Link
-                href={`/clinician/diagnostic/${patient.id}`}
+                href={`/clinician/diagnostic;/${patient.id}`}
                 className="rounded-lg bg-cyan-500 px-4 py-2 text-xs font-medium text-white transition-colors hover:bg-cyan-600 sm:px-6 sm:text-sm"
               >
                 View
@@ -136,7 +126,7 @@ export default function DiagnosticModePage() {
               No Patient Available For Diagnostic Assessment
             </p>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   );
