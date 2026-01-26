@@ -13,9 +13,14 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
   const { toggleSidebar } = useUIStore();
   const { data: session } = useSession();
 
+  const isClinician = session?.user?.role?.toLowerCase() === 'clinician';
   const userName = session?.user?.firstName
-    ? `Dr. ${session.user.lastName || session.user.firstName}`
-    : 'Dr. Ajayi';
+    ? isClinician
+      ? `Dr. ${session.user.lastName || session.user.firstName}`
+      : session.user.firstName
+    : isClinician
+      ? 'Dr. Ajayi'
+      : 'User';
 
   return (
     <header
@@ -25,8 +30,8 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
       )}
     >
       <div className="flex items-center gap-4">
-        {/* Mobile Menu Button */}
-        {showSidebarTrigger && (
+        {/* Mobile Menu Button or Logo */}
+        {showSidebarTrigger ? (
           <button
             className="hover:bg-accent text-foreground block rounded-lg p-2 transition-colors lg:hidden"
             onClick={toggleSidebar}
@@ -34,13 +39,27 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
           >
             <Menu className="h-6 w-6" />
           </button>
+        ) : (
+          <Link href="/" className="lg:hidden">
+            <Logo size="sm" showText={false} />
+          </Link>
         )}
 
-        {/* Welcome Text */}
+        {/* Welcome Text or Title */}
         <div className="flex flex-col">
-          <h1 className="text-foreground text-xl font-black tracking-tight lg:text-2xl">
-            Welcome Back, {userName}!
-          </h1>
+          {session ? (
+            <h1 className="text-foreground animate-fade-in text-xl font-black tracking-tight lg:text-2xl">
+              Welcome Back, {userName}!
+            </h1>
+          ) : title ? (
+            <h1 className="text-foreground animate-fade-in text-xl font-black tracking-tight lg:text-2xl">
+              {title}
+            </h1>
+          ) : (
+            <div className="animate-fade-in">
+              <Logo size="sm" showText={false} className="flex-row items-center" />
+            </div>
+          )}
         </div>
       </div>
 
@@ -63,7 +82,7 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
                 useDiagnosisStore.getState().reset?.();
                 useAssessmentStore.getState().resetAssessment?.();
 
-                await signOut({ redirectTo: '/' });
+                await signOut({ callbackUrl: '/', redirect: true });
               }
             }}
           >

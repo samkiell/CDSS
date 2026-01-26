@@ -76,13 +76,11 @@ export default async function PatientDashboardPage() {
 
   return (
     <div className="animate-fade-in space-y-6 pb-8">
-      {/* Welcome Header */}
+      {/* Header */}
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">
-            Welcome back, {patient?.firstName || session.user.firstName}!
-          </h2>
-          <p className="text-muted-foreground text-sm">
+          <h2 className="text-2xl font-black tracking-tight">Dashboard Overview</h2>
+          <p className="text-muted-foreground text-sm font-medium">
             Keep track of your symptoms and recovery progress here.
           </p>
         </div>
