@@ -7,116 +7,102 @@ The CDSS (Clinical Decision Support System) uses a hybrid architecture combining
 - **AI Layer**: Mistral AI for preliminary qualitative analysis.
 - **Persistence**: MongoDB with Mongoose ODM.
 
-### Target Audience
-- **Frontend Engineers**: Integrating assessment forms, patient dashboards, and clinician review interfaces.
-- **Backend Engineers**: Maintaining API routes, ML bridge services, and database schemas.
-- **samkiell**: Enhancing the heuristic engine and integrating Python-based ML models.
+### Target Audience & Team Ownership
+- **👑 Samkiell (Lead)**: Core architecture, all dashboard shells, admin UI, AI core logic.
+- **🔥 Philip (Heavy Full-Stack)**: Core business flows (Assessment → Diagnosis → Review), Clinician Case View.
+- **🎨 Abraham (Frontend)**: Patient-side UI implementation, Settings, Help Center.
+- **🔄 Tobi (Light Full-Stack)**: Clinician support pages (Patient list, Messages).
+- **🧱 Robert (Backend)**: Profile APIs, Stats, Data Contracts.
 
 ---
 
-## 2. Page-to-API Mapping
+## 2. Page & Route Mapping
+This section defines the ownership and logic for every route in the system.
 
-### Onboarding & Public Pages
-| Page | Endpoint / Action | Method | Description |
+### 2.1 Patient Routes (Dashboard & UI)
+| Route | Owner | Purpose | API / Logic |
 | :--- | :--- | :--- | :--- |
-| **Login** (`/login`) | NextAuth.js | `POST` | Sets session cookie via `CredentialsProvider`. |
-| **Register** (`/register`) | `/api/otp/send` | `POST` | Validates data and sends verification code. |
-| **Verify** (`/verify`) | `/api/otp/verify` | `POST` | Verifies OTP and creates/activates user account. |
+| `/patient/dashboard` | Samkiell | Overview & Stats | `db.DiagnosisSession`, `db.Appointment` |
+| `/patient/assessment/**` | Philip | Assessment Wizard | `/api/assessment/submit` |
+| `/patient/progress` | Abraham | Recovery Charts | Heuristic Engine Output UI |
+| `/patient/messages` | Philip | Communication | (Planned) WebSockets or Polling |
+| `/patient/settings` | Abraham | User Profile | `/api/patients/profile` |
 
-### Patient Experience
-| Page | Endpoint / Action | Method | Description |
+### 2.2 Clinician Routes (Core & Support)
+| Route | Owner | Purpose | API / Logic |
 | :--- | :--- | :--- | :--- |
-| **Assessment** (`/patient/assessment`) | `/api/diagnosis/ai-analysis` | `POST` | Generates a preview analysis for the summary screen. |
-| **Assessment** (`/patient/assessment`) | `/api/assessment/submit` | `POST` | Final submission which creates `DiagnosisSession` and `CaseFile`. |
-| **Dashboard** (`/patient/dashboard`) | `db.DiagnosisSession.find` | `QUERY` | Fetches sessions, appointments, and treatment plans directly. |
-| **Media Uploads** | `/api/upload` | `POST` | Proxies files to Cloudinary for storage. |
+| `/clinician/dashboard` | Samkiell | Patient Queue | `getAssignedCases` Service |
+| `/clinician/cases/[id]` | Philip | Case Review | `GET /api/diagnosis/[id]` |
+| `/clinician/patients` | Tobi | CRM / Patient List | `/api/users?role=PATIENT` |
+| `/clinician/guided-diagnostic`| Philip | Assisted Physical Exam | Heuristic Engine Logic |
+| `/clinician/treatment-planner`| Philip | Recovery Planning | `db.TreatmentPlan` CRUD |
 
-### Clinician Workflow
-| Page | Endpoint / Action | Method | Description |
+### 2.3 Admin Routes
+| Route | Owner | Purpose | API / Logic |
 | :--- | :--- | :--- | :--- |
-| **Dashboard** (`/clinician/dashboard`) | `GET /api/diagnosis` | `GET` | (Proposed/Service-Level) Fetches assigned cases. |
-| **Case Detail** (`/clinician/.../case/[id]`) | `GET /api/diagnosis/[id]` | `GET` | Retrieves full session data including AI analysis and responses. |
-| **Case Detail** (`/clinician/.../case/[id]`) | `PATCH /api/diagnosis/[id]` | `PATCH` | Used by clinician to finalize the case with a review. |
+| `/admin/**` | Samkiell | System Mgt | `src/app/actions/admin.js` |
 
 ---
 
-## 3. Detailed Endpoint Specification
+## 3. API Specification
 
-### Authentication & Profile
+### 3.1 Auth & Identity
 #### `POST /api/otp/send`
-- **Request**: `{ "email": string, "firstName"?: string, "lastName"?: string, "password"?: string }`
-- **Logic**: If registration data is provided, it's hashed and stored temporarily in the `EmailOtp` record until verification.
+- **Request**: `{ email, firstName?, lastName?, password? }`
+- **Logic**: Used for both login verification and account initialization.
 
-#### `POST /api/otp/verify`
-- **Request**: `{ "email": string, "otp": string }`
-- **Effect**: If valid, marks user as `isVerified: true`. If registration data was pending, creates the `User` record.
+#### `POST /api/patients/profile` (Owned by Robert)
+- **Method**: `GET / PATCH`
+- **Purpose**: Fetch or update patient demographic data.
 
-### Clinical Assessments
+#### `GET /api/users?role=PATIENT` (Owned by Robert)
+- **Purpose**: Lists all registered patients for clinician/admin views.
+
+### 3.2 Clinical Endpoints
 #### `POST /api/assessment/submit`
-- **Headers**: Requires Auth Session.
-- **Body**: 
-  ```json
-  {
-    "bodyRegion": "Lumbar Spine",
-    "symptomData": [{ "question": "string", "answer": "mixed" }],
-    "mediaUrls": ["url"]
-  }
-  ```
-- **Internal Logic**: 
-  1. Calls Mistral AI for preliminary reasoning.
-  2. Persists `DiagnosisSession`.
-  3. Creates a `CaseFile` object for Admin visibility.
+- **Logic**: Calls Mistral AI Agent → Persists `DiagnosisSession` → Creates `CaseFile`.
 
-#### `POST /api/diagnosis/ai-analysis`
-- **Description**: Lightweight endpoint for "real-time" AI feedback before the patient finally submits.
-- **Response**: `{ "success": true, "analysis": { "temporalDiagnosis": "...", "confidenceScore": number, ... } }`
+#### `PATCH /api/diagnosis/[id]` (Owned by Robert)
+- **Goal**: Finalize clinician review and confirm diagnosis.
 
-### System & Health
-#### `GET /api/health`
-- **Description**: Simple health check to verify the API and database connectivity status.
-- **Response**: `{ "status": "healthy", "timestamp": "...", "version": "1.0.0" }`
+#### `GET /api/clinician/stats` (Owned by Robert)
+- **Purpose**: Aggregated data for dashboard widgets (active cases, pending reviews).
 
 ---
 
-## 4. Server Actions (Internal APIs)
-Used in Admin and Dashboard pages to avoid full API roundtrips where Server Components are used.
+## 4. Operational Governance (Hard Boundaries)
 
-### Admin Actions (`src/app/actions/admin.js`)
-- `assignPatientToClinician(sessionId, clinicianId)`: 
-  - Updates the session status to `assigned`.
-  - Revalidates the dashboard cache.
-- `getNewCases()`: 
-  - Fetches `CaseFile` entries filtered by `pending_review`.
-  - Sorts by AI Risk Level priority (Urgent > Moderate > Low).
+### 4.1 Dashboard Shell Authority
+To maintain UI consistency and role enforcement, the **Dashboard Shells** (Sidebar, TopNav, Layout logic) are restricted.
+- **Protected Controllers**: `Samkiell` & `Philip` only.
+- **Rule**: No direct modifications to layout files by other team members without PR approval.
 
----
-
-## 5. Data Models
-### User
-Stores identity and roles (`PATIENT`, `CLINICIAN`, `ADMIN`).
-- `isVerified`: Must be true for login.
-- `role`: Controls access to `/clinician/*` or `/admin/*` routes.
-
-### DiagnosisSession
-The core clinical record.
-- `symptomData`: Captured using the MSK Heuristic Engine format.
-- `aiAnalysis`: Structured result from LLM (Reasoning, Risk, Confidence).
-- `status`: `pending_review` -> `assigned` -> `completed`.
-
-### CaseFile
-A lightweight reference used for tracking assignments and visibility in the Admin Dashboard.
+### 4.2 PR & Integration Workflow
+1. **Feature Isolation**: One branch per developer per feature.
+2. **Review Tier**: All core logic changes (Heuristic/AI) must be reviewed by Samkiell.
+3. **Parity**: Ensure patient and clinician experiences share component libraries where medically applicable.
 
 ---
 
-## 6. Environment & Prerequisites
-- **`MONGODB_URI`**: Required for all database persistence.
-- **`AUTH_SECRET`**: Required for session encryption.
-- **`MISTRAL_API_KEY`**: Required for `ai-analysis` and `assessment/submit`.
-- **`CLOUDINARY_URL`**: Required for handling image/document uploads.
+## 5. Data Models & Contracts
+### 5.1 DiagnosisSession
+The source of truth for MSK assessments. Stores `symptomData` (Heuristic input) and `aiAnalysis` (LLM output).
 
+### 5.2 CaseFile
+The administrative link between a patient's session and a clinician assignment.
+
+### 5.3 TreatmentPlan
+Iterative recovery schedules, including sets/reps and daily goals.
 ---
 
-## 7. Future Capability Stubs
-Refer to `src/lib/ml-bridge/index.js` for integration hooks:
-- **`POST /api/ml/diagnosis`**: Intended for Bayesian/Heuristic-ML ensemble analysis.
-- **`GET /api/ml/explain`**: Intended for medical transparency (SHAP values).
+## 7. Appendix
+
+### 7.1 Project Milestones
+- **Current Cycle Deadline**: Thursday, January 30th, 2026.
+- **Review Frequency**: Physical meetings held weekly for integration sync.
+
+### 7.2 Glossary
+- **Temporal Diagnosis**: An immediate, rule-based clinical assessment generated by the Heuristic Engine.
+- **Provisional AI Analysis**: Qualitative reasoning provided by the LLM agent (requires clinician validation).
+- **Hard Shell**: Components (Sidebar/Nav) protected by lead developers to ensure role-based enforcement.
+- **VAS Scale**: Visual Analogue Scale used for subjective pain measurement in assessments.
