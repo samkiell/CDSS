@@ -44,7 +44,6 @@ export default function Page() {
   return (
     <div className="mx-auto max-w-4xl">
       <SearchPaitent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-
       <div className="space-y-4">
         <PatientInfoContainer
           patients={patients}
