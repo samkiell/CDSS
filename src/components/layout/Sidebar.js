@@ -106,7 +106,23 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
                       className="text-muted-foreground hover:bg-muted hover:text-foreground flex w-full cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors"
                       onClick={async () => {
                         setSidebarOpen(false);
-                        await signOut({ redirectTo: '/' });
+                        // Clear all Zustand stores
+                        try {
+                          const { useAuthStore, useDiagnosisStore, useAssessmentStore } =
+                            await import('@/store');
+
+                          useAuthStore.getState().logout?.();
+                          useDiagnosisStore.getState().reset?.();
+                          useAssessmentStore.getState().resetAssessment?.();
+                        } catch (err) {
+                          console.error('Error clearing stores:', err);
+                        }
+
+                        // NextAuth SignOut
+                        await signOut({
+                          callbackUrl: '/',
+                          redirect: true,
+                        });
                       }}
                     >
                       {Icon && <Icon className="h-5 w-5" />}

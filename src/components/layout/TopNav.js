@@ -53,6 +53,19 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
           <button
             className="border-background flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 shadow-md transition-transform hover:scale-105"
             aria-label="User menu"
+            onClick={async () => {
+              if (window.confirm('Do you want to sign out?')) {
+                const { signOut } = await import('next-auth/react');
+                const { useAuthStore, useDiagnosisStore, useAssessmentStore } =
+                  await import('@/store');
+
+                useAuthStore.getState().logout?.();
+                useDiagnosisStore.getState().reset?.();
+                useAssessmentStore.getState().resetAssessment?.();
+
+                await signOut({ redirectTo: '/' });
+              }
+            }}
           >
             {session?.user?.image ? (
               <Image
