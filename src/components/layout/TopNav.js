@@ -95,14 +95,8 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
                 className="object-cover"
               />
             ) : (
-              <div className="bg-muted flex h-full w-full items-center justify-center">
-                <Image
-                  src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=100&h=100"
-                  alt="Profile"
-                  width={48}
-                  height={48}
-                  className="object-cover"
-                />
+              <div className="bg-primary/10 text-primary flex h-full w-full items-center justify-center text-lg font-bold">
+                {session?.user?.firstName?.[0] || session?.user?.email?.[0] || 'U'}
               </div>
             )}
           </button>

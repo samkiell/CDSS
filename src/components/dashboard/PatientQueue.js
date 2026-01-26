@@ -141,8 +141,8 @@ function PatientCard({ patient }) {
 
       <div className="flex items-center gap-6">
         {/* Avatar */}
-        <div className="bg-muted border-border flex h-16 w-16 shrink-0 items-center justify-center rounded-full border shadow-inner">
-          <User className="text-muted-foreground/50 h-8 w-8" />
+        <div className="bg-primary/10 text-primary border-primary/20 flex h-16 w-16 shrink-0 items-center justify-center rounded-full border text-xl font-bold shadow-inner">
+          {patient.name?.[0] || 'P'}
         </div>
 
         {/* Patient Info */}

@@ -41,8 +41,8 @@ export default function CaseDetailsPage({ params }) {
 
       {/* Patient Header Card */}
       <Card className="border-border bg-card flex items-center gap-8 rounded-[2.5rem] p-8 shadow-sm">
-        <div className="bg-muted border-border flex h-20 w-20 items-center justify-center rounded-full border shadow-inner">
-          <User className="text-muted-foreground/50 h-10 w-10" />
+        <div className="bg-primary/10 text-primary border-primary/20 flex h-20 w-20 items-center justify-center rounded-full border text-2xl font-black shadow-inner">
+          B
         </div>
         <div className="grid flex-1 grid-cols-2 gap-6 lg:grid-cols-4">
           <div className="flex flex-col">

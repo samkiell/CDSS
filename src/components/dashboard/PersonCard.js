@@ -16,22 +16,8 @@ export default function PersonCard({
     <Card className="border-border group rounded-2xl border p-4 shadow-sm">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          {/* Avatar Container */}
-          <div className="bg-muted border-border relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full border shadow-sm">
-            <div className="text-muted-foreground/40">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-6 w-6"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-            </div>
+          <div className="bg-primary/10 text-primary relative flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full font-bold shadow-sm">
+            {name?.[0] || 'P'}
           </div>
 
           {/* Info */}
