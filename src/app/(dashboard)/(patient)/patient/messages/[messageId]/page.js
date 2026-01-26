@@ -7,7 +7,6 @@ export default function Page() {
   const router = useRouter();
   const [message, setMessage] = useState('');
 
-  // Sample messages data
   const messages = [
     {
       id: 1,
@@ -27,18 +26,16 @@ export default function Page() {
 
   const handleSendMessage = () => {
     if (message.trim()) {
-      // Handle sending message
       setMessage('');
     }
   };
 
   return (
     <div className="flex h-[calc(100vh-100px)] flex-col bg-gray-50 dark:bg-gray-900">
-      {/* Header */}
       <div className="flex items-center gap-3 border-b border-gray-200 bg-white px-4 py-3 sm:gap-4 sm:px-6 sm:py-4 dark:border-gray-700 dark:bg-gray-800">
         <button
           onClick={() => router.back()}
-          className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+          className="cursor-pointer text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
         >
           <ArrowLeft size={20} className="sm:h-6 sm:w-6" />
         </button>
@@ -58,16 +55,13 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Messages Area */}
       <div className="flex-1 overflow-y-auto px-4 py-3 sm:px-6 sm:py-4">
-        {/* Date Separator */}
         <div className="mb-4 text-center sm:mb-6">
           <span className="rounded-full bg-gray-200 px-2.5 py-1 text-xs text-gray-600 dark:bg-gray-700 dark:text-gray-400">
             9th July 2025
           </span>
         </div>
 
-        {/* Messages */}
         <div className="space-y-3 sm:space-y-4">
           {messages.map((msg) => (
             <div
@@ -84,7 +78,7 @@ export default function Page() {
                 </div>
               )}
               <div
-                className={`max-w-[280px] rounded-lg px-3 py-2.5 sm:max-w-md sm:rounded-xl sm:px-4 sm:py-3 ${
+                className={`max-w-70 rounded-lg px-3 py-2.5 sm:max-w-md sm:rounded-xl sm:px-4 sm:py-3 ${
                   msg.sender === 'patient'
                     ? 'bg-cyan-500 text-white'
                     : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
@@ -159,7 +153,7 @@ export default function Page() {
             onClick={handleSendMessage}
             className="flex h-9 w-9 items-center justify-center rounded-full bg-cyan-500 text-white hover:bg-cyan-600 sm:h-10 sm:w-10"
           >
-            <Send size={16} className="sm:h-[18px] sm:w-[18px]" />
+            <Send size={16} className="sm:h-4.5 sm:w-4.5" />
           </button>
         </div>
       </div>

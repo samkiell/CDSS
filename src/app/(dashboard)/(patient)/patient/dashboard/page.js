@@ -120,7 +120,7 @@ export default async function PatientDashboardPage() {
               <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
                 Assigned Therapist
               </p>
-              <h3 className="max-w-[150px] truncate text-lg font-bold">
+              <h3 className="max-w-37.5 truncate text-lg font-bold">
                 {treatmentPlan?.therapistName ||
                   nextAppointment?.therapistName ||
                   'None assigned'}
@@ -138,7 +138,7 @@ export default async function PatientDashboardPage() {
               <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
                 Active Case
               </p>
-              <h3 className="max-w-[150px] truncate text-lg font-bold">
+              <h3 className="max-w-37.5 truncate text-lg font-bold">
                 {latestSession?.temporalDiagnosis?.primaryDiagnosis?.conditionName ||
                   'No active case'}
               </h3>

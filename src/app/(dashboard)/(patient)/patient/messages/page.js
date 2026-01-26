@@ -47,13 +47,14 @@ export default function Page() {
       {/* Messages List */}
       <div className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm dark:bg-gray-800">
         {conversations.map((conversation, index) => (
-          <div
+          <a
             key={conversation.id}
             className={`flex cursor-pointer items-center justify-between p-6 transition hover:bg-gray-50 dark:hover:bg-gray-700 ${
               index !== conversations.length - 1
                 ? 'border-b border-gray-100 dark:border-gray-700'
                 : ''
             }`}
+            href={`/patient/messages/${index}`}
           >
             {/* Left side - Avatar and text */}
             <div className="flex flex-1 items-center gap-4">
@@ -89,7 +90,7 @@ export default function Page() {
                 {conversation.timeAgo}
               </p>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
