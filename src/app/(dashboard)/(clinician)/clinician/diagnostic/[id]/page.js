@@ -39,7 +39,7 @@ mnjkjnsi uhuu`,
       <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center">
         <button
           onClick={() => router.back()}
-          className="shrink-0 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
+          className="shrink-0 cursor-pointer text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
         >
           <ArrowLeft size={20} className="sm:h-6 sm:w-6" />
         </button>
