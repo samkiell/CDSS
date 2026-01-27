@@ -1,6 +1,6 @@
 import { auth } from '@/auth';
 import dbConnect from '@/lib/db/connect';
-import { User, DiagnosisSession, Appointment, TreatmentPlan } from '@/models';
+import { User, DiagnosisSession, Appointment, TreatmentPlan, CaseFile } from '@/models';
 import { redirect } from 'next/navigation';
 import {
   Calendar,
@@ -54,11 +54,11 @@ export default async function PatientDashboardPage() {
         date: 1,
       })
       .lean(),
-    TreatmentPlan.findOne({ patient: session.user.id, status: 'active' }).lean(),
     DiagnosisSession.find({ patientId: session.user.id })
       .sort({ createdAt: -1 })
       .limit(7)
       .lean(),
+    CaseFile.find({ patientId: session.user.id }).sort({ createdAt: -1 }).limit(5).lean(),
   ]);
 
   // Serialize to plain objects for Client Components
@@ -66,6 +66,7 @@ export default async function PatientDashboardPage() {
   const latestSession = JSON.parse(JSON.stringify(latestSessionData));
   const appointments = JSON.parse(JSON.stringify(appointmentsData));
   const pastSessions = JSON.parse(JSON.stringify(pastSessionsData));
+  const caseFiles = JSON.parse(JSON.stringify(arguments[5] || [])); // CaseFile query is the 6th element
   let treatmentPlan = JSON.parse(JSON.stringify(treatmentPlanData));
 
   // 🏥 FALLBACK: If no active clinician treatment plan, synthesize a provisional one from latest AI analysis
@@ -458,27 +459,42 @@ export default async function PatientDashboardPage() {
             </CardContent>
           </Card>
 
-          {/* Clinical Tests */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Clinical Tests</CardTitle>
+              <CardTitle className="text-lg">Clinical Data Files</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="border-border bg-muted/20 flex items-center justify-between rounded-lg border p-3">
-                <div className="flex items-center gap-3">
-                  <Clipboard className="text-muted-foreground h-4 w-4" />
-                  <span className="text-xs font-bold">Lumbar X-Ray</span>
-                </div>
-                <Badge
-                  variant="outline"
-                  className="bg-warning/10 text-warning border-warning/20 text-[9px] font-black uppercase"
+              {caseFiles.length > 0 ? (
+                caseFiles.map((file, idx) => (
+                  <div
+                    key={idx}
+                    className="border-border bg-muted/20 flex items-center justify-between rounded-lg border p-3"
+                  >
+                    <div className="flex items-center gap-3 overflow-hidden">
+                      <Clipboard className="text-muted-foreground h-4 w-4 shrink-0" />
+                      <span className="truncate text-xs font-bold">{file.fileName}</span>
+                    </div>
+                    <Badge
+                      variant="outline"
+                      className="bg-primary/5 text-primary border-primary/20 shrink-0 text-[9px] font-black uppercase"
+                    >
+                      {file.category}
+                    </Badge>
+                  </div>
+                ))
+              ) : (
+                <p className="text-muted-foreground text-center text-[10px] italic">
+                  No clinical reports or imaging files found.
+                </p>
+              )}
+              <Link href="/patient/documents">
+                <Button
+                  variant="ghost"
+                  className="bg-muted/30 mt-2 w-full text-[10px] font-bold tracking-widest uppercase"
                 >
-                  Pending
-                </Badge>
-              </div>
-              <p className="text-muted-foreground text-center text-[10px] italic">
-                Recent lab results and imaging orders will appear here.
-              </p>
+                  Manage Documents
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         </div>

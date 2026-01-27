@@ -1,14 +1,5 @@
-'use client';
-
 import React from 'react';
-import {
-  Users,
-  FileText,
-  Calendar,
-  Activity,
-  ArrowUpRight,
-  ClipboardList,
-} from 'lucide-react';
+import { Users as UsersIcon, FileText, Activity, ClipboardList } from 'lucide-react';
 import PatientQueue from '@/components/dashboard/PatientQueue';
 import ClinicianHero from '@/components/dashboard/clinician/ClinicianHero';
 import ClinicianQuickActions from '@/components/dashboard/clinician/ClinicianQuickActions';
@@ -18,26 +9,54 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  Badge,
-  Button,
 } from '@/components/ui';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import dbConnect from '@/lib/db/connect';
+import { DiagnosisSession, User } from '@/models';
 
-import FloatingIssue from '@/components/dashboard/clinician/FloatingIssue';
+export default async function ClinicianDashboardPage() {
+  const session = await auth();
 
-export default function ClinicianDashboardPage() {
-  // Mock data for stats
+  if (!session || !session.user || session.user.role !== 'CLINICIAN') {
+    redirect('/login');
+  }
+
+  await dbConnect();
+
+  const clinicianId = session.user.id;
+
+  // Fetch Stats
+  const [totalPatientsCount, pendingReviewCount, urgentCasesCount, assignedSessionsRaw] =
+    await Promise.all([
+      DiagnosisSession.distinct('patientId', { clinicianId }).then((ids) => ids.length),
+      DiagnosisSession.countDocuments({ clinicianId, status: 'assigned' }),
+      DiagnosisSession.countDocuments({
+        clinicianId,
+        status: 'assigned',
+        'aiAnalysis.riskLevel': 'Urgent',
+      }),
+      DiagnosisSession.find({ clinicianId })
+        .populate('patientId', 'firstName lastName avatar gender')
+        .sort({ createdAt: -1 })
+        .lean(),
+    ]);
+
+  const sessions = JSON.parse(JSON.stringify(assignedSessionsRaw));
+
+  // Format stats for rendering
   const stats = [
     {
       label: 'Total Patients',
-      value: '24',
-      icon: Users,
+      value: totalPatientsCount.toString(),
+      icon: UsersIcon,
       color: 'text-primary',
       bgColor: 'bg-primary/10',
       borderColor: 'border-l-primary',
     },
     {
-      label: 'Pending Review',
-      value: '12',
+      label: 'Cases to Review',
+      value: pendingReviewCount.toString(),
       icon: FileText,
       color: 'text-indigo-500',
       bgColor: 'bg-indigo-500/10',
@@ -45,7 +64,7 @@ export default function ClinicianDashboardPage() {
     },
     {
       label: 'Urgent Cases',
-      value: '03',
+      value: urgentCasesCount.toString().padStart(2, '0'),
       icon: Activity,
       color: 'text-emerald-500',
       bgColor: 'bg-emerald-500/10',
@@ -53,11 +72,16 @@ export default function ClinicianDashboardPage() {
     },
   ];
 
-  const latestPatient = {
-    id: '1',
-    name: 'Bola Ahmed Tinubu',
-    region: 'Lower Back',
-  };
+  // Latest patient for the hero
+  const latestSession = sessions[0];
+  const latestPatient = latestSession
+    ? {
+        id: latestSession._id,
+        name: `${latestSession.patientId?.firstName} ${latestSession.patientId?.lastName}`,
+        region: latestSession.bodyRegion,
+        risk: latestSession.aiAnalysis?.riskLevel,
+      }
+    : null;
 
   return (
     <div className="animate-fade-in space-y-6 pb-20">
@@ -101,15 +125,15 @@ export default function ClinicianDashboardPage() {
               <div>
                 <CardTitle className="flex items-center gap-2 text-xl">
                   <ClipboardList className="text-primary h-5 w-5" />
-                  Upcoming Patient Appointments
+                  Assigned Patient Cases
                 </CardTitle>
                 <CardDescription>
-                  Your scheduled sessions for today and upcoming days
+                  Review and manage the diagnostic sessions assigned to you
                 </CardDescription>
               </div>
             </CardHeader>
             <CardContent>
-              <PatientQueue />
+              <PatientQueue initialSessions={sessions} />
             </CardContent>
           </Card>
         </div>
@@ -118,44 +142,46 @@ export default function ClinicianDashboardPage() {
         <div className="space-y-6 md:col-span-4">
           <ClinicianQuickActions />
 
-          {/* Today's Schedule Mini-Card */}
+          {/* Today's Schedule Mini-Card - Real data would come from an Appointment model if implemented, for now keep as is but could fetch actual next sessions */}
           <Card>
             <CardHeader>
-              <CardTitle className="text-lg">Today's Timeline</CardTitle>
+              <CardTitle className="text-lg">Next in Queue</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {[
-                {
-                  time: '09:00 AM',
-                  event: 'New Patient Assessment',
-                  patient: 'Lekan Salami',
-                },
-                { time: '11:30 AM', event: 'Follow-up Session', patient: 'Mary Okoro' },
-                { time: '02:00 PM', event: 'Case Review', patient: 'Internal' },
-              ].map((item, idx) => (
-                <div key={idx} className="relative flex items-start gap-4 pb-4 last:pb-0">
-                  {idx !== 2 && (
-                    <div className="bg-border absolute top-[30px] bottom-0 left-[15px] w-[2px]" />
-                  )}
-                  <div className="bg-primary/20 z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
-                    <div className="bg-primary h-2 w-2 rounded-full" />
+              {sessions.slice(0, 3).length > 0 ? (
+                sessions.slice(0, 3).map((sess, idx) => (
+                  <div
+                    key={idx}
+                    className="relative flex items-start gap-4 pb-4 last:pb-0"
+                  >
+                    {idx !== sessions.slice(0, 3).length - 1 && (
+                      <div className="bg-border absolute top-[30px] bottom-0 left-[15px] w-[2px]" />
+                    )}
+                    <div className="bg-primary/20 z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full">
+                      <div className="bg-primary h-2 w-2 rounded-full" />
+                    </div>
+                    <div>
+                      <p className="text-primary text-xs font-bold">
+                        {new Date(sess.createdAt).toLocaleDateString()}
+                      </p>
+                      <p className="max-w-[150px] truncate text-sm font-bold">
+                        {sess.patientId?.firstName} {sess.patientId?.lastName}
+                      </p>
+                      <p className="text-muted-foreground text-xs tracking-tighter uppercase">
+                        {sess.bodyRegion} Assessment
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-primary text-xs font-bold">{item.time}</p>
-                    <p className="text-sm font-bold">{item.event}</p>
-                    <p className="text-muted-foreground text-xs">{item.patient}</p>
-                  </div>
+                ))
+              ) : (
+                <div className="text-muted-foreground py-8 text-center text-sm italic">
+                  No pending items in queue
                 </div>
-              ))}
-              <Button variant="outline" className="mt-2 w-full text-xs font-bold">
-                View Full Calendar
-              </Button>
+              )}
             </CardContent>
           </Card>
         </div>
       </div>
-
-      <FloatingIssue count={1} />
     </div>
   );
 }
