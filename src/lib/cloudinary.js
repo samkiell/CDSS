@@ -34,10 +34,9 @@ const UPLOAD_PRESETS = {
   },
   medical_report: {
     folder: 'cdss/medical_reports',
-    allowed_formats: ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx'],
-    resource_type: 'auto', // Auto handles both images and raw files (PDFs)
     access_mode: 'public',
     type: 'upload',
+    // We handle resource_type dynamically in the API route
   },
   avatar: {
     folder: 'cdss/avatars',
