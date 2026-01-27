@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Card,
   CardHeader,
@@ -25,22 +25,63 @@ import {
   Save,
   X,
   CreditCard,
+  Loader2,
 } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function PatientSettingsPage() {
   const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(true);
   const [profileImage, setProfileImage] = useState(null);
 
   // Form states
   const [personalInfo, setPersonalInfo] = useState({
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@example.com',
-    phone: '+1 234 567 890',
-    dob: '1990-01-01',
-    address: '123 Health St, Medical City',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    dob: '',
+    gender: '',
   });
+
+  // Fetch profile data on mount
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await fetch('/api/patients/profile');
+
+        // Check if response is ok before parsing JSON
+        if (!response.ok) {
+          // API not built yet - this is expected, just log and continue
+          console.warn('Profile API not available yet (Status:', response.status, ')');
+          return;
+        }
+
+        const data = await response.json();
+
+        if (data.success) {
+          setPersonalInfo({
+            firstName: data.data.firstName || '',
+            lastName: data.data.lastName || '',
+            email: data.data.email || '',
+            phone: data.data.phone || '',
+            dob: data.data.dateOfBirth ? data.data.dateOfBirth.split('T')[0] : '',
+            gender: data.data.gender || '',
+          });
+          if (data.data.avatar) {
+            setProfileImage(data.data.avatar);
+          }
+        }
+      } catch (error) {
+        // Network error or other issue - just log, don't show error to user
+        console.warn('Profile API fetch failed:', error.message);
+      } finally {
+        setIsFetching(false);
+      }
+    };
+
+    fetchProfile();
+  }, []);
 
   const [notifications, setNotifications] = useState({
     email: true,
@@ -70,10 +111,36 @@ export default function PatientSettingsPage() {
   const handleSavePersonalInfo = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    toast.success('Personal information updated successfully');
-    setIsLoading(false);
+
+    try {
+      const response = await fetch('/api/patients/profile', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: personalInfo.firstName,
+          lastName: personalInfo.lastName,
+          phone: personalInfo.phone,
+          gender: personalInfo.gender || null,
+          dateOfBirth: personalInfo.dob || null,
+          avatar: profileImage,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success('Personal information updated successfully');
+      } else {
+        toast.error(data.error || 'Failed to update profile');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      toast.error('Error updating profile. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSaveSecurity = async (e) => {
@@ -110,6 +177,18 @@ export default function PatientSettingsPage() {
     setProfileImage(null);
     toast.success('Profile picture removed');
   };
+
+  // Show loading state while fetching profile
+  if (isFetching) {
+    return (
+      <div className="flex h-[60vh] items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <p className="text-muted-foreground">Loading your profile...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mx-auto max-w-5xl space-y-8 pb-10 animate-fade-in">
@@ -256,7 +335,7 @@ export default function PatientSettingsPage() {
                         value={personalInfo.phone}
                         onChange={handlePersonalInfoChange}
                         className="bg-muted/20 pl-10"
-                        placeholder="+1 (555) 000-0000"
+                        placeholder="+234 801 234 5678"
                       />
                     </div>
                   </div>
@@ -276,17 +355,21 @@ export default function PatientSettingsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground/80">Home Address</label>
+                  <label className="text-sm font-semibold text-foreground/80">Gender</label>
                   <div className="relative group">
-                    <MapPin className="absolute left-3 top-3 h-4 w-4 text-muted-foreground transition-colors group-focus-within:text-primary" />
-                    <textarea
-                      name="address"
-                      value={personalInfo.address}
+                    <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                    <select
+                      name="gender"
+                      value={personalInfo.gender}
                       onChange={handlePersonalInfoChange}
-                      rows={3}
-                      className="border-input bg-muted/20 placeholder:text-muted-foreground focus-visible:ring-ring flex min-h-[100px] w-full rounded-lg border px-3 py-2 pl-10 text-sm transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-                      placeholder="Enter your full residential address"
-                    />
+                      className="border-input bg-muted/20 placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-lg border px-3 py-2 pl-10 text-sm transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer"
+                    >
+                      <option value="">Select gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="other">Other</option>
+                      <option value="prefer_not_to_say">Prefer not to say</option>
+                    </select>
                   </div>
                 </div>
 
