@@ -69,20 +69,72 @@ export async function GET(req) {
     await dbConnect();
 
     // Patients can only see their own docs, clinicians can see patient docs they are assigned to (simplified check here)
-    const targetPatientId =
-      session.user.role === 'CLINICIAN' ? patientId : session.user.id;
+    let targetPatientId = session.user.role === 'CLINICIAN' ? patientId : session.user.id;
 
-    if (!targetPatientId) {
-      return NextResponse.json({ error: 'Patient ID is required' }, { status: 400 });
+    if (
+      !targetPatientId ||
+      targetPatientId === 'undefined' ||
+      targetPatientId === 'null'
+    ) {
+      return NextResponse.json(
+        { error: 'Valid Patient ID is required' },
+        { status: 400 }
+      );
     }
 
-    const documents = await CaseFile.find({ patientId: targetPatientId })
+    // Basic hex check for MongoDB ObjectId
+    if (!/^[0-9a-fA-F]{24}$/.test(targetPatientId)) {
+      return NextResponse.json({ error: 'Invalid Patient ID format' }, { status: 400 });
+    }
+
+    const documents = await CaseFile.find({
+      patientId: targetPatientId,
+      fileUrl: { $not: /^internal:\/\// }, // Filter out dummy internal session records
+    })
       .sort({ createdAt: -1 })
       .lean();
 
     return NextResponse.json({ success: true, documents });
   } catch (error) {
     console.error('Fetch documents error:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
+}
+
+export async function DELETE(req) {
+  try {
+    const session = await auth();
+    if (!session || !session.user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return NextResponse.json({ error: 'Document ID required' }, { status: 400 });
+    }
+
+    await dbConnect();
+
+    // Verify ownership or role
+    const doc = await CaseFile.findById(id);
+    if (!doc) {
+      return NextResponse.json({ error: 'Document not found' }, { status: 404 });
+    }
+
+    if (
+      doc.patientId.toString() !== session.user.id &&
+      session.user.role !== 'CLINICIAN'
+    ) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    await CaseFile.findByIdAndDelete(id);
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Delete document error:', error);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

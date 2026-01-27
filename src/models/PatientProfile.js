@@ -106,7 +106,6 @@ const PatientProfileSchema = new mongoose.Schema(
 );
 
 // Index for faster lookups
-PatientProfileSchema.index({ userId: 1 });
 PatientProfileSchema.index({ assignedClinician: 1 });
 
 const PatientProfile =

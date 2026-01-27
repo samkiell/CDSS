@@ -105,6 +105,24 @@ export default function PatientDocumentsPage() {
     return 'Other';
   };
 
+  const handleDelete = async (id) => {
+    if (!confirm('Are you sure you want to delete this document?')) return;
+
+    try {
+      const res = await fetch(`/api/documents?id=${id}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (data.success) {
+        fetchDocuments();
+      } else {
+        alert('Failed to delete document: ' + data.error);
+      }
+    } catch (err) {
+      console.error('Delete error:', err);
+    }
+  };
+
   const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
@@ -137,10 +155,11 @@ export default function PatientDocumentsPage() {
             accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
           />
           <label htmlFor="file-upload">
-            <Button
-              as="div"
-              className="bg-primary hover:bg-primary/90 cursor-pointer gap-2 rounded-xl px-6 font-bold text-white shadow-lg transition-all"
-              disabled={isUploading}
+            <div
+              className={cn(
+                'bg-primary hover:bg-primary/90 flex h-10 cursor-pointer items-center justify-center gap-2 rounded-xl px-6 font-bold text-white shadow-lg transition-all',
+                isUploading && 'pointer-events-none opacity-50'
+              )}
             >
               {isUploading ? (
                 <>
@@ -153,7 +172,7 @@ export default function PatientDocumentsPage() {
                   Add Document
                 </>
               )}
-            </Button>
+            </div>
           </label>
         </div>
       </div>
