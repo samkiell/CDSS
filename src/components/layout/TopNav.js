@@ -55,7 +55,7 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
             </h1>
           ) : (
             <div className="animate-fade-in">
-              <Logo size="sm" showText={false} className="flex-row items-center" />
+              <Logo size="lg" showText={false} className="flex-row items-center" />
             </div>
           )}
         </div>
