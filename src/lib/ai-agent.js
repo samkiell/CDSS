@@ -53,20 +53,21 @@ export async function getAiPreliminaryAnalysis({
 
       Instructions:
       1. Analyze the symptoms using clinical reasoning.
-      2. Provide a temporal diagnosis for the patient. respond to the paitient and not the clinician.
-      3. Calculate a dynamic "confidenceScore" (0-100) by refining the "Mathematical Baseline Confidence".
+      2. Provide a temporal diagnosis and reasoning addressed DIRECTLY TO THE PATIENT.
+      3. Use second-person perspective (e.g., "You reported...", "Your symptoms suggest...") instead of third-person clinical reporting (e.g., "The patient reports...").
+      4. Calculate a dynamic "confidenceScore" (0-100) by refining the "Mathematical Baseline Confidence".
          - Adjust based on symptom specificity, red flags, and consistency.
          - AVOID using fixed or placeholder numbers (like 85).
          - Be granular (e.g., 73, 88, 92).
-      4. For "reasoning", provide clear clinical indicators found in the symptoms.
-      5. CRITICAL: Do NOT include any internal tags, question IDs, or technical codes (e.g., "(lumbar_q_redflag)") in the reasoning. Use natural language only.
+      5. For "reasoning", provide clear clinical indicators found in the symptoms, phrased so the patient understands why this diagnosis was reached.
+      6. CRITICAL: Do NOT include any internal tags, question IDs, or technical codes (e.g., "(lumbar_q_redflag)") in the reasoning. Use natural language only.
 
       Output JSON only:
       {
-        "temporalDiagnosis": "String",
+        "temporalDiagnosis": "String (Geared for the patient)",
         "confidenceScore": Number,
         "riskLevel": "Low" | "Moderate" | "Urgent",
-        "reasoning": ["String"]
+        "reasoning": ["String (Geared for the patient)"]
       }
     `;
 
@@ -78,7 +79,7 @@ export async function getAiPreliminaryAnalysis({
           {
             role: 'system',
             content:
-              'You are a diagnostic engine using the Weighted Matching Paradigm. Compare symptoms against clinical heuristics. Output JSON only. Do not include internal question IDs or tags in your reasoning.',
+              'You are a diagnostic engine using the Weighted Matching Paradigm. Compare symptoms against clinical heuristics. You speak directly to the patient in the second person (You/Your). Provide compassionate, clear, and direct analysis. Output JSON only. Do not include internal question IDs or tags in your reasoning.',
           },
           { role: 'user', content: prompt },
         ],
