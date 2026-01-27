@@ -132,7 +132,9 @@ export default function CaseDetailsPage({ params }) {
             <ArrowLeft className="text-muted-foreground h-6 w-6" />
           </Link>
           <div className="flex items-center gap-2">
-            <h1 className="text-2xl font-black tracking-tight">David's Case File</h1>
+            <h1 className="text-2xl font-black tracking-tight">
+              {patient ? `${patient.firstName}'s Case File` : 'Patient Case File'}
+            </h1>
             <div className="bg-destructive ml-2 h-3 w-3 animate-pulse rounded-full" />
             <span className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
               Urgent
@@ -144,35 +146,39 @@ export default function CaseDetailsPage({ params }) {
       {/* Patient Header Card */}
       <Card className="border-border bg-card flex items-center gap-8 rounded-[2.5rem] p-8 shadow-sm">
         <div className="bg-primary/10 text-primary border-primary/20 flex h-20 w-20 items-center justify-center rounded-full border text-2xl font-black shadow-inner">
-          B
+          {patient ? patient.firstName[0] : 'P'}
         </div>
         <div className="grid flex-1 grid-cols-2 gap-6 lg:grid-cols-4">
           <div className="flex flex-col">
             <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
               Name
             </span>
-            <span className="text-foreground text-base font-black">
-              Bola Ahmed Tinubu
+            <span className="text-foreground truncate text-base font-black">
+              {patient ? `${patient.firstName} ${patient.lastName}` : 'Loading...'}
             </span>
           </div>
           <div className="flex flex-col">
             <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
               Sex
             </span>
-            <span className="text-foreground text-base font-black">Male</span>
+            <span className="text-foreground text-base font-black">
+              {patient?.sex || 'Not specified'}
+            </span>
           </div>
           <div className="flex flex-col">
             <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
               Age
             </span>
-            <span className="text-foreground text-base font-black">56 yrs</span>
+            <span className="text-foreground text-base font-black">
+              {patient?.age ? `${patient.age} yrs` : 'N/A'}
+            </span>
           </div>
           <div className="flex flex-col">
             <span className="text-muted-foreground text-right text-xs font-bold tracking-wider uppercase">
               Pattern
             </span>
             <span className="text-foreground text-right text-xs font-bold">
-              12-11-2025
+              {patient ? new Date(patient.createdAt).toLocaleDateString() : '--/--/--'}
             </span>
           </div>
         </div>
@@ -366,7 +372,8 @@ export default function CaseDetailsPage({ params }) {
           <Card className="w-full max-w-md border-none p-6 shadow-2xl">
             <h3 className="text-xl font-black">Schedule Appointment</h3>
             <p className="text-muted-foreground mt-2 text-xs font-medium">
-              Select a date and time for Bola Ahmed Tinubu
+              Select a date and time for{' '}
+              {patient ? `${patient.firstName} ${patient.lastName}` : 'this patient'}
             </p>
 
             <form onSubmit={handleBook} className="mt-6 space-y-4">
@@ -442,6 +449,8 @@ export default function CaseDetailsPage({ params }) {
               <div>
                 <h3 className="text-xl font-black">Patient Documents</h3>
                 <p className="text-muted-foreground text-xs font-medium">
+                  Viewing clinical files for {patient ? `${patient.firstName} ${patient.lastName}` : "this patient"}
+                </p>
                   Uploaded by Bola Ahmed Tinubu
                 </p>
               </div>
