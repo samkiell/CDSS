@@ -11,6 +11,8 @@ import {
   Users,
   FolderOpen,
   Compass,
+  HelpCircle,
+  ShieldCheck,
 } from 'lucide-react';
 
 export const patientLinks = [
@@ -31,4 +33,6 @@ export const clinicianLinks = [
   { href: '/clinician/referral', label: 'Referral or Order', icon: FileOutput },
   { href: '/clinician/messages', label: 'Messages', icon: MessageSquare },
   { href: '/clinician/notifications', label: 'Notifications', icon: Bell },
+  { href: '/clinician/help-center', label: 'Help Center', icon: HelpCircle },
+  { href: '/clinician/privacy', label: 'Privacy & Ethics', icon: ShieldCheck },
 ];
