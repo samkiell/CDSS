@@ -53,7 +53,7 @@ export async function getAiPreliminaryAnalysis({
 
       Instructions:
       1. Analyze the symptoms using clinical reasoning.
-      2. Provide a temporal diagnosis.
+      2. Provide a temporal diagnosis for the patient.
       3. Calculate a dynamic "confidenceScore" (0-100) by refining the "Mathematical Baseline Confidence".
          - Adjust based on symptom specificity, red flags, and consistency.
          - AVOID using fixed or placeholder numbers (like 85).
