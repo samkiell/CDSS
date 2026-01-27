@@ -1,62 +1,53 @@
-'use client';
-import PatientInfoContainer from '@/components/dashboard/clinician/paitentContainer';
-import SearchPaitent from '@/components/dashboard/clinician/search';
-import { useState } from 'react';
+import connectDB from '@/lib/db/connect';
+import { DiagnosisSession } from '@/models';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import ReferralClient from '@/components/dashboard/clinician/ReferralClient';
 
-export default function ReferralPage() {
-  const [searchQuery, setSearchQuery] = useState('');
+export default async function ReferralPage() {
+  const session = await auth();
+  if (!session || !session.user) redirect('/login');
 
-  const patients = [
-    {
-      id: 1,
-      name: 'Bola Ahmed Tinubu',
-      gender: 'Male',
-      time: '8:00am',
-      date: '12-11-2025',
-      status: 'active',
-    },
-    {
-      id: 2,
-      name: 'Tomisi Faith John',
-      gender: 'Female',
-      time: '8:30am',
-      date: '12-11-2025',
-      status: 'active',
-    },
-    {
-      id: 3,
-      name: 'Henry Ahmed Garet',
-      gender: 'Male',
-      time: '10:00am',
-      date: '12-11-2025',
-      status: 'pending',
-    },
-    {
-      id: 4,
-      name: 'Bola Saed Dushak',
-      gender: 'Male',
-      time: '10:30am',
-      date: '12-11-2025',
-      status: 'urgent',
-    },
-  ];
+  await connectDB();
+  const clinicianId = session.user.id;
+
+  // Fetch all unique patients for this clinician
+  const sessions = await DiagnosisSession.find({ clinicianId })
+    .populate('patientId', 'firstName lastName avatar gender updatedAt')
+    .sort({ updatedAt: -1 })
+    .lean();
+
+  const patientsMap = new Map();
+  sessions.forEach((sess) => {
+    if (!sess.patientId) return;
+    const pId = sess.patientId._id.toString();
+    if (!patientsMap.has(pId)) {
+      patientsMap.set(pId, {
+        id: pId,
+        name: `${sess.patientId.firstName} ${sess.patientId.lastName}`,
+        gender: sess.patientId.gender || 'Not specified',
+        avatar: sess.patientId.avatar,
+        lastActive: sess.updatedAt,
+        status: sess.aiAnalysis?.riskLevel === 'Urgent' ? 'urgent' : 'active',
+      });
+    }
+  });
+
+  const patients = Array.from(patientsMap.values());
 
   return (
     <div className="mx-auto w-full max-w-4xl px-3 pb-8 sm:px-4 sm:pb-10">
-      <h2 className="mb-4 text-sm font-medium text-gray-800 sm:mb-6 sm:text-base dark:text-gray-200">
-        Refer your patients to an healthcare center, if necessary
-      </h2>
+      <header className="mb-8 flex flex-col gap-2">
+        <h2 className="text-foreground text-3xl font-black tracking-tighter uppercase italic">
+          Referral Management
+        </h2>
+        <p className="text-muted-foreground font-medium">
+          Issue clinical referrals and orders for your patients to external healthcare
+          centers.
+        </p>
+      </header>
 
-      <SearchPaitent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-
-      <div className="space-y-4">
-        <PatientInfoContainer
-          patients={patients}
-          searchQuery={searchQuery}
-          url={'/clinician/referral'}
-          buttonLabel={'Create'}
-        />
-      </div>
+      <ReferralClient initialPatients={patients} />
     </div>
   );
 }
