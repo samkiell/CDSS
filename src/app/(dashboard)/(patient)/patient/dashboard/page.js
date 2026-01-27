@@ -43,6 +43,7 @@ export default async function PatientDashboardPage() {
     appointmentsData,
     treatmentPlanData,
     pastSessionsData,
+    caseFilesData,
   ] = await Promise.all([
     User.findById(session.user.id).select('firstName lastName avatar').lean(),
     DiagnosisSession.findOne({ patientId: session.user.id })
@@ -54,6 +55,7 @@ export default async function PatientDashboardPage() {
         date: 1,
       })
       .lean(),
+    TreatmentPlan.findOne({ patient: session.user.id, status: 'active' }).lean(),
     DiagnosisSession.find({ patientId: session.user.id })
       .sort({ createdAt: -1 })
       .limit(7)
@@ -66,7 +68,7 @@ export default async function PatientDashboardPage() {
   const latestSession = JSON.parse(JSON.stringify(latestSessionData));
   const appointments = JSON.parse(JSON.stringify(appointmentsData));
   const pastSessions = JSON.parse(JSON.stringify(pastSessionsData));
-  const caseFiles = JSON.parse(JSON.stringify(arguments[5] || [])); // CaseFile query is the 6th element
+  const caseFiles = JSON.parse(JSON.stringify(caseFilesData));
   let treatmentPlan = JSON.parse(JSON.stringify(treatmentPlanData));
 
   // 🏥 FALLBACK: If no active clinician treatment plan, synthesize a provisional one from latest AI analysis
