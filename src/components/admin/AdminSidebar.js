@@ -59,7 +59,7 @@ export default function AdminSidebar() {
         <div className="flex h-20 items-center justify-between border-b border-gray-100 px-6 dark:border-gray-800">
           <Link
             href="/admin/dashboard"
-            className="relative h-12 w-32"
+            className="relative h-24 w-32"
             onClick={() => setSidebarOpen(false)}
           >
             <Image
