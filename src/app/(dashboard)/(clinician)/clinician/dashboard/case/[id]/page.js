@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import {
   ArrowLeft,
@@ -11,19 +11,50 @@ import {
   PlusCircle,
   Calendar,
   Info,
+  Download,
+  Eye,
+  FileIcon,
+  X,
 } from 'lucide-react';
 import { cn } from '@/lib/cn';
-import { Button, Card } from '@/components/ui';
+import { Button, Card, Badge } from '@/components/ui';
 
 export default function CaseDetailsPage({ params }) {
   const { id } = params;
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isDocsOpen, setIsDocsOpen] = useState(false);
+  const [documents, setDocuments] = useState([]);
+  const [isLoadingDocs, setIsLoadingDocs] = useState(false);
   const [bookingData, setBookingData] = useState({
     date: '',
     time: '',
     type: 'Physiotherapy Session',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isDocsOpen) {
+      fetchDocuments();
+    }
+  }, [isDocsOpen]);
+
+  const fetchDocuments = async () => {
+    setIsLoadingDocs(true);
+    try {
+      // id is patientId linked from PatientQueue
+      const res = await fetch(
+        `/api/documents?patientId=${id === '1' ? '69756da7494dd880c45762b4' : id}`
+      );
+      const data = await res.json();
+      if (data.success) {
+        setDocuments(data.documents);
+      }
+    } catch (err) {
+      console.error('Error fetching documents:', err);
+    } finally {
+      setIsLoadingDocs(false);
+    }
+  };
 
   const handleBook = async (e) => {
     e.preventDefault();
@@ -50,6 +81,14 @@ export default function CaseDetailsPage({ params }) {
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const formatFileSize = (bytes) => {
+    if (!bytes) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
   };
 
   return (
@@ -256,6 +295,7 @@ export default function CaseDetailsPage({ params }) {
             title="Uploaded Documents"
             desc="Check documents uploaded by the your patient."
             actionText="Check"
+            onClick={() => setIsDocsOpen(true)}
           />
 
           <div className="bg-border col-span-full my-6 h-[1px] opacity-50" />
@@ -302,7 +342,7 @@ export default function CaseDetailsPage({ params }) {
 
             <form onSubmit={handleBook} className="mt-6 space-y-4">
               <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
                   Date
                 </label>
                 <input
@@ -310,11 +350,13 @@ export default function CaseDetailsPage({ params }) {
                   required
                   className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
                   value={bookingData.date}
-                  onChange={(e) => setBookingData({ ...bookingData, date: e.target.value })}
+                  onChange={(e) =>
+                    setBookingData({ ...bookingData, date: e.target.value })
+                  }
                 />
               </div>
               <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
                   Time
                 </label>
                 <input
@@ -322,17 +364,21 @@ export default function CaseDetailsPage({ params }) {
                   required
                   className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
                   value={bookingData.time}
-                  onChange={(e) => setBookingData({ ...bookingData, time: e.target.value })}
+                  onChange={(e) =>
+                    setBookingData({ ...bookingData, time: e.target.value })
+                  }
                 />
               </div>
               <div>
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
                   Session Type
                 </label>
                 <select
                   className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
                   value={bookingData.type}
-                  onChange={(e) => setBookingData({ ...bookingData, type: e.target.value })}
+                  onChange={(e) =>
+                    setBookingData({ ...bookingData, type: e.target.value })
+                  }
                 >
                   <option>Physiotherapy Session</option>
                   <option>Consultation</option>
@@ -355,6 +401,104 @@ export default function CaseDetailsPage({ params }) {
                 </Button>
               </div>
             </form>
+          </Card>
+        </div>
+      )}
+
+      {/* Documents Modal */}
+      {isDocsOpen && (
+        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden border-none shadow-2xl">
+            <div className="flex items-center justify-between border-b p-6">
+              <div>
+                <h3 className="text-xl font-black">Patient Documents</h3>
+                <p className="text-muted-foreground text-xs font-medium">
+                  Uploaded by Bola Ahmed Tinubu
+                </p>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setIsDocsOpen(false)}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6">
+              {isLoadingDocs ? (
+                <div className="flex h-40 flex-col items-center justify-center gap-3">
+                  <div className="border-primary h-8 w-8 animate-spin rounded-full border-b-2" />
+                  <p className="text-muted-foreground text-sm font-bold">
+                    Fetching files...
+                  </p>
+                </div>
+              ) : documents.length > 0 ? (
+                <div className="space-y-3">
+                  {documents.map((doc) => (
+                    <div
+                      key={doc._id}
+                      className="hover:border-primary/50 group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 p-4 transition-all dark:border-slate-800 dark:bg-slate-900/40"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-slate-800">
+                          <FileIcon className="h-6 w-6 text-slate-400" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="max-w-[200px] truncate text-sm font-black">
+                            {doc.fileName}
+                          </span>
+                          <div className="mt-0.5 flex items-center gap-2">
+                            <Badge
+                              variant="outline"
+                              className="h-4 px-1 text-[8px] font-black uppercase"
+                            >
+                              {doc.category}
+                            </Badge>
+                            <span className="text-muted-foreground text-[10px] font-bold">
+                              {formatFileSize(doc.fileSize)} •{' '}
+                              {new Date(doc.createdAt).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <a href={doc.fileUrl} target="_blank" rel="noopener noreferrer">
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            className="group-hover:bg-primary/10 group-hover:text-primary h-8 w-8 rounded-full p-0"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        </a>
+                        <a href={doc.fileUrl} download={doc.fileName}>
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            className="group-hover:bg-primary/10 group-hover:text-primary h-8 w-8 rounded-full p-0"
+                          >
+                            <Download className="h-4 w-4" />
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex h-40 flex-col items-center justify-center text-center">
+                  <FileText className="mb-2 h-10 w-10 text-slate-300" />
+                  <p className="text-sm font-bold text-slate-500">
+                    No documents found for this patient.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="border-t bg-slate-50/50 p-6 dark:bg-slate-900/20">
+              <Button
+                className="h-12 w-full rounded-xl font-black"
+                onClick={() => setIsDocsOpen(false)}
+              >
+                Close Viewer
+              </Button>
+            </div>
           </Card>
         </div>
       )}
