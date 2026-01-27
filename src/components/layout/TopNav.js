@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, Search } from 'lucide-react';
+import { Menu } from 'lucide-react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { ThemeToggle } from '@/components/ui';
