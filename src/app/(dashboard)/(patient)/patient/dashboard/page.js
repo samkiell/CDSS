@@ -46,6 +46,7 @@ export default async function PatientDashboardPage() {
   ] = await Promise.all([
     User.findById(session.user.id).select('firstName lastName avatar').lean(),
     DiagnosisSession.findOne({ patientId: session.user.id })
+      .populate('clinicianId', 'firstName lastName')
       .sort({ createdAt: -1 })
       .lean(),
     Appointment.find({ patient: session.user.id, date: { $gte: new Date() } })
@@ -69,9 +70,13 @@ export default async function PatientDashboardPage() {
 
   // 🏥 FALLBACK: If no active clinician treatment plan, synthesize a provisional one from latest AI analysis
   if (!treatmentPlan && latestSession) {
+    const assignedTherapist = latestSession.clinicianId
+      ? `Dr. ${latestSession.clinicianId.lastName || latestSession.clinicianId.firstName}`
+      : 'System (AI)';
+
     treatmentPlan = {
       isProvisional: true,
-      therapistName: 'System (AI)',
+      therapistName: assignedTherapist,
       conditionName: latestSession.aiAnalysis.temporalDiagnosis,
       activities: [
         {
