@@ -64,8 +64,25 @@ export default async function PatientDashboardPage() {
   const patient = JSON.parse(JSON.stringify(patientData));
   const latestSession = JSON.parse(JSON.stringify(latestSessionData));
   const appointments = JSON.parse(JSON.stringify(appointmentsData));
-  const treatmentPlan = JSON.parse(JSON.stringify(treatmentPlanData));
   const pastSessions = JSON.parse(JSON.stringify(pastSessionsData));
+  let treatmentPlan = JSON.parse(JSON.stringify(treatmentPlanData));
+
+  // 🏥 FALLBACK: If no active clinician treatment plan, synthesize a provisional one from latest AI analysis
+  if (!treatmentPlan && latestSession) {
+    treatmentPlan = {
+      isProvisional: true,
+      therapistName: 'System (AI)',
+      conditionName: latestSession.aiAnalysis.temporalDiagnosis,
+      activities: [
+        {
+          date: latestSession.createdAt,
+          goal: 'Initial Symptom Management',
+          activeTreatment: 'Reviewing Assessment Findings',
+          homeExercise: `Gentle ${latestSession.bodyRegion} Mobility`,
+        },
+      ],
+    };
+  }
 
   // Aggregate pain history for the chart
   const painHistory = pastSessions
@@ -229,9 +246,21 @@ export default async function PatientDashboardPage() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0">
               <div>
-                <CardTitle className="text-xl">Current Treatment Activities</CardTitle>
+                <div className="flex items-center gap-3">
+                  <CardTitle className="text-xl">Current Treatment Activities</CardTitle>
+                  {treatmentPlan?.isProvisional && (
+                    <Badge
+                      variant="outline"
+                      className="animate-pulse border-blue-400 text-blue-500"
+                    >
+                      Provisional
+                    </Badge>
+                  )}
+                </div>
                 <CardDescription>
-                  Scheduled exercises and clinical sessions
+                  {treatmentPlan?.isProvisional
+                    ? 'AI recommended care while you wait for clinician review'
+                    : 'Scheduled exercises and clinical sessions'}
                 </CardDescription>
               </div>
               <Link
