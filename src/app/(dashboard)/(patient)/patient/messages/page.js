@@ -37,9 +37,7 @@ export default async function MessagesPage() {
         otherUser: {
           id: clinician._id,
           name: `Dr ${clinician.firstName} ${clinician.lastName}`,
-          avatar:
-            clinician.avatar ||
-            `https://api.dicebear.com/7.x/avataaars/svg?seed=${clinician.lastName}`,
+          avatar: clinician.avatar || null,
           online: false, // We don't have real-time online status yet
         },
         lastMessage: lastMsg ? lastMsg.content : 'Start a conversation',

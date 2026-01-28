@@ -34,9 +34,7 @@ export default async function ClinicianMessagesPage() {
         otherUser: {
           id: patient._id,
           name: `${patient.firstName} ${patient.lastName}`,
-          avatar:
-            patient.avatar ||
-            `https://api.dicebear.com/7.x/avataaars/svg?seed=${patient.lastName}`,
+          avatar: patient.avatar || null,
           online: false,
         },
         lastMessage: lastMsg ? lastMsg.content : 'No messages yet',

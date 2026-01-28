@@ -139,6 +139,15 @@ export default function MessagingClient({ currentUser, initialConversations = []
         // Send a message with the image URL
         const sentMsg = await sendMessage(activeTab.otherUser.id, `IMAGE:${data.url}`);
         setMessages((prev) => [...prev, sentMsg]);
+
+        // Update last message in conversation list
+        setConversations((prev) =>
+          prev.map((c) =>
+            c.id === activeTab.id
+              ? { ...c, lastMessage: 'Sent an image', lastMessageTime: 'Just now' }
+              : c
+          )
+        );
       }
     } catch (error) {
       console.error('Upload failed:', error);

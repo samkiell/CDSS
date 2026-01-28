@@ -41,11 +41,9 @@ export default function Page() {
         </button>
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="h-8 w-8 overflow-hidden rounded-full bg-gray-300 sm:h-10 sm:w-10 dark:bg-gray-600">
-            <img
-              src="https://api.dicebear.com/7.x/avataaars/svg?seed=Dr Ajayi"
-              alt="Dr Ajayi"
-              className="h-full w-full object-cover"
-            />
+            <div className="bg-primary/10 text-primary flex h-full w-full items-center justify-center font-bold">
+              AJ
+            </div>
           </div>
           <div>
             <h2 className="text-sm font-semibold text-gray-900 sm:text-base dark:text-gray-100">
@@ -70,11 +68,9 @@ export default function Page() {
             >
               {msg.sender === 'doctor' && (
                 <div className="mr-1.5 h-6 w-6 shrink-0 overflow-hidden rounded-full bg-gray-300 sm:mr-2 sm:h-8 sm:w-8 dark:bg-gray-600">
-                  <img
-                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=Dr Ajayi"
-                    alt="Dr Ajayi"
-                    className="h-full w-full object-cover"
-                  />
+                  <div className="bg-primary/10 text-primary flex h-full w-full items-center justify-center text-[10px] font-bold">
+                    AJ
+                  </div>
                 </div>
               )}
               <div
@@ -123,11 +119,9 @@ export default function Page() {
               </div>
               {msg.sender === 'patient' && (
                 <div className="ml-1.5 h-6 w-6 shrink-0 overflow-hidden rounded-full bg-gray-300 sm:ml-2 sm:h-8 sm:w-8 dark:bg-gray-600">
-                  <img
-                    src="https://api.dicebear.com/7.x/avataaars/svg?seed=David"
-                    alt="You"
-                    className="h-full w-full object-cover"
-                  />
+                  <div className="flex h-full w-full items-center justify-center bg-cyan-100 text-[10px] font-bold text-cyan-500">
+                    DV
+                  </div>
                 </div>
               )}
             </div>
