@@ -36,7 +36,9 @@ export default function MessagingClient({ currentUser, initialConversations = []
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const scrollRef = useRef(null);
+  const scrollContainerRef = useRef(null);
   const fileInputRef = useRef(null);
+  const msgCountRef = useRef(0);
 
   const emojis = ['😊', '👍', '🙏', '🏥', '💊', '👋', '❤️', '📍', '✅', '❌', '🤔', '💪'];
 
@@ -45,12 +47,25 @@ export default function MessagingClient({ currentUser, initialConversations = []
     setConversations(initialConversations);
   }, [initialConversations]);
 
-  // Auto-scroll to bottom of messages
+  // Auto-scroll to bottom of messages (Smart Scroll)
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (messages.length > msgCountRef.current) {
+      const isNewMsgFromMe = messages[messages.length - 1]?.senderId === currentUser.id;
+
+      // Check if user is near bottom
+      const container = scrollContainerRef.current;
+      const isNearBottom = container
+        ? container.scrollHeight - container.scrollTop - container.clientHeight < 150
+        : true;
+
+      if (isNewMsgFromMe || isNearBottom) {
+        if (scrollRef.current) {
+          scrollRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+      msgCountRef.current = messages.length;
     }
-  }, [messages]);
+  }, [messages, currentUser.id]);
 
   // Fetch messages when tab changes
   useEffect(() => {
@@ -77,9 +92,16 @@ export default function MessagingClient({ currentUser, initialConversations = []
 
       // Poll for new messages every 5 seconds
       const interval = setInterval(async () => {
-        const msgs = await getMessages(activeTab.otherUser.id);
-        if (msgs.length !== messages.length) {
-          setMessages(msgs);
+        try {
+          const msgs = await getMessages(activeTab.otherUser.id);
+          setMessages((prev) => {
+            if (msgs.length !== prev.length) {
+              return msgs;
+            }
+            return prev;
+          });
+        } catch (error) {
+          console.error('Polling failed:', error);
         }
       }, 5000);
 
@@ -247,9 +269,9 @@ export default function MessagingClient({ currentUser, initialConversations = []
         </div>
       ) : (
         /* Chat View - Full Width */
-        <div className="flex h-full flex-col">
-          {/* Header */}
-          <header className="border-border/50 bg-card z-10 flex items-center justify-between border-b p-6">
+        <div className="flex h-full flex-col overflow-hidden">
+          {/* Header - Static Top Bar */}
+          <header className="border-border/50 bg-card/95 z-20 flex flex-shrink-0 items-center justify-between border-b p-6 backdrop-blur-sm">
             <div className="flex items-center gap-5">
               <Button
                 variant="ghost"
@@ -317,7 +339,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
           </header>
 
           {/* Messages */}
-          <ScrollArea className="bg-muted/5 flex-1 p-8">
+          <ScrollArea ref={scrollContainerRef} className="bg-muted/5 flex-1 p-8">
             <div className="mx-auto max-w-4xl space-y-8">
               <div className="flex justify-center">
                 <Badge
