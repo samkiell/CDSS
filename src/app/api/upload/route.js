@@ -1,66 +1,34 @@
-/**
- * File Upload API Route
- * Handles medical image and document uploads via Cloudinary
- */
-
 import { NextResponse } from 'next/server';
 import { uploadFile } from '@/lib/cloudinary';
 
-/**
- * POST /api/upload
- * Upload a file to Cloudinary
- */
 export async function POST(request) {
   try {
     const formData = await request.formData();
     const file = formData.get('file');
-    const preset = formData.get('preset') || 'medical_image';
-    const sessionId = formData.get('sessionId');
 
     if (!file) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
-    }
-
-    // Convert file to buffer for upload
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    // Detect if file is PDF for better Cloudinary handling
-    const isPDF =
-      file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
-
-    // Upload to Cloudinary directly using the buffer
-    const result = await uploadFile(buffer, {
-      preset,
-      customOptions: {
-        context: `session_id=${sessionId || 'unknown'}`,
-        // Force 'raw' for PDFs to avoid Cloudinary's "Authenticated/Private" image-pdf restriction (401 error)
-        resource_type: isPDF ? 'raw' : 'auto',
-      },
-    });
-
-    if (!result.success) {
       return NextResponse.json(
-        { error: result.error || 'Upload failed' },
-        { status: 500 }
+        { success: false, error: 'No file provided' },
+        { status: 400 }
       );
     }
 
-    return NextResponse.json({
-      success: true,
-      data: {
-        url: result.url,
-        publicId: result.publicId,
-        format: result.format,
-        bytes: result.bytes,
-      },
+    // Convert file to array buffer and then to buffer
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    // Upload to Cloudinary using the existing medical_image preset or a generic one
+    const result = await uploadFile(buffer, {
+      preset: 'medical_image', // Or create a new one for chat
     });
+
+    if (result.success) {
+      return NextResponse.json({ success: true, url: result.url });
+    } else {
+      return NextResponse.json({ success: false, error: result.error }, { status: 500 });
+    }
   } catch (error) {
-    console.error('Upload error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error('API Upload error:', error);
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
-
-/**
- * GET - Removed for security or unused
- */

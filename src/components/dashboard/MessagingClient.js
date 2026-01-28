@@ -17,6 +17,11 @@ import {
   User,
 } from 'lucide-react';
 import {
+  Button,
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  ScrollArea,
   Badge,
   DropdownMenu,
   DropdownMenuTrigger,
