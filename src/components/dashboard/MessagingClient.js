@@ -11,14 +11,11 @@ import {
   Video,
   Check,
   CheckCheck,
-  User,
   MessageSquare,
   ChevronLeft,
   Circle,
 } from 'lucide-react';
 import {
-  Card,
-  CardContent,
   Button,
   Avatar,
   AvatarImage,
@@ -33,7 +30,6 @@ export default function MessagingClient({ currentUser, initialConversations = []
   const [message, setMessage] = useState('');
   const [conversations, setConversations] = useState(initialConversations);
   const [messages, setMessages] = useState([]);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const scrollRef = useRef(null);
 
   // Auto-scroll to bottom of messages
@@ -58,168 +54,121 @@ export default function MessagingClient({ currentUser, initialConversations = []
 
     setMessages([...messages, newMessage]);
     setMessage('');
-
-    // In a real app, we would call an API/Server Action here
-    // const result = await sendMessageAction(newMessage);
   };
 
   return (
-    <div className="bg-card border-border/50 flex h-[calc(100vh-12rem)] min-h-150 overflow-hidden rounded-[2.5rem] border shadow-2xl">
-      {/* Sidebar: User List */}
-      <aside
-        className={cn(
-          'border-border/50 bg-muted/10 flex-col border-r transition-all duration-300',
-          isSidebarOpen ? 'flex w-full md:w-80' : 'hidden md:flex md:w-20',
-          activeTab && 'hidden md:flex'
-        )}
-      >
-        <div className="border-border/50 bg-card border-b p-6">
-          <div className="mb-6 flex items-center justify-between">
-            <h2
-              className={cn(
-                'text-xl font-black tracking-tighter uppercase italic',
-                !isSidebarOpen && 'hidden'
-              )}
-            >
-              Messages
-            </h2>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="rounded-xl"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-              <MessageSquare className="h-5 w-5" />
-            </Button>
-          </div>
-          {isSidebarOpen && (
+    <div className="bg-card border-border/50 h-[calc(100vh-12rem)] min-h-[600px] overflow-hidden rounded-[2.5rem] border shadow-2xl">
+      {!activeTab ? (
+        /* Conversation List - Full Width */
+        <div className="flex h-full flex-col">
+          <div className="border-border/50 bg-card border-b p-8">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-black tracking-tighter uppercase italic">
+                Secure Inbox
+              </h2>
+              <div className="bg-primary/10 rounded-xl p-3">
+                <MessageSquare className="text-primary h-6 w-6" />
+              </div>
+            </div>
             <div className="relative">
-              <Search className="text-muted-foreground absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2" />
+              <Search className="text-muted-foreground absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Search..."
-                className="bg-muted/30 placeholder:text-muted-foreground/50 h-10 w-full rounded-xl pr-4 pl-10 text-xs font-bold focus:outline-none"
+                placeholder="Search conversations..."
+                className="bg-muted/30 placeholder:text-muted-foreground/50 focus:ring-primary/20 h-14 w-full rounded-2xl pr-4 pl-12 text-sm font-bold focus:ring-2 focus:outline-none"
               />
             </div>
-          )}
-        </div>
+          </div>
 
-        <ScrollArea className="flex-1">
-          <div className="space-y-2 p-4">
-            {conversations.map((conv) => (
-              <button
-                key={conv.id}
-                onClick={() => setActiveTab(conv)}
-                className={cn(
-                  'group flex w-full items-center gap-4 rounded-[1.5rem] p-4 transition-all',
-                  activeTab?.id === conv.id
-                    ? 'bg-primary shadow-primary/20 text-white shadow-lg'
-                    : 'hover:bg-muted/50 text-foreground'
-                )}
-              >
-                <div className="relative shrink-0">
-                  <Avatar className="h-12 w-12 rounded-2xl ring-2 ring-white/10">
-                    <AvatarImage src={conv.otherUser.avatar} />
-                    <AvatarFallback
-                      className={cn(
-                        'bg-primary/10 font-bold',
-                        activeTab?.id === conv.id
-                          ? 'bg-white/20 text-white'
-                          : 'text-primary'
-                      )}
-                    >
-                      {conv.otherUser.name[0]}
-                    </AvatarFallback>
-                  </Avatar>
-                  {conv.otherUser.online && (
-                    <div className="group-hover:ring-muted absolute -right-1 -bottom-1 h-4 w-4 rounded-full bg-emerald-500 ring-2 ring-white transition-all" />
-                  )}
-                </div>
-                {isSidebarOpen && (
+          <ScrollArea className="flex-1">
+            <div className="mx-auto max-w-4xl space-y-4 p-8">
+              {conversations.map((conv) => (
+                <button
+                  key={conv.id}
+                  onClick={() => setActiveTab(conv)}
+                  className="group hover:bg-muted/50 border-border/20 bg-card flex w-full items-center gap-6 rounded-[2rem] border p-6 transition-all hover:scale-[1.01] hover:shadow-lg"
+                >
+                  <div className="relative shrink-0">
+                    <Avatar className="h-16 w-16 rounded-[1.5rem] shadow-md ring-4 ring-white dark:ring-gray-800">
+                      <AvatarImage src={conv.otherUser.avatar} />
+                      <AvatarFallback className="bg-primary/10 text-primary text-xl font-bold">
+                        {conv.otherUser.name[0]}
+                      </AvatarFallback>
+                    </Avatar>
+                    {conv.otherUser.online && (
+                      <div className="absolute -right-1 -bottom-1 h-5 w-5 rounded-full bg-emerald-500 ring-4 ring-white dark:ring-gray-900" />
+                    )}
+                  </div>
+
                   <div className="min-w-0 flex-1 text-left">
-                    <div className="mb-1 flex items-start justify-between">
-                      <span className="truncate text-[11px] font-black tracking-tight uppercase italic">
+                    <div className="mb-2 flex items-center justify-between">
+                      <h4 className="text-lg font-black tracking-tight uppercase italic">
                         {conv.otherUser.name}
-                      </span>
-                      <span
-                        className={cn(
-                          'text-[8px] font-black tracking-widest uppercase opacity-60',
-                          activeTab?.id === conv.id
-                            ? 'text-white'
-                            : 'text-muted-foreground'
-                        )}
-                      >
+                      </h4>
+                      <span className="text-muted-foreground text-[10px] font-black tracking-widest uppercase opacity-60">
                         {conv.lastMessageTime}
                       </span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Check
-                        size={10}
-                        className={cn(
-                          activeTab?.id === conv.id ? 'text-white/60' : 'text-cyan-500'
-                        )}
-                      />
-                      <p
-                        className={cn(
-                          'truncate text-[10px] font-medium opacity-70',
-                          activeTab?.id === conv.id
-                            ? 'text-white/80'
-                            : 'text-muted-foreground'
-                        )}
-                      >
+
+                    <div className="flex items-center gap-2">
+                      <Check size={14} className="shrink-0 text-cyan-500" />
+                      <p className="text-muted-foreground truncate text-sm font-medium">
                         {conv.lastMessage}
                       </p>
                     </div>
-                    {conv.unreadCount > 0 && activeTab?.id !== conv.id && (
-                      <div className="mt-1">
-                        <span className="rounded-full bg-cyan-500 px-2 py-0.5 text-[8px] font-black text-white">
-                          {conv.unreadCount} NEWS
-                        </span>
-                      </div>
-                    )}
                   </div>
-                )}
-              </button>
-            ))}
-          </div>
-        </ScrollArea>
-      </aside>
 
-      {/* Main: Chat View */}
-      <main className="bg-card flex flex-1 flex-col">
-        {activeTab ? (
-          <>
-            {/* Header */}
-            <header className="border-border/50 bg-card z-10 flex items-center justify-between border-b p-6">
-              <div className="flex items-center gap-4">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-xl md:hidden"
-                  onClick={() => setActiveTab(null)}
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </Button>
-                <div className="relative">
-                  <Avatar className="ring-primary/10 h-12 w-12 rounded-2xl ring-2">
-                    <AvatarImage src={activeTab.otherUser.avatar} />
-                    <AvatarFallback className="bg-primary/10 text-primary font-bold">
-                      {activeTab.otherUser.name[0]}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="ring-card absolute -right-1 -bottom-1 h-3 w-3 rounded-full bg-emerald-500 ring-2" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-black tracking-tighter uppercase italic">
-                    {activeTab.otherUser.name}
-                  </h3>
-                  <p className="flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-emerald-500 uppercase">
-                    <Circle className="h-1.5 w-1.5 fill-current" />
-                    Online
-                  </p>
-                </div>
+                  <div className="flex shrink-0 flex-col items-end gap-3">
+                    {conv.unreadCount > 0 && (
+                      <span className="bg-primary shadow-primary/20 rounded-full px-3 py-1 text-[10px] font-black text-white shadow-lg">
+                        {conv.unreadCount} NEWS
+                      </span>
+                    )}
+                    <ChevronLeft className="h-5 w-5 rotate-180 opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-30" />
+                  </div>
+                </button>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+      ) : (
+        /* Chat View - Full Width */
+        <div className="flex h-full flex-col">
+          {/* Header */}
+          <header className="border-border/50 bg-card z-10 flex items-center justify-between border-b p-6">
+            <div className="flex items-center gap-5">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-muted/50 h-12 w-12 rounded-xl"
+                onClick={() => setActiveTab(null)}
+              >
+                <ChevronLeft className="h-6 w-6" />
+              </Button>
+              <div className="relative">
+                <Avatar className="ring-primary/10 h-14 w-14 rounded-2xl ring-2">
+                  <AvatarImage src={activeTab.otherUser.avatar} />
+                  <AvatarFallback className="bg-primary/10 text-primary font-bold">
+                    {activeTab.otherUser.name[0]}
+                  </AvatarFallback>
+                </Avatar>
+                {activeTab.otherUser.online && (
+                  <div className="ring-card absolute -right-1 -bottom-1 h-4 w-4 rounded-full bg-emerald-500 ring-2" />
+                )}
               </div>
-              <div className="flex items-center gap-2">
+              <div>
+                <h3 className="text-lg font-black tracking-tighter uppercase italic">
+                  {activeTab.otherUser.name}
+                </h3>
+                <p className="flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-emerald-500 uppercase">
+                  <Circle className="h-1.5 w-1.5 fill-current" />
+                  Online
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="hidden items-center gap-3 sm:flex">
                 <Button
                   variant="ghost"
                   size="icon"
@@ -234,39 +183,58 @@ export default function MessagingClient({ currentUser, initialConversations = []
                 >
                   <Video className="h-5 w-5" />
                 </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="hover:bg-muted/50 rounded-xl"
-                >
-                  <MoreVertical className="h-5 w-5" />
-                </Button>
               </div>
-            </header>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-muted/50 rounded-xl"
+              >
+                <MoreVertical className="h-5 w-5" />
+              </Button>
+            </div>
+          </header>
 
-            {/* Messages */}
-            <ScrollArea className="bg-muted/5 flex-1 p-8">
-              <div className="mx-auto max-w-4xl space-y-6">
-                {messages.map((m) => (
+          {/* Messages */}
+          <ScrollArea className="bg-muted/5 flex-1 p-8">
+            <div className="mx-auto max-w-4xl space-y-8">
+              <div className="flex justify-center">
+                <Badge
+                  variant="outline"
+                  className="text-[10px] font-black tracking-[0.2em] uppercase opacity-40"
+                >
+                  Secure Communication Established
+                </Badge>
+              </div>
+
+              {messages.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-20 text-center opacity-30">
+                  <MessageSquare className="mb-4 h-16 w-16" />
+                  <p className="text-lg font-black uppercase italic">
+                    No message history
+                  </p>
+                  <p className="text-sm">Start your clinical inquiry below.</p>
+                </div>
+              ) : (
+                messages.map((m) => (
                   <div
                     key={m._id}
                     className={cn(
-                      'group flex max-w-[80%] flex-col',
+                      'group flex max-w-[85%] flex-col',
                       m.senderId === currentUser.id ? 'ml-auto items-end' : 'items-start'
                     )}
                   >
                     <div
                       className={cn(
-                        'rounded-[1.5rem] p-5 shadow-sm transition-all duration-300',
+                        'rounded-[2rem] p-6 shadow-sm transition-all duration-300',
                         m.senderId === currentUser.id
                           ? 'bg-primary hover:shadow-primary/10 rounded-tr-none text-white hover:shadow-lg'
                           : 'dark:bg-muted border-border/50 rounded-tl-none border bg-white hover:shadow-lg'
                       )}
                     >
-                      <p className="font-sans text-sm leading-relaxed">{m.content}</p>
+                      <p className="font-sans text-[15px] leading-relaxed">{m.content}</p>
                     </div>
-                    <div className="mt-2 flex items-center gap-2 px-1">
-                      <span className="text-muted-foreground text-[8px] font-black tracking-widest uppercase opacity-40">
+                    <div className="mt-3 flex items-center gap-2 px-2">
+                      <span className="text-muted-foreground text-[9px] font-black tracking-widest uppercase opacity-40">
                         {new Date(m.createdAt).toLocaleTimeString([], {
                           hour: '2-digit',
                           minute: '2-digit',
@@ -274,75 +242,63 @@ export default function MessagingClient({ currentUser, initialConversations = []
                       </span>
                       {m.senderId === currentUser.id &&
                         (m.isRead ? (
-                          <CheckCheck className="text-primary h-3 w-3 opacity-60" />
+                          <CheckCheck className="text-primary h-3.5 w-3.5 opacity-60" />
                         ) : (
-                          <Check className="text-muted-foreground h-3 w-3 opacity-40" />
+                          <Check className="text-muted-foreground h-3.5 w-3.5 opacity-40" />
                         ))}
                     </div>
                   </div>
-                ))}
-                <div ref={scrollRef} />
-              </div>
-            </ScrollArea>
+                ))
+              )}
+              <div ref={scrollRef} />
+            </div>
+          </ScrollArea>
 
-            {/* Input */}
-            <footer className="bg-card border-border/50 border-t p-6">
-              <form
-                onSubmit={handleSendMessage}
-                className="relative mx-auto flex max-w-4xl items-center gap-4"
+          {/* Input */}
+          <footer className="bg-card border-border/50 border-t p-8">
+            <form
+              onSubmit={handleSendMessage}
+              className="relative mx-auto flex max-w-4xl items-center gap-5"
+            >
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                className="hover:bg-muted/50 h-16 w-16 shrink-0 rounded-[1.5rem]"
               >
+                <Paperclip className="text-muted-foreground h-6 w-6" />
+              </Button>
+
+              <div className="group relative flex-1">
+                <div className="from-primary/20 absolute -inset-1 rounded-[1.5rem] bg-gradient-to-r to-indigo-500/20 opacity-0 blur transition duration-500 group-focus-within:opacity-100"></div>
+                <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Type clinical inquiry here..."
+                  className="bg-muted/30 focus:ring-primary/20 relative h-16 w-full rounded-[1.5rem] border-none px-8 font-sans text-sm transition-all focus:ring-2 focus:outline-none"
+                />
                 <Button
                   type="button"
                   variant="ghost"
                   size="icon"
-                  className="hover:bg-muted/50 h-14 w-14 shrink-0 rounded-2xl"
+                  className="hover:text-primary absolute top-1/2 right-3 h-12 w-12 -translate-y-1/2 rounded-xl"
                 >
-                  <Paperclip className="text-muted-foreground h-5 w-5" />
+                  <Smile className="h-6 w-6" />
                 </Button>
-                <div className="group relative flex-1">
-                  <div className="from-primary/10 absolute -inset-1 rounded-2xl bg-gradient-to-r to-indigo-500/10 opacity-0 blur transition duration-500 group-focus-within:opacity-100"></div>
-                  <input
-                    type="text"
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Type clinical inquiry here..."
-                    className="bg-muted/30 focus:ring-primary/20 relative h-14 w-full rounded-2xl border-none px-6 font-sans text-sm transition-all focus:ring-2 focus:outline-none"
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="hover:text-primary absolute top-1/2 right-2 h-10 w-10 -translate-y-1/2 rounded-xl"
-                  >
-                    <Smile className="h-5 w-5" />
-                  </Button>
-                </div>
-                <Button
-                  type="submit"
-                  disabled={!message.trim()}
-                  className="bg-primary shadow-primary/20 h-14 w-14 shrink-0 rounded-2xl text-white shadow-lg transition-all hover:brightness-110 active:scale-95"
-                >
-                  <Send className="h-5 w-5" />
-                </Button>
-              </form>
-            </footer>
-          </>
-        ) : (
-          <div className="flex flex-1 flex-col items-center justify-center gap-6 opacity-40">
-            <div className="bg-muted/50 flex h-24 w-24 items-center justify-center rounded-[2rem]">
-              <MessageSquare className="h-10 w-10" />
-            </div>
-            <div className="text-center">
-              <h4 className="text-2xl font-black tracking-tighter uppercase italic">
-                Select Conversation
-              </h4>
-              <p className="text-sm font-medium">
-                Connect with your assigned clinician or patient.
-              </p>
-            </div>
-          </div>
-        )}
-      </main>
+              </div>
+
+              <Button
+                type="submit"
+                disabled={!message.trim()}
+                className="bg-primary shadow-primary/30 h-16 w-16 shrink-0 rounded-[1.5rem] text-white shadow-2xl transition-all hover:brightness-110 active:scale-95 disabled:opacity-50"
+              >
+                <Send className="h-6 w-6" />
+              </Button>
+            </form>
+          </footer>
+        </div>
+      )}
     </div>
   );
 }
