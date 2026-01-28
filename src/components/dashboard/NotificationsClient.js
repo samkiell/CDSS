@@ -43,11 +43,35 @@ const typeColors = {
 
 export default function NotificationsClient({ initialNotifications = [] }) {
   const [activeTab, setActiveTab] = useState('All');
+  const [notifications, setNotifications] = useState(initialNotifications);
 
   const filteredNotifications = useMemo(() => {
-    if (activeTab === 'All') return initialNotifications;
-    return initialNotifications.filter((n) => n.type === activeTab);
-  }, [initialNotifications, activeTab]);
+    if (activeTab === 'All') return notifications;
+    return notifications.filter((n) => n.type === activeTab);
+  }, [notifications, activeTab]);
+
+  const handleMarkAsRead = async (id, isRead) => {
+    if (isRead) return;
+
+    try {
+      const response = await fetch(`/api/notifications/${id}/read`, {
+        method: 'PATCH',
+      });
+
+      if (response.ok) {
+        setNotifications((prev) =>
+          prev.map((n) => (n._id === id ? { ...n, isRead: true, status: 'Read' } : n))
+        );
+      }
+    } catch (error) {
+      console.error('Failed to mark as read:', error);
+    }
+  };
+
+  const handleMarkAllRead = async () => {
+    // Optional: implement mark all read API
+    toast.info('Marking all as read...');
+  };
 
   return (
     <div className="space-y-8">
@@ -81,6 +105,7 @@ export default function NotificationsClient({ initialNotifications = [] }) {
           </TabsList>
           <Button
             variant="ghost"
+            onClick={handleMarkAllRead}
             className="text-primary gap-2 text-[10px] font-bold tracking-widest uppercase"
           >
             <CheckCircle2 className="h-4 w-4" />
@@ -93,9 +118,10 @@ export default function NotificationsClient({ initialNotifications = [] }) {
             filteredNotifications.map((notif) => (
               <Card
                 key={notif._id}
+                onClick={() => handleMarkAsRead(notif._id, notif.isRead)}
                 className={cn(
-                  'group bg-card relative overflow-hidden rounded-[2rem] border-none shadow-sm transition-all hover:shadow-md',
-                  notif.status === 'Unread' && 'ring-primary/20 ring-2'
+                  'group bg-card relative cursor-pointer overflow-hidden rounded-[2rem] border-none shadow-sm transition-all hover:shadow-md',
+                  !notif.isRead && 'ring-primary/20 ring-2'
                 )}
               >
                 <CardContent className="flex items-start gap-6 p-6 sm:p-8">
@@ -118,7 +144,7 @@ export default function NotificationsClient({ initialNotifications = [] }) {
                           <Clock className="h-3 w-3" />
                           {formatTime(notif.createdAt)}
                         </span>
-                        {notif.status === 'Unread' && (
+                        {!notif.isRead && (
                           <div className="bg-primary h-2 w-2 animate-pulse rounded-full" />
                         )}
                       </div>
