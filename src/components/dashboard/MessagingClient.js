@@ -17,12 +17,11 @@ import {
   User,
 } from 'lucide-react';
 import {
-  Button,
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-  ScrollArea,
   Badge,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
 } from '@/components/ui';
 import { cn } from '@/lib/cn';
 import { getMessages, sendMessage, markAsRead } from '@/lib/actions/messages';
@@ -33,7 +32,12 @@ export default function MessagingClient({ currentUser, initialConversations = []
   const [conversations, setConversations] = useState(initialConversations);
   const [messages, setMessages] = useState([]);
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
+  const [showEmojiPicker, setShowEmojiPicker] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
   const scrollRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  const emojis = ['😊', '👍', '🙏', '🏥', '💊', '👋', '❤️', '📍', '✅', '❌', '🤔', '💪'];
 
   // Sync state with props
   useEffect(() => {
@@ -89,13 +93,13 @@ export default function MessagingClient({ currentUser, initialConversations = []
     if (!message.trim() || !activeTab) return;
 
     const content = message;
-    setMessage(''); // Clear immediately for UX
+    setMessage('');
+    setShowEmojiPicker(false);
 
     try {
       const sentMsg = await sendMessage(activeTab.otherUser.id, content);
       setMessages((prev) => [...prev, sentMsg]);
 
-      // Update last message in conversation list
       setConversations((prev) =>
         prev.map((c) =>
           c.id === activeTab.id
@@ -105,8 +109,41 @@ export default function MessagingClient({ currentUser, initialConversations = []
       );
     } catch (error) {
       console.error('Failed to send message:', error);
-      // Revert if failed?
     }
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file || !activeTab) return;
+
+    setIsUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      // For now, we simulate the upload success on client side or use a generic endpoint if available
+      // In a real app, you'd call a server action that uploads to Cloudinary
+      // Let's assume we have a simple /api/upload for now or we just mock the result
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+
+      if (data.success) {
+        // Send a message with the image URL
+        const sentMsg = await sendMessage(activeTab.otherUser.id, `IMAGE:${data.url}`);
+        setMessages((prev) => [...prev, sentMsg]);
+      }
+    } catch (error) {
+      console.error('Upload failed:', error);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const addEmoji = (emoji) => {
+    setMessage((prev) => prev + emoji);
   };
 
   return (
@@ -235,29 +272,37 @@ export default function MessagingClient({ currentUser, initialConversations = []
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="hidden items-center gap-3 sm:flex">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="hover:bg-muted/50 rounded-xl"
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="hover:bg-muted/50 rounded-xl"
+                  >
+                    <MoreVertical className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent
+                  align="end"
+                  className="w-48 rounded-2xl p-2 shadow-2xl"
                 >
-                  <Phone className="h-5 w-5" />
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="hover:bg-muted/50 rounded-xl"
-                >
-                  <Video className="h-5 w-5" />
-                </Button>
-              </div>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="hover:bg-muted/50 rounded-xl"
-              >
-                <MoreVertical className="h-5 w-5" />
-              </Button>
+                  <DropdownMenuItem
+                    className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase transition-colors hover:bg-red-50 hover:text-red-500"
+                    onClick={() => setActiveTab(null)}
+                  >
+                    Close Chat
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase transition-colors">
+                    View Profile
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="text-muted-foreground hover:text-foreground flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase transition-colors">
+                    Clear History
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest text-amber-500 uppercase transition-colors hover:bg-amber-50">
+                    Report
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </header>
 
@@ -301,7 +346,17 @@ export default function MessagingClient({ currentUser, initialConversations = []
                           : 'dark:bg-muted border-border/50 rounded-tl-none border bg-white hover:shadow-lg'
                       )}
                     >
-                      <p className="font-sans text-[15px] leading-relaxed">{m.content}</p>
+                      {m.content.startsWith('IMAGE:') ? (
+                        <img
+                          src={m.content.replace('IMAGE:', '')}
+                          alt="Attachment"
+                          className="max-h-64 rounded-2xl object-cover"
+                        />
+                      ) : (
+                        <p className="font-sans text-[15px] leading-relaxed">
+                          {m.content}
+                        </p>
+                      )}
                     </div>
                     <div className="mt-3 flex items-center gap-2 px-2">
                       <span className="text-muted-foreground text-[8px] font-semibold tracking-widest uppercase opacity-40">
@@ -330,11 +385,23 @@ export default function MessagingClient({ currentUser, initialConversations = []
               onSubmit={handleSendMessage}
               className="relative mx-auto flex max-w-4xl items-center gap-5"
             >
+              <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                accept="image/*"
+                onChange={handleFileUpload}
+              />
               <Button
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="hover:bg-muted/50 h-16 w-16 shrink-0 rounded-[1.5rem]"
+                className={cn(
+                  'hover:bg-muted/50 h-16 w-16 shrink-0 rounded-[1.5rem]',
+                  isUploading && 'animate-pulse opacity-50'
+                )}
+                disabled={isUploading}
+                onClick={() => fileInputRef.current?.click()}
               >
                 <Paperclip className="text-muted-foreground h-6 w-6" />
               </Button>
@@ -352,10 +419,29 @@ export default function MessagingClient({ currentUser, initialConversations = []
                   type="button"
                   variant="ghost"
                   size="icon"
-                  className="hover:text-primary absolute top-1/2 right-3 h-12 w-12 -translate-y-1/2 rounded-xl"
+                  className={cn(
+                    'hover:text-primary absolute top-1/2 right-3 h-12 w-12 -translate-y-1/2 rounded-xl transition-all',
+                    showEmojiPicker && 'text-primary bg-primary/10'
+                  )}
+                  onClick={() => setShowEmojiPicker(!showEmojiPicker)}
                 >
                   <Smile className="h-6 w-6" />
                 </Button>
+
+                {showEmojiPicker && (
+                  <div className="bg-card border-border/50 animate-in fade-in slide-in-from-bottom-2 absolute right-0 bottom-full mb-4 grid grid-cols-4 gap-2 rounded-2xl border p-4 shadow-2xl">
+                    {emojis.map((emoji) => (
+                      <button
+                        key={emoji}
+                        type="button"
+                        onClick={() => addEmoji(emoji)}
+                        className="hover:bg-muted flex h-10 w-10 items-center justify-center rounded-xl text-xl transition-all active:scale-95"
+                      >
+                        {emoji}
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
 
               <Button
