@@ -54,7 +54,7 @@ export async function PATCH(request, { params }) {
     }
 
     // Update allowed fields
-    const allowedUpdates = ['sessionStatus', 'clinicianReview', 'finalDiagnosis'];
+    const allowedUpdates = ['status', 'clinicianReview', 'finalDiagnosis'];
 
     for (const key of allowedUpdates) {
       if (body[key] !== undefined) {
@@ -64,7 +64,7 @@ export async function PATCH(request, { params }) {
 
     // If clinician review is being added, update status
     if (body.clinicianReview?.confirmedDiagnosis) {
-      session.sessionStatus = 'reviewed';
+      session.status = 'completed';
       session.clinicianReview.reviewedAt = new Date();
     }
 
@@ -97,7 +97,7 @@ export async function DELETE(request, { params }) {
     }
 
     // Soft delete by setting status to archived
-    session.sessionStatus = 'archived';
+    session.status = 'archived';
     await session.save();
 
     return NextResponse.json({

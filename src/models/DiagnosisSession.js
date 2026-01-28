@@ -55,7 +55,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['pending_review', 'assigned', 'completed'],
+      enum: ['pending_review', 'assigned', 'completed', 'archived'],
       default: 'pending_review',
       required: true,
       index: true,
@@ -63,6 +63,20 @@ const DiagnosisSessionSchema = new mongoose.Schema(
     assessmentType: {
       type: String,
       default: 'MSK_HEURISTIC_V1',
+    },
+    clinicianReview: {
+      reviewedBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+      reviewedAt: Date,
+      confirmedDiagnosis: String,
+      clinicianNotes: String,
+      prescriptions: [String],
+      recommendedPlan: String,
+    },
+    finalDiagnosis: {
+      type: String,
     },
   },
   {
