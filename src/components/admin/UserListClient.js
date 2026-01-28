@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 import {
   Search,
   Filter,
@@ -33,6 +35,7 @@ import {
 import { cn } from '@/lib/cn';
 
 export default function AdminUserListClient({ initialUsers = [] }) {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState('ALL');
   const [statusFilter, setStatusFilter] = useState('ALL');
@@ -63,6 +66,38 @@ export default function AdminUserListClient({ initialUsers = [] }) {
       unverified: initialUsers.filter((u) => !u.isVerified).length,
     };
   }, [initialUsers]);
+
+  const handleRoleUpdate = async (userId, newRole) => {
+    try {
+      const res = await fetch(`/api/admin/users/${userId}/role`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: newRole }),
+      });
+      if (!res.ok) throw new Error('Failed to update role');
+      toast.success('User role updated successfully');
+      router.refresh();
+    } catch (error) {
+      toast.error('Failed to update user role');
+    }
+  };
+
+  const handleDelete = async (userId) => {
+    if (
+      !confirm('Are you sure you want to delete this user? This action cannot be undone.')
+    )
+      return;
+    try {
+      const res = await fetch(`/api/admin/users/${userId}`, {
+        method: 'DELETE',
+      });
+      if (!res.ok) throw new Error('Failed to delete user');
+      toast.success('User deleted successfully');
+      router.refresh();
+    } catch (error) {
+      toast.error('Failed to delete user');
+    }
+  };
 
   return (
     <div className="space-y-8 pb-12">
@@ -233,20 +268,18 @@ export default function AdminUserListClient({ initialUsers = [] }) {
                     </td>
                     <td className="p-6 text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="hover:bg-primary/10 hover:text-primary h-9 w-9 rounded-xl"
-                        >
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-9 w-9 rounded-xl hover:bg-indigo-500/10 hover:text-indigo-500"
-                        >
-                          <Edit className="h-4 w-4" />
-                        </Button>
+                        {user.role === 'PATIENT' && (
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => router.push(`/admin/users/${user._id}`)}
+                            className="hover:bg-primary/10 hover:text-primary h-9 w-9 rounded-xl"
+                            title="View Case File"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        )}
+
                         <DropdownMenu>
                           <DropdownMenuTrigger asChild>
                             <Button
@@ -261,11 +294,20 @@ export default function AdminUserListClient({ initialUsers = [] }) {
                             align="end"
                             className="w-48 rounded-2xl p-2"
                           >
-                            <DropdownMenuItem className="flex gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase">
-                              <ShieldCheck className="h-4 w-4" />
-                              Toggle Verify
-                            </DropdownMenuItem>
-                            <DropdownMenuItem className="text-destructive flex gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase">
+                            {user.role === 'PATIENT' && (
+                              <DropdownMenuItem
+                                onClick={() => handleRoleUpdate(user._id, 'CLINICIAN')}
+                                className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase"
+                              >
+                                <Stethoscope className="h-4 w-4" />
+                                Make Therapist
+                              </DropdownMenuItem>
+                            )}
+
+                            <DropdownMenuItem
+                              onClick={() => handleDelete(user._id)}
+                              className="text-destructive flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase"
+                            >
                               <Trash2 className="h-4 w-4" />
                               Delete User
                             </DropdownMenuItem>
