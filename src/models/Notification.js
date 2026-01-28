@@ -5,7 +5,13 @@ const NotificationSchema = new mongoose.Schema(
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      required: true,
+      required: false,
+      index: true,
+    },
+    targetRole: {
+      type: String,
+      enum: ['PATIENT', 'CLINICIAN', 'ADMIN', 'ALL'],
+      required: false,
       index: true,
     },
     title: {
@@ -18,14 +24,28 @@ const NotificationSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ['Assessments', 'Appointments', 'Treatments', 'Messages', 'System'],
-      default: 'System',
+      enum: [
+        'SYSTEM',
+        'ALERT',
+        'UPDATE',
+        'Assessments',
+        'Appointments',
+        'Treatments',
+        'Messages',
+      ],
+      default: 'SYSTEM',
     },
     status: {
       type: String,
       enum: ['Read', 'Unread'],
       default: 'Unread',
     },
+    readBy: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ],
     link: {
       type: String,
       default: null,
