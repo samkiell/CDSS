@@ -165,6 +165,9 @@ export async function getConversations() {
 
   await connectDB();
 
+  // Heartbeat: Update current user's lastLogin
+  await User.findByIdAndUpdate(session.user.id, { lastLogin: new Date() });
+
   const role = session.user.role;
   let users = [];
 
