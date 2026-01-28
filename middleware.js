@@ -5,10 +5,10 @@ export const middleware = auth((req) => {
   const isLoggedIn = !!req.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith('/api/auth');
-  const isPublicRoute = ['/', '/login', '/register', '/verify'].includes(
+  const isPublicRoute = ['/', '/login', '/register', '/verify', '/admin'].includes(
     nextUrl.pathname
   );
-  const isAuthRoute = ['/login', '/register'].includes(nextUrl.pathname);
+  const isAuthRoute = ['/login', '/register', '/admin'].includes(nextUrl.pathname);
 
   if (isApiAuthRoute) {
     return null;
@@ -28,7 +28,11 @@ export const middleware = auth((req) => {
   }
 
   if (!isLoggedIn && !isPublicRoute) {
-    return Response.redirect(new URL('/login', nextUrl));
+    const callbackUrl = nextUrl.pathname;
+    if (nextUrl.pathname.startsWith('/admin')) {
+      return Response.redirect(new URL(`/admin?callbackUrl=${callbackUrl}`, nextUrl));
+    }
+    return Response.redirect(new URL(`/login?callbackUrl=${callbackUrl}`, nextUrl));
   }
 
   // Role-based protection

@@ -4,7 +4,7 @@
  */
 
 import { NextResponse } from 'next/server';
-import { uploadFile, generateSignedUploadParams } from '@/lib/cloudinary';
+import { uploadFile } from '@/lib/cloudinary';
 
 /**
  * POST /api/upload
@@ -25,15 +25,17 @@ export async function POST(request) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create a base64 data URI for Cloudinary upload
-    const base64 = buffer.toString('base64');
-    const dataUri = `data:${file.type};base64,${base64}`;
+    // Detect if file is PDF for better Cloudinary handling
+    const isPDF =
+      file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
 
-    // Upload to Cloudinary
-    const result = await uploadFile(dataUri, {
+    // Upload to Cloudinary directly using the buffer
+    const result = await uploadFile(buffer, {
       preset,
       customOptions: {
         context: `session_id=${sessionId || 'unknown'}`,
+        // Force 'raw' for PDFs to avoid Cloudinary's "Authenticated/Private" image-pdf restriction (401 error)
+        resource_type: isPDF ? 'raw' : 'auto',
       },
     });
 
@@ -60,22 +62,5 @@ export async function POST(request) {
 }
 
 /**
- * GET /api/upload
- * Get signed upload parameters for direct client uploads
+ * GET - Removed for security or unused
  */
-export async function GET(request) {
-  try {
-    const { searchParams } = new URL(request.url);
-    const preset = searchParams.get('preset') || 'medical_image';
-
-    const params = generateSignedUploadParams({ preset });
-
-    return NextResponse.json({
-      success: true,
-      data: params,
-    });
-  } catch (error) {
-    console.error('Get upload params error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
-}

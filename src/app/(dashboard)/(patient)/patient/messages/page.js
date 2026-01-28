@@ -1,98 +1,80 @@
-import { Check } from 'lucide-react';
-const conversations = [
-  {
-    id: 1,
-    name: 'Dr Ajayi',
-    lastMessage: 'How are you today David?',
-    unreadCount: 12,
-    timeAgo: 'Yesterday',
-  },
-  {
-    id: 2,
-    name: 'Dr Isaac',
-    lastMessage: 'How are you today David?',
-    unreadCount: 10,
-    timeAgo: '2d ago',
-  },
-  {
-    id: 3,
-    name: 'Dr Bull',
-    lastMessage: 'How are you today David?',
-    unreadCount: 21,
-    timeAgo: '2d ago',
-  },
-  {
-    id: 4,
-    name: 'Dr Olufemi',
-    lastMessage: 'How are you today David?',
-    unreadCount: 0,
-    timeAgo: '2d ago',
-  },
-  {
-    id: 5,
-    name: 'Dr Dayo',
-    lastMessage: 'How are you today David?',
-    unreadCount: 0,
-    timeAgo: '2d ago',
-  },
-];
-export default function Page() {
+import connectDB from '@/lib/db/connect';
+import { DiagnosisSession, Message, User } from '@/models';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import MessagingClient from '@/components/dashboard/MessagingClient';
+
+export default async function PatientMessagesPage() {
+  const session = await auth();
+  if (!session || !session.user) redirect('/login');
+
+  await connectDB();
+  const patientId = session.user.id;
+
+  // 1. Get all assigned clinicians via sessions
+  const sessions = await DiagnosisSession.find({ patientId })
+    .populate('clinicianId', 'firstName lastName avatar specialization')
+    .sort({ updatedAt: -1 })
+    .lean();
+
+  // 2. Get recent messages
+  const recentMessages = await Message.find({
+    $or: [{ senderId: patientId }, { receiverId: patientId }],
+  })
+    .sort({ createdAt: -1 })
+    .lean();
+
+  // 3. Construct conversations
+  const conversationsMap = new Map();
+
+  sessions.forEach((sess) => {
+    if (!sess.clinicianId) return;
+    const cId = sess.clinicianId._id.toString();
+
+    const lastMsg = recentMessages.find(
+      (m) => m.senderId.toString() === cId || m.receiverId.toString() === cId
+    );
+
+    conversationsMap.set(cId, {
+      id: cId,
+      otherUser: {
+        id: cId,
+        name: `Dr. ${sess.clinicianId.firstName} ${sess.clinicianId.lastName}`,
+        avatar: sess.clinicianId.avatar,
+        online: true,
+      },
+      lastMessage: lastMsg
+        ? lastMsg.content
+        : 'Start a conversation with your therapist.',
+      lastMessageTime: lastMsg
+        ? new Date(lastMsg.createdAt).toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit',
+          })
+        : 'New',
+    });
+  });
+
+  const initialConversations = Array.from(conversationsMap.values());
+
   return (
-    <div className="mx-auto max-w-4xl">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-black dark:text-gray-200">Messages</h1>
-      </div>
+    <div className="mx-auto max-w-6xl">
+      <header className="mb-8">
+        <h1 className="text-foreground text-3xl font-black tracking-tighter uppercase italic">
+          Messages
+        </h1>
+        <p className="text-muted-foreground font-medium">
+          Direct secure clinical communication with your medical team.
+        </p>
+      </header>
 
-      {/* Messages List */}
-      <div className="overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm dark:bg-gray-800">
-        {conversations.map((conversation, index) => (
-          <a
-            key={conversation.id}
-            className={`flex cursor-pointer items-center justify-between p-6 transition hover:bg-gray-50 dark:hover:bg-gray-700 ${
-              index !== conversations.length - 1
-                ? 'border-b border-gray-100 dark:border-gray-700'
-                : ''
-            }`}
-            href={`/patient/messages/${index}`}
-          >
-            {/* Left side - Avatar and text */}
-            <div className="flex flex-1 items-center gap-4">
-              {/* Avatar */}
-              <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-gray-300 dark:bg-gray-600">
-                <img
-                  src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${conversation.name}`}
-                  alt={conversation.name}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-
-              {/* Text content */}
-              <div className="flex-1">
-                <h3 className="mb-1 text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  {conversation.name}
-                </h3>
-                <p className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400">
-                  <Check size={16} className="text-cyan-500" />
-                  {conversation.lastMessage}
-                </p>
-              </div>
-            </div>
-
-            {/* Right side - Unread count and time */}
-            <div className="flex flex-col items-end gap-2">
-              {conversation.unreadCount > 0 && (
-                <span className="rounded-full bg-cyan-500 px-2.5 py-1 text-xs font-semibold text-white">
-                  {conversation.unreadCount}
-                </span>
-              )}
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                {conversation.timeAgo}
-              </p>
-            </div>
-          </a>
-        ))}
-      </div>
+      <MessagingClient
+        currentUser={{
+          id: session.user.id,
+          name: `${session.user.firstName} ${session.user.lastName}`,
+        }}
+        initialConversations={initialConversations}
+      />
     </div>
   );
 }

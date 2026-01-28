@@ -15,6 +15,7 @@ import {
   Eye,
   FileIcon,
   X,
+  AlertCircle,
 } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { Button, Card, Badge } from '@/components/ui';
@@ -22,6 +23,7 @@ import { Button, Card, Badge } from '@/components/ui';
 export default function CaseDetailsPage({ params }) {
   const unwrappedParams = React.use(params);
   const id = unwrappedParams.id;
+
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [isDocsOpen, setIsDocsOpen] = useState(false);
   const [documents, setDocuments] = useState([]);
@@ -33,47 +35,41 @@ export default function CaseDetailsPage({ params }) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [patient, setPatient] = useState(null);
-  const [isLoadingPatient, setIsLoadingPatient] = useState(true);
+  const [session, setSession] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (id) {
-      fetchPatientDetails();
+      fetchCaseDetails();
     }
   }, [id]);
 
   useEffect(() => {
-    if (isDocsOpen) {
+    if (isDocsOpen && session?.patientId?._id) {
       fetchDocuments();
     }
-  }, [isDocsOpen]);
+  }, [isDocsOpen, session]);
 
-  const fetchPatientDetails = async () => {
-    setIsLoadingPatient(true);
+  const fetchCaseDetails = async () => {
+    setIsLoading(true);
     try {
-      // id is the patient id
-      const res = await fetch(
-        `/api/diagnosis/profile?patientId=${id === '1' ? '69756da7494dd880c45762b4' : id}`
-      );
-      const data = await res.json();
-      if (data.success) {
-        setPatient(data.patient);
+      const res = await fetch(`/api/diagnosis/${id}`);
+      const result = await res.json();
+      if (result.success) {
+        setSession(result.data);
       }
     } catch (err) {
-      console.error('Error fetching patient:', err);
+      console.error('Error fetching case details:', err);
     } finally {
-      setIsLoadingPatient(false);
+      setIsLoading(false);
     }
   };
 
   const fetchDocuments = async () => {
-    if (!id || id === 'undefined') return;
+    if (!session?.patientId?._id) return;
     setIsLoadingDocs(true);
     try {
-      // id is patientId linked from PatientQueue
-      const res = await fetch(
-        `/api/documents?patientId=${id === '1' ? '69756da7494dd880c45762b4' : id}`
-      );
+      const res = await fetch(`/api/documents?patientId=${session.patientId._id}`);
       const data = await res.json();
       if (data.success) {
         setDocuments(data.documents);
@@ -93,7 +89,7 @@ export default function CaseDetailsPage({ params }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          patientId: id === '1' ? '69756da7494dd880c45762b4' : id,
+          patientId: session.patientId._id,
           ...bookingData,
         }),
       });
@@ -120,6 +116,47 @@ export default function CaseDetailsPage({ params }) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
   };
 
+  const calculateAge = (dob) => {
+    if (!dob) return 'N/A';
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
+        <div className="border-primary h-12 w-12 animate-spin rounded-full border-b-2" />
+        <p className="text-muted-foreground font-bold">Synchronizing Case Data...</p>
+      </div>
+    );
+  }
+
+  if (!session) {
+    return (
+      <div className="text-foreground flex min-h-[60vh] flex-col items-center justify-center gap-4 p-8 text-center">
+        <AlertCircle className="text-destructive h-16 w-16 opacity-50" />
+        <h2 className="text-2xl font-black">Case File Not Found</h2>
+        <p className="text-muted-foreground max-w-md font-medium">
+          The session you are looking for does not exist or has been archived.
+        </p>
+        <Link href="/clinician/dashboard">
+          <Button variant="outline" className="mt-4 rounded-xl border-2 font-bold">
+            Back to Dashboard
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
+  const patient = session.patientId;
+  const analysis = session.aiAnalysis;
+
   return (
     <div className="animate-fade-in text-foreground mx-auto max-w-5xl space-y-8 pb-20">
       {/* Header */}
@@ -133,11 +170,22 @@ export default function CaseDetailsPage({ params }) {
           </Link>
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-black tracking-tight">
-              {patient ? `${patient.firstName}'s Case File` : 'Patient Case File'}
+              {patient?.firstName
+                ? `${patient.firstName}'s Case File`
+                : 'Patient Case File'}
             </h1>
-            <div className="bg-destructive ml-2 h-3 w-3 animate-pulse rounded-full" />
+            <div
+              className={cn(
+                'ml-2 h-3 w-3 animate-pulse rounded-full',
+                analysis?.riskLevel === 'Urgent'
+                  ? 'bg-destructive'
+                  : analysis?.riskLevel === 'Moderate'
+                    ? 'bg-warning'
+                    : 'bg-success'
+              )}
+            />
             <span className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
-              Urgent
+              {analysis?.riskLevel || 'Low'} Risk
             </span>
           </div>
         </div>
@@ -145,8 +193,16 @@ export default function CaseDetailsPage({ params }) {
 
       {/* Patient Header Card */}
       <Card className="border-border bg-card flex items-center gap-8 rounded-[2.5rem] p-8 shadow-sm">
-        <div className="bg-primary/10 text-primary border-primary/20 flex h-20 w-20 items-center justify-center rounded-full border text-2xl font-black shadow-inner">
-          {patient ? patient.firstName[0] : 'P'}
+        <div className="bg-primary/10 text-primary border-primary/20 relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full border text-2xl font-black shadow-inner">
+          {patient?.avatar ? (
+            <img
+              src={patient.avatar}
+              alt="Avatar"
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            patient?.firstName?.[0] || 'P'
+          )}
         </div>
         <div className="grid flex-1 grid-cols-2 gap-6 lg:grid-cols-4">
           <div className="flex flex-col">
@@ -154,15 +210,15 @@ export default function CaseDetailsPage({ params }) {
               Name
             </span>
             <span className="text-foreground truncate text-base font-black">
-              {patient ? `${patient.firstName} ${patient.lastName}` : 'Loading...'}
+              {patient?.firstName} {patient?.lastName}
             </span>
           </div>
           <div className="flex flex-col">
             <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
               Sex
             </span>
-            <span className="text-foreground text-base font-black">
-              {patient?.sex || 'Not specified'}
+            <span className="text-foreground text-base font-black capitalize">
+              {patient?.gender || 'Not specified'}
             </span>
           </div>
           <div className="flex flex-col">
@@ -170,73 +226,62 @@ export default function CaseDetailsPage({ params }) {
               Age
             </span>
             <span className="text-foreground text-base font-black">
-              {patient?.age ? `${patient.age} yrs` : 'N/A'}
+              {calculateAge(patient?.dateOfBirth)} yrs
             </span>
           </div>
           <div className="flex flex-col">
             <span className="text-muted-foreground text-right text-xs font-bold tracking-wider uppercase">
-              Pattern
+              Assigned
             </span>
             <span className="text-foreground text-right text-xs font-bold">
-              {patient ? new Date(patient.createdAt).toLocaleDateString() : '--/--/--'}
+              {new Date(session.createdAt).toLocaleDateString(undefined, {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+              })}
             </span>
           </div>
         </div>
       </Card>
 
-      {/* Assessment Summary */}
+      {/* AI Reasoning / Assessment Summary */}
       <div className="space-y-4">
         <div className="flex items-center justify-between px-2">
-          <h2 className="text-xl font-black">Assessment Summary</h2>
+          <h2 className="text-xl font-black">AI Assessment Summary</h2>
           <span className="text-muted-foreground text-xs font-bold uppercase opacity-70">
-            12 NOVEMBER, 2025
+            {new Date(session.createdAt).toLocaleDateString(undefined, {
+              day: 'numeric',
+              month: 'LONG',
+              year: 'numeric',
+            })}
           </span>
         </div>
         <Card className="border-border bg-card text-muted-foreground rounded-[2.5rem] p-10 text-sm leading-relaxed">
           <div className="space-y-4">
-            <p>
-              Based on the completed lumbar assessment test, the patient demonstrates
-              signs consistent with mechanical low back pain. Movement patterns indicate
-              reduced flexibility and mild-to-moderate functional limitation. Pain was
-              reproduced during specific lumbar motions, suggesting involvement of
-              musculoskeletal structures such as lumbar extensors, facet joints, or
-              surrounding soft tissues.
+            <p className="text-foreground text-base font-medium">
+              Findings for {session.bodyRegion} Assessment:
             </p>
-
-            <div className="pt-2">
-              <strong className="text-foreground">Key Findings:</strong>
-              <ul className="mt-2 ml-5 list-disc space-y-1">
-                <li>
-                  Pain Triggered By: Forward bending, prolonged sitting, lifting, and
-                  twisting.
+            <ul className="mt-2 ml-5 list-disc space-y-3">
+              {analysis?.reasoning?.map((point, idx) => (
+                <li key={idx} className="pl-2">
+                  {point}
                 </li>
-                <li>Pain Relieved By: Rest, lying supine, light stretching.</li>
-                <li>
-                  Range of Motion: Mild restriction in lumbar flexion and extension.
-                </li>
-                <li>
-                  Strength Observations: Slight weakness in core stabilizers and lower
-                  back muscles.
-                </li>
-              </ul>
-            </div>
-
-            <div className="pt-2">
-              <strong className="text-foreground">Functional Impact:</strong>
-              <p className="mt-1">
-                The lumbar discomfort affects daily activities such as bending, sitting
-                for long periods, standing up from a seated position, and performing
-                lifting tasks.
+              ))}
+            </ul>
+            {!analysis?.reasoning?.length && (
+              <p className="italic">
+                AI reasoning details are currently unavailable for this session.
               </p>
-            </div>
+            )}
 
-            <div className="pt-2">
-              <strong className="text-foreground">Overall Assessment:</strong>
-              <p className="mt-1">
-                The findings suggest a non-specific lumbar strain or mechanical
-                dysfunction, likely due to muscle imbalance, poor posture habits, or
-                movement-related stress. Condition appears manageable with guided
-                physiotherapy interventions.
+            <div className="border-border mt-6 border-t pt-4">
+              <strong className="text-foreground text-[10px] tracking-widest uppercase">
+                Diagnosis Reasoning
+              </strong>
+              <p className="mt-2 text-sm italic">
+                Based on machine learning models analyzing clinical heuristic MSK
+                patterns. This is a provisional diagnosis pending human physical
+                examination.
               </p>
             </div>
           </div>
@@ -249,8 +294,8 @@ export default function CaseDetailsPage({ params }) {
           <span className="text-muted-foreground decoration-border text-xs font-bold uppercase underline underline-offset-8">
             Temporary Diagnosis
           </span>
-          <h3 className="mt-8 text-4xl font-black tracking-tight">
-            Lumbar Disc Herniation
+          <h3 className="mt-8 text-4xl leading-tight font-black tracking-tight">
+            {analysis?.temporalDiagnosis || 'N/A'}
           </h3>
         </Card>
         <Card className="border-border bg-card flex items-center justify-around gap-8 rounded-[2.5rem] p-10">
@@ -265,18 +310,29 @@ export default function CaseDetailsPage({ params }) {
               <path
                 d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                 fill="none"
-                className="stroke-warning"
+                className={cn(
+                  'stroke-current transition-all duration-1000 ease-out',
+                  (analysis?.confidenceScore || 0) > 80
+                    ? 'text-success'
+                    : (analysis?.confidenceScore || 0) > 50
+                      ? 'text-warning'
+                      : 'text-destructive'
+                )}
                 strokeWidth="3.5"
-                strokeDasharray="84, 100"
+                strokeDasharray={`${analysis?.confidenceScore || 0}, 100`}
                 strokeLinecap="round"
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              {/* Empty in screenshot, but usually 84% goes here. In Image 1 it's next to it. */}
+              <span className="text-2xl font-black">
+                {analysis?.confidenceScore || 0}%
+              </span>
             </div>
           </div>
           <div className="flex flex-col">
-            <span className="text-5xl font-black tracking-tighter italic">84%</span>
+            <span className="text-5xl font-black tracking-tighter italic">
+              {analysis?.confidenceScore || 0}%
+            </span>
             <span className="text-muted-foreground mt-1 text-xs font-bold uppercase">
               Confidence Rate
             </span>
@@ -284,23 +340,37 @@ export default function CaseDetailsPage({ params }) {
         </Card>
       </div>
 
-      {/* Metrics Row 2 */}
+      {/* Metrics Row 2 - Dynamic stats if available */}
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <Card className="border-border bg-card flex flex-col items-center justify-center rounded-[2.5rem] p-10 text-center">
-          <span className="text-primary/40 mb-2 text-6xl leading-none font-light">C</span>
+          <div className="mb-2 flex items-center gap-3">
+            <div className="bg-primary h-2 w-2 rounded-full" />
+            <span className="text-xs font-bold tracking-widest uppercase opacity-60">
+              Status
+            </span>
+          </div>
           <div className="border-border mt-2 w-full border-t pt-6">
-            <span className="text-5xl font-black tracking-tight">7/10</span>
+            <span className="text-5xl font-black tracking-tight uppercase">
+              {session.status === 'pending_review' ? 'NEW' : session.status}
+            </span>
             <p className="text-muted-foreground mt-3 text-xs font-bold tracking-widest uppercase">
-              VAS Scale
+              Session Priority
             </p>
           </div>
         </Card>
         <Card className="border-border bg-card flex flex-col items-center justify-center rounded-[2.5rem] p-10 text-center">
-          <span className="text-success/40 mb-2 text-6xl leading-none font-light">C</span>
+          <div className="mb-2 flex items-center gap-3">
+            <div className="h-2 w-2 rounded-full bg-indigo-500" />
+            <span className="text-xs font-bold tracking-widest uppercase opacity-60">
+              Region
+            </span>
+          </div>
           <div className="border-border mt-2 w-full border-t pt-6">
-            <span className="text-5xl font-black tracking-tight">4/5</span>
+            <span className="text-5xl font-black tracking-tight uppercase">
+              {session.bodyRegion?.slice(0, 3)}
+            </span>
             <p className="text-muted-foreground mt-3 text-xs font-bold tracking-widest uppercase">
-              Oxford Motor Grade
+              Target Area
             </p>
           </div>
         </Card>
@@ -308,68 +378,71 @@ export default function CaseDetailsPage({ params }) {
 
       {/* Reports Section */}
       <div className="space-y-6 pt-4">
-        <h2 className="px-2 text-xl font-black tracking-wide uppercase">Reports</h2>
+        <h2 className="px-2 text-xl font-black tracking-wide uppercase">
+          Reports & Actions
+        </h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           <ReportCard
-            color="bg-success/90 dark:bg-success/80"
+            color="bg-primary shadow-primary/20"
             icon={<ClipboardList />}
-            title="Book Appointment"
-            desc="Schedule your next physiotherapy session with your patient."
+            title="Schedules"
+            desc="Book the next clinical session for this patient."
             onClick={() => setIsBookingOpen(true)}
+            actionText="Schedule Session"
           />
           <ReportCard
-            color="bg-[#7fb2f0]"
+            color="bg-indigo-500 shadow-indigo-500/20"
             icon={<CheckCircle2 />}
-            title="Check Guided-Test"
-            desc="Guided tests already assigned to your patient."
-            actionText="Check"
+            title="Analysis"
+            desc="Review the granular heuristic patterns detected via MSK logic."
+            actionText="Review Patterns"
           />
           <ReportCard
-            color="bg-[#f472d0]"
+            color="bg-emerald-500 shadow-emerald-500/20"
             icon={<FileText />}
-            title="Uploaded Documents"
-            desc="Check documents uploaded by the your patient."
-            actionText="Check"
+            title="Clinical Files"
+            desc="Access radiological images, lab results and previous prescriptions."
+            actionText="Browse Files"
             onClick={() => setIsDocsOpen(true)}
           />
 
           <div className="bg-border col-span-full my-6 h-[1px] opacity-50" />
 
           <ReportCard
-            color="bg-[#7c4d7c]"
+            color="bg-[#7c4d7c] shadow-[#7c4d7c]/20"
             icon={<PlusCircle />}
             title="Treatment Plan"
-            desc="Check documents uploaded by the your patient."
-            actionText="Create"
+            desc="Construct a personalized recovery roadmap and exercise regimen."
+            actionText="Generate Plan"
           />
           <ReportCard
-            color="bg-warning dark:opacity-90"
+            color="bg-warning shadow-warning/20 bg-opacity-90"
             icon={<Calendar />}
-            title="Session Note"
-            desc="Check documents uploaded by the your patient."
-            actionText="Create"
+            title="Clinical Notes"
+            desc="Add specific observational notes and clinician impressions."
+            actionText="Add Notes"
           />
           <ReportCard
-            color="bg-foreground text-background"
+            color="bg-foreground text-background shadow-foreground/20"
             icon={<Info />}
-            title="Referral Or Order"
-            desc="Request for other important documents and refer your patient."
-            actionText="Create"
+            title="Referral Plan"
+            desc="Authorize secondary referrals or medical investigations."
+            actionText="Refer Patient"
           />
         </div>
       </div>
 
       {/* Final Action */}
       <div className="flex justify-center pt-10">
-        <Button className="h-16 rounded-2xl border-none bg-[#3da9f5] px-20 text-sm font-black text-white shadow-lg transition-transform hover:scale-105 hover:bg-[#2c91db] active:scale-95">
-          Finalize Case
+        <Button className="h-16 rounded-2xl border-none bg-[#3da9f5] px-20 text-sm font-black tracking-widest text-white uppercase shadow-lg transition-transform hover:scale-105 hover:bg-[#2c91db] active:scale-95">
+          Complete Documentation
         </Button>
       </div>
 
       {/* Booking Modal */}
       {isBookingOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <Card className="w-full max-w-md border-none p-6 shadow-2xl">
+          <Card className="animate-scale-up w-full max-w-md border-none p-6 shadow-2xl">
             <h3 className="text-xl font-black">Schedule Appointment</h3>
             <p className="text-muted-foreground mt-2 text-xs font-medium">
               Select a date and time for{' '}
@@ -433,7 +506,7 @@ export default function CaseDetailsPage({ params }) {
                   Cancel
                 </Button>
                 <Button type="submit" className="flex-1" disabled={isSubmitting}>
-                  {isSubmitting ? 'Scheduling...' : 'Confirm Booking'}
+                  {isSubmitting ? 'Scheduling...' : 'Confirm'}
                 </Button>
               </div>
             </form>
@@ -444,7 +517,7 @@ export default function CaseDetailsPage({ params }) {
       {/* Documents Modal */}
       {isDocsOpen && (
         <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <Card className="flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden border-none shadow-2xl">
+          <Card className="animate-scale-up flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden border-none shadow-2xl">
             <div className="flex items-center justify-between border-b p-6">
               <div>
                 <h3 className="text-xl font-black">Patient Documents</h3>
@@ -474,8 +547,8 @@ export default function CaseDetailsPage({ params }) {
                       className="hover:border-primary/50 group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 p-4 transition-all dark:border-slate-800 dark:bg-slate-900/40"
                     >
                       <div className="flex items-center gap-4">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-slate-800">
-                          <FileIcon className="h-6 w-6 text-slate-400" />
+                        <div className="text-primary flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-slate-800">
+                          <FileIcon className="h-6 w-6" />
                         </div>
                         <div className="flex flex-col">
                           <span className="max-w-[200px] truncate text-sm font-black">
@@ -547,18 +620,18 @@ function ReportCard({ color, icon, title, desc, actionText = 'Book Now', onClick
   return (
     <div
       className={cn(
-        'flex min-h-[180px] flex-col justify-between rounded-[2rem] p-7 text-white shadow-md transition-transform hover:-translate-y-1',
+        'flex min-h-[190px] flex-col justify-between rounded-[2rem] p-7 text-white shadow-md transition-all hover:-translate-y-1 hover:brightness-110',
         color
       )}
     >
       <div className="space-y-3">
         <div className="flex items-center gap-2">
           {React.cloneElement(icon, { className: 'h-5 w-5' })}
-          <span className="text-sm leading-none font-black tracking-tight uppercase">
+          <span className="text-[12px] leading-none font-black tracking-widest uppercase opacity-80">
             {title}
           </span>
         </div>
-        <p className="line-clamp-2 text-[11px] leading-relaxed font-bold opacity-90">
+        <p className="line-clamp-3 text-[11px] leading-relaxed font-bold opacity-90">
           {desc}
         </p>
       </div>
