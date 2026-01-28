@@ -63,9 +63,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
         <div className="flex h-full flex-col">
           <div className="border-border/50 bg-card border-b p-8">
             <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-2xl font-black tracking-tighter uppercase italic">
-                Secure Inbox
-              </h2>
+              <h2 className="text-xl font-bold tracking-tight uppercase">Secure Inbox</h2>
               <div className="bg-primary/10 rounded-xl p-3">
                 <MessageSquare className="text-primary h-6 w-6" />
               </div>
@@ -75,7 +73,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
               <input
                 type="text"
                 placeholder="Search conversations..."
-                className="bg-muted/30 placeholder:text-muted-foreground/50 focus:ring-primary/20 h-14 w-full rounded-2xl pr-4 pl-12 text-sm font-bold focus:ring-2 focus:outline-none"
+                className="bg-muted/30 placeholder:text-muted-foreground/50 focus:ring-primary/20 h-12 w-full rounded-2xl pr-4 pl-12 text-xs font-semibold focus:ring-2 focus:outline-none"
               />
             </div>
           </div>
@@ -102,10 +100,10 @@ export default function MessagingClient({ currentUser, initialConversations = []
 
                   <div className="min-w-0 flex-1 text-left">
                     <div className="mb-2 flex items-center justify-between">
-                      <h4 className="text-lg font-black tracking-tight uppercase italic">
+                      <h4 className="text-base font-bold tracking-tight uppercase">
                         {conv.otherUser.name}
                       </h4>
-                      <span className="text-muted-foreground text-[10px] font-black tracking-widest uppercase opacity-60">
+                      <span className="text-muted-foreground text-[9px] font-semibold tracking-widest uppercase opacity-60">
                         {conv.lastMessageTime}
                       </span>
                     </div>
@@ -120,7 +118,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
 
                   <div className="flex shrink-0 flex-col items-end gap-3">
                     {conv.unreadCount > 0 && (
-                      <span className="bg-primary shadow-primary/20 rounded-full px-3 py-1 text-[10px] font-black text-white shadow-lg">
+                      <span className="bg-primary shadow-primary/20 rounded-full px-2.5 py-0.5 text-[8px] font-bold text-white shadow-lg">
                         {conv.unreadCount} NEWS
                       </span>
                     )}
@@ -157,10 +155,10 @@ export default function MessagingClient({ currentUser, initialConversations = []
                 )}
               </div>
               <div>
-                <h3 className="text-lg font-black tracking-tighter uppercase italic">
+                <h3 className="text-base font-bold tracking-tight uppercase">
                   {activeTab.otherUser.name}
                 </h3>
-                <p className="flex items-center gap-1.5 text-[10px] font-bold tracking-widest text-emerald-500 uppercase">
+                <p className="flex items-center gap-1.5 text-[9px] font-semibold tracking-widest text-emerald-500 uppercase">
                   <Circle className="h-1.5 w-1.5 fill-current" />
                   Online
                 </p>
@@ -200,7 +198,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
               <div className="flex justify-center">
                 <Badge
                   variant="outline"
-                  className="text-[10px] font-black tracking-[0.2em] uppercase opacity-40"
+                  className="text-[9px] font-bold tracking-widest uppercase opacity-40"
                 >
                   Secure Communication Established
                 </Badge>
@@ -209,9 +207,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
               {messages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-20 text-center opacity-30">
                   <MessageSquare className="mb-4 h-16 w-16" />
-                  <p className="text-lg font-black uppercase italic">
-                    No message history
-                  </p>
+                  <p className="text-base font-bold uppercase">No message history</p>
                   <p className="text-sm">Start your clinical inquiry below.</p>
                 </div>
               ) : (
@@ -234,7 +230,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
                       <p className="font-sans text-[15px] leading-relaxed">{m.content}</p>
                     </div>
                     <div className="mt-3 flex items-center gap-2 px-2">
-                      <span className="text-muted-foreground text-[9px] font-black tracking-widest uppercase opacity-40">
+                      <span className="text-muted-foreground text-[8px] font-semibold tracking-widest uppercase opacity-40">
                         {new Date(m.createdAt).toLocaleTimeString([], {
                           hour: '2-digit',
                           minute: '2-digit',

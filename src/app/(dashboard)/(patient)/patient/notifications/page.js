@@ -22,7 +22,7 @@ export default async function NotificationsPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-8">
       <header className="px-2">
-        <h1 className="text-foreground text-3xl font-black tracking-tighter uppercase italic">
+        <h1 className="text-foreground text-3xl font-bold tracking-tighter uppercase">
           Notifications
         </h1>
         <p className="text-muted-foreground font-medium">

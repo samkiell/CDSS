@@ -85,7 +85,7 @@ export default function MessagesPage() {
   return (
     <div className="mx-auto max-w-6xl space-y-6">
       <header className="mb-8">
-        <h1 className="text-foreground text-3xl font-black tracking-tighter uppercase italic">
+        <h1 className="text-foreground text-3xl font-bold tracking-tighter uppercase">
           Messages
         </h1>
         <p className="text-muted-foreground font-medium">
