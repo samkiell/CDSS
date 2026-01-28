@@ -1,17 +1,20 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Play, Info, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent, Badge, Button } from '@/components/ui';
 import { toast } from 'sonner';
 import { cn } from '@/lib/cn';
 
 export default function SelfTestPage() {
-  useEffect(() => {
-    toast.success('Details recorded', {
-      description: 'Your clinical assessments have been successfully documented.',
+  const [completedTests, setCompletedTests] = useState({});
+
+  const handleComplete = (id) => {
+    setCompletedTests((prev) => ({ ...prev, [id]: true }));
+    toast.success('Test Completed', {
+      description: 'The clinical details for this test have been recorded successfully.',
     });
-  }, []);
+  };
 
   const tests = [
     {
@@ -139,18 +142,29 @@ export default function SelfTestPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 pt-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400">
-                      <CheckCircle2 className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-black tracking-widest text-gray-900 uppercase dark:text-white">
-                        Test Completed
-                      </p>
-                      <p className="text-muted-foreground text-xs font-medium italic">
-                        All clinical details have been recorded.
-                      </p>
-                    </div>
+                  <div className="pt-4">
+                    {completedTests[test.id] ? (
+                      <div className="animate-in fade-in slide-in-from-bottom-2 flex items-center gap-4 duration-500">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400">
+                          <CheckCircle2 className="h-6 w-6" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-black tracking-widest text-gray-900 uppercase dark:text-white">
+                            Test Completed
+                          </p>
+                          <p className="text-muted-foreground text-xs font-medium italic">
+                            All clinical details have been recorded.
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <Button
+                        onClick={() => handleComplete(test.id)}
+                        className="bg-primary shadow-primary/30 group h-16 w-full max-w-[300px] rounded-2xl text-sm font-black tracking-widest text-white uppercase shadow-2xl transition-all hover:brightness-110 active:scale-95"
+                      >
+                        Mark test as completed
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -173,9 +187,10 @@ export default function SelfTestPage() {
             </p>
           </div>
         </div>
-        <Button 
-        onClick={() => router.push('/patient/assessment?new=true')}
-        className="h-14 shrink-0 rounded-xl bg-white px-10 text-[10px] font-black tracking-widest text-gray-900 uppercase">
+        <Button
+          onClick={() => router.push('/patient/assessment?new=true')}
+          className="h-14 shrink-0 rounded-xl bg-white px-10 text-[10px] font-black tracking-widest text-gray-900 uppercase"
+        >
           Take an Assessment
         </Button>
       </div>
