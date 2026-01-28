@@ -12,12 +12,20 @@ export default async function NotificationsPage() {
   const userId = session.user.id;
 
   // Fetch real notifications
-  const notificationsRaw = await Notification.find({ userId })
+  // Fetch targeted notifications OR broadcasts for the user's role
+  const notificationsRaw = await Notification.find({
+    $or: [{ userId: userId }, { targetRole: { $in: [session.user.role, 'ALL'] } }],
+  })
     .sort({ createdAt: -1 })
-    .limit(20)
+    .limit(30)
     .lean();
 
-  const notifications = JSON.parse(JSON.stringify(notificationsRaw));
+  const notifications = JSON.parse(JSON.stringify(notificationsRaw)).map((n) => ({
+    ...n,
+    isRead: n.userId
+      ? n.status === 'Read'
+      : n.readBy?.some((id) => id.toString() === userId),
+  }));
 
   return (
     <div className="mx-auto max-w-4xl space-y-8">
