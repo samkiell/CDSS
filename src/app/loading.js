@@ -39,7 +39,7 @@ function StyleSheet() {
                 height: 50px;
                 border-radius: 50%;
                 border: 4px solid var(--divider);
-                border-top-color: #ff0088;
+                border-top-color: #39A9F0;
                 will-change: transform;
             }
             `}
