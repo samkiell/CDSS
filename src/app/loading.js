@@ -1,50 +1,17 @@
 'use client';
 
-import { motion } from 'motion/react';
-
-function LoadingCircleSpinner() {
+export default function Loading() {
   return (
-    <div className="container">
-      <motion.div
-        className="spinner"
-        animate={{ transform: 'rotate(360deg)' }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-      />
-      <StyleSheet />
+    <div className="flex min-h-screen items-center justify-center bg-white dark:bg-gray-900">
+      <div className="flex flex-col items-center gap-6">
+        {/* Spinner */}
+        <div className="h-16 w-16 animate-spin rounded-full border-4 border-gray-300 border-t-blue-500 dark:border-gray-700 dark:border-t-blue-400"></div>
+
+        {/* Loading text */}
+        <p className="text-base font-semibold tracking-wide text-gray-800 dark:text-gray-300">
+          LOADING
+        </p>
+      </div>
     </div>
   );
 }
-
-/**
- * ==============   Styles   ================
- */
-function StyleSheet() {
-  return (
-    <style>
-      {`
-            .container {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 40px;
-                border-radius: 8px;
-            }
-
-            .spinner {
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                border: 4px solid var(--divider);
-                border-top-color: #39A9F0;
-                will-change: transform;
-            }
-            `}
-    </style>
-  );
-}
-
-export default LoadingCircleSpinner;
