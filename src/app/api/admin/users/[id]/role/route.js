@@ -12,7 +12,7 @@ export async function PATCH(request, { params }) {
     }
 
     await connectDB();
-    const { id } = params;
+    const { id } = await params;
     const { role } = await request.json();
 
     if (!role || !['PATIENT', 'CLINICIAN', 'ADMIN'].includes(role)) {
