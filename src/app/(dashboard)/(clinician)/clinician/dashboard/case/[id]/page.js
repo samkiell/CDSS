@@ -251,7 +251,7 @@ export default function CaseDetailsPage({ params }) {
           <span className="text-muted-foreground text-xs font-bold uppercase opacity-70">
             {new Date(session.createdAt).toLocaleDateString(undefined, {
               day: 'numeric',
-              month: 'LONG',
+              month: 'long',
               year: 'numeric',
             })}
           </span>
