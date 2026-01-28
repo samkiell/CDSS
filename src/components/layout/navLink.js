@@ -21,7 +21,6 @@ export const patientLinks = [
   { href: '/patient/self-test', label: 'Guided Self Test', icon: FlaskConical },
   { href: '/patient/progress', label: 'Progress', icon: TrendingUp },
   { href: '/patient/messages', label: 'Messages', icon: MessageSquare },
-  { href: '/patient/notifications', label: 'Notifications', icon: Bell },
 ];
 
 export const clinicianLinks = [
@@ -32,7 +31,6 @@ export const clinicianLinks = [
   { href: '/clinician/treatment', label: 'Treatment Planner', icon: ClipboardList },
   { href: '/clinician/referral', label: 'Referral or Order', icon: FileOutput },
   { href: '/clinician/messages', label: 'Messages', icon: MessageSquare },
-  { href: '/clinician/notifications', label: 'Notifications', icon: Bell },
   { href: '/clinician/help-center', label: 'Help Center', icon: HelpCircle },
   { href: '/clinician/privacy', label: 'Privacy & Ethics', icon: ShieldCheck },
 ];

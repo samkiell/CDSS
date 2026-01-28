@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Settings, Bell, Shield, LogOut, User, X } from 'lucide-react';
+import { Settings, HelpCircle, Shield, LogOut, User, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { signOut } from 'next-auth/react';
 import { useUIStore } from '@/store';
@@ -17,7 +17,7 @@ export default function Sidebar({ links = [], secondaryLinks = [], className, us
 
   const defaultSecondaryLinks = [
     { href: `${basePath}/settings`, label: 'Settings', icon: Settings },
-    { href: `${basePath}/notifications`, label: 'Notifications', icon: Bell },
+    { href: `${basePath}/settings/help`, label: 'Help & Support', icon: HelpCircle },
     { href: `${basePath}/settings/privacy`, label: 'Privacy', icon: Shield },
     { href: '#', label: 'Logout', icon: LogOut, action: true },
   ];
