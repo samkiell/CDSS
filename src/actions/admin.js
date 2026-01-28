@@ -3,6 +3,7 @@
 import connectDB from '@/lib/db/connect';
 import User, { ROLES } from '@/models/User';
 import DiagnosisSession from '@/models/DiagnosisSession';
+import PatientProfile from '@/models/PatientProfile';
 import bcrypt from 'bcrypt';
 import { revalidatePath } from 'next/cache';
 
@@ -44,7 +45,6 @@ export async function assignCase(sessionId, clinicianId) {
     await session.save();
 
     // Sync with PatientProfile so messaging system detects the assignment
-    const { PatientProfile } = await import('@/models');
     await PatientProfile.findOneAndUpdate(
       { userId: session.patientId },
       { assignedClinician: clinicianId },
