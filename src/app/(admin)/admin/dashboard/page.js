@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import connectDB from '@/lib/db/connect';
 import User, { ROLES } from '@/models/User';
 import DiagnosisSession from '@/models/DiagnosisSession';
@@ -127,9 +128,12 @@ export default async function AdminDashboardPage() {
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">
             Therapist Management
           </h3>
-          <button className="text-primary text-sm font-bold hover:underline">
+          <Link
+            href="/admin/users"
+            className="text-primary text-sm font-bold hover:underline"
+          >
             Manage All
-          </button>
+          </Link>
         </div>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <TherapistManagement
@@ -138,7 +142,7 @@ export default async function AdminDashboardPage() {
             type="approved"
           />
           <TherapistManagement
-            title="Pending Therapist Role Requests"
+            title="System Members"
             therapists={pendingTherapists}
             type="pending"
           />
