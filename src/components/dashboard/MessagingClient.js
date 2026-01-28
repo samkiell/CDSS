@@ -16,18 +16,14 @@ import {
   Circle,
   User,
 } from 'lucide-react';
+import { Button, Avatar, AvatarImage, AvatarFallback, Badge } from '@/components/ui';
+import { ScrollArea } from '@/components/ui/ScrollArea';
 import {
-  Button,
-  Avatar,
-  AvatarImage,
-  AvatarFallback,
-  ScrollArea,
-  Badge,
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from '@/components/ui';
+} from '@/components/ui/DropdownMenu';
 import { cn } from '@/lib/cn';
 import { getMessages, sendMessage, markAsRead } from '@/lib/actions/messages';
 
