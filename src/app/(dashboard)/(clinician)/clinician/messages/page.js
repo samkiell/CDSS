@@ -44,7 +44,7 @@ const patientConversations = [
   },
 ];
 
-export default function ClinicianMessagesPage() {
+export default function Page() {
   return (
     <div className="mx-auto max-w-5xl">
       {/* Header */}
