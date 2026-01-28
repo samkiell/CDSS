@@ -50,6 +50,10 @@ export default function MessagingClient({ currentUser, initialConversations = []
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedImage, setExpandedImage] = useState(null);
 
+  // Derive active conversation details from the updated list to reflect real-time status
+  const activeConversation =
+    conversations.find((c) => c.id === activeTab?.id) || activeTab;
+
   const emojis = ['😊', '👍', '🙏', '🏥', '💊', '👋', '❤️', '📍', '✅', '❌', '🤔', '💪'];
 
   const filteredConversations = useMemo(() => {
@@ -117,16 +121,19 @@ export default function MessagingClient({ currentUser, initialConversations = []
 
       fetchMessages();
 
-      // Poll for new messages every 5 seconds
+      // Poll for new messages and status updates
       const interval = setInterval(async () => {
         try {
+          // 1. Fetch messages
           const msgs = await getMessages(activeTab.otherUser.id);
           setMessages((prev) => {
-            if (msgs.length !== prev.length) {
-              return msgs;
-            }
+            if (msgs.length !== prev.length) return msgs;
             return prev;
           });
+
+          // 2. Fetch updated conversations (Status logic)
+          const updatedConvs = await getConversations();
+          setConversations(updatedConvs);
         } catch (error) {
           console.error('Polling failed:', error);
         }
@@ -359,24 +366,31 @@ export default function MessagingClient({ currentUser, initialConversations = []
               </div>
               <div>
                 <h3 className="text-sm font-bold tracking-tight uppercase">
-                  {activeTab.otherUser.name}
+                  {activeConversation.otherUser.name}
                 </h3>
-                {activeTab.otherUser.online ? (
-                  <p className="flex items-center gap-1.5 text-[9px] font-semibold tracking-widest text-emerald-500 uppercase">
-                    <Circle className="h-1.5 w-1.5 fill-current" />
+                {activeConversation.otherUser.online ? (
+                  <p className="flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
+                    <span className="relative flex h-2 w-2 rounded-full bg-current">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-current opacity-75"></span>
+                    </span>
                     Online
                   </p>
                 ) : (
                   <p className="text-muted-foreground text-[10px] font-medium opacity-60">
-                    {activeTab.otherUser.lastLogin
+                    {activeConversation.otherUser.lastLogin
                       ? `Last seen ${
-                          new Date(activeTab.otherUser.lastLogin).toLocaleDateString() ===
-                          new Date().toLocaleDateString()
-                            ? new Date(activeTab.otherUser.lastLogin).toLocaleTimeString(
-                                [],
-                                { hour: '2-digit', minute: '2-digit' }
-                              )
-                            : new Date(activeTab.otherUser.lastLogin).toLocaleDateString()
+                          new Date(
+                            activeConversation.otherUser.lastLogin
+                          ).toLocaleDateString() === new Date().toLocaleDateString()
+                            ? new Date(
+                                activeConversation.otherUser.lastLogin
+                              ).toLocaleTimeString([], {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              })
+                            : new Date(
+                                activeConversation.otherUser.lastLogin
+                              ).toLocaleDateString()
                         }`
                       : 'Offline'}
                   </p>
