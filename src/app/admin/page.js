@@ -14,10 +14,21 @@ import {
   CardContent,
 } from '@/components/ui';
 import { toast } from 'sonner';
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+
 export default function AdminLoginPage() {
-  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { data: session, status } = useSession();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      const role = session.user.role;
+      if (role === 'ADMIN') router.push('/admin/dashboard');
+      else if (role === 'CLINICIAN') router.push('/clinician/dashboard');
+      else router.push('/patient/dashboard');
+    }
+  }, [status, session, router]);
   const [formData, setFormData] = useState({
     email: '',
     password: '',

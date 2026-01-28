@@ -14,14 +14,20 @@ export const middleware = auth((req) => {
     return null;
   }
 
+  const isAuthRoute = ['/login', '/register', '/admin'].includes(nextUrl.pathname);
+
   if (isAuthRoute) {
     if (isLoggedIn) {
-      // Redirect logged in users away from auth pages
-      const role = req.auth.user.role;
+      const role = req.auth?.user?.role?.toUpperCase();
+      console.log(
+        `Middleware: Authenticated user with role ${role} accessing auth route ${nextUrl.pathname}. Redirecting...`
+      );
+
       if (role === 'ADMIN')
         return Response.redirect(new URL('/admin/dashboard', nextUrl));
       if (role === 'CLINICIAN')
         return Response.redirect(new URL('/clinician/dashboard', nextUrl));
+
       return Response.redirect(new URL('/patient/dashboard', nextUrl));
     }
     return null;

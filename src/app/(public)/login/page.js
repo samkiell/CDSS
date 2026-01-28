@@ -15,12 +15,24 @@ import {
   CardFooter,
 } from '@/components/ui';
 import { toast } from 'sonner';
-import { signIn } from 'next-auth/react';
-import { useSearchParams } from 'next/navigation';
+import { signIn, useSession } from 'next-auth/react';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const { data: session, status } = useSession();
   const [isLoading, setIsLoading] = useState(false);
-  const error = useSearchParams().has('error');
+  const searchParams = useSearchParams();
+  const error = searchParams.has('error');
+
+  useEffect(() => {
+    if (status === 'authenticated') {
+      const role = session.user.role;
+      if (role === 'ADMIN') router.push('/admin/dashboard');
+      else if (role === 'CLINICIAN') router.push('/clinician/dashboard');
+      else router.push('/patient/dashboard');
+    }
+  }, [status, session, router]);
 
   useEffect(() => {
     if (error) {
