@@ -15,7 +15,7 @@ export default async function AdminLayout({ children }) {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <AdminSidebar />
       <div className="lg:pl-64">
-        <AdminHeader />
+        <AdminHeader user={session.user} />
         <main className="mt-20 min-h-[calc(100vh-80px)] p-4 lg:p-8">
           <div className="mx-auto max-w-7xl">{children}</div>
         </main>

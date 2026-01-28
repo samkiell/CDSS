@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 import { Search, Bell, User, Menu } from 'lucide-react';
-import { useSession } from 'next-auth/react';
 import { ThemeToggle } from '@/components/ui';
 import Image from 'next/image';
 import { useUIStore } from '@/store';
 
-export default function AdminHeader() {
-  const { data: session } = useSession();
+export default function AdminHeader({ user }) {
   const { toggleSidebar } = useUIStore();
 
   return (
@@ -52,16 +50,16 @@ export default function AdminHeader() {
         <div className="flex items-center gap-3">
           <div className="hidden text-right lg:block">
             <p className="text-sm font-bold text-gray-900 dark:text-white">
-              {session?.user?.firstName} {session?.user?.lastName}
+              {user?.firstName} {user?.lastName}
             </p>
             <p className="text-xs font-semibold tracking-wider text-gray-400 uppercase">
               Super Admin
             </p>
           </div>
           <button className="border-primary/10 h-12 w-12 overflow-hidden rounded-2xl border-2 shadow-sm transition-transform hover:scale-105">
-            {session?.user?.avatar ? (
+            {user?.avatar ? (
               <Image
-                src={session.user.avatar}
+                src={user.avatar}
                 alt="Admin Avatar"
                 width={48}
                 height={48}
@@ -69,7 +67,7 @@ export default function AdminHeader() {
               />
             ) : (
               <div className="bg-primary flex h-full w-full items-center justify-center text-lg font-black text-white">
-                {session?.user?.firstName?.[0] || 'A'}
+                {user?.firstName?.[0] || 'A'}
               </div>
             )}
           </button>
