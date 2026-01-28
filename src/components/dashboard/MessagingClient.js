@@ -41,6 +41,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
   usePresencePing(true);
 
   const [activeTab, setActiveTab] = useState(null);
+  const [presence, setPresence] = useState(null);
   const [message, setMessage] = useState('');
   const [conversations, setConversations] = useState(initialConversations);
   const [messages, setMessages] = useState([]);
@@ -149,6 +150,31 @@ export default function MessagingClient({ currentUser, initialConversations = []
       setMessages([]);
     }
   }, [activeTab]);
+
+  // Fetch real-time presence
+  useEffect(() => {
+    if (!activeTab?.otherUser?.id) {
+      setPresence(null);
+      return;
+    }
+
+    const fetchPresence = async () => {
+      try {
+        const res = await fetch(`/api/presence/${activeTab.otherUser.id}`);
+        if (res.ok) {
+          const data = await res.json();
+          setPresence(data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch presence:', error);
+      }
+    };
+
+    fetchPresence();
+    const interval = setInterval(fetchPresence, 30000); // 30s refresh
+
+    return () => clearInterval(interval);
+  }, [activeTab?.otherUser?.id]);
 
   const handleSendMessage = async (e) => {
     e.preventDefault();
@@ -365,7 +391,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
                     {getInitials(activeTab.otherUser.name)}
                   </AvatarFallback>
                 </Avatar>
-                {activeTab.otherUser.online && (
+                {presence?.status === 'ONLINE' && (
                   <div className="ring-card absolute -right-1 -bottom-1 h-4 w-4 rounded-full bg-emerald-500 ring-2" />
                 )}
               </div>
@@ -373,7 +399,8 @@ export default function MessagingClient({ currentUser, initialConversations = []
                 <h3 className="text-sm font-bold tracking-tight uppercase">
                   {activeConversation.otherUser.name}
                 </h3>
-                {activeConversation.otherUser.online ? (
+                {presence?.status === 'ONLINE' ? (
+                  <p className="flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
                   <p className="flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
                     <span className="relative flex h-2 w-2 rounded-full bg-current">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-current opacity-75"></span>
@@ -382,22 +409,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
                   </p>
                 ) : (
                   <p className="text-muted-foreground text-[10px] font-medium opacity-60">
-                    {activeConversation.otherUser.lastLogin
-                      ? `Last seen ${
-                          new Date(
-                            activeConversation.otherUser.lastLogin
-                          ).toLocaleDateString() === new Date().toLocaleDateString()
-                            ? new Date(
-                                activeConversation.otherUser.lastLogin
-                              ).toLocaleTimeString([], {
-                                hour: '2-digit',
-                                minute: '2-digit',
-                              })
-                            : new Date(
-                                activeConversation.otherUser.lastLogin
-                              ).toLocaleDateString()
-                        }`
-                      : 'Offline'}
+                    {presence?.lastSeenText || 'Offline'}
                   </p>
                 )}
               </div>
