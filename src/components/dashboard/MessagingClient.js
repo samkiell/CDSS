@@ -324,9 +324,18 @@ export default function MessagingClient({ currentUser, initialConversations = []
                   >
                     Close Chat
                   </DropdownMenuItem>
-                  <DropdownMenuItem className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase transition-colors">
-                    View Profile
-                  </DropdownMenuItem>
+
+                  {currentUser.role === 'CLINICIAN' && (
+                    <DropdownMenuItem
+                      className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase transition-colors"
+                      onClick={() =>
+                        (window.location.href = `/clinician/diagnostics?id=${activeTab.id}`)
+                      }
+                    >
+                      View Case File
+                    </DropdownMenuItem>
+                  )}
+
                   <DropdownMenuItem className="text-muted-foreground hover:text-foreground flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase transition-colors">
                     Clear History
                   </DropdownMenuItem>
