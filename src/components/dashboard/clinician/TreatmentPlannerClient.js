@@ -95,7 +95,7 @@ export default function TreatmentPlannerClient({ initialPatients = [] }) {
 
               <CardContent className="space-y-8 p-8">
                 <div className="flex items-center gap-6">
-                  <Avatar className="ring-primary/5 group-hover:ring-primary/20 h-20 w-20 rounded-[1.5rem] ring-4 transition-all">
+                  <Avatar className="ring-primary/5 group-hover:ring-primary/20 h-20 w-20 rounded-3xl ring-4 transition-all">
                     <AvatarImage src={patient.avatar} />
                     <AvatarFallback className="bg-primary/10 text-primary text-2xl font-black">
                       {patient.name

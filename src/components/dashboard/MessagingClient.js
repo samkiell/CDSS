@@ -64,7 +64,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
   };
 
   return (
-    <div className="bg-card border-border/50 flex h-[calc(100vh-12rem)] min-h-[600px] overflow-hidden rounded-[2.5rem] border shadow-2xl">
+    <div className="bg-card border-border/50 flex h-[calc(100vh-12rem)] min-h-150 overflow-hidden rounded-[2.5rem] border shadow-2xl">
       {/* Sidebar: User List */}
       <aside
         className={cn(
