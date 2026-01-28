@@ -19,6 +19,7 @@ import {
   Award,
   ClipboardCheck,
   AlertCircle,
+  CheckCircle2,
 } from 'lucide-react';
 import ProgressCharts from './ProgressCharts';
 
