@@ -238,11 +238,11 @@ export default function MessagingClient({ currentUser, initialConversations = []
   };
 
   return (
-    <div className="bg-card border-border/50 h-[calc(100vh-12rem)] min-h-[600px] overflow-hidden rounded-[2.5rem] border shadow-2xl">
+    <div className="bg-card border-border/50 h-[calc(100vh-8rem)] min-h-[500px] overflow-hidden rounded-3xl border shadow-2xl md:h-[calc(100vh-12rem)] md:rounded-[2.5rem]">
       {!activeTab ? (
         /* Conversation List - Full Width */
         <div className="flex h-full flex-col">
-          <div className="border-border/50 bg-card border-b p-8">
+          <div className="border-border/50 bg-card border-b p-4 md:p-8">
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-xl font-bold tracking-tight uppercase">Secure Inbox</h2>
               <div className="bg-primary/10 rounded-xl p-3">
@@ -332,7 +332,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
         /* Chat View - Full Width */
         <div className="flex h-full flex-col overflow-hidden">
           {/* Header - Static Top Bar */}
-          <header className="border-border/50 bg-card/95 z-20 flex flex-shrink-0 items-center justify-between border-b p-6 backdrop-blur-sm">
+          <header className="border-border/50 bg-card/95 z-20 flex flex-shrink-0 items-center justify-between border-b p-4 backdrop-blur-sm md:p-6">
             <div className="flex items-center gap-5">
               <Button
                 variant="ghost"
@@ -357,10 +357,26 @@ export default function MessagingClient({ currentUser, initialConversations = []
                 <h3 className="text-base font-bold tracking-tight uppercase">
                   {activeTab.otherUser.name}
                 </h3>
-                <p className="flex items-center gap-1.5 text-[9px] font-semibold tracking-widest text-emerald-500 uppercase">
-                  <Circle className="h-1.5 w-1.5 fill-current" />
-                  Online
-                </p>
+                {activeTab.otherUser.online ? (
+                  <p className="flex items-center gap-1.5 text-[9px] font-semibold tracking-widest text-emerald-500 uppercase">
+                    <Circle className="h-1.5 w-1.5 fill-current" />
+                    Online
+                  </p>
+                ) : (
+                  <p className="text-muted-foreground text-[9px] font-semibold tracking-widest uppercase opacity-60">
+                    {activeTab.otherUser.lastLogin
+                      ? `Last seen ${
+                          new Date(activeTab.otherUser.lastLogin).toLocaleDateString() ===
+                          new Date().toLocaleDateString()
+                            ? new Date(activeTab.otherUser.lastLogin).toLocaleTimeString(
+                                [],
+                                { hour: '2-digit', minute: '2-digit' }
+                              )
+                            : new Date(activeTab.otherUser.lastLogin).toLocaleDateString()
+                        }`
+                      : 'Offline'}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -500,7 +516,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
           </ScrollArea>
 
           {/* Input */}
-          <footer className="bg-card border-border/50 border-t p-8">
+          <footer className="bg-card border-border/50 border-t p-4 md:p-8">
             <form
               onSubmit={handleSendMessage}
               className="relative mx-auto flex max-w-4xl items-center gap-5"
