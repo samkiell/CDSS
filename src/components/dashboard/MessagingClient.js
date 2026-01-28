@@ -401,7 +401,6 @@ export default function MessagingClient({ currentUser, initialConversations = []
                 </h3>
                 {presence?.status === 'ONLINE' ? (
                   <p className="flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
-                  <p className="flex items-center gap-1.5 text-xs font-semibold text-emerald-500">
                     <span className="relative flex h-2 w-2 rounded-full bg-current">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-current opacity-75"></span>
                     </span>
