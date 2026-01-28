@@ -43,8 +43,18 @@ export async function assignCase(sessionId, clinicianId) {
     session.status = 'assigned';
     await session.save();
 
+    // Sync with PatientProfile so messaging system detects the assignment
+    const { PatientProfile } = await import('@/models');
+    await PatientProfile.findOneAndUpdate(
+      { userId: session.patientId },
+      { assignedClinician: clinicianId },
+      { upsert: true, new: true }
+    );
+
     revalidatePath('/admin/sessions');
     revalidatePath('/admin/dashboard');
+    revalidatePath('/patient/messages');
+    revalidatePath('/clinician/messages');
     return { success: true };
   } catch (error) {
     console.error('Error assigning case:', error);

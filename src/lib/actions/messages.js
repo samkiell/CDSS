@@ -1,7 +1,7 @@
 'use server';
 
 import connectDB from '@/lib/db/connect';
-import { Message, User, PatientProfile } from '@/models';
+import { Message, User, PatientProfile, DiagnosisSession } from '@/models';
 import { auth } from '@/auth';
 import { revalidatePath } from 'next/cache';
 
@@ -14,13 +14,29 @@ export async function getAssignedClinician() {
 
   await connectDB();
 
+  // 1. Try PatientProfile (Primary assignment)
   const profile = await PatientProfile.findOne({ userId: session.user.id })
     .populate('assignedClinician', 'firstName lastName email avatar')
     .lean();
 
-  if (!profile || !profile.assignedClinician) return null;
+  if (profile?.assignedClinician) {
+    return JSON.parse(JSON.stringify(profile.assignedClinician));
+  }
 
-  return JSON.parse(JSON.stringify(profile.assignedClinician));
+  // 2. Fallback: Try most recent DiagnosisSession with an assigned clinician
+  const lastSession = await DiagnosisSession.findOne({
+    patientId: session.user.id,
+    clinicianId: { $ne: null },
+  })
+    .sort({ updatedAt: -1 })
+    .populate('clinicianId', 'firstName lastName email avatar')
+    .lean();
+
+  if (lastSession?.clinicianId) {
+    return JSON.parse(JSON.stringify(lastSession.clinicianId));
+  }
+
+  return null;
 }
 
 /**
@@ -32,11 +48,31 @@ export async function getAssignedPatients() {
 
   await connectDB();
 
+  const patientMap = new Map();
+
+  // 1. Get patients from PatientProfile
   const profiles = await PatientProfile.find({ assignedClinician: session.user.id })
     .populate('userId', 'firstName lastName email avatar')
     .lean();
 
-  return JSON.parse(JSON.stringify(profiles.map((p) => p.userId)));
+  profiles.forEach((p) => {
+    if (p.userId) {
+      patientMap.set(p.userId._id.toString(), p.userId);
+    }
+  });
+
+  // 2. Get patients from DiagnosisSessions (Fallback/Legacy support)
+  const sessions = await DiagnosisSession.find({ clinicianId: session.user.id })
+    .populate('patientId', 'firstName lastName email avatar')
+    .lean();
+
+  sessions.forEach((s) => {
+    if (s.patientId && !patientMap.has(s.patientId._id.toString())) {
+      patientMap.set(s.patientId._id.toString(), s.patientId);
+    }
+  });
+
+  return JSON.parse(JSON.stringify(Array.from(patientMap.values())));
 }
 
 /**
