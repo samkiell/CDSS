@@ -18,7 +18,7 @@ export async function GET(request, { params }) {
     await connectDB();
 
     const session = await DiagnosisSession.findById(id)
-      .populate('patientId', 'firstName lastName email')
+      .populate('patientId', 'firstName lastName email gender dateOfBirth avatar')
       .populate('clinicianReview.reviewedBy', 'firstName lastName')
       .lean();
 

@@ -21,6 +21,7 @@ src/
 │   │
 │   ├── api/                 # Backend API routes
 │   │   ├── auth/            # Authentication endpoints
+│   │   ├── otp/             # OTP send & verify endpoints
 │   │   ├── diagnosis/       # Diagnosis session CRUD
 │   │   ├── upload/          # File upload (Cloudinary)
 │   │   └── health/          # Health check
@@ -198,9 +199,23 @@ Types:
 | File | Purpose |
 |------|---------|
 | `src/lib/db/connect.js` | MongoDB connection with hot-reload handling |
+| `src/models/EmailOtp.js` | Secure 4-digit OTP storage with TTL expiry |
+| `src/services/otpService.js` | OTP generation, hashing (SHA-256), and email logic |
 | `src/lib/decision-engine/heuristic.js` | Rule-based diagnostic algorithm |
 | `src/store/authStore.js` | Authentication state management |
 | `src/models/DiagnosisSession.js` | Core data model for diagnoses |
+
+## 🔐 Authentication & Verification
+
+The platform implements a **Secure Deferred Registration Flow**:
+
+1. **Information Collection**: User registration details (Name, Email, Password) are collected.
+2. **Account Deferral**: No record is created in the `users` collection initially. Instead, data is stored in the `email_otps` collection with a 5-minute expiry.
+3. **OTP Delivery**: A 4-digit numeric code is generated server-side and sent via Nodemailer.
+4. **Verification**: 
+   - Uses constant-time hashing (SHA-256) for comparison.
+   - Upon correct entry, the `users` record is officially created with the stored registration data.
+   - Prevents database pollution from unverified or duplicate emails.
 
 ## 🩺 Decision Engine
 

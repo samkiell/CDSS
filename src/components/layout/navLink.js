@@ -17,7 +17,7 @@ import {
 
 export const patientLinks = [
   { href: '/patient/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/patient/assessment', label: 'New assessment', icon: ClipboardPlus },
+  { href: '/patient/assessment?new=true', label: 'New assessment', icon: ClipboardPlus },
   { href: '/patient/self-test', label: 'Guided Self Test', icon: FlaskConical },
   { href: '/patient/progress', label: 'Progress', icon: TrendingUp },
   { href: '/patient/messages', label: 'Messages', icon: MessageSquare },

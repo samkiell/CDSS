@@ -1,20 +1,56 @@
-import { Card, CardContent } from '@/components/ui';
-import { Construction } from 'lucide-react';
+'use client';
+import { useState } from 'react';
+import SearchPaitent from '@/components/dashboard/clinician/search';
+import PatientInfoContainer from '@/components/dashboard/clinician/paitentContainer';
 
-export default function CasesPage() {
+export default function Page() {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const patients = [
+    {
+      id: 1,
+      name: 'Bola Ahmed Tinubu',
+      gender: 'Male',
+      time: '8:00am',
+      date: '12-11-2025',
+      status: 'active',
+    },
+    {
+      id: 2,
+      name: 'Tomisi Faith John',
+      gender: 'Female',
+      time: '8:30am',
+      date: '12-11-2025',
+      status: 'active',
+    },
+    {
+      id: 3,
+      name: 'Henry Ahmed Garet',
+      gender: 'Male',
+      time: '10:00am',
+      date: '12-11-2025',
+      status: 'pending',
+    },
+    {
+      id: 4,
+      name: 'Bola Saed Dushak',
+      gender: 'Male',
+      time: '10:30am',
+      date: '12-11-2025',
+      status: 'urgent',
+    },
+  ];
+
   return (
-    <div className="flex min-h-[60vh] items-center justify-center">
-      <Card className="w-full max-w-md">
-        <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-          <Construction className="text-muted-foreground mb-4 h-12 w-12" />
-          <h2 className="text-foreground text-lg font-semibold">Cases Management</h2>
-          <p className="text-muted-foreground mt-2 text-sm">
-            This page is not implemented yet.
-            <br />
-            Waiting for assigned developer.
-          </p>
-        </CardContent>
-      </Card>
+    <div className="mx-auto max-w-4xl">
+      <SearchPaitent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <div className="space-y-4">
+        <PatientInfoContainer
+          patients={patients}
+          searchQuery={searchQuery}
+          url={'/clinician/cases'}
+        />
+      </div>
     </div>
   );
 }

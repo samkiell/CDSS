@@ -1,20 +1,37 @@
-import { Card, CardContent } from '@/components/ui';
-import { Construction } from 'lucide-react';
+import connectDB from '@/lib/db/connect';
+import { Notification } from '@/models';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import NotificationsClient from '@/components/dashboard/NotificationsClient';
 
-export default function NotificationsPage() {
+export default async function NotificationsPage() {
+  const session = await auth();
+  if (!session || !session.user) redirect('/login');
+
+  await connectDB();
+  const userId = session.user.id;
+
+  // Fetch real notifications
+  const notificationsRaw = await Notification.find({ userId })
+    .sort({ createdAt: -1 })
+    .limit(20)
+    .lean();
+
+  const notifications = JSON.parse(JSON.stringify(notificationsRaw));
+
   return (
-    <div className="flex min-h-[60vh] items-center justify-center">
-      <Card className="w-full max-w-md">
-        <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-          <Construction className="text-muted-foreground mb-4 h-12 w-12" />
-          <h2 className="text-foreground text-lg font-semibold">Notifications</h2>
-          <p className="text-muted-foreground mt-2 text-sm">
-            This page is not implemented yet.
-            <br />
-            Waiting for assigned developer.
-          </p>
-        </CardContent>
-      </Card>
+    <div className="mx-auto max-w-4xl space-y-8">
+      <header className="px-2">
+        <h1 className="text-foreground text-3xl font-black tracking-tighter uppercase italic">
+          Notifications
+        </h1>
+        <p className="text-muted-foreground font-medium">
+          Real-time updates on your clinical assessments, treatment progress, and
+          scheduled sessions.
+        </p>
+      </header>
+
+      <NotificationsClient initialNotifications={notifications} />
     </div>
   );
 }

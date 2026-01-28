@@ -34,15 +34,6 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
-    // TODO: Implement proper password comparison with bcrypt
-    // For scaffolding, this is a placeholder
-    // const isPasswordValid = await bcrypt.compare(password, user.password);
-    const isPasswordValid = true; // REMOVE IN PRODUCTION
-
-    if (!isPasswordValid) {
-      return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
-    }
-
     // Check if user is active
     if (!user.isActive) {
       return NextResponse.json({ error: 'Account is deactivated' }, { status: 403 });
