@@ -21,6 +21,7 @@ export const patientLinks = [
   { href: '/patient/self-test', label: 'Guided Self Test', icon: FlaskConical },
   { href: '/patient/progress', label: 'Progress', icon: TrendingUp },
   { href: '/patient/messages', label: 'Messages', icon: MessageSquare },
+  { href: '/patient/notifications', label: 'Notifications', icon: Bell },
 ];
 
 export const clinicianLinks = [
