@@ -101,7 +101,7 @@ export default function ClinicalRulebookPage() {
             <BookOpen className="h-8 w-8" />
           </div>
           <div>
-            <h1 className="mb-1 text-3xl font-black tracking-tighter uppercase italic">
+            <h1 className="mb-1 text-3xl font-bold tracking-tight uppercase">
               Clinical Heuristic Rulebook
             </h1>
             <p className="text-muted-foreground max-w-xl font-medium">
@@ -115,7 +115,7 @@ export default function ClinicalRulebookPage() {
             <Search className="h-4 w-4" />
             Search Library
           </Button>
-          <Button className="bg-primary shadow-primary/20 h-14 rounded-2xl px-8 text-xs font-black tracking-widest text-white uppercase shadow-lg">
+          <Button className="bg-primary h-14 rounded-2xl px-8 text-xs font-bold tracking-widest text-white uppercase shadow-sm">
             View Whitepapers
           </Button>
         </div>
@@ -125,13 +125,13 @@ export default function ClinicalRulebookPage() {
         {regions.map((region, idx) => (
           <section key={idx} className="space-y-6">
             <div className="flex items-center gap-4 px-4">
-              <h2 className="text-foreground shrink-0 text-xl font-black tracking-widest uppercase italic">
+              <h2 className="text-foreground shrink-0 text-xl font-bold tracking-widest uppercase">
                 {region.name}
               </h2>
               <div className="bg-border h-px flex-1" />
               <Badge
                 variant="outline"
-                className="bg-muted/30 rounded-full px-4 py-1 text-[10px] font-black tracking-[0.2em] uppercase"
+                className="bg-muted/30 rounded-full px-4 py-1 text-[10px] font-bold tracking-widest uppercase"
               >
                 {region.tests.length} Tests
               </Badge>
@@ -150,7 +150,7 @@ export default function ClinicalRulebookPage() {
                       </div>
                       <ArrowRight className="text-muted-foreground h-4 w-4 opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100" />
                     </div>
-                    <h3 className="text-foreground mb-2 text-base leading-tight font-black">
+                    <h3 className="text-foreground mb-2 text-base leading-tight font-bold">
                       {test.name}
                     </h3>
                     <p className="text-muted-foreground text-xs leading-relaxed font-medium opacity-80">
@@ -169,16 +169,16 @@ export default function ClinicalRulebookPage() {
           <ShieldCheck className="h-8 w-8" />
         </div>
         <div className="flex-1">
-          <h4 className="mb-1 text-lg font-black tracking-tighter uppercase">
+          <h4 className="mb-1 text-lg font-bold tracking-tight uppercase">
             Clinical Accuracy Guarantee
           </h4>
-          <p className="text-muted-foreground text-sm font-medium italic">
+          <p className="text-muted-foreground text-sm font-medium">
             All tests listed above are pulled from vetted technical whitepapers and mapped
             to the AI diagnostic engine for real-time verification.
           </p>
         </div>
-        <Button className="bg-foreground text-background h-14 rounded-xl px-10 text-[10px] font-black tracking-widest uppercase hover:brightness-110">
-          Download PDF PDF
+        <Button className="bg-foreground text-background h-14 rounded-xl px-10 text-[10px] font-bold tracking-widest uppercase hover:brightness-110">
+          Download PDF
         </Button>
       </div>
     </div>

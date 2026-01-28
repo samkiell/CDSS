@@ -104,7 +104,7 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
                 key={status}
                 onClick={() => setActiveFilter(status)}
                 className={cn(
-                  'rounded-xl px-6 py-2 text-xs font-black tracking-widest uppercase transition-all',
+                  'rounded-xl px-6 py-2 text-xs font-bold tracking-widest uppercase transition-all',
                   activeFilter === status
                     ? 'text-primary bg-white shadow-sm'
                     : 'text-muted-foreground hover:text-foreground'
@@ -131,16 +131,16 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
                   <div className="border-border/50 flex items-start gap-6 border-b p-8 lg:w-1/3 lg:border-r lg:border-b-0">
                     <Avatar className="ring-primary/10 h-20 w-20 rounded-[1.5rem] ring-4">
                       <AvatarImage src={therapist.avatar} />
-                      <AvatarFallback className="bg-primary/20 text-primary text-2xl font-black">
+                      <AvatarFallback className="bg-primary/20 text-primary text-2xl font-bold">
                         {therapist.firstName[0]}
                         {therapist.lastName[0]}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col gap-1">
-                      <h3 className="text-foreground text-xl font-black">
+                      <h3 className="text-foreground text-xl font-bold">
                         Dr. {therapist.firstName} {therapist.lastName}
                       </h3>
-                      <span className="text-primary text-xs font-bold tracking-[0.2em] uppercase">
+                      <span className="text-primary text-xs font-bold tracking-widest uppercase">
                         {therapist.specialization || 'General Practitioner'}
                       </span>
                       <div className="mt-4 flex flex-col gap-2">
@@ -166,7 +166,7 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
                           <FileText className="h-5 w-5" />
                         </div>
                         <div>
-                          <p className="text-muted-foreground text-[10px] font-black tracking-widest uppercase">
+                          <p className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
                             License Number
                           </p>
                           <p className="text-foreground text-sm font-bold">
@@ -179,12 +179,12 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
                           <Briefcase className="h-5 w-5" />
                         </div>
                         <div>
-                          <p className="text-muted-foreground text-[10px] font-black tracking-widest uppercase">
+                          <p className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
                             Practice Status
                           </p>
                           <Badge
                             className={cn(
-                              'mt-1 rounded-full border-none px-3 py-1 text-[10px] font-black',
+                              'mt-1 rounded-full border-none px-3 py-1 text-[10px] font-bold',
                               therapist.isActive
                                 ? 'bg-emerald-500/10 text-emerald-600'
                                 : 'bg-amber-500/10 text-amber-600'
@@ -196,14 +196,14 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
                       </div>
                     </div>
                     <div className="flex flex-col gap-3">
-                      <div className="text-muted-foreground mb-1 flex items-center justify-between px-1 text-[10px] font-black tracking-widest uppercase">
+                      <div className="text-muted-foreground mb-1 flex items-center justify-between px-1 text-[10px] font-bold tracking-widest uppercase">
                         <span>Verification Score</span>
-                        <span className="text-primary font-black">92%</span>
+                        <span className="text-primary font-bold">92%</span>
                       </div>
                       <div className="bg-muted h-2 w-full overflow-hidden rounded-full">
-                        <div className="bg-primary h-full w-[92%] rounded-full shadow-[0_0_10px_rgba(var(--primary),0.5)]" />
+                        <div className="bg-primary h-full w-[92%] rounded-full shadow-sm" />
                       </div>
-                      <p className="text-muted-foreground mt-1 text-[10px] font-bold italic">
+                      <p className="text-muted-foreground mt-1 text-[10px] font-bold">
                         Credentials verified via MSK Medical Board API
                       </p>
                     </div>
@@ -211,7 +211,7 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
 
                   {/* Actions */}
                   <div className="bg-muted/10 border-border/50 flex items-center justify-center gap-3 border-t p-8 lg:w-48 lg:flex-col lg:border-t-0">
-                    <Button className="bg-primary h-11 w-full rounded-xl text-[10px] font-black tracking-widest text-white uppercase">
+                    <Button className="bg-primary h-11 w-full rounded-xl text-[10px] font-bold tracking-widest text-white uppercase">
                       Review
                     </Button>
                     <Button
@@ -250,7 +250,7 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
         ) : (
           <div className="flex flex-col items-center gap-4 p-20 text-center">
             <Stethoscope className="text-muted-foreground h-20 w-20 opacity-20" />
-            <p className="text-muted-foreground text-2xl font-black tracking-tighter uppercase italic">
+            <p className="text-muted-foreground text-2xl font-bold tracking-tight uppercase">
               No clinicians matched
             </p>
           </div>
@@ -273,12 +273,10 @@ function StatCard({ title, value, icon, color }) {
           {icon}
         </div>
         <div>
-          <p className="text-muted-foreground mb-1 text-[10px] font-black tracking-[0.2em] uppercase">
+          <p className="text-muted-foreground mb-1 text-[10px] font-bold tracking-widest uppercase">
             {title}
           </p>
-          <h3 className="text-foreground text-3xl font-black tracking-tighter">
-            {value}
-          </h3>
+          <h3 className="text-foreground text-3xl font-bold tracking-tight">{value}</h3>
         </div>
       </CardContent>
     </Card>

@@ -28,7 +28,7 @@ export default function AdminSettingsPage() {
   return (
     <div className="space-y-10 pb-12">
       <header className="flex flex-col gap-2 px-2">
-        <h2 className="text-foreground text-3xl font-black tracking-tighter uppercase italic">
+        <h2 className="text-foreground text-3xl font-bold tracking-tight uppercase">
           System Configuration
         </h2>
         <p className="text-muted-foreground font-medium">
@@ -53,7 +53,7 @@ export default function AdminSettingsPage() {
           <Card className="bg-card rounded-[2.5rem] border-none shadow-sm">
             <CardHeader className="p-8 pb-0">
               <div className="flex items-center justify-between">
-                <CardTitle className="flex items-center gap-3 text-xl font-black tracking-tight uppercase italic">
+                <CardTitle className="flex items-center gap-3 text-xl font-bold tracking-tight uppercase">
                   <Cpu className="text-primary h-6 w-6" />
                   AI Heuristic Thresholds
                 </CardTitle>
@@ -87,7 +87,7 @@ export default function AdminSettingsPage() {
 
           <Card className="bg-card rounded-[2.5rem] border-none shadow-sm">
             <CardHeader className="p-8 pb-0">
-              <CardTitle className="flex items-center gap-3 text-xl font-black tracking-tight uppercase italic">
+              <CardTitle className="flex items-center gap-3 text-xl font-bold tracking-tight uppercase">
                 <Cloud className="h-6 w-6 text-indigo-500" />
                 Infrastructure Status
               </CardTitle>
@@ -99,7 +99,7 @@ export default function AdminSettingsPage() {
                     CLO
                   </div>
                   <div>
-                    <p className="text-foreground text-sm font-bold uppercase italic">
+                    <p className="text-foreground text-sm font-bold uppercase">
                       Cloudinary Storage
                     </p>
                     <p className="text-muted-foreground text-xs">
@@ -107,7 +107,7 @@ export default function AdminSettingsPage() {
                     </p>
                   </div>
                 </div>
-                <Badge className="border-none bg-emerald-500 px-3 text-[10px] font-black text-white uppercase">
+                <Badge className="border-none bg-emerald-500/10 px-3 py-1 text-[10px] font-bold text-emerald-600 uppercase">
                   Stable
                 </Badge>
               </div>
@@ -117,7 +117,7 @@ export default function AdminSettingsPage() {
                     MON
                   </div>
                   <div>
-                    <p className="text-foreground text-sm font-bold uppercase italic">
+                    <p className="text-foreground text-sm font-bold uppercase">
                       MongoDB Atlas
                     </p>
                     <p className="text-muted-foreground text-xs">
@@ -125,7 +125,7 @@ export default function AdminSettingsPage() {
                     </p>
                   </div>
                 </div>
-                <Badge className="border-none bg-emerald-500 px-3 text-[10px] font-black text-white uppercase">
+                <Badge className="border-none bg-emerald-500/10 px-3 py-1 text-[10px] font-bold text-emerald-600 uppercase">
                   Active
                 </Badge>
               </div>
@@ -135,11 +135,11 @@ export default function AdminSettingsPage() {
           <div className="flex justify-end gap-4">
             <Button
               variant="outline"
-              className="h-14 rounded-2xl px-10 text-xs font-black tracking-widest uppercase"
+              className="h-14 rounded-2xl px-10 text-xs font-bold tracking-widest uppercase"
             >
               Reset to Baseline
             </Button>
-            <Button className="bg-primary shadow-primary/20 h-14 gap-2 rounded-2xl px-10 text-xs font-black tracking-widest text-white uppercase shadow-lg">
+            <Button className="bg-primary h-14 gap-2 rounded-2xl px-10 text-xs font-bold tracking-widest text-white uppercase shadow-sm">
               <Save className="h-4 w-4" />
               Apply All Changes
             </Button>
@@ -156,7 +156,7 @@ function SettingsItem({ icon, label, active = false }) {
       className={cn(
         'flex w-full items-center justify-between rounded-2xl p-5 transition-all',
         active
-          ? 'bg-primary shadow-primary/20 scale-[1.02] text-white shadow-xl'
+          ? 'bg-primary scale-[1.02] text-white shadow-sm'
           : 'hover:bg-muted/50 text-foreground'
       )}
     >
@@ -164,9 +164,7 @@ function SettingsItem({ icon, label, active = false }) {
         <div className={cn('h-6 w-6', active ? 'text-white' : 'text-muted-foreground')}>
           {icon}
         </div>
-        <span className="text-sm font-black tracking-tighter uppercase italic">
-          {label}
-        </span>
+        <span className="text-sm font-bold tracking-tight uppercase">{label}</span>
       </div>
       <ChevronRight
         className={cn('h-4 w-4 opacity-50', !active && 'hidden group-hover:block')}
@@ -179,10 +177,10 @@ function SettingRow({ title, desc, value }) {
   return (
     <div className="border-border/50 flex items-center justify-between border-b pb-6 last:border-0 last:pb-0">
       <div className="max-w-md">
-        <p className="text-foreground mb-1 text-sm font-bold uppercase italic">{title}</p>
+        <p className="text-foreground mb-1 text-sm font-bold uppercase">{title}</p>
         <p className="text-muted-foreground text-xs leading-relaxed">{desc}</p>
       </div>
-      <div className="bg-muted text-primary border-border/50 min-w-[60px] rounded-xl border px-4 py-2 text-center text-xs font-black">
+      <div className="bg-muted text-primary border-border/50 min-w-[60px] rounded-xl border px-4 py-2 text-center text-xs font-bold">
         {value}
       </div>
     </div>

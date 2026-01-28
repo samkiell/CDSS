@@ -38,7 +38,7 @@ export default async function ReferralPage() {
   return (
     <div className="mx-auto w-full max-w-4xl px-3 pb-8 sm:px-4 sm:pb-10">
       <header className="mb-8 flex flex-col gap-2">
-        <h2 className="text-foreground text-3xl font-black tracking-tighter uppercase italic">
+        <h2 className="text-foreground text-3xl font-bold tracking-tight uppercase">
           Referral Management
         </h2>
         <p className="text-muted-foreground font-medium">

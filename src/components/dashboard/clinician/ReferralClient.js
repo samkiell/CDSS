@@ -59,7 +59,7 @@ export default function ReferralClient({ initialPatients = [] }) {
                   <div className="flex items-center gap-6 p-8 md:w-1/3">
                     <Avatar className="ring-primary/5 group-hover:ring-primary/20 h-16 w-16 rounded-2xl ring-4 transition-all">
                       <AvatarImage src={patient.avatar} />
-                      <AvatarFallback className="bg-primary/10 text-primary font-black">
+                      <AvatarFallback className="bg-primary/10 text-primary font-bold">
                         {patient.name
                           .split(' ')
                           .map((n) => n[0])
@@ -67,7 +67,7 @@ export default function ReferralClient({ initialPatients = [] }) {
                       </AvatarFallback>
                     </Avatar>
                     <div>
-                      <h3 className="text-foreground text-lg font-black tracking-tight uppercase italic">
+                      <h3 className="text-foreground text-lg font-bold tracking-tight uppercase">
                         {patient.name}
                       </h3>
                       <p className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
@@ -79,22 +79,22 @@ export default function ReferralClient({ initialPatients = [] }) {
                   {/* Stats & Info */}
                   <div className="grid flex-1 grid-cols-2 items-center gap-6 p-8">
                     <div className="flex flex-col gap-1">
-                      <div className="text-muted-foreground flex items-center gap-2 text-[10px] font-black tracking-widest uppercase opacity-60">
+                      <div className="text-muted-foreground flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase opacity-60">
                         <Calendar className="h-3 w-3" />
                         Last Assessment
                       </div>
-                      <p className="text-foreground text-sm font-bold italic">
+                      <p className="text-foreground text-sm font-bold">
                         {new Date(patient.lastActive).toLocaleDateString()}
                       </p>
                     </div>
                     <div className="flex flex-col gap-1">
-                      <div className="text-muted-foreground flex items-center gap-2 text-[10px] font-black tracking-widest uppercase opacity-60">
+                      <div className="text-muted-foreground flex items-center gap-2 text-[10px] font-bold tracking-widest uppercase opacity-60">
                         <MapPin className="h-3 w-3" />
                         Status
                       </div>
                       <Badge
                         className={cn(
-                          'w-fit rounded-full border-none px-3 py-1 text-[10px] font-black',
+                          'w-fit rounded-full border-none px-3 py-1 text-[10px] font-bold',
                           patient.status === 'urgent'
                             ? 'bg-red-500 text-white'
                             : 'bg-emerald-500 text-white'
@@ -107,7 +107,7 @@ export default function ReferralClient({ initialPatients = [] }) {
 
                   {/* Action */}
                   <div className="bg-muted/10 flex items-center justify-center p-8 md:w-48">
-                    <Button className="bg-primary shadow-primary/20 h-12 w-full gap-2 rounded-xl text-[10px] font-black tracking-widest text-white uppercase shadow-lg transition-all hover:brightness-110 active:scale-95">
+                    <Button className="bg-primary h-12 w-full gap-2 rounded-xl text-[10px] font-bold tracking-widest text-white uppercase shadow-sm transition-all hover:brightness-110 active:scale-95">
                       <FileOutput className="h-4 w-4" />
                       Create
                     </Button>
@@ -121,7 +121,7 @@ export default function ReferralClient({ initialPatients = [] }) {
             <div className="bg-muted text-muted-foreground flex h-20 w-20 items-center justify-center rounded-full">
               <User className="h-10 w-10 opacity-20" />
             </div>
-            <p className="text-muted-foreground/30 text-xl font-black tracking-tighter uppercase italic">
+            <p className="text-muted-foreground/30 text-xl font-bold tracking-tight uppercase">
               No patients found
             </p>
           </div>
@@ -134,7 +134,7 @@ export default function ReferralClient({ initialPatients = [] }) {
           <MapPin className="h-7 w-7" />
         </div>
         <div className="flex-1 text-center md:text-left">
-          <h4 className="mb-1 text-lg font-black tracking-tight uppercase italic">
+          <h4 className="mb-1 text-lg font-bold tracking-tight uppercase">
             External Facility Network
           </h4>
           <p className="text-sm font-medium text-gray-400">
@@ -144,7 +144,7 @@ export default function ReferralClient({ initialPatients = [] }) {
         </div>
         <Button
           variant="outline"
-          className="h-14 rounded-2xl border-white/10 px-8 text-[10px] font-black tracking-widest text-white uppercase hover:bg-white/5"
+          className="h-14 rounded-2xl border-white/10 px-8 text-[10px] font-bold tracking-widest text-white uppercase hover:bg-white/5"
         >
           Manage Facilities
         </Button>

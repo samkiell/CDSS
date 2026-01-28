@@ -88,7 +88,7 @@ export default async function ClinicianDashboardPage() {
       {/* Header Info */}
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h2 className="text-2xl font-black tracking-tight">Dashboard Overview</h2>
+          <h2 className="text-2xl font-bold tracking-tight">Dashboard Overview</h2>
           <p className="text-muted-foreground text-sm font-medium">
             Monitor patient progress and manage clinical tasks efficiently.
           </p>
@@ -107,7 +107,7 @@ export default async function ClinicianDashboardPage() {
                 <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
                   {stat.label}
                 </p>
-                <h3 className="text-2xl font-black">{stat.value}</h3>
+                <h3 className="text-2xl font-bold">{stat.value}</h3>
               </div>
             </CardContent>
           </Card>
@@ -167,14 +167,14 @@ export default async function ClinicianDashboardPage() {
                       <p className="max-w-[150px] truncate text-sm font-bold">
                         {sess.patientId?.firstName} {sess.patientId?.lastName}
                       </p>
-                      <p className="text-muted-foreground text-xs tracking-tighter uppercase">
+                      <p className="text-muted-foreground text-xs uppercase">
                         {sess.bodyRegion} Assessment
                       </p>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className="text-muted-foreground py-8 text-center text-sm italic">
+                <div className="text-muted-foreground py-8 text-center text-sm">
                   No pending items in queue
                 </div>
               )}

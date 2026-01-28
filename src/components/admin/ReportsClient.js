@@ -35,19 +35,19 @@ export default function AdminReportsClient({ stats }) {
         <div className="bg-muted/30 flex items-center gap-4 rounded-2xl p-1">
           <Button
             variant="ghost"
-            className="h-11 rounded-xl bg-white px-6 text-[10px] font-black tracking-widest uppercase shadow-sm"
+            className="h-11 rounded-xl bg-white px-6 text-[10px] font-bold tracking-widest uppercase shadow-sm"
           >
             Standard
           </Button>
           <Button
             variant="ghost"
-            className="text-muted-foreground h-11 rounded-xl px-6 text-[10px] font-black tracking-widest uppercase"
+            className="text-muted-foreground h-11 rounded-xl px-6 text-[10px] font-bold tracking-widest uppercase"
           >
             Custom
           </Button>
           <Button
             variant="ghost"
-            className="text-muted-foreground h-11 rounded-xl px-6 text-[10px] font-black tracking-widest uppercase"
+            className="text-muted-foreground h-11 rounded-xl px-6 text-[10px] font-bold tracking-widest uppercase"
           >
             Scheduled
           </Button>
@@ -57,7 +57,7 @@ export default function AdminReportsClient({ stats }) {
             <Filter className="h-4 w-4" />
             Date Range
           </Button>
-          <Button className="bg-primary shadow-primary/20 h-14 gap-2 rounded-2xl px-8 text-sm font-black tracking-widest text-white uppercase shadow-lg">
+          <Button className="bg-primary h-14 gap-2 rounded-2xl px-8 text-sm font-bold tracking-widest text-white uppercase shadow-sm">
             <Download className="h-4 w-4" />
             Export PDF
           </Button>
@@ -100,19 +100,19 @@ export default function AdminReportsClient({ stats }) {
         <TabsList className="bg-muted/30 h-14 w-full rounded-2xl p-1 md:w-auto">
           <TabsTrigger
             value="overview"
-            className="h-full rounded-xl px-8 text-[10px] font-black tracking-widest uppercase"
+            className="h-full rounded-xl px-8 text-[10px] font-bold tracking-widest uppercase"
           >
             Overview
           </TabsTrigger>
           <TabsTrigger
             value="performance"
-            className="h-full rounded-xl px-8 text-[10px] font-black tracking-widest uppercase"
+            className="h-full rounded-xl px-8 text-[10px] font-bold tracking-widest uppercase"
           >
             Performance
           </TabsTrigger>
           <TabsTrigger
             value="demographics"
-            className="h-full rounded-xl px-8 text-[10px] font-black tracking-widest uppercase"
+            className="h-full rounded-xl px-8 text-[10px] font-bold tracking-widest uppercase"
           >
             Demographics
           </TabsTrigger>
@@ -122,7 +122,7 @@ export default function AdminReportsClient({ stats }) {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <Card className="bg-card rounded-[2.5rem] border-none shadow-sm">
               <CardHeader className="p-8 pb-0">
-                <CardTitle className="text-xl font-black tracking-tight uppercase">
+                <CardTitle className="text-xl font-bold tracking-tight uppercase">
                   Regional Distribution
                 </CardTitle>
               </CardHeader>
@@ -130,7 +130,7 @@ export default function AdminReportsClient({ stats }) {
                 <div className="space-y-6">
                   {stats.regionalData.map((item, i) => (
                     <div key={i} className="space-y-2">
-                      <div className="flex justify-between text-xs font-black tracking-widest uppercase">
+                      <div className="flex justify-between text-xs font-bold tracking-widest uppercase">
                         <span>{item.region}</span>
                         <span className="text-primary">{item.count} Cases</span>
                       </div>
@@ -150,7 +150,7 @@ export default function AdminReportsClient({ stats }) {
 
             <Card className="bg-card rounded-[2.5rem] border-none shadow-sm">
               <CardHeader className="p-8 pb-0">
-                <CardTitle className="text-xl font-black tracking-tight uppercase">
+                <CardTitle className="text-xl font-bold tracking-tight uppercase">
                   Risk Level Breakdown
                 </CardTitle>
               </CardHeader>
@@ -175,10 +175,10 @@ export default function AdminReportsClient({ stats }) {
                                 : 'bg-emerald-500'
                           )}
                         />
-                        <span className="text-muted-foreground text-[10px] font-black tracking-widest uppercase">
+                        <span className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
                           {risk}
                         </span>
-                        <span className="text-foreground text-2xl font-black">
+                        <span className="text-foreground text-2xl font-bold">
                           {Math.round(percentage)}%
                         </span>
                       </div>
@@ -192,12 +192,12 @@ export default function AdminReportsClient({ stats }) {
           <Card className="bg-card overflow-hidden rounded-[2.5rem] border-none shadow-sm">
             <CardHeader className="border-border bg-muted/10 border-b p-8">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-xl font-black tracking-tight uppercase">
+                <CardTitle className="text-xl font-bold tracking-tight uppercase">
                   Recent Activity Log
                 </CardTitle>
                 <Button
                   variant="ghost"
-                  className="text-primary text-[10px] font-black tracking-widest uppercase"
+                  className="text-primary text-[10px] font-bold tracking-widest uppercase"
                 >
                   View Full Log
                 </Button>
@@ -218,7 +218,7 @@ export default function AdminReportsClient({ stats }) {
                         <p className="text-foreground text-sm font-bold">
                           Diagnostic Report Generated
                         </p>
-                        <p className="text-muted-foreground text-[10px] font-black tracking-widest uppercase opacity-60">
+                        <p className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase opacity-60">
                           Lumbar Region • Patient #1024
                         </p>
                       </div>
@@ -250,7 +250,7 @@ function KPICard({ title, value, change, trend, icon }) {
           </div>
           <Badge
             className={cn(
-              'rounded-full border-none px-3 py-1 text-[10px] font-black',
+              'rounded-full border-none px-3 py-1 text-[10px] font-bold',
               trend === 'up'
                 ? 'bg-emerald-500/10 text-emerald-600'
                 : 'bg-red-500/10 text-red-600'
@@ -259,10 +259,10 @@ function KPICard({ title, value, change, trend, icon }) {
             {change}
           </Badge>
         </div>
-        <p className="text-muted-foreground mb-1 text-[10px] font-black tracking-[0.2em] uppercase">
+        <p className="text-muted-foreground mb-1 text-[10px] font-bold tracking-widest uppercase">
           {title}
         </p>
-        <h3 className="text-foreground text-3xl font-black tracking-tighter">{value}</h3>
+        <h3 className="text-foreground text-3xl font-bold tracking-tight">{value}</h3>
       </CardContent>
     </Card>
   );

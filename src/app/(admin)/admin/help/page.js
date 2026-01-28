@@ -54,7 +54,7 @@ export default function AdminHelpPage() {
             <HelpCircle className="h-8 w-8" />
           </div>
           <div>
-            <h1 className="mb-1 text-3xl font-black tracking-tighter uppercase italic">
+            <h1 className="mb-1 text-3xl font-bold tracking-tight uppercase">
               Admin Support Portal
             </h1>
             <p className="text-muted-foreground font-medium">
@@ -83,7 +83,7 @@ export default function AdminHelpPage() {
               <div className="bg-primary/10 text-primary group-hover:bg-primary mb-4 flex h-12 w-12 items-center justify-center rounded-2xl transition-colors group-hover:text-white">
                 {section.icon}
               </div>
-              <CardTitle className="text-lg font-black tracking-tight uppercase italic">
+              <CardTitle className="text-lg font-bold tracking-tight uppercase">
                 {section.title}
               </CardTitle>
             </CardHeader>
@@ -109,10 +109,10 @@ export default function AdminHelpPage() {
           <BookOpen className="h-64 w-64 rotate-12" />
         </div>
         <div className="relative z-10 flex-1 space-y-6">
-          <Badge className="bg-primary rounded-full border-none px-4 py-1.5 text-[10px] font-black tracking-[0.2em] text-white uppercase">
+          <Badge className="bg-primary rounded-full border-none px-4 py-1.5 text-[10px] font-bold tracking-widest text-white uppercase">
             Live Training
           </Badge>
-          <h2 className="text-4xl leading-none font-black tracking-tighter uppercase italic">
+          <h2 className="text-4xl leading-none font-bold tracking-tight uppercase">
             CDSS Administrator <br /> Academy is Live
           </h2>
           <p className="max-w-xl font-medium text-gray-400">
@@ -120,13 +120,13 @@ export default function AdminHelpPage() {
             patient triage workflows.
           </p>
           <div className="flex gap-4">
-            <Button className="h-14 gap-2 rounded-2xl bg-white px-10 text-xs font-black tracking-widest text-gray-900 uppercase hover:brightness-110">
+            <Button className="h-14 gap-2 rounded-2xl bg-white px-10 text-xs font-bold tracking-widest text-gray-900 uppercase hover:brightness-110">
               <PlayCircle className="h-5 w-5" />
               Watch Video
             </Button>
             <Button
               variant="outline"
-              className="h-14 rounded-2xl border-white/10 px-10 text-xs font-black tracking-widest text-white uppercase hover:bg-white/5"
+              className="h-14 rounded-2xl border-white/10 px-10 text-xs font-bold tracking-widest text-white uppercase hover:bg-white/5"
             >
               View Whitepapers
             </Button>

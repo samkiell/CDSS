@@ -155,7 +155,7 @@ export default async function PatientDashboardPage() {
       {/* Header */}
       <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
         <div>
-          <h2 className="text-2xl font-black tracking-tight">Dashboard Overview</h2>
+          <h2 className="text-2xl font-bold tracking-tight">Dashboard Overview</h2>
           <p className="text-muted-foreground text-sm font-medium">
             Keep track of your symptoms and recovery progress here.
           </p>
@@ -420,7 +420,7 @@ export default async function PatientDashboardPage() {
                       </div>
                       <Badge
                         variant="outline"
-                        className="bg-success/10 text-success border-success/20 text-[10px] font-black uppercase"
+                        className="bg-success/10 text-success border-success/20 text-[10px] font-bold uppercase"
                       >
                         {appt.status}
                       </Badge>
@@ -478,14 +478,14 @@ export default async function PatientDashboardPage() {
                     </div>
                     <Badge
                       variant="outline"
-                      className="bg-primary/5 text-primary border-primary/20 shrink-0 text-[9px] font-black uppercase"
+                      className="bg-primary/5 text-primary border-primary/20 shrink-0 text-[9px] font-bold uppercase"
                     >
                       {file.category}
                     </Badge>
                   </div>
                 ))
               ) : (
-                <p className="text-muted-foreground text-center text-[10px] italic">
+                <p className="text-muted-foreground text-center text-[10px]">
                   No clinical reports or imaging files found.
                 </p>
               )}

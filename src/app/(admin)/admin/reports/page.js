@@ -46,7 +46,7 @@ export default async function AdminReportsPage() {
   return (
     <div className="space-y-8 px-2 pb-12">
       <header className="flex flex-col gap-2">
-        <h2 className="text-3xl font-black tracking-tighter text-gray-900 uppercase italic dark:text-white">
+        <h2 className="text-3xl font-bold tracking-tight text-gray-900 uppercase dark:text-white">
           System Reports & Analytics
         </h2>
         <p className="max-w-2xl font-medium text-gray-500">

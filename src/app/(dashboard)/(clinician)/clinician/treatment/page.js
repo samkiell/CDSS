@@ -52,7 +52,7 @@ export default async function TreatmentPlannerPage() {
   return (
     <div className="mx-auto w-full max-w-5xl px-3 pb-8 sm:px-4 sm:pb-10">
       <header className="mb-8 flex flex-col gap-2">
-        <h1 className="text-foreground text-3xl font-black tracking-tighter uppercase italic">
+        <h1 className="text-foreground text-3xl font-bold tracking-tight uppercase">
           Treatment Planner
         </h1>
         <p className="text-muted-foreground font-medium">

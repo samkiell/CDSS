@@ -51,8 +51,8 @@ export default async function AdminMessagesPage() {
   return (
     <div className="space-y-6">
       <header className="px-2">
-        <h1 className="text-foreground text-3xl font-black tracking-tighter uppercase italic">
-          Platform Support messages
+        <h1 className="text-foreground text-3xl font-bold tracking-tight uppercase">
+          Platform Support Messages
         </h1>
         <p className="text-muted-foreground font-medium">
           Global communication hub for managing user inquiries and platform-wide

@@ -54,7 +54,6 @@ export default function TreatmentPlannerClient({ initialPatients = [] }) {
     <div className="space-y-8">
       {/* Search Bar */}
       <div className="group relative">
-        <div className="from-primary/20 absolute -inset-1 rounded-2xl bg-gradient-to-r to-indigo-500/20 opacity-25 blur transition duration-1000 group-focus-within:opacity-100"></div>
         <Card className="bg-card relative rounded-2xl border-none shadow-sm">
           <CardContent className="p-0">
             <div className="relative flex items-center">
@@ -84,7 +83,7 @@ export default function TreatmentPlannerClient({ initialPatients = [] }) {
               <div className="absolute top-0 right-0 p-6">
                 <Badge
                   className={cn(
-                    'flex items-center gap-1.5 rounded-full border-none px-3 py-1.5 text-[10px] font-black tracking-widest text-white uppercase shadow-lg',
+                    'flex items-center gap-1.5 rounded-full border-none px-3 py-1.5 text-[10px] font-bold tracking-widest text-white uppercase shadow-sm',
                     status.color
                   )}
                 >
@@ -97,7 +96,7 @@ export default function TreatmentPlannerClient({ initialPatients = [] }) {
                 <div className="flex items-center gap-6">
                   <Avatar className="ring-primary/5 group-hover:ring-primary/20 h-20 w-20 rounded-3xl ring-4 transition-all">
                     <AvatarImage src={patient.avatar} />
-                    <AvatarFallback className="bg-primary/10 text-primary text-2xl font-black">
+                    <AvatarFallback className="bg-primary/10 text-primary text-2xl font-bold">
                       {patient.name
                         .split(' ')
                         .map((n) => n[0])
@@ -105,7 +104,7 @@ export default function TreatmentPlannerClient({ initialPatients = [] }) {
                     </AvatarFallback>
                   </Avatar>
                   <div className="min-w-0">
-                    <h3 className="text-foreground truncate text-xl font-black tracking-tighter uppercase italic">
+                    <h3 className="text-foreground truncate text-xl font-bold tracking-tight uppercase">
                       {patient.name}
                     </h3>
                     <p className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
@@ -115,12 +114,12 @@ export default function TreatmentPlannerClient({ initialPatients = [] }) {
                 </div>
 
                 <div className="space-y-4">
-                  <div className="text-muted-foreground flex items-center justify-between px-1 text-[10px] font-black tracking-widest uppercase opacity-60">
+                  <div className="text-muted-foreground flex items-center justify-between px-1 text-[10px] font-bold tracking-widest uppercase opacity-60">
                     <span>Recovery Progress</span>
                     <span className="text-primary">64%</span>
                   </div>
                   <div className="bg-muted h-2 w-full overflow-hidden rounded-full">
-                    <div className="bg-primary h-full w-[64%] rounded-full shadow-[0_0_10px_rgba(var(--primary),0.5)]" />
+                    <div className="bg-primary h-full w-[64%] rounded-full shadow-sm" />
                   </div>
                 </div>
 
@@ -129,13 +128,13 @@ export default function TreatmentPlannerClient({ initialPatients = [] }) {
                     href={`/clinician/treatment/view/${patient.id}`}
                     className="flex-1"
                   >
-                    <Button className="bg-foreground text-background h-12 w-full rounded-xl text-[10px] font-black tracking-widest uppercase transition-all hover:brightness-110 active:scale-95">
+                    <Button className="bg-foreground text-background h-12 w-full rounded-xl text-[10px] font-bold tracking-widest uppercase transition-all hover:brightness-110 active:scale-95">
                       Open File
                     </Button>
                   </Link>
                   <Button
                     variant="outline"
-                    className="hover:bg-muted h-12 flex-1 rounded-xl border-2 text-[10px] font-black tracking-widest uppercase transition-all active:scale-95"
+                    className="hover:bg-muted h-12 flex-1 rounded-xl border-2 text-[10px] font-bold tracking-widest uppercase transition-all active:scale-95"
                   >
                     {patient.status === 'not_started' ? 'Assign Plan' : 'Modify'}
                   </Button>
@@ -151,7 +150,7 @@ export default function TreatmentPlannerClient({ initialPatients = [] }) {
               <FlaskConical className="h-10 w-10" />
             </div>
             <div>
-              <p className="text-2xl font-black tracking-tighter uppercase italic">
+              <p className="text-2xl font-bold tracking-tight uppercase">
                 No Treatment Plans
               </p>
               <p className="text-sm font-medium">
