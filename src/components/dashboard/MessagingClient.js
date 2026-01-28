@@ -268,7 +268,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
                   <button
                     key={conv.id}
                     onClick={() => setActiveTab(conv)}
-                    className="group hover:bg-muted/50 border-border/20 bg-card flex w-full items-center gap-6 rounded-[2rem] border p-6 transition-all hover:scale-[1.01] hover:shadow-lg"
+                    className="group hover:bg-muted/50 border-border/20 bg-card flex w-full items-center gap-4 rounded-[2rem] border p-4 transition-all hover:scale-[1.01] hover:shadow-lg"
                   >
                     <div className="relative shrink-0">
                       <Avatar className="h-12 w-12 rounded-xl shadow-md ring-2 ring-white dark:ring-gray-800">
@@ -283,11 +283,11 @@ export default function MessagingClient({ currentUser, initialConversations = []
                     </div>
 
                     <div className="min-w-0 flex-1 text-left">
-                      <div className="mb-2 flex items-center justify-between">
-                        <h4 className="text-base font-bold tracking-tight uppercase">
+                      <div className="mb-1 flex items-center justify-between gap-2">
+                        <h4 className="truncate text-sm font-bold tracking-tight uppercase">
                           {conv.otherUser.name}
                         </h4>
-                        <span className="text-muted-foreground text-[9px] font-semibold tracking-widest uppercase opacity-60">
+                        <span className="text-muted-foreground shrink-0 text-[9px] font-semibold tracking-widest whitespace-nowrap uppercase opacity-60">
                           {conv.lastMessageTime}
                         </span>
                       </div>
@@ -354,7 +354,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
                 )}
               </div>
               <div>
-                <h3 className="text-base font-bold tracking-tight uppercase">
+                <h3 className="text-sm font-bold tracking-tight uppercase">
                   {activeTab.otherUser.name}
                 </h3>
                 {activeTab.otherUser.online ? (

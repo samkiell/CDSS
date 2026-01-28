@@ -73,8 +73,8 @@ export default function PatientQueue({ initialSessions = [] }) {
           </div>
           <Input
             type="text"
-            placeholder="Search assigned patient cases..."
-            className="bg-card border-border focus:ring-primary/10 h-12 w-full rounded-2xl px-6 text-sm shadow-sm transition-all focus:ring-2"
+            placeholder="Search cases..."
+            className="bg-card border-border focus:ring-primary/10 h-12 w-full rounded-2xl pr-12 pl-6 text-sm shadow-sm transition-all focus:ring-2"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -104,11 +104,11 @@ function PatientCard({ session }) {
   const status = session.aiAnalysis?.riskLevel;
 
   return (
-    <Card className="group border-border bg-card relative flex items-center justify-between rounded-[2rem] p-6 shadow-sm transition-all hover:shadow-md lg:px-10">
+    <Card className="group border-border bg-card relative flex flex-col gap-4 rounded-[2rem] p-5 shadow-sm transition-all hover:shadow-md sm:flex-row sm:items-center sm:justify-between lg:px-10">
       {/* Risk Badge */}
       <div
         className={cn(
-          'absolute top-6 right-8 rounded-full px-3 py-1 text-[10px] font-black tracking-wider uppercase',
+          'absolute top-6 right-6 rounded-full px-3 py-1 text-[10px] font-black tracking-wider uppercase sm:right-8',
           status === 'Urgent'
             ? 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400'
             : status === 'Moderate'
@@ -119,9 +119,9 @@ function PatientCard({ session }) {
         {status || 'Low'} Risk
       </div>
 
-      <div className="flex items-center gap-6">
+      <div className="flex items-center gap-4 sm:gap-6">
         {/* Avatar */}
-        <div className="bg-primary/10 text-primary border-primary/20 relative flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full border text-xl font-bold shadow-inner">
+        <div className="bg-primary/10 text-primary border-primary/20 relative flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border text-xl font-bold shadow-inner sm:h-16 sm:w-16">
           {patient?.avatar ? (
             <img
               src={patient.avatar}
@@ -135,10 +135,10 @@ function PatientCard({ session }) {
 
         {/* Patient Info */}
         <div className="flex flex-col gap-0.5">
-          <h3 className="text-foreground text-lg leading-none font-bold">
+          <h3 className="text-foreground text-base leading-none font-bold sm:text-lg">
             {patient?.firstName} {patient?.lastName}
           </h3>
-          <span className="text-muted-foreground text-sm font-medium capitalize">
+          <span className="text-muted-foreground text-xs font-medium capitalize sm:text-sm">
             {patient?.gender || 'N/A'} • {session.bodyRegion} Assessment
           </span>
         </div>
@@ -155,8 +155,11 @@ function PatientCard({ session }) {
       </div>
 
       {/* Action Button */}
-      <Link href={`/clinician/dashboard/case/${session._id}`}>
-        <Button className="bg-primary rounded-xl border-none px-10 py-3 text-sm font-bold text-white transition-all hover:scale-105 active:scale-95">
+      <Link
+        href={`/clinician/dashboard/case/${session._id}`}
+        className="w-full sm:w-auto"
+      >
+        <Button className="bg-primary w-full rounded-xl border-none px-6 py-3 text-sm font-bold text-white transition-all hover:scale-105 active:scale-95 sm:w-auto sm:px-10">
           View Case
         </Button>
       </Link>
