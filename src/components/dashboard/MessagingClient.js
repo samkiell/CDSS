@@ -15,6 +15,7 @@ import {
   ChevronLeft,
   Circle,
   User,
+  X,
 } from 'lucide-react';
 import { Button, Avatar, AvatarImage, AvatarFallback, Badge } from '@/components/ui';
 import { ScrollArea } from '@/components/ui/ScrollArea';
@@ -44,7 +45,9 @@ export default function MessagingClient({ currentUser, initialConversations = []
   const scrollContainerRef = useRef(null);
   const fileInputRef = useRef(null);
   const msgCountRef = useRef(0);
+  const msgCountRef = useRef(0);
   const [searchQuery, setSearchQuery] = useState('');
+  const [expandedImage, setExpandedImage] = useState(null);
 
   const emojis = ['😊', '👍', '🙏', '🏥', '💊', '👋', '❤️', '📍', '✅', '❌', '🤔', '💪'];
 
@@ -442,7 +445,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
               {isLoadingMessages ? (
                 <div className="flex flex-col items-center justify-center py-20 text-center opacity-30">
                   <Circle className="mb-4 h-8 w-8 animate-ping" />
-                  <p className="text-sm font-bold uppercase">Loading decryption...</p>
+                  <p className="text-sm font-bold uppercase">Loading messages...</p>
                 </div>
               ) : messages.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-20 text-center opacity-30">
@@ -475,7 +478,12 @@ export default function MessagingClient({ currentUser, initialConversations = []
                           <img
                             src={m.content.replace('IMAGE:', '')}
                             alt="Attachment"
-                            className="max-h-48 rounded-xl object-cover"
+                            src={m.content.replace('IMAGE:', '')}
+                            alt="Attachment"
+                            className="max-h-48 cursor-pointer rounded-xl object-cover transition-opacity hover:opacity-90"
+                            onClick={() =>
+                              setExpandedImage(m.content.replace('IMAGE:', ''))
+                            }
                           />
                         ) : (
                           <p className="font-sans text-sm leading-snug">{m.content}</p>
@@ -587,6 +595,24 @@ export default function MessagingClient({ currentUser, initialConversations = []
               </Button>
             </form>
           </footer>
+        </div>
+      )}
+      {expandedImage && (
+        <div
+          className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm duration-200"
+          onClick={() => setExpandedImage(null)}
+        >
+          <button
+            className="absolute top-4 right-4 rounded-full bg-black/20 p-2 text-white/50 transition-colors hover:text-white"
+            onClick={() => setExpandedImage(null)}
+          >
+            <X className="h-8 w-8" />
+          </button>
+          <img
+            src={expandedImage}
+            alt="Full size"
+            className="animate-in zoom-in-95 max-h-full max-w-full rounded-lg object-contain shadow-2xl duration-200"
+          />
         </div>
       )}
     </div>
