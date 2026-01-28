@@ -142,7 +142,7 @@ export default async function AdminDashboardPage() {
             type="approved"
           />
           <TherapistManagement
-            title="System Members"
+            title="Latest Patients"
             therapists={pendingTherapists}
             type="pending"
           />
