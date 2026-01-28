@@ -54,7 +54,8 @@ export default function MessagingClient({ currentUser, initialConversations = []
 
   // Auto-scroll to bottom of messages (Smart Scroll)
   useEffect(() => {
-    if (messages.length > msgCountRef.current) {
+    if (messages.length > 0) {
+      const isInitialLoad = msgCountRef.current === 0;
       const isNewMsgFromMe = messages[messages.length - 1]?.senderId === currentUser.id;
 
       // Check if user is near bottom
@@ -63,14 +64,24 @@ export default function MessagingClient({ currentUser, initialConversations = []
         ? container.scrollHeight - container.scrollTop - container.clientHeight < 150
         : true;
 
-      if (isNewMsgFromMe || isNearBottom) {
-        if (scrollRef.current) {
-          scrollRef.current.scrollIntoView({ behavior: 'smooth' });
-        }
+      if (isInitialLoad || isNewMsgFromMe || isNearBottom) {
+        // Use a small timeout to ensure DOM has updated
+        setTimeout(() => {
+          if (scrollRef.current) {
+            scrollRef.current.scrollIntoView({
+              behavior: isInitialLoad ? 'auto' : 'smooth',
+            });
+          }
+        }, 100);
       }
       msgCountRef.current = messages.length;
     }
   }, [messages, currentUser.id]);
+
+  // Reset message count when switching conversations
+  useEffect(() => {
+    msgCountRef.current = 0;
+  }, [activeTab]);
 
   // Fetch messages when tab changes
   useEffect(() => {
@@ -282,8 +293,8 @@ export default function MessagingClient({ currentUser, initialConversations = []
 
                     <div className="flex shrink-0 flex-col items-end gap-3">
                       {conv.unreadCount > 0 && (
-                        <span className="bg-primary shadow-primary/20 rounded-full px-2.5 py-0.5 text-[8px] font-bold text-white shadow-lg">
-                          {conv.unreadCount} MSG
+                        <span className="bg-primary flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-white shadow-lg">
+                          {conv.unreadCount}
                         </span>
                       )}
                       <ChevronLeft className="h-5 w-5 rotate-180 opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-30" />
@@ -458,15 +469,15 @@ export default function MessagingClient({ currentUser, initialConversations = []
                           <div className="flex items-center gap-1">
                             {m.isRead ? (
                               <>
-                                <CheckCheck className="text-primary h-3.5 w-3.5 opacity-60" />
+                                <CheckCheck className="h-4 w-4 text-cyan-500" />
                                 {isLastMessage && (
-                                  <span className="text-primary text-[8px] font-bold tracking-widest uppercase">
+                                  <span className="text-[8px] font-bold tracking-widest text-cyan-500 uppercase">
                                     Seen
                                   </span>
                                 )}
                               </>
                             ) : (
-                              <Check className="text-muted-foreground h-3.5 w-3.5 opacity-40" />
+                              <Check className="text-muted-foreground h-4 w-4 opacity-50" />
                             )}
                           </div>
                         )}
