@@ -86,7 +86,12 @@ export async function getMessages(otherUserId) {
 
   const conversationId = [session.user.id, otherUserId].sort().join('_');
 
-  const messages = await Message.find({ conversationId }).sort({ createdAt: 1 }).lean();
+  const messages = await Message.find({
+    conversationId,
+    deletedBy: { $ne: session.user.id },
+  })
+    .sort({ createdAt: 1 })
+    .lean();
 
   return JSON.parse(JSON.stringify(messages));
 }
@@ -122,7 +127,12 @@ export async function markAsRead(senderId) {
   await connectDB();
 
   await Message.updateMany(
-    { senderId, receiverId: session.user.id, isRead: false },
+    {
+      senderId,
+      receiverId: session.user.id,
+      isRead: false,
+      deletedBy: { $ne: session.user.id },
+    },
     { $set: { isRead: true } }
   );
 }
@@ -137,7 +147,10 @@ export async function clearMessages(otherUserId) {
   await connectDB();
 
   const conversationId = [session.user.id, otherUserId].sort().join('_');
-  await Message.deleteMany({ conversationId });
+  await Message.updateMany(
+    { conversationId },
+    { $addToSet: { deletedBy: session.user.id } }
+  );
 
   return { success: true };
 }

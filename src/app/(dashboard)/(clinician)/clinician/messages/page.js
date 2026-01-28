@@ -19,7 +19,10 @@ export default async function ClinicianMessagesPage() {
   const initialConversations = await Promise.all(
     patients.map(async (patient) => {
       const conversationId = [session.user.id, patient._id].sort().join('_');
-      const lastMsg = await Message.findOne({ conversationId })
+      const lastMsg = await Message.findOne({
+        conversationId,
+        deletedBy: { $ne: session.user.id },
+      })
         .sort({ createdAt: -1 })
         .lean();
 
@@ -27,6 +30,7 @@ export default async function ClinicianMessagesPage() {
         conversationId,
         receiverId: session.user.id,
         isRead: false,
+        deletedBy: { $ne: session.user.id },
       });
 
       return {

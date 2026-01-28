@@ -21,7 +21,10 @@ export default async function MessagesPage() {
   if (clinician) {
     // Fetch last message for the conversation
     const conversationId = [session.user.id, clinician._id].sort().join('_');
-    const lastMsg = await Message.findOne({ conversationId })
+    const lastMsg = await Message.findOne({
+      conversationId,
+      deletedBy: { $ne: session.user.id },
+    })
       .sort({ createdAt: -1 })
       .lean();
 
@@ -29,6 +32,7 @@ export default async function MessagesPage() {
       conversationId,
       receiverId: session.user.id,
       isRead: false,
+      deletedBy: { $ne: session.user.id },
     });
 
     initialConversations = [
