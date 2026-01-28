@@ -29,7 +29,7 @@ export async function PATCH(request, { params }) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // Send notification if upgraded to CLINICIAN
+    // Send notification for role change
     if (role === 'CLINICIAN') {
       await Notification.create({
         userId: updatedUser._id,
@@ -38,6 +38,15 @@ export async function PATCH(request, { params }) {
           'Your account has been upgraded to Clinician (Therapist). You can now manage patient cases.',
         type: 'SYSTEM',
         link: '/clinician/dashboard',
+      });
+    } else if (role === 'PATIENT') {
+      await Notification.create({
+        userId: updatedUser._id,
+        title: 'Account Role Updated',
+        description:
+          'Your account role has been set to Patient. You can continue using the platform for assessments.',
+        type: 'SYSTEM',
+        link: '/patient/dashboard',
       });
     }
 

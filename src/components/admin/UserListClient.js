@@ -304,6 +304,16 @@ export default function AdminUserListClient({ initialUsers = [] }) {
                               </DropdownMenuItem>
                             )}
 
+                            {user.role === 'CLINICIAN' && (
+                              <DropdownMenuItem
+                                onClick={() => handleRoleUpdate(user._id, 'PATIENT')}
+                                className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase"
+                              >
+                                <UserIcon className="h-4 w-4" />
+                                Make Patient
+                              </DropdownMenuItem>
+                            )}
+
                             <DropdownMenuItem
                               onClick={() => handleDelete(user._id)}
                               className="text-destructive flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase"
