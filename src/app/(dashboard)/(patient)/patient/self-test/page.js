@@ -1,11 +1,18 @@
 'use client';
 
-import React from 'react';
-import { Play, Info, Activity, ChevronRight } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { Play, Info, CheckCircle2 } from 'lucide-react';
 import { Card, CardContent, Badge, Button } from '@/components/ui';
+import { toast } from 'sonner';
 import { cn } from '@/lib/cn';
 
 export default function SelfTestPage() {
+  useEffect(() => {
+    toast.success('Details recorded', {
+      description: 'Your clinical assessments have been successfully documented.',
+    });
+  }, []);
+
   const tests = [
     {
       id: 'leg-raise',
@@ -132,17 +139,18 @@ export default function SelfTestPage() {
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-4 pt-4 sm:flex-row">
-                    <Button className="bg-primary shadow-primary/30 group h-16 flex-1 rounded-2xl text-sm font-black tracking-widest text-white uppercase shadow-2xl transition-all hover:brightness-110 active:scale-95">
-                      Start Assessment
-                      <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="hover:bg-muted h-16 rounded-2xl border-2 px-10 text-sm font-black tracking-widest uppercase transition-all"
-                    >
-                      Clinical Details
-                    </Button>
+                  <div className="flex items-center gap-4 pt-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-green-500/10 text-green-600 dark:bg-green-500/20 dark:text-green-400">
+                      <CheckCircle2 className="h-6 w-6" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-black tracking-widest text-gray-900 uppercase dark:text-white">
+                        Test Completed
+                      </p>
+                      <p className="text-muted-foreground text-xs font-medium italic">
+                        All clinical details have been recorded.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -165,8 +173,10 @@ export default function SelfTestPage() {
             </p>
           </div>
         </div>
-        <Button className="h-14 shrink-0 rounded-xl bg-white px-10 text-[10px] font-black tracking-widest text-gray-900 uppercase">
-          Contact Therapist
+        <Button 
+        onClick={() => router.push('/patient/assessment?new=true')}
+        className="h-14 shrink-0 rounded-xl bg-white px-10 text-[10px] font-black tracking-widest text-gray-900 uppercase">
+          Take an Assessment
         </Button>
       </div>
     </div>
