@@ -157,9 +157,22 @@ export default function CaseDetailsPage({ params }) {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      // Mocking referral API for now as it's a secondary feature
-      alert(`Referral sent to ${referralData.specialty} successfully!`);
-      setIsReferralOpen(false);
+      const res = await fetch('/api/referrals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientId: session.patientId._id,
+          specialty: referralData.specialty,
+          reason: referralData.reason,
+        }),
+      });
+
+      if (res.ok) {
+        alert(`Referral sent to ${referralData.specialty} successfully!`);
+        setIsReferralOpen(false);
+      } else {
+        alert('Failed to send referral.');
+      }
     } catch (err) {
       alert('Failed to send referral.');
     } finally {
