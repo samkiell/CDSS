@@ -37,7 +37,7 @@ export async function PATCH(req) {
       { new: true, runValidators: true }
     );
 
-    return NextResponse.json(user.notifications);
+    return NextResponse.json(JSON.parse(JSON.stringify(user.notifications)));
   } catch (error) {
     console.error('Error updating notifications:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
