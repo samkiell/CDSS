@@ -11,16 +11,37 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/cn';
-import { Card, CardContent, Button, Input, Badge } from '@/components/ui';
+import {
+  Card,
+  CardContent,
+  Button,
+  Input,
+  Badge,
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from '@/components/ui';
 
 export default function PatientListClient({ patients }) {
   const [search, setSearch] = useState('');
+  const [filter, setFilter] = useState('All'); // 'All', 'Urgent', 'Active', 'New'
 
-  const filteredPatients = patients.filter(
-    (p) =>
+  const filteredPatients = patients.filter((p) => {
+    const matchesSearch =
       p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.condition.toLowerCase().includes(search.toLowerCase())
-  );
+      p.condition.toLowerCase().includes(search.toLowerCase());
+
+    if (!matchesSearch) return false;
+
+    if (filter === 'Urgent') return p.riskLevel === 'Urgent';
+    if (filter === 'Active') return p.status !== 'success'; // Assuming 'success' means discharged or stable
+    if (filter === 'New') {
+      const oneWeekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+      return new Date(p.lastSession) > oneWeekAgo;
+    }
+    return true;
+  });
 
   return (
     <div className="space-y-6">
@@ -38,13 +59,28 @@ export default function PatientListClient({ patients }) {
           />
         </div>
         <div className="flex w-full items-center gap-2 md:w-auto">
-          <Button
-            variant="outline"
-            className="border-border h-14 flex-1 gap-2 rounded-2xl font-bold md:w-14 md:flex-none"
-          >
-            <ListFilter className="h-5 w-5" />
-            <span className="md:hidden">Filter</span>
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="outline"
+                className="border-border h-14 w-14 gap-2 rounded-2xl font-bold md:w-auto md:px-6"
+              >
+                <ListFilter className="h-5 w-5" />
+                <span className="hidden md:inline">Filter: {filter}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {['All', 'Urgent', 'Active', 'New'].map((f) => (
+                <DropdownMenuItem
+                  key={f}
+                  onClick={() => setFilter(f)}
+                  className={cn(filter === f && 'bg-primary/10 text-primary font-bold')}
+                >
+                  {f} Patients
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
 
@@ -166,9 +202,25 @@ function PatientListItem({ patient }) {
               <ArrowUpRight className="h-4 w-4" />
             </Button>
           </Link>
-          <Button variant="ghost" size="icon" className="border-border rounded-xl border">
-            <MoreHorizontal className="h-5 w-5" />
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="border-border rounded-xl border"
+              >
+                <MoreHorizontal className="h-5 w-5" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => alert('View Profile clicked')}>
+                View Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => alert('Archive Case clicked')}>
+                Archive Case
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </Card>
