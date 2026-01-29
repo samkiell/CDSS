@@ -350,6 +350,37 @@ export default function CaseDetailsPage({ params }) {
         </div>
       </Card>
 
+      {/* Assessment Media Gallery */}
+      {session.mediaUrls && session.mediaUrls.length > 0 && (
+        <div className="space-y-4">
+          <h2 className="px-2 text-xl font-black tracking-wide uppercase">
+            Visual Assessment Findings
+          </h2>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {session.mediaUrls.map((url, idx) => (
+              <div
+                key={idx}
+                className="group relative aspect-square cursor-zoom-in overflow-hidden rounded-[2rem] border-4 border-white bg-slate-100 shadow-sm transition-all hover:shadow-lg dark:border-slate-800 dark:bg-slate-900"
+                onClick={() =>
+                  setActiveImage({ src: url, alt: `Patient Assessment Image ${idx + 1}` })
+                }
+              >
+                <img
+                  src={url}
+                  alt={`Assessment ${idx}`}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
+                  <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-full text-white shadow-xl">
+                    <Eye className="h-5 w-5" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* AI Reasoning / Assessment Summary */}
       <div className="space-y-4">
         <div className="flex items-center justify-between px-2">
@@ -945,7 +976,15 @@ export default function CaseDetailsPage({ params }) {
                   {documents.map((doc) => (
                     <div
                       key={doc._id}
-                      className="hover:border-primary/50 group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 p-4 transition-all dark:border-slate-800 dark:bg-slate-900/40"
+                      onClick={() => {
+                        if (!doc.fileType?.includes('pdf')) {
+                          setActiveImage({ src: doc.fileUrl, alt: doc.fileName });
+                        }
+                      }}
+                      className={cn(
+                        'hover:border-primary/50 group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 p-4 transition-all dark:border-slate-800 dark:bg-slate-900/40',
+                        !doc.fileType?.includes('pdf') && 'cursor-zoom-in'
+                      )}
                     >
                       <div className="flex items-center gap-4">
                         <div className="text-primary flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-slate-800">
@@ -971,7 +1010,12 @@ export default function CaseDetailsPage({ params }) {
                       </div>
                       <div className="flex gap-2">
                         {doc.fileType?.includes('pdf') ? (
-                          <a href={doc.fileUrl} target="_blank" rel="noopener noreferrer">
+                          <a
+                            href={doc.fileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                          >
                             <Button
                               size="sm"
                               variant="ghost"
@@ -984,15 +1028,20 @@ export default function CaseDetailsPage({ params }) {
                           <Button
                             size="sm"
                             variant="ghost"
-                            onClick={() =>
-                              setActiveImage({ src: doc.fileUrl, alt: doc.fileName })
-                            }
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveImage({ src: doc.fileUrl, alt: doc.fileName });
+                            }}
                             className="group-hover:bg-primary/10 group-hover:text-primary h-8 w-8 rounded-full p-0"
                           >
                             <Eye className="h-4 w-4" />
                           </Button>
                         )}
-                        <a href={doc.fileUrl} download={doc.fileName}>
+                        <a
+                          href={doc.fileUrl}
+                          download={doc.fileName}
+                          onClick={(e) => e.stopPropagation()}
+                        >
                           <Button
                             size="sm"
                             variant="ghost"
