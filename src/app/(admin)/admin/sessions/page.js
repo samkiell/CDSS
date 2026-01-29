@@ -19,7 +19,7 @@ export default async function AdminSessionsPage({ searchParams }) {
 
   // Fetch all clinicians for assignment dropdown
   const cliniciansRaw = await User.find({ role: ROLES.CLINICIAN, isActive: true })
-    .select('firstName lastName avatar specialization')
+    .select('firstName lastName avatar specialization professional')
     .lean();
 
   const clinicians = JSON.parse(JSON.stringify(cliniciansRaw));

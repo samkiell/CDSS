@@ -17,6 +17,7 @@ import {
   Mail,
   Smartphone,
   Users,
+  AlertTriangle,
 } from 'lucide-react';
 import {
   Card,
@@ -32,10 +33,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui';
 import { cn } from '@/lib/cn';
+import ClinicianDetailsModal from './ClinicianDetailsModal';
+import { verifyClinician } from '@/actions/admin';
+import { toast } from 'sonner';
 
 export default function AdminTherapistListClient({ initialTherapists = [] }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeFilter, setActiveFilter] = useState('ALL');
+  const [selectedClinician, setSelectedClinician] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
 
   const filteredTherapists = useMemo(() => {
     return initialTherapists.filter((t) => {
@@ -48,7 +55,12 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
           t.specialization.toLowerCase().includes(searchQuery.toLowerCase()));
 
       const matchesStatus =
-        activeFilter === 'ALL' || (activeFilter === 'ACTIVE' ? t.isActive : !t.isActive);
+        activeFilter === 'ALL' ||
+        (activeFilter === 'ACTIVE'
+          ? t.isActive
+          : activeFilter === 'UNVERIFIED'
+            ? !t.professional?.verified
+            : !t.isActive);
 
       return matchesSearch && matchesStatus;
     });
@@ -58,12 +70,43 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
     return {
       total: initialTherapists.length,
       active: initialTherapists.filter((t) => t.isActive).length,
-      pending: initialTherapists.filter((t) => !t.isActive).length,
+      pending: initialTherapists.filter((t) => !t.professional?.verified).length,
     };
   }, [initialTherapists]);
 
+  const handleOpenDetails = (clinician) => {
+    setSelectedClinician(clinician);
+    setIsModalOpen(true);
+  };
+
+  const handleVerify = async (clinicianId) => {
+    setIsVerifying(true);
+    const result = await verifyClinician(clinicianId);
+    if (result.success) {
+      toast.success('Clinician verified successfully');
+      // Update local state is tricky without refetching or using router refresh,
+      // but revalidatePath in action handles the refresh of the page props if this is a server component wrapper,
+      // but client state might need manual update or just close modal + wait for refresh.
+      // Since 'initialTherapists' comes from props, Next.js should re-render this component with new props automatically
+      // if the parent server component refreshes.
+      setIsModalOpen(false);
+      setSelectedClinician(null);
+    } else {
+      toast.error('Verification failed: ' + result.error);
+    }
+    setIsVerifying(false);
+  };
+
   return (
     <div className="space-y-8 pb-12">
+      <ClinicianDetailsModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        clinician={selectedClinician}
+        onVerify={handleVerify}
+        isVerifying={isVerifying}
+      />
+
       {/* Stats */}
       <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
         <StatCard
@@ -79,9 +122,9 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
           color="bg-emerald-500"
         />
         <StatCard
-          title="Pending Review"
+          title="Pending Verification"
           value={stats.pending}
-          icon={<Clock />}
+          icon={<AlertTriangle />}
           color="bg-amber-500"
         />
       </div>
@@ -100,7 +143,7 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
             />
           </div>
           <div className="bg-muted/30 flex items-center gap-2 rounded-2xl p-1">
-            {['ALL', 'ACTIVE', 'PENDING'].map((status) => (
+            {['ALL', 'ACTIVE', 'UNVERIFIED'].map((status) => (
               <button
                 key={status}
                 onClick={() => setActiveFilter(status)}
@@ -133,14 +176,21 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
                     <Avatar className="ring-primary/10 h-20 w-20 rounded-[1.5rem] ring-4">
                       <AvatarImage src={therapist.avatar} />
                       <AvatarFallback className="bg-primary/20 text-primary text-2xl font-bold">
-                        {therapist.firstName[0]}
-                        {therapist.lastName[0]}
+                        {therapist.firstName?.[0]}
+                        {therapist.lastName?.[0]}
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col gap-1">
-                      <h3 className="text-foreground text-xl font-bold">
-                        Dr. {therapist.firstName} {therapist.lastName}
-                      </h3>
+                      <div className="flex items-center gap-2">
+                        <h3 className="text-foreground text-xl font-bold">
+                          Dr. {therapist.firstName} {therapist.lastName}
+                        </h3>
+                        {therapist.professional?.verified ? (
+                          <CheckCircle2 className="h-5 w-5 text-emerald-500" />
+                        ) : (
+                          <AlertTriangle className="h-5 w-5 text-amber-500" />
+                        )}
+                      </div>
                       <span className="text-primary text-xs font-bold tracking-widest uppercase">
                         {therapist.specialization || 'General Practitioner'}
                       </span>
@@ -175,7 +225,7 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
                             License Number
                           </p>
                           <p className="text-foreground text-sm font-bold">
-                            {therapist.licenseNumber || 'Not provided'}
+                            {therapist.professional?.licenseNumber || 'Not provided'}
                           </p>
                         </div>
                       </div>
@@ -185,68 +235,58 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
                         </div>
                         <div>
                           <p className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
-                            Practice Status
+                            Verification Status
                           </p>
                           <Badge
                             className={cn(
                               'mt-1 rounded-full border-none px-3 py-1 text-[10px] font-bold',
-                              therapist.isActive
+                              therapist.professional?.verified
                                 ? 'bg-emerald-500/10 text-emerald-600'
                                 : 'bg-amber-500/10 text-amber-600'
                             )}
                           >
-                            {therapist.isActive ? 'ACTIVE' : 'INACTIVE'}
+                            {therapist.professional?.verified ? 'VERIFIED' : 'UNVERIFIED'}
                           </Badge>
                         </div>
                       </div>
                     </div>
+
                     <div className="flex flex-col gap-3">
-                      <div className="text-muted-foreground mb-1 flex items-center justify-between px-1 text-[10px] font-bold tracking-widest uppercase">
-                        <span>Verification Score</span>
-                        <span className="text-primary font-bold">92%</span>
-                      </div>
-                      <div className="bg-muted h-2 w-full overflow-hidden rounded-full">
-                        <div className="bg-primary h-full w-[92%] rounded-full shadow-sm" />
-                      </div>
-                      <p className="text-muted-foreground mt-1 text-[10px] font-bold">
-                        Credentials verified via MSK Medical Board API
-                      </p>
+                      {!therapist.professional?.verified && (
+                        <div className="rounded-xl bg-amber-50 p-3 text-xs text-amber-800 dark:bg-amber-950/30 dark:text-amber-300">
+                          <strong>Action Required:</strong> Please verify medical
+                          credentials to enable patient assignment.
+                        </div>
+                      )}
                     </div>
                   </div>
 
                   {/* Actions */}
-                  <div className="bg-muted/10 border-border/50 flex items-center justify-center gap-3 border-t p-8 lg:w-48 lg:flex-col lg:border-t-0">
-                    <Button className="bg-primary h-11 w-full rounded-xl text-[10px] font-bold tracking-widest text-white uppercase">
-                      Review
-                    </Button>
+                  <div className="bg-muted/10 border-border/50 hover:bg-muted/20 flex items-center justify-center gap-3 border-t p-8 transition-colors lg:w-48 lg:flex-col lg:border-t-0">
+                    {/* Primary Button */}
+                    {!therapist.professional?.verified ? (
+                      <Button
+                        className="h-11 w-full rounded-xl bg-emerald-600 text-[10px] font-bold tracking-widest text-white uppercase shadow-lg shadow-emerald-500/20 hover:bg-emerald-700"
+                        onClick={() => handleOpenDetails(therapist)}
+                      >
+                        Verify Now
+                      </Button>
+                    ) : (
+                      <Button
+                        className="bg-primary/10 text-primary hover:bg-primary/20 h-11 w-full rounded-xl text-[10px] font-bold tracking-widest uppercase"
+                        onClick={() => handleOpenDetails(therapist)}
+                      >
+                        View Profile
+                      </Button>
+                    )}
+
                     <Button
-                      variant="outline"
-                      className="h-11 w-full rounded-xl text-[10px] font-bold tracking-widest uppercase"
+                      variant="ghost"
+                      className="text-muted-foreground hover:text-foreground h-11 w-full rounded-xl text-[10px] font-bold tracking-widest uppercase"
+                      onClick={() => handleOpenDetails(therapist)}
                     >
                       Details
                     </Button>
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          size="icon"
-                          className="h-11 w-full rounded-xl lg:w-11"
-                        >
-                          <MoreVertical className="h-4 w-4" />
-                        </Button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end" className="w-48 rounded-2xl p-2">
-                        <DropdownMenuItem className="rounded-xl py-3 text-xs font-bold uppercase">
-                          <Edit className="mr-2 h-4 w-4" /> Edit Info
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="rounded-xl py-3 text-xs font-bold uppercase">
-                          <ShieldCheck className="mr-2 h-4 w-4" /> Permissions
-                        </DropdownMenuItem>
-                        <DropdownMenuItem className="text-destructive rounded-xl py-3 text-xs font-bold uppercase">
-                          <Trash2 className="mr-2 h-4 w-4" /> Suspend
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
                   </div>
                 </div>
               </CardContent>
