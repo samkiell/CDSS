@@ -32,9 +32,12 @@ export default async function TreatmentPlannerPage() {
     if (!patientsMap.has(pId)) {
       const plan = activePlans.find((ap) => ap.patient.toString() === pId);
 
+      const formatName = (str) =>
+        str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : '';
+
       patientsMap.set(pId, {
         id: pId,
-        name: `${sess.patientId.firstName} ${sess.patientId.lastName}`,
+        name: `${formatName(sess.patientId.firstName)} ${formatName(sess.patientId.lastName)}`,
         gender: sess.patientId.gender || 'Not specified',
         avatar: sess.patientId.avatar,
         status: plan

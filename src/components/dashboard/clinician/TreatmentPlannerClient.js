@@ -104,7 +104,7 @@ export default function TreatmentPlannerClient({ initialPatients = [] }) {
                     </AvatarFallback>
                   </Avatar>
                   <div className="min-w-0">
-                    <h3 className="text-foreground truncate text-xl font-bold tracking-tight uppercase">
+                    <h3 className="text-foreground truncate text-xl font-bold tracking-tight">
                       {patient.name}
                     </h3>
                     <p className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
