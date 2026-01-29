@@ -31,7 +31,9 @@ import {
   Avatar,
   AvatarFallback,
   AvatarImage,
+  StatusModal,
 } from '@/components/ui';
+
 import { cn } from '@/lib/cn';
 
 export default function AdminUserListClient({ initialUsers = [] }) {
@@ -82,21 +84,35 @@ export default function AdminUserListClient({ initialUsers = [] }) {
     }
   };
 
-  const handleDelete = async (userId) => {
-    if (
-      !confirm('Are you sure you want to delete this user? This action cannot be undone.')
-    )
-      return;
-    try {
-      const res = await fetch(`/api/admin/users/${userId}`, {
-        method: 'DELETE',
-      });
-      if (!res.ok) throw new Error('Failed to delete user');
-      toast.success('User deleted successfully');
-      router.refresh();
-    } catch (error) {
-      toast.error('Failed to delete user');
-    }
+  const [statusModal, setStatusModal] = useState({
+    isOpen: false,
+    type: 'info',
+    title: '',
+    message: '',
+    onConfirm: null,
+  });
+
+  const handleDelete = (userId) => {
+    setStatusModal({
+      isOpen: true,
+      type: 'warning',
+      title: 'Delete User',
+      message: 'Are you sure you want to delete this user? This action cannot be undone.',
+      confirmText: 'Delete Permanently',
+      onConfirm: async () => {
+        try {
+          const res = await fetch(`/api/admin/users/${userId}`, {
+            method: 'DELETE',
+          });
+          if (!res.ok) throw new Error('Failed to delete user');
+          toast.success('User deleted successfully');
+          setStatusModal((prev) => ({ ...prev, isOpen: false }));
+          router.refresh();
+        } catch (error) {
+          toast.error('Failed to delete user');
+        }
+      },
+    });
   };
 
   return (
@@ -346,6 +362,16 @@ export default function AdminUserListClient({ initialUsers = [] }) {
           </table>
         </div>
       </Card>
+
+      <StatusModal
+        isOpen={statusModal.isOpen}
+        onClose={() => setStatusModal({ ...statusModal, isOpen: false })}
+        title={statusModal.title}
+        message={statusModal.message}
+        type={statusModal.type}
+        onConfirm={statusModal.onConfirm}
+        confirmText={statusModal.confirmText}
+      />
     </div>
   );
 }
