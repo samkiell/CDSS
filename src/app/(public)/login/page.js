@@ -62,7 +62,6 @@ export default function LoginPage() {
         password: formData.password,
         redirect: false,
       });
-      console.log(result);
       if (result.error || result.code) {
         return toast.error('Invalid credentials. Please try again.');
       }

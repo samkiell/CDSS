@@ -6,7 +6,6 @@ import Sidebar from '@/components/layout/Sidebar';
 
 export default async function ClinicianLayout({ children }) {
   const session = await auth();
-  console.log(session);
   if (!session || !session.user) redirect('/login');
   if (session?.user?.role !== 'CLINICIAN' && session?.user.role === 'PATIENT') {
     redirect('/patient/dashboard');
