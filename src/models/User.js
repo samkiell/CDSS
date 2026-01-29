@@ -90,7 +90,7 @@ const UserSchema = new mongoose.Schema(
     // Clinician Extended Profile
     timezone: { type: String, default: 'UTC' },
     bio: { type: String, maxlength: 500 },
-    
+
     // Professional Details
     professional: {
       licenseNumber: { type: String },
@@ -113,14 +113,29 @@ const UserSchema = new mongoose.Schema(
       sessionBuffer: { type: Number, default: 15 }, // minutes
       acceptNewPatients: { type: Boolean, default: true },
       schedule: {
-        monday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
-        tuesday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
-        wednesday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
-        thursday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
-        friday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
+        monday: {
+          enabled: { type: Boolean, default: true },
+          timeSlots: [{ start: String, end: String }],
+        },
+        tuesday: {
+          enabled: { type: Boolean, default: true },
+          timeSlots: [{ start: String, end: String }],
+        },
+        wednesday: {
+          enabled: { type: Boolean, default: true },
+          timeSlots: [{ start: String, end: String }],
+        },
+        thursday: {
+          enabled: { type: Boolean, default: true },
+          timeSlots: [{ start: String, end: String }],
+        },
+        friday: {
+          enabled: { type: Boolean, default: true },
+          timeSlots: [{ start: String, end: String }],
+        },
         saturday: { enabled: { type: Boolean, default: false }, timeSlots: [] },
         sunday: { enabled: { type: Boolean, default: false }, timeSlots: [] },
-      }
+      },
     },
 
     // Notifications
@@ -129,6 +144,7 @@ const UserSchema = new mongoose.Schema(
       inApp: { type: Boolean, default: true },
       events: [{ type: String }], // 'new_patient', 'assessment_completed', etc.
     },
+  },
   {
     timestamps: true,
     toJSON: { virtuals: true },
