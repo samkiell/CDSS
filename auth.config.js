@@ -12,6 +12,7 @@ export const authConfig = {
         token.lastName = user.lastName;
         token.role = user.role;
         token.avatar = user.avatar;
+        token.sessionId = user.sessionId;
       }
 
       if (trigger === 'update' && session) {
@@ -31,6 +32,7 @@ export const authConfig = {
         session.user.lastName = token.lastName;
         session.user.role = token.role;
         session.user.avatar = token.avatar;
+        session.user.sessionId = token.sessionId;
       }
       return session;
     },

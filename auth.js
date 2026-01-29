@@ -28,6 +28,45 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           if (!isPasswordValid) return null;
           if (!user.isVerified) return null;
 
+          // Track Session
+          let sessionId = null;
+          try {
+            const { headers } = await import('next/headers');
+            const headerList = await headers();
+            const userAgent = headerList.get('user-agent') || 'Unknown Device';
+            const ip = headerList.get('x-forwarded-for') || 'Unknown IP';
+
+            // Simple parsing for device name
+            let device = 'Unknown Device';
+            if (userAgent) {
+              if (userAgent.includes('Windows')) device = 'Windows PC';
+              else if (userAgent.includes('Macintosh')) device = 'Mac';
+              else if (userAgent.includes('Linux')) device = 'Linux PC';
+              else if (userAgent.includes('Android')) device = 'Android Device';
+              else if (userAgent.includes('iPhone')) device = 'iPhone';
+              else if (userAgent.includes('iPad')) device = 'iPad';
+
+              if (userAgent.includes('Chrome')) device = `Chrome on ${device}`;
+              else if (userAgent.includes('Firefox')) device = `Firefox on ${device}`;
+              else if (userAgent.includes('Safari') && !userAgent.includes('Chrome'))
+                device = `Safari on ${device}`;
+              else if (userAgent.includes('Edge')) device = `Edge on ${device}`;
+            }
+
+            const { UserSession } = await import('@/models');
+
+            const sessionLog = await UserSession.create({
+              user: user._id,
+              device,
+              ip: ip.split(',')[0].trim(), // Get first IP if multiple
+              userAgent,
+              lastActive: new Date(),
+            });
+            sessionId = sessionLog._id.toString();
+          } catch (sessionError) {
+            console.error('Failed to create session log:', sessionError);
+          }
+
           return {
             id: user._id.toString(),
             email: user.email,
@@ -35,6 +74,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             lastName: user.lastName,
             role: user.role,
             avatar: user.avatar || null,
+            sessionId,
           };
         } catch (error) {
           console.error('Auth authorize error:', error);
