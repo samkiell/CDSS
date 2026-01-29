@@ -463,9 +463,13 @@ export default function MessagingClient({ currentUser, initialConversations = []
                   {currentUser.role === 'CLINICIAN' && (
                     <DropdownMenuItem
                       className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase transition-colors"
-                      onClick={() =>
-                        (window.location.href = `/clinician/cases/${activeTab.id}`)
-                      }
+                      onClick={() => {
+                        if (activeTab.otherUser.sessionId) {
+                          window.location.href = `/clinician/cases/${activeTab.otherUser.sessionId}`;
+                        } else {
+                          alert('No case file found for this patient.');
+                        }
+                      }}
                     >
                       View Case File
                     </DropdownMenuItem>

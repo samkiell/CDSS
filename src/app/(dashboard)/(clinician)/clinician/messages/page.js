@@ -40,6 +40,7 @@ export default async function ClinicianMessagesPage() {
           name: `${patient.firstName} ${patient.lastName}`,
           avatar: patient.avatar || null,
           online: false,
+          sessionId: patient.sessionId,
         },
         lastMessage: lastMsg ? lastMsg.content : 'No messages yet',
         unreadCount: unreadCount,

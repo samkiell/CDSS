@@ -73,7 +73,25 @@ export async function getAssignedPatients() {
     }
   });
 
-  return JSON.parse(JSON.stringify(Array.from(patientMap.values())));
+  const patients = Array.from(patientMap.values());
+
+  // Attach latest session ID to each patient
+  await Promise.all(
+    patients.map(async (p) => {
+      const latestSession = await DiagnosisSession.findOne({
+        patientId: p._id,
+      })
+        .select('_id')
+        .sort({ updatedAt: -1 })
+        .lean();
+
+      if (latestSession) {
+        p.sessionId = latestSession._id.toString();
+      }
+    })
+  );
+
+  return JSON.parse(JSON.stringify(patients));
 }
 
 /**
@@ -267,8 +285,16 @@ export async function getConversations() {
           name: `${u.firstName} ${u.lastName}`,
           avatar: u.avatar || '',
           online: isOnline,
+          online: isOnline,
           lastLogin: u.lastLogin,
           role: u.role,
+          sessionId:
+            u.sessionId || // Try to use existing if available (from getAssignedPatients)
+            (
+              await DiagnosisSession.findOne({ patientId: u._id })
+                .sort({ updatedAt: -1 })
+                .select('_id')
+            )?._id?.toString(),
         },
         lastMessage: lastMsg ? lastMsg.content : 'No messages yet',
         lastMessageTime: lastMsg ? formatTime(lastMsg.createdAt) : '',
