@@ -29,10 +29,11 @@ export default async function PatientsPage() {
   sessions.forEach((sess) => {
     if (!sess.patientId) return;
     const pId = sess.patientId._id.toString();
-    if (!patientsMap.has(pId)) {
+      const formatName = (str) =>
+        str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : '';
       patientsMap.set(pId, {
         id: pId,
-        name: `${sess.patientId.firstName} ${sess.patientId.lastName}`,
+        name: `${formatName(sess.patientId.firstName)} ${formatName(sess.patientId.lastName)}`,
         sex: sess.patientId.gender || 'N/A',
         avatar: sess.patientId.avatar,
         age: sess.patientId.dateOfBirth
