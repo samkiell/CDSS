@@ -30,7 +30,10 @@ export async function POST(req) {
     if (plan) {
       // Add new activity to existing plan
       plan.activities.push({
-        date: new Date(),
+        date:
+          activity.date && activity.time
+            ? new Date(`${activity.date}T${activity.time}`)
+            : new Date(),
         goal: activity.goal,
         activeTreatment: activity.activeTreatment,
         homeExercise: activity.homeExercise,
@@ -46,7 +49,10 @@ export async function POST(req) {
         conditionName: conditionName,
         activities: [
           {
-            date: new Date(),
+            date:
+              activity.date && activity.time
+                ? new Date(`${activity.date}T${activity.time}`)
+                : new Date(),
             goal: activity.goal,
             activeTreatment: activity.activeTreatment,
             homeExercise: activity.homeExercise,

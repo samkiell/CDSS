@@ -49,6 +49,8 @@ export default function CaseDetailsPage({ params }) {
     goal: '',
     activeTreatment: '',
     homeExercise: '',
+    date: new Date().toISOString().split('T')[0],
+    time: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
   });
 
   const [session, setSession] = useState(null);
@@ -826,6 +828,33 @@ export default function CaseDetailsPage({ params }) {
                       setPlanData({ ...planData, homeExercise: e.target.value })
                     }
                     placeholder="e.g. 3x10 Glute Bridges"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={planData.date}
+                    onChange={(e) => setPlanData({ ...planData, date: e.target.value })}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Time
+                  </label>
+                  <input
+                    type="time"
+                    required
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={planData.time}
+                    onChange={(e) => setPlanData({ ...planData, time: e.target.value })}
                   />
                 </div>
               </div>

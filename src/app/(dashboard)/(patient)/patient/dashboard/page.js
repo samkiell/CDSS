@@ -225,7 +225,7 @@ export default async function PatientDashboardPage() {
               <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
                 Active Case
               </p>
-              <h3 className="text-lg font-bold">
+              <h3 className="max-w-37.5 truncate text-lg font-bold">
                 {latestSession?.patientFacingAnalysis?.temporalDiagnosis ||
                   latestSession?.aiAnalysis?.temporalDiagnosis ||
                   'No active case'}
@@ -308,10 +308,20 @@ export default async function PatientDashboardPage() {
                       treatmentPlan.activities.map((activity, idx) => (
                         <tr key={idx} className="hover:bg-muted/30 transition-colors">
                           <td className="px-6 py-4 text-sm font-bold whitespace-nowrap">
-                            {new Date(activity.date).toLocaleDateString(undefined, {
-                              month: 'short',
-                              day: 'numeric',
-                            })}
+                            <div className="flex flex-col">
+                              <span>
+                                {new Date(activity.date).toLocaleDateString(undefined, {
+                                  month: 'short',
+                                  day: 'numeric',
+                                })}
+                              </span>
+                              <span className="text-muted-foreground text-[10px] font-medium">
+                                {new Date(activity.date).toLocaleTimeString([], {
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                })}
+                              </span>
+                            </div>
                           </td>
                           <td className="text-muted-foreground px-6 py-4 text-sm font-medium">
                             {activity.goal}
