@@ -5,12 +5,21 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Settings, HelpCircle, Shield, LogOut, User, X } from 'lucide-react';
 import { cn } from '@/lib/cn';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react'; // Added useSession
 import { useUIStore } from '@/store';
 
-export default function Sidebar({ links = [], secondaryLinks = [], className, user }) {
+export default function Sidebar({
+  links = [],
+  secondaryLinks = [],
+  className,
+  user: initialUser,
+}) {
   const pathname = usePathname();
   const { isSidebarOpen, setSidebarOpen } = useUIStore();
+  const { data: session } = useSession();
+
+  // Prefer the real-time session user if available, otherwise fall back to the server prop
+  const user = session?.user || initialUser;
 
   // Determine base path from current pathname for settings route
   const basePath = pathname.startsWith('/clinician') ? '/clinician' : '/patient';
