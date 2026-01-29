@@ -15,9 +15,10 @@ import {
   CardDescription,
   Switch,
   Badge,
+  StatusModal,
 } from '@/components/ui';
 import { Loader2, Shield, Smartphone, LogOut, Laptop, CheckCircle } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { format } from 'date-fns';
 
 export default function SecurityPage() {
@@ -43,10 +44,30 @@ export default function SecurityPage() {
     toggle2FA.mutate(checked);
   };
 
+  const [statusModal, setStatusModal] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+    type: 'info',
+    onConfirm: null,
+  });
+
   const handleLogoutSessions = () => {
-    if (confirm('Are you sure you want to log out of all other devices?')) {
-      logoutAllSessions.mutate();
-    }
+    setStatusModal({
+      isOpen: true,
+      type: 'warning',
+      title: 'Log Out All Sessions',
+      message:
+        'Are you sure you want to log out of all other devices? This will invalidate all other active sessions.',
+      onConfirm: () => {
+        logoutAllSessions.mutate(undefined, {
+          onSettled: () => {
+            setStatusModal((prev) => ({ ...prev, isOpen: false }));
+          },
+        });
+      },
+      confirmText: 'Log Out All',
+    });
   };
 
   if (isLoading) {
@@ -233,6 +254,17 @@ export default function SecurityPage() {
           </div>
         </CardContent>
       </Card>
+
+      <StatusModal
+        isOpen={statusModal.isOpen}
+        onClose={() => setStatusModal({ ...statusModal, isOpen: false })}
+        title={statusModal.title}
+        message={statusModal.message}
+        type={statusModal.type}
+        onConfirm={statusModal.onConfirm}
+        confirmText={statusModal.confirmText || 'Continue'}
+        isSubmitting={logoutAllSessions.isPending}
+      />
     </div>
   );
 }
