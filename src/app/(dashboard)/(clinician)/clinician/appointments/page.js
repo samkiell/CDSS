@@ -125,9 +125,7 @@ export default async function ClinicianAppointmentsPage() {
                             Status
                           </span>
                         </div>
-                        <button className="bg-muted hover:bg-muted/80 flex h-10 w-10 items-center justify-center rounded-full transition-colors">
-                          <MoreHorizontal className="h-5 w-5" />
-                        </button>
+                        <AppointmentAction appointmentId={appt._id.toString()} />
                       </div>
                     </div>
                   </div>
