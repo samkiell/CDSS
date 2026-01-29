@@ -29,8 +29,8 @@ export default function ClinicianQuickActions() {
       bg: 'bg-yellow-500',
     },
     {
-      href: '/clinician/reports',
-      label: 'Clinical Files',
+      href: '/clinician/cases',
+      label: 'Case View',
       icon: FileText,
       bg: 'bg-emerald-500',
     },
