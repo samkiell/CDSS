@@ -83,7 +83,48 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
-  },
+    // Clinician Extended Profile
+    timezone: { type: String, default: 'UTC' },
+    bio: { type: String, maxlength: 500 },
+    
+    // Professional Details
+    professional: {
+      licenseNumber: { type: String },
+      licenseBody: { type: String },
+      experienceYears: { type: Number, default: 0 },
+      specializations: [{ type: String }],
+      primaryPracticeArea: { type: String },
+      verified: { type: Boolean, default: false },
+    },
+
+    // Clinical Preferences
+    clinical: {
+      defaultModules: [{ type: String }],
+      painScale: { type: String, enum: ['VAS'], default: 'VAS' },
+      autoSuggestTests: { type: Boolean, default: true },
+    },
+
+    // Availability
+    availability: {
+      sessionBuffer: { type: Number, default: 15 }, // minutes
+      acceptNewPatients: { type: Boolean, default: true },
+      schedule: {
+        monday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
+        tuesday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
+        wednesday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
+        thursday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
+        friday: { enabled: { type: Boolean, default: true }, timeSlots: [{ start: String, end: String }] },
+        saturday: { enabled: { type: Boolean, default: false }, timeSlots: [] },
+        sunday: { enabled: { type: Boolean, default: false }, timeSlots: [] },
+      }
+    },
+
+    // Notifications
+    notifications: {
+      email: { type: Boolean, default: true },
+      inApp: { type: Boolean, default: true },
+      events: [{ type: String }], // 'new_patient', 'assessment_completed', etc.
+    },
   {
     timestamps: true,
     toJSON: { virtuals: true },
