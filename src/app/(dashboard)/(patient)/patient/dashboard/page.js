@@ -208,9 +208,15 @@ export default async function PatientDashboardPage() {
                 Assigned Therapist
               </p>
               <h3 className="max-w-37.5 truncate text-lg font-bold">
-                {treatmentPlan?.therapistName ||
-                  nextAppointment?.therapistName ||
-                  'None assigned'}
+                {(() => {
+                  const name =
+                    treatmentPlan?.therapistName ||
+                    nextAppointment?.therapistName ||
+                    'None assigned';
+                  return name !== 'None assigned' && !name.startsWith('Dr.')
+                    ? `Dr. ${name}`
+                    : name;
+                })()}
               </h3>
             </div>
           </CardContent>
