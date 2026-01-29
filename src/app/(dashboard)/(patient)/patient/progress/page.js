@@ -256,7 +256,11 @@ export default async function ProgressPage() {
               </div>
               <p className="text-muted-foreground text-sm">
                 Managed by:{' '}
-                <span className="text-foreground">{treatmentPlan.therapistName}</span>
+                <span className="text-foreground">
+                  {treatmentPlan.therapistName?.startsWith('Dr.')
+                    ? treatmentPlan.therapistName
+                    : `Dr. ${treatmentPlan.therapistName || ''}`}
+                </span>
               </p>
             </div>
           </CardContent>
