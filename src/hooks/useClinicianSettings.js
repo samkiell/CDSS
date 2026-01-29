@@ -187,9 +187,27 @@ export function useClinicianSettings() {
     onSuccess: () => {
       toast.success('All other sessions logged out');
       queryClient.invalidateQueries({ queryKey: ['clinician-security'] });
+      router.refresh();
     },
     onError: (err) => {
       toast.error('Failed to log out sessions');
+    },
+  });
+
+  const logoutIndividualSession = useMutation({
+    mutationFn: async (sessionId) => {
+      const response = await axios.delete(
+        `/api/clinician/settings/security?sessionId=${sessionId}`
+      );
+      return response.data;
+    },
+    onSuccess: () => {
+      toast.success('Session logged out successfully');
+      queryClient.invalidateQueries({ queryKey: ['clinician-security'] });
+      router.refresh();
+    },
+    onError: (err) => {
+      toast.error(err.response?.data?.error || 'Failed to log out session');
     },
   });
 
@@ -208,5 +226,6 @@ export function useClinicianSettings() {
     changePassword,
     toggle2FA,
     logoutAllSessions,
+    logoutIndividualSession,
   };
 }

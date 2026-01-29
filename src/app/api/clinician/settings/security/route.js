@@ -113,28 +113,39 @@ export async function DELETE(req) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
+    const { searchParams } = new URL(req.url);
+    const sessionIdToLogOut = searchParams.get('sessionId');
+
     await connectDB();
 
-    // Delete all sessions for this user EXCEPT the current one
-    // If sessionId is not present (old login), this might delete everything or nothing safely.
-    // Ideally we warn user to relogin.
+    if (sessionIdToLogOut) {
+      // Log out specific session
+      // Security check: ensure this session belongs to the user
+      const result = await UserSession.deleteOne({
+        _id: sessionIdToLogOut,
+        user: session.user.id,
+      });
 
-    const query = { user: session.user.id };
-    if (session.user.sessionId) {
-      query._id = { $ne: session.user.sessionId };
+      if (result.deletedCount === 0) {
+        return NextResponse.json(
+          { error: 'Session not found or already logged out' },
+          { status: 404 }
+        );
+      }
+
+      return NextResponse.json({ message: 'Session logged out' });
     } else {
-      // If we don't know current session ID, maybe we shouldn't delete anything?
-      // Or we delete ALL other sessions if we could identify them?
-      // For now, let's assume relogin handles it.
-      // Or safer: error out? No, let's assume we delete everything older than 5 mins?
-      // Let's rely on sessionId. If it's undefined, valid query is just user: id.
-      // But that deletes current session too effectively.
-      // Assuming user will re-login.
+      // Log out all OTHER sessions
+      const query = { user: session.user.id };
+
+      if (session.user.sessionId) {
+        // Keep current session alive
+        query._id = { $ne: session.user.sessionId };
+      }
+
+      await UserSession.deleteMany(query);
+      return NextResponse.json({ message: 'All other sessions logged out' });
     }
-
-    await UserSession.deleteMany(query);
-
-    return NextResponse.json({ message: 'All other sessions logged out' });
   } catch (error) {
     console.error('Error logging out sessions:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
