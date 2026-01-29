@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle, Badge } from '@/components/ui';
 import { Calendar, Clock, MapPin, User as UserIcon, MoreHorizontal } from 'lucide-react';
 import Image from 'next/image';
+import AppointmentAction from '@/components/dashboard/clinician/AppointmentAction';
 
 export default async function ClinicianAppointmentsPage() {
   const session = await auth();
