@@ -1,221 +1,329 @@
-'use client';
+import connectDB from '@/lib/db/connect';
+import { User, DiagnosisSession, TreatmentPlan } from '@/models';
+import { auth } from '@/auth';
+import { redirect, notFound } from 'next/navigation';
+import {
+  ArrowLeft,
+  User as UserIcon,
+  Activity,
+  Clock,
+  CheckCircle2,
+  FileText,
+  AlertTriangle,
+} from 'lucide-react';
+import Link from 'next/link';
+import { Badge, Card, CardContent } from '@/components/ui';
+import { cn } from '@/lib/cn';
 
-const patient = {
-  name: 'Bola Ahmed Tinubu',
-  dob: '12-03-1989',
-  sex: 'Male',
-};
-
-const diagnosis = {
-  possibleCondition: 'Lumbar Disc Herniation',
-  painPattern: 'Strong',
-  riskLevel: 'Moderate',
-  aiConfidence: '85%',
-  reasoning: [
-    'Pain worsens while walking',
-    'Improves with sitting',
-    'Radiating leg symptoms',
-  ],
-  insight: [
-    'Pain described as 2/15, but you reported “being able to walk long distance”',
-    'This helps your Physiotherapist adjust questions',
-  ],
-};
-
-const plan = {
-  interventionType: [
-    'Physical Therapy',
-    'Manual Therapy',
-    'Therapeutic Exercises',
-    'Modalities',
-  ],
-  description: [
-    'Physical Therapy – Targeted exercises and stretches to improve range of motion, strength, and flexibility',
-    'Manual Therapy – Hands-on techniques to improve joint mobility and soft tissue function',
-    'Therapeutic Exercises – Patient-specific exercises to improve strength, flexibility, and function',
-  ],
-  duration: ['Session duration: 30–60 mins', 'Frequency: 2–3 times per week'],
-  goals: ['Reduce pain and discomfort', 'Improve range of motion and flexibility'],
-  progression: [
-    'Patient reports decreased pain and discomfort',
-    'Patient demonstrates improved range of motion and flexibility',
-  ],
-  reEvaluation: [
-    'Re-evaluate patient progress every 2–3 sessions',
-    'Assess patient’s goals and objectives and adjust treatment plan as needed',
-  ],
-};
-
-function SectionCard({ title, children }) {
+function SectionCard({ title, children, icon: Icon }) {
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5 dark:border-gray-700 dark:bg-gray-800">
-      <h3 className="mb-3 text-base font-semibold text-gray-900 sm:text-lg dark:text-gray-100">
-        {title}
-      </h3>
-      <div className="space-y-2 text-sm text-gray-700 sm:text-base dark:text-gray-300">
-        {children}
-      </div>
-    </div>
+    <Card className="rounded-2xl border-none bg-white shadow-sm dark:bg-slate-900/40">
+      <CardContent className="p-6">
+        <div className="mb-4 flex items-center gap-2">
+          {Icon && <Icon className="text-primary h-5 w-5" />}
+          <h3 className="text-sm font-black tracking-widest text-slate-400 uppercase">
+            {title}
+          </h3>
+        </div>
+        <div className="space-y-4">{children}</div>
+      </CardContent>
+    </Card>
   );
 }
 
 function BulletList({ items }) {
+  if (!items || items.length === 0)
+    return <p className="text-muted-foreground text-xs italic">No items recorded</p>;
   return (
-    <ul className="list-disc space-y-1 pl-5 text-sm text-gray-700 sm:text-base dark:text-gray-300">
-      {items.map((item) => (
-        <li key={item}>{item}</li>
+    <ul className="space-y-2">
+      {items.map((item, i) => (
+        <li key={i} className="flex items-start gap-2 text-sm font-bold">
+          <div className="bg-primary/20 mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
+          <span>{item}</span>
+        </li>
       ))}
     </ul>
   );
 }
 
-export default function Page() {
+export default async function TreatmentPlanViewPage({ params }) {
+  const { id } = params;
+  const sessionUser = await auth();
+  if (!sessionUser) redirect('/login');
+
+  await connectDB();
+
+  // Fetch patient, latest session, and treatment plan
+  const [patient, session, plan] = await Promise.all([
+    User.findById(id).lean(),
+    DiagnosisSession.findOne({ patientId: id }).sort({ createdAt: -1 }).lean(),
+    TreatmentPlan.findOne({ patient: id, status: 'active' })
+      .sort({ updatedAt: -1 })
+      .lean(),
+  ]);
+
+  if (!patient) notFound();
+
+  const aiRes = session?.aiAnalysis || {};
+
+  const calculateAge = (dob) => {
+    if (!dob) return 'N/A';
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
   return (
-    <div className="mx-auto w-full max-w-4xl px-3 pt-5 pb-10 sm:px-6 sm:pt-6">
+    <div className="animate-fade-in mx-auto w-full max-w-5xl space-y-8 px-4 pb-20">
       {/* Header */}
-      <div className="mb-6 flex items-center gap-3 sm:gap-4">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700">
-          <svg
-            className="h-6 w-6 text-gray-500 dark:text-gray-300"
-            viewBox="0 0 24 24"
-            fill="currentColor"
+      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div className="flex items-center gap-4">
+          <Link
+            href="/clinician/treatment"
+            className="hover:bg-muted bg-card border-border rounded-xl border p-2 transition-all"
           >
-            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-          </svg>
-        </div>
-        <div className="min-w-0">
-          <h1 className="truncate text-lg font-semibold text-gray-900 sm:text-xl dark:text-gray-100">
-            Treatment Plan View
-          </h1>
-        </div>
-      </div>
-
-      {/* Patient Info */}
-      <div className="mb-5 rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5 dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="mb-3 text-base font-semibold text-gray-900 sm:text-lg dark:text-gray-100">
-          Patient’s Information
-        </h2>
-        <div className="grid grid-cols-1 gap-2 text-sm sm:grid-cols-3 sm:text-base">
+            <ArrowLeft className="h-5 w-5" />
+          </Link>
           <div>
-            <span className="font-semibold text-gray-800 dark:text-gray-200">Name:</span>{' '}
-            <span className="text-gray-700 dark:text-gray-300">{patient.name}</span>
-          </div>
-          <div>
-            <span className="font-semibold text-gray-800 dark:text-gray-200">
-              Date of Birth:
-            </span>{' '}
-            <span className="text-gray-700 dark:text-gray-300">{patient.dob}</span>
-          </div>
-          <div>
-            <span className="font-semibold text-gray-800 dark:text-gray-200">Sex:</span>{' '}
-            <span className="text-gray-700 dark:text-gray-300">{patient.sex}</span>
+            <h1 className="text-2xl font-black tracking-tight tracking-widest uppercase">
+              Recovery Roadmap
+            </h1>
+            <p className="text-muted-foreground text-xs font-bold uppercase">
+              Clinical Treatment Plan & AI Diagnostics
+            </p>
           </div>
         </div>
+
+        {plan && (
+          <div className="flex items-center gap-4 rounded-3xl bg-white p-2 pr-6 shadow-sm dark:bg-slate-900/40">
+            <div className="bg-primary shadow-primary/30 flex h-12 w-12 items-center justify-center rounded-2xl text-white shadow-lg">
+              <Activity className="h-6 w-6" />
+            </div>
+            <div>
+              <p className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                Recovery Progress
+              </p>
+              <div className="flex items-center gap-3">
+                <div className="bg-muted h-2 w-32 overflow-hidden rounded-full">
+                  <div
+                    className="bg-primary h-full rounded-full transition-all duration-1000"
+                    style={{ width: `${plan.progress}%` }}
+                  />
+                </div>
+                <span className="text-sm font-black">{plan.progress}%</span>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* AI Diagnosis */}
-      <div className="mb-5 rounded-xl border border-gray-200 bg-white p-4 shadow-sm sm:p-5 dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="mb-2 text-base font-semibold text-gray-900 sm:text-lg dark:text-gray-100">
-          AI Preliminary Diagnosis (Provisional)
-        </h2>
-        <p className="mb-4 text-sm text-gray-700 sm:text-base dark:text-gray-300">
-          Based on your answers, this is the likely condition. Your Therapist will confirm
-          the final diagnosis.
-        </p>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          <div className="space-y-3">
-            <div>
-              <p className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Possible Condition:
-              </p>
-              <p className="text-sm font-semibold text-cyan-600 sm:text-base dark:text-cyan-400">
-                {diagnosis.possibleCondition}
-              </p>
+      {/* Patient Profile Quick View */}
+      <Card className="rounded-[2.5rem] border-none bg-linear-to-br from-slate-900 to-slate-800 text-white shadow-2xl">
+        <CardContent className="flex flex-col items-center gap-8 p-8 md:flex-row">
+          <div className="relative">
+            <div className="h-24 w-24 overflow-hidden rounded-[2rem] border-4 border-white/10 bg-white/5 shadow-2xl">
+              {patient.avatar ? (
+                <img
+                  src={patient.avatar}
+                  alt={patient.firstName}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="flex h-full w-full items-center justify-center text-3xl font-black opacity-30">
+                  {patient.firstName[0]}
+                  {patient.lastName[0]}
+                </div>
+              )}
             </div>
-            <div>
-              <p className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Pain Pattern Match:
-              </p>
-              <p className="text-sm font-semibold text-gray-900 sm:text-base dark:text-gray-100">
-                {diagnosis.painPattern}
-              </p>
-            </div>
-            <div>
-              <p className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Risk Level:
-              </p>
-              <p className="text-sm font-semibold text-orange-500 sm:text-base dark:text-orange-300">
-                {diagnosis.riskLevel}
-              </p>
+            <div className="absolute -right-2 -bottom-2 flex h-8 w-8 items-center justify-center rounded-2xl border-4 border-slate-900 bg-emerald-500">
+              <CheckCircle2 className="h-4 w-4" />
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="flex-1 space-y-4 text-center md:text-left">
             <div>
-              <p className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Reasoning Indicator:
-              </p>
-              <BulletList items={diagnosis.reasoning} />
-            </div>
-            <div>
-              <p className="text-xs font-semibold tracking-wide text-gray-500 uppercase dark:text-gray-400">
-                Insight:
-              </p>
-              <BulletList items={diagnosis.insight} />
+              <h2 className="text-3xl font-black tracking-tight uppercase">
+                {patient.firstName} {patient.lastName}
+              </h2>
+              <div className="mt-1 flex flex-wrap justify-center gap-4 text-xs font-bold tracking-widest uppercase opacity-60 md:justify-start">
+                <div className="flex items-center gap-1.5">
+                  <Badge
+                    variant="outline"
+                    className="border-white/20 text-white uppercase"
+                  >
+                    {patient.gender || 'Not Specified'}
+                  </Badge>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span>Age: {calculateAge(patient.dateOfBirth)} Yrs</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <span>ID: #P-{patient._id.toString().slice(-6)}</span>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3 rounded-lg bg-cyan-50 px-4 py-3 sm:col-span-2 dark:bg-cyan-900/30">
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-cyan-600 shadow-sm dark:bg-gray-800 dark:text-cyan-300">
-              <span className="text-base font-semibold">{diagnosis.aiConfidence}</span>
+          <div className="flex shrink-0 items-center gap-3">
+            <Link href={`/clinician/messages?patientId=${patient._id}`}>
+              <Button className="h-14 w-14 rounded-2xl border-none bg-white/10 text-white hover:bg-white/20">
+                <FileText className="h-6 w-6" />
+              </Button>
+            </Link>
+          </div>
+        </CardContent>
+      </Card>
+
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        {/* Left Column: Diagnostics */}
+        <div className="space-y-8 lg:col-span-1">
+          <SectionCard title="AI Diagnostics" icon={Activity}>
+            <div className="space-y-6">
+              <div>
+                <p className="mb-2 text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                  Primary Impression
+                </p>
+                <p className="text-lg leading-tight font-black text-cyan-500">
+                  {aiRes.temporalDiagnosis || 'Awaiting Assessment'}
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="rounded-2xl border bg-slate-50 p-4 dark:bg-slate-800/50">
+                  <p className="mb-1 text-[9px] font-black tracking-widest text-slate-400 uppercase">
+                    Risk Level
+                  </p>
+                  <Badge
+                    className={cn(
+                      'text-[10px] font-black tracking-widest uppercase',
+                      aiRes.riskLevel === 'Urgent'
+                        ? 'bg-red-500'
+                        : aiRes.riskLevel === 'Moderate'
+                          ? 'bg-amber-500'
+                          : 'bg-emerald-500'
+                    )}
+                  >
+                    {aiRes.riskLevel || 'Low'}
+                  </Badge>
+                </div>
+                <div className="rounded-2xl border bg-slate-50 p-4 dark:bg-slate-800/50">
+                  <p className="mb-1 text-[9px] font-black tracking-widest text-slate-400 uppercase">
+                    AI Confidence
+                  </p>
+                  <p className="text-xl font-black">{aiRes.confidenceScore || 0}%</p>
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-3 text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                  Clinical Reasoning
+                </p>
+                <BulletList items={aiRes.reasoning} />
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                AI Confidence
-              </p>
-              <p className="text-sm text-gray-700 dark:text-gray-300">
-                Based on your answers. This will be updated by your physiotherapist.
-              </p>
+          </SectionCard>
+
+          <div className="rounded-[2rem] bg-indigo-600 p-8 text-white shadow-xl">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20">
+              <Clock className="h-6 w-6" />
             </div>
+            <h4 className="text-lg leading-tight font-black uppercase">Last Activity</h4>
+            <p className="mt-2 text-xs leading-relaxed font-medium opacity-80">
+              {plan?.updatedAt
+                ? new Date(plan.updatedAt).toLocaleDateString(undefined, {
+                    dateStyle: 'long',
+                  })
+                : 'No recent activity recorded.'}
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* Plan Sections */}
-      <div className="space-y-4 sm:space-y-5">
-        <SectionCard title="Intervention Type">
-          <BulletList items={plan.interventionType} />
-        </SectionCard>
+        {/* Middle/Right Column: Treatment Plan */}
+        <div className="space-y-8 lg:col-span-2">
+          <SectionCard title="Therapeutic Strategy" icon={CheckCircle2}>
+            {plan && plan.activities && plan.activities.length > 0 ? (
+              <div className="space-y-8">
+                {plan.activities
+                  .slice()
+                  .reverse()
+                  .map((act, i) => (
+                    <div
+                      key={i}
+                      className={cn(
+                        'relative flex flex-col gap-6 rounded-3xl border p-6 transition-all hover:bg-slate-50 dark:hover:bg-white/5',
+                        i === 0
+                          ? 'border-primary/30 ring-primary/5 ring-4'
+                          : 'border-slate-100'
+                      )}
+                    >
+                      {i === 0 && (
+                        <Badge className="bg-primary absolute -top-3 left-6 px-3 py-1 font-black uppercase">
+                          Latest Milestone
+                        </Badge>
+                      )}
 
-        <SectionCard title="Description">
-          <BulletList items={plan.description} />
-        </SectionCard>
+                      <div className="flex items-center justify-between">
+                        <h4 className="flex items-center gap-2 text-lg font-black uppercase">
+                          <span className="text-primary text-2xl opacity-30">#</span>{' '}
+                          {act.goal}
+                        </h4>
+                        <span className="text-muted-foreground text-[10px] font-black uppercase">
+                          {new Date(act.date).toLocaleDateString()}
+                        </span>
+                      </div>
 
-        <SectionCard title="Duration">
-          <BulletList items={plan.duration} />
-        </SectionCard>
+                      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                        <div className="space-y-2">
+                          <p className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                            In-Clinic Treatment
+                          </p>
+                          <div className="flex items-start gap-3 rounded-2xl bg-slate-100/50 p-4 dark:bg-slate-800">
+                            <Activity className="mt-0.5 h-4 w-4 shrink-0 text-indigo-500" />
+                            <p className="text-sm font-bold">{act.activeTreatment}</p>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          <p className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                            Home Exercise Regimen
+                          </p>
+                          <div className="flex items-start gap-3 rounded-2xl bg-slate-100/50 p-4 dark:bg-slate-800">
+                            <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+                            <p className="text-sm font-bold">{act.homeExercise}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            ) : (
+              <div className="flex min-h-[400px] flex-col items-center justify-center rounded-[2.5rem] border-4 border-dashed border-slate-100 text-center opacity-40">
+                <FileText className="mb-4 h-16 w-16" />
+                <p className="text-xl font-black uppercase">No Active Plan</p>
+                <p className="max-w-xs text-sm font-medium">
+                  This patient does not have a confirmed treatment program yet.
+                </p>
+              </div>
+            )}
+          </SectionCard>
 
-        <SectionCard title="Goals">
-          <BulletList items={plan.goals} />
-        </SectionCard>
-
-        <SectionCard title="Progression Criteria">
-          <BulletList items={plan.progression} />
-        </SectionCard>
-
-        <SectionCard title="Re-Evaluation Plan">
-          <BulletList items={plan.reEvaluation} />
-        </SectionCard>
-      </div>
-
-      {/* Footer */}
-      <div className="mt-8 flex justify-end border-t border-gray-200 pt-6 text-right dark:border-gray-700">
-        <div>
-          <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-            Dr. Ajayi
-          </p>
-          <p className="text-xs text-gray-600 dark:text-gray-400">Therapist’s Name</p>
+          <div className="bg-muted/30 flex items-start gap-4 rounded-3xl border border-dashed border-slate-200 p-6">
+            <div className="bg-primary/10 text-primary mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-[1rem]">
+              <AlertTriangle className="h-5 w-5" />
+            </div>
+            <div>
+              <h5 className="text-sm font-black uppercase">Clinician Note</h5>
+              <p className="text-muted-foreground mt-1 text-xs leading-relaxed font-medium">
+                This plan is dynamic and should be adjusted based on the patient's
+                biomechanical response and symptom progression. Regular re-evaluation is
+                mandatory every 3-5 sessions.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
