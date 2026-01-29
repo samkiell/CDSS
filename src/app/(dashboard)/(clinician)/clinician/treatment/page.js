@@ -44,6 +44,7 @@ export default async function TreatmentPlannerPage() {
           : 'not_started',
         planId: plan?._id.toString(),
         progress: plan?.progress || 0,
+        sessionId: sess._id.toString(),
       });
     }
   });
