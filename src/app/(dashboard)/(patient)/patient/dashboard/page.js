@@ -225,10 +225,15 @@ export default async function PatientDashboardPage() {
               <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
                 Active Case
               </p>
-              <h3 className="max-w-37.5 truncate text-lg font-bold">
-                {latestSession?.patientFacingAnalysis?.temporalDiagnosis ||
+               <h3 className="max-w-37.5 truncate text-lg font-bold">
+
+                {(
+                  latestSession?.patientFacingAnalysis?.temporalDiagnosis ||
                   latestSession?.aiAnalysis?.temporalDiagnosis ||
-                  'No active case'}
+                  'No active case'
+                )
+                  .replace(/^the patient('s)?/i, 'Your')
+                  .replace(/^the patient/i, 'You')}
               </h3>
             </div>
           </CardContent>

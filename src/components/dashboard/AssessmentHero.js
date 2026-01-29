@@ -25,11 +25,30 @@ export default function AssessmentHero({ latestSession }) {
 
   const statusLabel = isInProgress ? 'Assessment in progress' : 'Assessment Result';
 
-  const title = isInProgress
+  const rawTitle = isInProgress
     ? 'Continue Your Assessment'
     : latestSession?.patientFacingAnalysis?.temporalDiagnosis ||
       latestSession?.aiAnalysis?.temporalDiagnosis ||
       'Start a New Assessment';
+
+  // UI CLEANUP: Automatically fix legacy third-person data or overly long strings in the UI display
+  const formatTitle = (text) => {
+    if (isInProgress || text === 'Start a New Assessment') return text;
+
+    let cleaned = text;
+    // Fix "The patient's symptoms suggest..." -> "Your symptoms suggest..."
+    cleaned = cleaned.replace(/^the patient's/i, 'Your');
+    // Fix "The patient has..." -> "You have..."
+    cleaned = cleaned.replace(/^the patient/i, 'You');
+
+    // If it's still extremely long (legacy data), truncate for the Hero section
+    if (cleaned.length > 80) {
+      return cleaned.substring(0, 77) + '...';
+    }
+    return cleaned;
+  };
+
+  const title = formatTitle(rawTitle);
 
   const description = isInProgress
     ? 'Finish your assessment to get a comprehensive diagnostic report and personalized treatment plan.'
