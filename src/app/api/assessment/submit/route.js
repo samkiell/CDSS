@@ -68,6 +68,7 @@ export async function POST(req) {
         ...therapistFacingResult,
         isProvisional: true, // Crucial medical disclaimer requirement
       },
+      patientFacingAnalysis: finalAiResult, // Persist for patient-dashboard consistency
       status: 'pending_review',
     });
 

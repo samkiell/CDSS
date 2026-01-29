@@ -50,7 +50,10 @@ export default async function PatientDashboardPage() {
       .populate('clinicianId', 'firstName lastName')
       .sort({ createdAt: -1 })
       .lean(),
-    Appointment.find({ patient: session.user.id, date: { $gte: new Date() } })
+    Appointment.find({
+      patient: session.user.id,
+      date: { $gte: new Date(new Date().setHours(0, 0, 0, 0)) },
+    })
       .sort({
         date: 1,
       })
@@ -80,7 +83,9 @@ export default async function PatientDashboardPage() {
     treatmentPlan = {
       isProvisional: true,
       therapistName: assignedTherapist,
-      conditionName: latestSession.aiAnalysis.temporalDiagnosis,
+      conditionName:
+        latestSession.patientFacingAnalysis?.temporalDiagnosis ||
+        latestSession.aiAnalysis.temporalDiagnosis,
       activities: [
         {
           date: latestSession.createdAt,
@@ -221,7 +226,8 @@ export default async function PatientDashboardPage() {
                 Active Case
               </p>
               <h3 className="max-w-37.5 truncate text-lg font-bold">
-                {latestSession?.temporalDiagnosis?.primaryDiagnosis?.conditionName ||
+                {latestSession?.patientFacingAnalysis?.temporalDiagnosis ||
+                  latestSession?.aiAnalysis?.temporalDiagnosis ||
                   'No active case'}
               </h3>
             </div>

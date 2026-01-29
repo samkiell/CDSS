@@ -53,6 +53,12 @@ const DiagnosisSessionSchema = new mongoose.Schema(
         required: true,
       },
     },
+    patientFacingAnalysis: {
+      temporalDiagnosis: String,
+      confidenceScore: Number,
+      riskLevel: String,
+      reasoning: [String],
+    },
     status: {
       type: String,
       enum: ['pending_review', 'assigned', 'completed', 'archived'],
