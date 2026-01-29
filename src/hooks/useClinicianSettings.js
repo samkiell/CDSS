@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast } from 'sonner';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const fetchSettings = async () => {
   const { data } = await axios.get('/api/clinician/settings');
