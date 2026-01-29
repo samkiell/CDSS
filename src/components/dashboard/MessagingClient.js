@@ -24,6 +24,7 @@ import {
   AvatarFallback,
   Badge,
   Lightbox,
+  StatusModal,
 } from '@/components/ui';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import {
@@ -532,8 +533,6 @@ export default function MessagingClient({ currentUser, initialConversations = []
                           <img
                             src={m.content.replace('IMAGE:', '')}
                             alt="Attachment"
-                            src={m.content.replace('IMAGE:', '')}
-                            alt="Attachment"
                             className="max-h-48 cursor-pointer rounded-xl object-cover transition-opacity hover:opacity-90"
                             onClick={() =>
                               setExpandedImage(m.content.replace('IMAGE:', ''))
@@ -658,6 +657,16 @@ export default function MessagingClient({ currentUser, initialConversations = []
           onClose={() => setExpandedImage(null)}
         />
       )}
+
+      <StatusModal
+        isOpen={statusModal.isOpen}
+        onClose={() => setStatusModal({ ...statusModal, isOpen: false })}
+        title={statusModal.title}
+        message={statusModal.message}
+        type={statusModal.type}
+        onConfirm={statusModal.onConfirm}
+        confirmText={statusModal.confirmText}
+      />
     </div>
   );
 }
