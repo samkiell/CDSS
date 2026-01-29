@@ -1,32 +1,18 @@
-/**
- * UI Components Index
- * Central export for all UI components
- */
-
-export { Button, buttonVariants } from './Button.js';
-export {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from './Card.js';
-export { Input } from './Input.js';
-export { PasswordInput } from './PasswordInput.js';
-export { Badge, badgeVariants } from './Badge.js';
-export { ThemeToggle } from './ThemeToggle.js';
-export { Logo } from './Logo.js';
-export { OTPInput } from './OTPInput.js';
-export { Avatar, AvatarImage, AvatarFallback } from './Avatar.js';
-export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs.js';
-export {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from './DropdownMenu.js';
-export { ScrollArea } from './ScrollArea.js';
-export { Switch } from './Switch.js';
-export { Lightbox } from './Lightbox.js';
-export { StatusModal } from './StatusModal.js';
+export * from './Avatar';
+export * from './Badge';
+export * from './Button';
+export * from './Card';
+export * from './DropdownMenu';
+export * from './Input';
+export * from './Label';
+export * from './Lightbox';
+export * from './Logo';
+export * from './OTPInput';
+export * from './PasswordInput';
+export * from './ScrollArea';
+export * from './Select';
+export * from './StatusModal';
+export * from './Switch';
+export * from './Tabs';
+export * from './Textarea';
+export * from './ThemeToggle';
