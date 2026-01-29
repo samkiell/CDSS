@@ -4,7 +4,7 @@ export const authConfig = {
     error: '/login',
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -13,6 +13,14 @@ export const authConfig = {
         token.role = user.role;
         token.avatar = user.avatar;
       }
+
+      if (trigger === 'update' && session) {
+        // Allow updating user details in the session
+        if (session.image) token.avatar = session.image;
+        if (session.firstName) token.firstName = session.firstName;
+        if (session.lastName) token.lastName = session.lastName;
+      }
+
       return token;
     },
     async session({ session, token }) {

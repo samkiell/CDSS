@@ -71,6 +71,22 @@ export function useClinicianSettings() {
     'profile',
     'Profile updated successfully'
   );
+
+  // Update session for profile changes specifically
+  const originalUpdateProfile = updateProfile.mutate;
+  updateProfile.mutate = (data) => {
+    originalUpdateProfile(data, {
+      onSuccess: () => {
+        // If we updated name, we should push that to the session
+        if (data.firstName || data.lastName) {
+          updateSession({
+            firstName: data.firstName,
+            lastName: data.lastName,
+          });
+        }
+      },
+    });
+  };
   const updateProfessional = createMutation(
     'professional',
     'professional',
