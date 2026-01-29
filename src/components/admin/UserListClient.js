@@ -52,9 +52,11 @@ export default function AdminUserListClient({ initialUsers = [] }) {
 
       const matchesRole = roleFilter === 'ALL' || user.role === roleFilter;
 
+      const isUserVerified =
+        user.role === 'CLINICIAN' ? user.professional?.verified : user.isVerified;
       const matchesStatus =
         statusFilter === 'ALL' ||
-        (statusFilter === 'VERIFIED' ? user.isVerified : !user.isVerified);
+        (statusFilter === 'VERIFIED' ? isUserVerified : !isUserVerified);
 
       return matchesSearch && matchesRole && matchesStatus;
     });
@@ -65,7 +67,9 @@ export default function AdminUserListClient({ initialUsers = [] }) {
       total: initialUsers.length,
       patients: initialUsers.filter((u) => u.role === 'PATIENT').length,
       clinicians: initialUsers.filter((u) => u.role === 'CLINICIAN').length,
-      unverified: initialUsers.filter((u) => !u.isVerified).length,
+      unverified: initialUsers.filter((u) =>
+        u.role === 'CLINICIAN' ? !u.professional?.verified : !u.isVerified
+      ).length,
     };
   }, [initialUsers]);
 
@@ -257,7 +261,11 @@ export default function AdminUserListClient({ initialUsers = [] }) {
                       </Badge>
                     </td>
                     <td className="p-6">
-                      {user.isVerified ? (
+                      {(
+                        user.role === 'CLINICIAN'
+                          ? user.professional?.verified
+                          : user.isVerified
+                      ) ? (
                         <div className="flex items-center gap-2 text-emerald-500">
                           <CheckCircle2 className="h-4 w-4" />
                           <span className="text-xs font-bold tracking-widest uppercase">
