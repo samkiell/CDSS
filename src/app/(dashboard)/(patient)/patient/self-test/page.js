@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Play, Info, CheckCircle2 } from 'lucide-react';
-import { Card, CardContent, Badge, Button } from '@/components/ui';
+import { Card, CardContent, Badge, Button, Lightbox } from '@/components/ui';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/cn';
@@ -11,6 +11,7 @@ export default function SelfTestPage() {
   const router = useRouter();
   const [completedTests, setCompletedTests] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [activeImage, setActiveImage] = useState(null); // { src, alt }
 
   useEffect(() => {
     const fetchCompletedTests = async () => {
