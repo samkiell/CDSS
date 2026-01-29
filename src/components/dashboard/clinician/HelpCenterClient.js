@@ -131,26 +131,7 @@ const KNOWLEDGE_BASE = [
   },
 ];
 
-const RESOURCES = [
-  {
-    name: 'Technical Whitepaper CDSS.pdf',
-    url: '/docs/A Technical Whitepaper_ A Clinical Decision Support System for Musculoskeletal Diagnosis - Google Docs.pdf',
-    type: 'PDF',
-    size: '104 KB',
-  },
-  {
-    name: 'CDSS Project Documentation.pdf',
-    url: '/docs/CDSS Project Documentation.pdf',
-    type: 'PDF',
-    size: '49 KB',
-  },
-  {
-    name: 'Development Notes.docx',
-    url: '/docs/Development Notes for the CDSS.docx',
-    type: 'DOCX',
-    size: '538 KB',
-  },
-];
+const RESOURCES = [];
 
 const FAQS = [
   {
@@ -257,33 +238,35 @@ export default function HelpCenterClient() {
               ))}
             </div>
 
-            <div className="mt-8">
-              <h3 className="mb-4 px-2 text-lg font-bold">Official Docs</h3>
-              <div className="space-y-3">
-                {RESOURCES.map((doc) => (
-                  <a
-                    key={doc.name}
-                    href={doc.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:bg-muted hover:border-border group flex items-center gap-3 rounded-xl border border-transparent p-3 transition-colors"
-                  >
-                    <div className="rounded-lg bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
-                      <FileText className="h-4 w-4" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <p className="group-hover:text-primary truncate text-sm font-bold transition-colors">
-                        {doc.name}
-                      </p>
-                      <p className="text-muted-foreground text-[10px] font-bold uppercase">
-                        {doc.type} • {doc.size}
-                      </p>
-                    </div>
-                    <Download className="text-muted-foreground h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
-                  </a>
-                ))}
+            {RESOURCES.length > 0 && (
+              <div className="mt-8">
+                <h3 className="mb-4 px-2 text-lg font-bold">Official Docs</h3>
+                <div className="space-y-3">
+                  {RESOURCES.map((doc) => (
+                    <a
+                      key={doc.name}
+                      href={doc.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:bg-muted hover:border-border group flex items-center gap-3 rounded-xl border border-transparent p-3 transition-colors"
+                    >
+                      <div className="rounded-lg bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400">
+                        <FileText className="h-4 w-4" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="group-hover:text-primary truncate text-sm font-bold transition-colors">
+                          {doc.name}
+                        </p>
+                        <p className="text-muted-foreground text-[10px] font-bold uppercase">
+                          {doc.type} • {doc.size}
+                        </p>
+                      </div>
+                      <Download className="text-muted-foreground h-4 w-4 opacity-0 transition-opacity group-hover:opacity-100" />
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
 
