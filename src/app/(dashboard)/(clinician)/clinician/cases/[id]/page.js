@@ -60,14 +60,8 @@ export default function CaseDetailsPage() {
   const [isAnalysisOpen, setIsAnalysisOpen] = useState(false);
   const [isReferralOpen, setIsReferralOpen] = useState(false);
   const [isPlanOpen, setIsPlanOpen] = useState(false);
-  const [isCompleteModalOpen, setIsCompleteModalOpen] = useState(false);
 
   const [notesData, setNotesData] = useState('');
-  const [completionData, setCompletionData] = useState({
-    confirmedDiagnosis: '',
-    prescriptions: '',
-    recommendedPlan: '',
-  });
   const [referralData, setReferralData] = useState({
     specialty: 'Orthopedic Surgeon',
     reason: '',
@@ -237,45 +231,6 @@ export default function CaseDetailsPage() {
         setIsPlanOpen(false);
       } else {
         showAlert('Plan Failed', 'Failed to create treatment plan.', 'error');
-      }
-    } catch (err) {
-      showAlert('System Error', 'Internal server error.', 'error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleCompleteDocumentation = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const res = await fetch(`/api/diagnosis/${id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          status: 'completed',
-          clinicianReview: {
-            ...session.clinicianReview,
-            confirmedDiagnosis: completionData.confirmedDiagnosis,
-            prescriptions: completionData.prescriptions
-              ? completionData.prescriptions.split(',').map((p) => p.trim())
-              : [],
-            recommendedPlan: completionData.recommendedPlan,
-            reviewedAt: new Date(),
-          },
-        }),
-      });
-
-      if (res.ok) {
-        showAlert(
-          'Documentation Completed',
-          'Case has been marked as completed and results published.',
-          'success',
-          () => router.push('/clinician/cases')
-        );
-        setIsCompleteModalOpen(false);
-      } else {
-        showAlert('Update Failed', 'Failed to complete documentation.', 'error');
       }
     } catch (err) {
       showAlert('System Error', 'Internal server error.', 'error');
@@ -654,26 +609,8 @@ export default function CaseDetailsPage() {
 
       {/* Final Action */}
       <div className="flex justify-center pt-10">
-        <Button
-          onClick={() => {
-            setCompletionData({
-              confirmedDiagnosis: session.aiAnalysis?.temporalDiagnosis || '',
-              prescriptions: session.clinicianReview?.prescriptions?.join(', ') || '',
-              recommendedPlan: session.clinicianReview?.recommendedPlan || '',
-            });
-            setIsCompleteModalOpen(true);
-          }}
-          disabled={session.status === 'completed'}
-          className={cn(
-            'h-16 rounded-2xl border-none px-20 text-sm font-black tracking-widest text-white uppercase shadow-lg transition-transform hover:scale-105 active:scale-95',
-            session.status === 'completed'
-              ? 'cursor-not-allowed bg-emerald-500 opacity-80'
-              : 'bg-[#3da9f5] hover:bg-[#2c91db]'
-          )}
-        >
-          {session.status === 'completed'
-            ? 'Documentation Finished'
-            : 'Complete Documentation'}
+        <Button className="h-16 rounded-2xl border-none bg-[#3da9f5] px-20 text-sm font-black tracking-widest text-white uppercase shadow-lg transition-transform hover:scale-105 hover:bg-[#2c91db] active:scale-95">
+          Complete Documentation
         </Button>
       </div>
 
@@ -1160,92 +1097,6 @@ export default function CaseDetailsPage() {
                 Close Viewer
               </Button>
             </div>
-          </Card>
-        </div>
-      )}
-
-      {/* Complete Documentation Modal */}
-      {isCompleteModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <Card className="animate-scale-up w-full max-w-xl border-none p-8 shadow-2xl">
-            <h3 className="text-2xl font-black tracking-tight uppercase">
-              Finalize Documentation
-            </h3>
-            <p className="text-muted-foreground mt-2 text-xs font-medium tracking-widest uppercase">
-              Submit your final clinical findings for {patient?.firstName}
-            </p>
-
-            <form onSubmit={handleCompleteDocumentation} className="mt-8 space-y-5">
-              <div className="space-y-2">
-                <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                  Confirmed Diagnosis
-                </label>
-                <input
-                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                  value={completionData.confirmedDiagnosis}
-                  onChange={(e) =>
-                    setCompletionData({
-                      ...completionData,
-                      confirmedDiagnosis: e.target.value,
-                    })
-                  }
-                  required
-                  placeholder="Final diagnosis"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                  Prescriptions (Comma separated)
-                </label>
-                <input
-                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                  value={completionData.prescriptions}
-                  onChange={(e) =>
-                    setCompletionData({
-                      ...completionData,
-                      prescriptions: e.target.value,
-                    })
-                  }
-                  placeholder="e.g. Paracetamol 500mg, Ibuprofen 200mg"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                  Recommended Recovery Plan
-                </label>
-                <textarea
-                  className="ring-primary/10 h-32 w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium transition-all outline-none focus:ring-4 dark:border-slate-800 dark:bg-slate-900"
-                  value={completionData.recommendedPlan}
-                  onChange={(e) =>
-                    setCompletionData({
-                      ...completionData,
-                      recommendedPlan: e.target.value,
-                    })
-                  }
-                  placeholder="Detailed recovery roadmap and next steps..."
-                />
-              </div>
-
-              <div className="flex gap-3 pt-4">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-12 flex-1 rounded-xl text-[10px] font-black tracking-widest uppercase"
-                  onClick={() => setIsCompleteModalOpen(false)}
-                >
-                  Go Back
-                </Button>
-                <Button
-                  type="submit"
-                  className="bg-success h-12 flex-1 rounded-xl border-none text-[10px] font-black tracking-widest text-white uppercase shadow-lg hover:brightness-110"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Finalizing...' : 'Publish Results'}
-                </Button>
-              </div>
-            </form>
           </Card>
         </div>
       )}
