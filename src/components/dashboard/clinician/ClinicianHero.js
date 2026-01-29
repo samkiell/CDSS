@@ -5,20 +5,27 @@ import { Activity, ChevronRight, Users } from 'lucide-react';
 import { Card, CardContent, Badge } from '@/components/ui';
 
 export default function ClinicianHero({ latestPatient }) {
-  const statusLabel = 'Critical Review Needed';
+  const isMultiPatient = latestPatient?.totalAssigned > 1;
+  const statusLabel = isMultiPatient ? 'Multiple Cases Active' : 'Critical Review Needed';
 
   const title = latestPatient
-    ? `Review: ${latestPatient.name}`
+    ? isMultiPatient
+      ? `Manage ${latestPatient.totalAssigned} active cases`
+      : `Review: ${latestPatient.name}`
     : 'New Assessment Received';
 
   const description = latestPatient
-    ? `${latestPatient.name} has submitted a new assessment for ${latestPatient.region}. AI indicates high risk levels.`
+    ? isMultiPatient
+      ? `You have ${latestPatient.totalAssigned} patients assigned to you. Review the latest findings for ${latestPatient.name} and others in your queue.`
+      : `${latestPatient.name} has submitted a new assessment for ${latestPatient.region}. AI indicates high risk levels.`
     : "Monitor your patients' recovery progress and review new assessment results as they arrive.";
 
-  const buttonLabel = 'Open Case File';
-  const href = latestPatient
-    ? `/clinician/dashboard/case/${latestPatient.id}`
-    : '/clinician/dashboard/patients';
+  const buttonLabel = 'Open Queue';
+  const href = isMultiPatient
+    ? '/clinician/dashboard'
+    : latestPatient
+      ? `/clinician/dashboard/case/${latestPatient.id}`
+      : '/clinician/dashboard/patients';
 
   return (
     <Card className="bg-primary text-primary-foreground overflow-hidden">

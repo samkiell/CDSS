@@ -10,8 +10,25 @@ export default async function AdminTherapistsPage() {
     .sort({ createdAt: -1 })
     .lean();
 
+  // Enhance with patient count from sessions
+  // Using a separate model import here to avoid circular dependencies if any
+  const DiagnosisSession = (await import('@/models/DiagnosisSession')).default;
+
+  const therapistsWithCounts = await Promise.all(
+    therapistsRaw.map(async (t) => {
+      const patientCount = await DiagnosisSession.distinct('patientId', {
+        clinicianId: t._id,
+      }).then((ids) => ids.length);
+
+      return {
+        ...t,
+        patientCount: patientCount || 0,
+      };
+    })
+  );
+
   // Serialize Mongoose objects
-  const therapists = JSON.parse(JSON.stringify(therapistsRaw));
+  const therapists = JSON.parse(JSON.stringify(therapistsWithCounts));
 
   return (
     <div className="space-y-8 pb-12">

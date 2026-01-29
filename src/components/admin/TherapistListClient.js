@@ -16,6 +16,7 @@ import {
   FileText,
   Mail,
   Smartphone,
+  Users,
 } from 'lucide-react';
 import {
   Card,
@@ -154,6 +155,10 @@ export default function AdminTherapistListClient({ initialTherapists = [] }) {
                             {therapist.phone}
                           </span>
                         )}
+                        <span className="text-primary mt-1 flex items-center gap-2 text-xs font-bold">
+                          <Users className="h-3.5 w-3.5" />
+                          {therapist.patientCount || 0} Assigned Patients
+                        </span>
                       </div>
                     </div>
                   </div>

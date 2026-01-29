@@ -80,6 +80,7 @@ export default async function ClinicianDashboardPage() {
         name: `${latestSession.patientId?.firstName} ${latestSession.patientId?.lastName}`,
         region: latestSession.bodyRegion,
         risk: latestSession.aiAnalysis?.riskLevel,
+        totalAssigned: sessions.length,
       }
     : null;
 

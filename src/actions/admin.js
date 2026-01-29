@@ -114,6 +114,8 @@ export async function assignCase(sessionId, clinicianId) {
     revalidatePath('/admin/dashboard');
     revalidatePath('/patient/messages');
     revalidatePath('/clinician/messages');
+    revalidatePath('/clinician/dashboard');
+    revalidatePath('/clinician/patients');
     return { success: true };
   } catch (error) {
     console.error('Error assigning case:', error);
