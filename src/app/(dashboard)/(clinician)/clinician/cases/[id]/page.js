@@ -1,404 +1,1154 @@
 'use client';
-import { ArrowLeft } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 
-export default function CaseViewPage() {
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import {
+  ArrowLeft,
+  User,
+  ClipboardList,
+  CheckCircle2,
+  FileText,
+  PlusCircle,
+  Calendar,
+  Info,
+  Download,
+  Eye,
+  FileIcon,
+  X,
+  AlertCircle,
+} from 'lucide-react';
+import { cn } from '@/lib/cn';
+import { Button, Card, Badge, Lightbox, StatusModal } from '@/components/ui';
+import { useParams, useRouter } from 'next/navigation';
+
+export default function CaseDetailsPage() {
+  const { id } = useParams();
   const router = useRouter();
 
-  const caseData = {
-    patientName: "David's Case File",
-    additionalInfo: "Patient's Additional Info",
-    name: 'Bola Ahmed Tinubu',
-    dateOfBirth: '05-05-1988',
-    sex: 'Male',
-    assessmentDate: '11 November, 2025',
-    diagnosis: 'Lumbar Disc Herniation',
-    confidenceRate: '84%',
-    vasScore: '7/10',
-    oxfordScore: '4/5',
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isDocsOpen, setIsDocsOpen] = useState(false);
+  const [documents, setDocuments] = useState([]);
+  const [isLoadingDocs, setIsLoadingDocs] = useState(false);
+  const [activeImage, setActiveImage] = useState(null); // { src, alt }
+
+  // Status Modal State
+  const [statusModal, setStatusModal] = useState({
+    isOpen: false,
+    type: 'info',
+    title: '',
+    message: '',
+    onConfirm: null,
+  });
+
+  const showAlert = (title, message, type = 'info', onConfirm = null) => {
+    setStatusModal({
+      isOpen: true,
+      type,
+      title,
+      message,
+      onConfirm,
+    });
   };
 
+  const [bookingData, setBookingData] = useState({
+    date: '',
+    time: '',
+    type: 'Physiotherapy Session',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
+  const [isAnalysisOpen, setIsAnalysisOpen] = useState(false);
+  const [isReferralOpen, setIsReferralOpen] = useState(false);
+  const [isPlanOpen, setIsPlanOpen] = useState(false);
+
+  const [notesData, setNotesData] = useState('');
+  const [referralData, setReferralData] = useState({
+    specialty: 'Orthopedic Surgeon',
+    reason: '',
+    urgency: 'Medium',
+    date: '',
+    time: '',
+  });
+  const [planData, setPlanData] = useState({
+    goal: '',
+    activeTreatment: '',
+    homeExercise: '',
+    date: new Date().toISOString().split('T')[0],
+    time: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
+  });
+
+  const [session, setSession] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (id) {
+      fetchCaseDetails();
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (isDocsOpen && session?.patientId?._id) {
+      fetchDocuments();
+    }
+  }, [isDocsOpen, session]);
+
+  const fetchCaseDetails = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch(`/api/diagnosis/${id}`);
+      const result = await res.json();
+      if (result.success) {
+        setSession(result.data);
+      }
+    } catch (err) {
+      console.error('Error fetching case details:', err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const fetchDocuments = async () => {
+    if (!session?.patientId?._id) return;
+    setIsLoadingDocs(true);
+    try {
+      const res = await fetch(`/api/documents?patientId=${session.patientId._id}`);
+      const data = await res.json();
+      if (data.success) {
+        setDocuments(data.documents);
+      }
+    } catch (err) {
+      console.error('Error fetching documents:', err);
+    } finally {
+      setIsLoadingDocs(false);
+    }
+  };
+
+  const handleBook = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientId: session.patientId._id,
+          ...bookingData,
+        }),
+      });
+
+      if (res.ok) {
+        showAlert('Schedule Confirmed', 'Appointment scheduled successfully!', 'success');
+        setIsBookingOpen(false);
+      } else {
+        const err = await res.json();
+        showAlert('Scheduling Failed', `Error: ${err.error}`, 'error');
+      }
+    } catch (err) {
+      showAlert('System Error', 'Failed to schedule appointment.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleUpdateNotes = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`/api/diagnosis/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          clinicianReview: {
+            ...session.clinicianReview,
+            clinicianNotes: notesData,
+          },
+        }),
+      });
+
+      if (res.ok) {
+        showAlert('Notes Saved', 'Case notes updated successfully!', 'success');
+        setIsNotesOpen(false);
+        fetchCaseDetails(); // Refresh data
+      } else {
+        showAlert('Update Failed', 'Failed to update notes.', 'error');
+      }
+    } catch (err) {
+      showAlert('System Error', 'Internal server error.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleReferral = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/referrals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientId: session.patientId._id,
+          specialty: referralData.specialty,
+          reason: referralData.reason,
+          preferredDate: referralData.date,
+          preferredTime: referralData.time,
+        }),
+      });
+
+      if (res.ok) {
+        showAlert(
+          'Referral Sent',
+          `Referral sent to ${referralData.specialty} successfully!`,
+          'success'
+        );
+        setIsReferralOpen(false);
+      } else {
+        showAlert('Referral Failed', 'Failed to send referral.', 'error');
+      }
+    } catch (err) {
+      showAlert('Referral Error', 'Failed to send referral.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleCreatePlan = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/treatment-plans', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientId: session.patientId._id,
+          conditionName: session.aiAnalysis.temporalDiagnosis,
+          activity: planData,
+        }),
+      });
+
+      if (res.ok) {
+        showAlert('Plan Generated', 'Treatment plan updated successfully!', 'success');
+        setIsPlanOpen(false);
+      } else {
+        showAlert('Plan Failed', 'Failed to create treatment plan.', 'error');
+      }
+    } catch (err) {
+      showAlert('System Error', 'Internal server error.', 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const formatFileSize = (bytes) => {
+    if (!bytes) return '0 B';
+    const k = 1024;
+    const sizes = ['B', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+  };
+
+  const calculateAge = (dob) => {
+    if (!dob) return 'N/A';
+    const birthDate = new Date(dob);
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
+        <div className="border-primary h-12 w-12 animate-spin rounded-full border-b-2" />
+        <p className="text-muted-foreground font-bold">Synchronizing Case Data...</p>
+      </div>
+    );
+  }
+
+  if (!session) {
+    return (
+      <div className="text-foreground flex min-h-[60vh] flex-col items-center justify-center gap-4 p-8 text-center">
+        <AlertCircle className="text-destructive h-16 w-16 opacity-50" />
+        <h2 className="text-2xl font-black">Case File Not Found</h2>
+        <p className="text-muted-foreground max-w-md font-medium">
+          The session you are looking for does not exist or has been archived.
+        </p>
+        <Link href="/clinician/cases">
+          <Button variant="outline" className="mt-4 rounded-xl border-2 font-bold">
+            Back to Case View
+          </Button>
+        </Link>
+      </div>
+    );
+  }
+
+  const patient = session.patientId;
+  const analysis = session.aiAnalysis;
+
   return (
-    <div className="mx-auto w-full max-w-4xl px-3 pb-6 sm:px-4 sm:pb-8">
+    <div className="animate-fade-in text-foreground mx-auto max-w-5xl space-y-8 pb-20">
       {/* Header */}
-      <div className="mb-4 flex flex-col gap-3 sm:mb-6 sm:flex-row sm:items-center">
-        <button
-          onClick={() => router.back()}
-          className="shrink-0 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100"
-        >
-          <ArrowLeft size={20} className="sm:h-6 sm:w-6" />
-        </button>
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gray-200 sm:h-12 sm:w-12 dark:bg-gray-700">
-          <svg
-            className="h-5 w-5 text-gray-500 sm:h-6 sm:w-6 dark:text-gray-400"
-            fill="currentColor"
-            viewBox="0 0 24 24"
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={() => router.push('/clinician/cases')}
+            className="bg-card border-border hover:bg-accent rounded-full border p-2 shadow-sm transition-all"
           >
-            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-          </svg>
-        </div>
-        <div className="min-w-0 flex-1">
-          <h1 className="truncate text-base font-semibold text-gray-900 sm:text-lg dark:text-gray-100">
-            {caseData.patientName}
-          </h1>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            {caseData.additionalInfo}
-          </p>
-        </div>
-        <div className="flex shrink-0 items-center gap-1.5">
-          <div className="h-2 w-2 rounded-full bg-green-500 sm:h-2.5 sm:w-2.5"></div>
-          <span className="text-xs whitespace-nowrap text-gray-600 dark:text-gray-400">
-            Currently Diagnosed
-          </span>
-        </div>
-      </div>
-
-      {/* Patient Info Card */}
-      <div className="mb-4 grid grid-cols-1 gap-2.5 rounded-lg border border-gray-200 bg-white p-3 sm:mb-6 sm:grid-cols-2 sm:gap-3 sm:p-4 lg:grid-cols-4 dark:border-gray-700 dark:bg-gray-800">
-        <div>
-          <p className="text-xs text-gray-500 dark:text-gray-400">Name:</p>
-          <p className="truncate text-xs font-medium text-gray-900 sm:text-sm dark:text-gray-100">
-            {caseData.name}
-          </p>
-        </div>
-        <div>
-          <p className="text-xs text-gray-500 dark:text-gray-400">Date Of Birth:</p>
-          <p className="text-xs font-medium text-gray-900 sm:text-sm dark:text-gray-100">
-            {caseData.dateOfBirth}
-          </p>
-        </div>
-        <div>
-          <p className="text-xs text-gray-500 dark:text-gray-400">Sex:</p>
-          <p className="text-xs font-medium text-gray-900 sm:text-sm dark:text-gray-100">
-            {caseData.sex}
-          </p>
-        </div>
-        <div>
-          <p className="text-xs text-gray-500 dark:text-gray-400">Assessment Date:</p>
-          <p className="text-xs font-medium text-gray-900 sm:text-sm dark:text-gray-100">
-            {caseData.assessmentDate}
-          </p>
-        </div>
-      </div>
-
-      {/* Assessment Summary */}
-      <div className="mb-4 rounded-lg border border-gray-200 bg-white p-3 sm:mb-6 sm:p-4 dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="mb-2.5 text-sm font-semibold text-gray-900 sm:mb-3 sm:text-base dark:text-gray-100">
-          Assessment Summary
-        </h2>
-        <p className="mb-2.5 text-xs leading-relaxed text-gray-700 sm:mb-3 sm:text-sm dark:text-gray-300">
-          Based on the completed lumbar assessment task, the patient exhibits moderate
-          signs of lumbar disc herniation. Symptoms include lower back pain, radiating
-          pain down the left leg (sciatica), and restricted range of motion, particularly
-          with forward bending and flexion. The patient reported mild-to-moderate
-          functional limitation from one typical daily activities such as prolonged
-          sitting or standing.
-        </p>
-
-        <h3 className="mb-1.5 text-xs font-semibold text-gray-900 sm:mb-2 sm:text-sm dark:text-gray-100">
-          Key Findings
-        </h3>
-        <ul className="mb-2.5 space-y-1 text-xs leading-relaxed text-gray-700 sm:mb-3 sm:text-sm dark:text-gray-300">
-          <li className="flex gap-2">
-            <span className="shrink-0 text-gray-500 dark:text-gray-400">•</span>
-            <span>
-              Pain triggered by forward bending, prolonged sitting, and twisting.
+            <ArrowLeft className="text-muted-foreground h-6 w-6" />
+          </button>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-black tracking-tight">
+              {patient?.firstName
+                ? `${patient.firstName}'s Case File`
+                : 'Patient Case File'}
+            </h1>
+            <div
+              className={cn(
+                'ml-2 h-3 w-3 animate-pulse rounded-full',
+                analysis?.riskLevel === 'Urgent'
+                  ? 'bg-destructive'
+                  : analysis?.riskLevel === 'Moderate'
+                    ? 'bg-warning'
+                    : 'bg-success'
+              )}
+            />
+            <span className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
+              {analysis?.riskLevel || 'Low'} Risk
             </span>
-          </li>
-          <li className="flex gap-2">
-            <span className="shrink-0 text-gray-500 dark:text-gray-400">•</span>
-            <span>
-              Positive straight leg raise (SLR) test on the left side at 45 degrees.
-            </span>
-          </li>
-          <li className="flex gap-2">
-            <span className="shrink-0 text-gray-500 dark:text-gray-400">•</span>
-            <span>
-              Strength: Observations: Slight weakness in core stabilizers and lower back
-              muscles.
-            </span>
-          </li>
-          <li className="flex gap-2">
-            <span className="shrink-0 text-gray-500 dark:text-gray-400">•</span>
-            <span>
-              Neurological: Mild tingling only identifies sciatica bending sitting for
-              long periods.
-            </span>
-          </li>
-        </ul>
-
-        <h3 className="mb-1.5 text-xs font-semibold text-gray-900 sm:mb-2 sm:text-sm dark:text-gray-100">
-          Overall Assessment:
-        </h3>
-        <p className="text-xs leading-relaxed text-gray-700 sm:text-sm dark:text-gray-300">
-          The findings suggest a non-specific lumbar disc-related dysfunction, likely due
-          to posture and movement patterns rather than acute injury. Conservative
-          treatment including strengthening exercises, posture correction, and manual
-          therapy is recommended to improve musculoskeletal with guided physiotherapy
-          interventions.
-        </p>
-      </div>
-
-      {/* Temporary Diagnosis */}
-      <div className="mb-4 rounded-lg border border-gray-200 bg-white p-3 sm:mb-6 sm:p-4 dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="mb-3 text-sm font-semibold text-gray-900 sm:mb-4 sm:text-base dark:text-gray-100">
-          Temporary Diagnosis
-        </h2>
-
-        <div className="mb-3 flex flex-col gap-4 rounded-lg bg-gray-50 p-4 sm:mb-4 sm:flex-row sm:items-center sm:justify-between dark:bg-gray-900">
-          <h3 className="text-base font-bold text-gray-900 sm:text-lg dark:text-gray-100">
-            {caseData.diagnosis}
-          </h3>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-gray-900 sm:text-3xl dark:text-gray-100">
-              {caseData.confidenceRate}
-            </div>
-            <p className="text-xs text-gray-600 dark:text-gray-400">Confidence Rate</p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
-          <div className="rounded-lg border border-cyan-200 bg-cyan-50 p-3 text-center sm:p-4 dark:border-cyan-800 dark:bg-cyan-900/20">
-            <div className="mb-1.5 text-xl font-bold text-cyan-600 sm:mb-2 sm:text-2xl dark:text-cyan-400">
-              {caseData.vasScore}
-            </div>
-            <p className="text-xs text-gray-600 dark:text-gray-400">VAS Scale</p>
-          </div>
-          <div className="rounded-lg border border-green-200 bg-green-50 p-3 text-center sm:p-4 dark:border-green-800 dark:bg-green-900/20">
-            <div className="mb-1.5 text-xl font-bold text-green-600 sm:mb-2 sm:text-2xl dark:text-green-400">
-              {caseData.oxfordScore}
-            </div>
-            <p className="text-xs text-gray-600 dark:text-gray-400">Oxford Minor Scale</p>
           </div>
         </div>
       </div>
 
-      {/* Uploaded Documents */}
-      <div className="mb-4 rounded-lg border border-gray-200 bg-white p-3 sm:mb-6 sm:p-4 dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="mb-3 text-sm font-semibold text-gray-900 sm:mb-4 sm:text-base dark:text-gray-100">
-          Uploaded Documents
-        </h2>
-
-        {/* MRI */}
-        <div className="mb-3 sm:mb-4">
-          <h3 className="mb-1.5 text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm dark:text-gray-300">
-            MRI
-          </h3>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
-            <div className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-700">
-              <div className="flex h-full items-center justify-center text-xs text-gray-400">
-                Image
-              </div>
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
-              <div className="flex h-full items-center justify-center text-xs text-gray-400 dark:text-gray-500">
-                None
-              </div>
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
-              <div className="flex h-full items-center justify-center text-xs text-gray-400 dark:text-gray-500">
-                None
-              </div>
-            </div>
+      {/* Patient Header Card */}
+      <Card className="border-border bg-card flex items-center gap-8 rounded-[2.5rem] p-8 shadow-sm">
+        <div className="bg-primary/10 text-primary border-primary/20 relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full border text-2xl font-black shadow-inner">
+          {patient?.avatar ? (
+            <img
+              src={patient.avatar}
+              alt="Avatar"
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            patient?.firstName?.[0] || 'P'
+          )}
+        </div>
+        <div className="grid flex-1 grid-cols-2 gap-6 lg:grid-cols-4">
+          <div className="flex flex-col">
+            <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
+              Name
+            </span>
+            <span className="text-foreground truncate text-base font-black">
+              {patient?.firstName} {patient?.lastName}
+            </span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
+              Sex
+            </span>
+            <span className="text-foreground text-base font-black capitalize">
+              {patient?.gender || 'Not specified'}
+            </span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
+              Age
+            </span>
+            <span className="text-foreground text-base font-black">
+              {calculateAge(patient?.dateOfBirth)} yrs
+            </span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-muted-foreground text-right text-xs font-bold tracking-wider uppercase">
+              Assigned
+            </span>
+            <span className="text-foreground text-right text-xs font-bold">
+              {new Date(session.createdAt).toLocaleDateString(undefined, {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric',
+              })}
+            </span>
           </div>
         </div>
+      </Card>
 
-        {/* X-Ray */}
-        <div className="mb-3 sm:mb-4">
-          <h3 className="mb-1.5 text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm dark:text-gray-300">
-            X-Ray
-          </h3>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
-            <div className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-700">
-              <div className="flex h-full items-center justify-center text-xs text-gray-400">
-                Image
-              </div>
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
-              <div className="flex h-full items-center justify-center text-xs text-gray-400 dark:text-gray-500">
-                None
-              </div>
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
-              <div className="flex h-full items-center justify-center text-xs text-gray-400 dark:text-gray-500">
-                None
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Other Clinical Files */}
-        <div className="mb-3 sm:mb-4">
-          <h3 className="mb-1.5 text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm dark:text-gray-300">
-            Other Clinical Files
-          </h3>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
-            {[1, 2, 3].map((i) => (
+      {/* Assessment Media Gallery */}
+      {session.mediaUrls && session.mediaUrls.length > 0 && (
+        <div className="space-y-4">
+          <h2 className="px-2 text-xl font-black tracking-wide uppercase">
+            Visual Assessment Findings
+          </h2>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {session.mediaUrls.map((url, idx) => (
               <div
-                key={i}
-                className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-800"
+                key={idx}
+                className="group relative aspect-square cursor-zoom-in overflow-hidden rounded-[2rem] border-4 border-white bg-slate-100 shadow-sm transition-all hover:shadow-lg dark:border-slate-800 dark:bg-slate-900"
+                onClick={() =>
+                  setActiveImage({ src: url, alt: `Patient Assessment Image ${idx + 1}` })
+                }
               >
-                <div className="flex h-full items-center justify-center text-xs text-gray-400 dark:text-gray-500">
-                  None
+                <img
+                  src={url}
+                  alt={`Assessment ${idx}`}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
+                  <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-full text-white shadow-xl">
+                    <Eye className="h-5 w-5" />
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
+      )}
 
-        {/* Other Pictures Or Videos */}
-        <div>
-          <h3 className="mb-1.5 text-xs font-medium text-gray-700 sm:mb-2 sm:text-sm dark:text-gray-300">
-            Other Pictures Or Videos
-          </h3>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
-            <div className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-100 dark:border-gray-600 dark:bg-gray-700">
-              <div className="flex h-full items-center justify-center text-xs text-gray-400">
-                Image
-              </div>
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
-              <div className="flex h-full items-center justify-center text-xs text-gray-400 dark:text-gray-500">
-                None
-              </div>
-            </div>
-            <div className="aspect-square overflow-hidden rounded-lg border border-gray-200 bg-gray-50 dark:border-gray-600 dark:bg-gray-800">
-              <div className="flex h-full items-center justify-center text-xs text-gray-400 dark:text-gray-500">
-                None
-              </div>
+      {/* AI Reasoning / Assessment Summary */}
+      <div className="space-y-4">
+        <div className="flex items-center justify-between px-2">
+          <h2 className="text-xl font-black">AI Assessment Summary</h2>
+          <span className="text-muted-foreground text-xs font-bold uppercase opacity-70">
+            {new Date(session.createdAt).toLocaleDateString(undefined, {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </span>
+        </div>
+        <Card className="border-border bg-card text-muted-foreground rounded-[2.5rem] p-10 text-sm leading-relaxed">
+          <div className="space-y-4">
+            <p className="text-foreground text-base font-medium">
+              Findings for {session.bodyRegion} Assessment:
+            </p>
+            <ul className="mt-2 ml-5 list-disc space-y-3">
+              {analysis?.reasoning?.map((point, idx) => (
+                <li key={idx} className="pl-2">
+                  {point}
+                </li>
+              ))}
+            </ul>
+            {!analysis?.reasoning?.length && (
+              <p className="italic">
+                AI reasoning details are currently unavailable for this session.
+              </p>
+            )}
+
+            <div className="border-border mt-6 border-t pt-4">
+              <strong className="text-foreground text-[10px] tracking-widest uppercase">
+                Diagnosis Reasoning
+              </strong>
+              <p className="mt-2 text-sm italic">
+                Based on machine learning models analyzing clinical heuristic MSK
+                patterns. This is a provisional diagnosis pending human physical
+                examination.
+              </p>
             </div>
           </div>
-        </div>
+        </Card>
       </div>
 
-      {/* Quick Actions */}
-      <div className="rounded-lg border border-gray-200 bg-white p-3 sm:p-4 dark:border-gray-700 dark:bg-gray-800">
-        <h2 className="mb-3 text-sm font-semibold text-gray-900 sm:mb-4 sm:text-base dark:text-gray-100">
-          Quick Actions
+      {/* Metrics Row 1 */}
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <Card className="border-border bg-card flex min-h-[220px] flex-col justify-center rounded-[2.5rem] p-10">
+          <span className="text-muted-foreground decoration-border text-xs font-bold uppercase underline underline-offset-8">
+            Temporary Diagnosis
+          </span>
+          <h3 className="mt-8 text-4xl leading-tight font-black tracking-tight">
+            {analysis?.temporalDiagnosis || 'N/A'}
+          </h3>
+        </Card>
+        <Card className="border-border bg-card flex items-center justify-around gap-8 rounded-[2.5rem] p-10">
+          <div className="relative h-28 w-28">
+            <svg viewBox="0 0 36 36" className="h-full w-full">
+              <path
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none"
+                className="stroke-muted-foreground/10"
+                strokeWidth="3.5"
+              />
+              <path
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                fill="none"
+                className={cn(
+                  'stroke-current transition-all duration-1000 ease-out',
+                  (analysis?.confidenceScore || 0) > 80
+                    ? 'text-success'
+                    : (analysis?.confidenceScore || 0) > 50
+                      ? 'text-warning'
+                      : 'text-destructive'
+                )}
+                strokeWidth="3.5"
+                strokeDasharray={`${analysis?.confidenceScore || 0}, 100`}
+                strokeLinecap="round"
+              />
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-2xl font-black">
+                {analysis?.confidenceScore || 0}%
+              </span>
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-5xl font-black tracking-tighter italic">
+              {analysis?.confidenceScore || 0}%
+            </span>
+            <span className="text-muted-foreground mt-1 text-xs font-bold uppercase">
+              Confidence Rate
+            </span>
+          </div>
+        </Card>
+      </div>
+
+      {/* Metrics Row 2 */}
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <Card className="border-border bg-card flex flex-col items-center justify-center rounded-[2.5rem] p-10 text-center">
+          <div className="mb-2 flex items-center gap-3">
+            <div className="bg-primary h-2 w-2 rounded-full" />
+            <span className="text-xs font-bold tracking-widest uppercase opacity-60">
+              Status
+            </span>
+          </div>
+          <div className="border-border mt-2 w-full border-t pt-6">
+            <span className="text-5xl font-black tracking-tight uppercase">
+              {session.status === 'pending_review' ? 'NEW' : session.status}
+            </span>
+            <p className="text-muted-foreground mt-3 text-xs font-bold tracking-widest uppercase">
+              Session Priority
+            </p>
+          </div>
+        </Card>
+        <Card className="border-border bg-card flex flex-col items-center justify-center rounded-[2.5rem] p-10 text-center">
+          <div className="mb-2 flex items-center gap-3">
+            <div className="h-2 w-2 rounded-full bg-indigo-500" />
+            <span className="text-xs font-bold tracking-widest uppercase opacity-60">
+              Region
+            </span>
+          </div>
+          <div className="border-border mt-2 w-full border-t pt-6">
+            <span className="text-5xl font-black tracking-tight uppercase">
+              {session.bodyRegion?.slice(0, 3)}
+            </span>
+            <p className="text-muted-foreground mt-3 text-xs font-bold tracking-widest uppercase">
+              Target Area
+            </p>
+          </div>
+        </Card>
+      </div>
+
+      {/* Reports Section */}
+      <div className="space-y-6 pt-4">
+        <h2 className="px-2 text-xl font-black tracking-wide uppercase">
+          Reports & Actions
         </h2>
-        <div className="space-y-2.5 sm:space-y-4">
-          <button className="relative w-full overflow-hidden rounded-xl bg-linear-to-r from-green-400 to-green-500 p-4 text-left text-white transition-transform hover:scale-105 sm:rounded-2xl sm:p-5 md:p-6">
-            <div className="relative z-10 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-              <div className="flex-1">
-                <div className="mb-1.5 flex items-center gap-2 sm:gap-3">
-                  <svg
-                    className="h-5 w-5 shrink-0 sm:h-6 sm:w-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M7 10h12V5H7v5zm12-7H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z" />
-                  </svg>
-                  <span className="text-sm font-bold sm:text-base">Book Appointment</span>
-                </div>
-                <p className="text-xs opacity-95 sm:text-sm">
-                  Schedule your next physiotherapy session with your patient.
-                </p>
-              </div>
-            </div>
-            <svg
-              className="absolute top-0 right-0 h-24 w-24 opacity-25 sm:h-32 sm:w-32 md:h-40 md:w-40"
-              viewBox="0 0 100 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="50"
-                y="20"
-                width="35"
-                height="45"
-                rx="3"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-              <path
-                d="M60 35h15M60 45h15M60 55h15M65 75h5v5h-5z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-            </svg>
-          </button>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <ReportCard
+            color="bg-primary shadow-primary/20"
+            icon={<ClipboardList />}
+            title="Schedules"
+            desc="Book the next clinical session for this patient."
+            onClick={() => setIsBookingOpen(true)}
+            actionText="Schedule Session"
+          />
+          <ReportCard
+            color="bg-indigo-500 shadow-indigo-500/20"
+            icon={<CheckCircle2 />}
+            title="Analysis"
+            desc="Review the granular heuristic patterns detected via MSK logic."
+            actionText="Review Patterns"
+            onClick={() => setIsAnalysisOpen(true)}
+          />
+          <ReportCard
+            color="bg-emerald-500 shadow-emerald-500/20"
+            icon={<FileText />}
+            title="Clinical Files"
+            desc="Access radiological images, lab results and previous prescriptions."
+            actionText="Browse Files"
+            onClick={() => setIsDocsOpen(true)}
+          />
 
-          <button className="relative w-full overflow-hidden rounded-xl bg-linear-to-r from-blue-400 to-blue-500 p-4 text-left text-white transition-transform hover:scale-105 sm:rounded-2xl sm:p-5 md:p-6">
-            <div className="relative z-10 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-              <div className="flex-1">
-                <div className="mb-1.5 flex items-center gap-2 sm:gap-3">
-                  <svg
-                    className="h-5 w-5 shrink-0 sm:h-6 sm:w-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z" />
-                  </svg>
-                  <span className="text-sm font-bold sm:text-base">
-                    Check Guided-Test
-                  </span>
-                </div>
-                <p className="text-xs opacity-95 sm:text-sm">
-                  Guided tests already assigned to your patient
-                </p>
-              </div>
-            </div>
-            <svg
-              className="absolute top-0 right-0 h-24 w-24 opacity-25 sm:h-32 sm:w-32 md:h-40 md:w-40"
-              viewBox="0 0 100 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M55 25L70 40M55 40L70 55M50 60L65 75"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <circle cx="60" cy="50" r="8" stroke="currentColor" strokeWidth="2" />
-            </svg>
-          </button>
+          <div className="bg-border col-span-full my-6 h-[1px] opacity-50" />
 
-          <button className="relative w-full overflow-hidden rounded-xl bg-linear-to-r from-purple-500 to-purple-600 p-4 text-left text-white transition-transform hover:scale-105 sm:rounded-2xl sm:p-5 md:p-6">
-            <div className="relative z-10 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-              <div className="flex-1">
-                <div className="mb-1.5 flex items-center gap-2 sm:gap-3">
-                  <svg
-                    className="h-5 w-5 shrink-0 sm:h-6 sm:w-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V8h8v2z" />
-                  </svg>
-                  <span className="text-sm font-bold sm:text-base">Treatment Plan</span>
-                </div>
-                <p className="text-xs opacity-95 sm:text-sm">
-                  Check documents uploaded by the your patient
-                </p>
-              </div>
-            </div>
-            <svg
-              className="absolute top-0 right-0 h-24 w-24 opacity-25 sm:h-32 sm:w-32 md:h-40 md:w-40"
-              viewBox="0 0 100 100"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="40"
-                y="25"
-                width="35"
-                height="50"
-                rx="2"
-                stroke="currentColor"
-                strokeWidth="2"
-              />
-              <path
-                d="M48 35h19M48 45h19M48 55h12"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-              />
-              <circle cx="72" cy="62" r="6" stroke="currentColor" strokeWidth="2" />
-            </svg>
-          </button>
+          <ReportCard
+            color="bg-[#7c4d7c] shadow-[#7c4d7c]/20"
+            icon={<PlusCircle />}
+            title="Treatment Plan"
+            desc="Construct a personalized recovery roadmap and exercise regimen."
+            actionText="Generate Plan"
+            onClick={() => {
+              setPlanData({
+                ...planData,
+                goal: `Recovery for ${session.bodyRegion}`,
+              });
+              setIsPlanOpen(true);
+            }}
+          />
+          <ReportCard
+            color="bg-warning shadow-warning/20 bg-opacity-90"
+            icon={<Calendar />}
+            title="Clinical Notes"
+            desc="Add specific observational notes and clinician impressions."
+            actionText="Add Notes"
+            onClick={() => {
+              setNotesData(session.clinicianReview?.clinicianNotes || '');
+              setIsNotesOpen(true);
+            }}
+          />
+          <ReportCard
+            color="bg-foreground text-background shadow-foreground/20"
+            icon={<Info />}
+            title="Referral Plan"
+            desc="Authorize secondary referrals or medical investigations."
+            actionText="Refer Patient"
+            onClick={() => setIsReferralOpen(true)}
+          />
         </div>
       </div>
+
+      {/* Final Action */}
+      <div className="flex justify-center pt-10">
+        <Button className="h-16 rounded-2xl border-none bg-[#3da9f5] px-20 text-sm font-black tracking-widest text-white uppercase shadow-lg transition-transform hover:scale-105 hover:bg-[#2c91db] active:scale-95">
+          Complete Documentation
+        </Button>
+      </div>
+
+      {/* Booking Modal */}
+      {isBookingOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-scale-up w-full max-w-md border-none p-6 shadow-2xl">
+            <h3 className="text-xl font-black">Schedule Appointment</h3>
+            <p className="text-muted-foreground mt-2 text-xs font-medium">
+              Select a date and time for{' '}
+              {patient ? `${patient.firstName} ${patient.lastName}` : 'this patient'}
+            </p>
+
+            <form onSubmit={handleBook} className="mt-6 space-y-4">
+              <div>
+                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                  Date
+                </label>
+                <input
+                  type="date"
+                  required
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
+                  value={bookingData.date}
+                  onChange={(e) =>
+                    setBookingData({ ...bookingData, date: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                  Time
+                </label>
+                <input
+                  type="time"
+                  required
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
+                  value={bookingData.time}
+                  onChange={(e) =>
+                    setBookingData({ ...bookingData, time: e.target.value })
+                  }
+                />
+              </div>
+              <div>
+                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                  Session Type
+                </label>
+                <select
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
+                  value={bookingData.type}
+                  onChange={(e) =>
+                    setBookingData({ ...bookingData, type: e.target.value })
+                  }
+                >
+                  <option>Physiotherapy Session</option>
+                  <option>Consultation</option>
+                  <option>Check-up</option>
+                  <option>Follow-up</option>
+                </select>
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => setIsBookingOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" className="flex-1" disabled={isSubmitting}>
+                  {isSubmitting ? 'Scheduling...' : 'Confirm'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+
+      {/* Analysis Modal */}
+      {isAnalysisOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-scale-up w-full max-w-2xl border-none p-8 shadow-2xl">
+            <div className="mb-6 flex items-center justify-between">
+              <h3 className="text-2xl font-black">MSK Analysis Patterns</h3>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsAnalysisOpen(false)}
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            <div className="max-h-[60vh] space-y-6 overflow-y-auto pr-4">
+              <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-6">
+                <span className="text-[10px] font-black tracking-widest text-indigo-500 uppercase">
+                  Detected Patterns
+                </span>
+                <p className="text-foreground mt-2 text-sm font-bold">
+                  Granular heuristic patterns detected via MSK logic for{' '}
+                  {session.bodyRegion}.
+                </p>
+              </div>
+              <div className="grid gap-4">
+                {analysis?.reasoning?.map((point, idx) => (
+                  <div
+                    key={idx}
+                    className="flex gap-4 rounded-xl bg-slate-50 p-4 dark:bg-slate-900"
+                  >
+                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-500 text-xs font-black text-white">
+                      {idx + 1}
+                    </div>
+                    <p className="text-sm font-medium">{point}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <Button
+              className="mt-8 h-12 w-full rounded-xl"
+              onClick={() => setIsAnalysisOpen(false)}
+            >
+              Close Patterns
+            </Button>
+          </Card>
+        </div>
+      )}
+
+      {/* Notes Modal */}
+      {isNotesOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-scale-up w-full max-w-md border-none p-6 shadow-2xl">
+            <h3 className="text-xl font-black">Add Clinical Notes</h3>
+            <p className="text-muted-foreground mt-2 text-xs font-medium">
+              Add your clinical impressions and observations for this session.
+            </p>
+            <form onSubmit={handleUpdateNotes} className="mt-6 space-y-4">
+              <textarea
+                className="ring-primary/20 h-40 w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium transition-all outline-none focus:ring-2 dark:border-slate-800 dark:bg-slate-900"
+                placeholder="Type clinician notes here..."
+                value={notesData}
+                onChange={(e) => setNotesData(e.target.value)}
+                required
+              />
+              <div className="flex gap-3 pt-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => setIsNotesOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit" className="flex-1" disabled={isSubmitting}>
+                  {isSubmitting ? 'Saving...' : 'Save Notes'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+
+      {/* Referral Modal */}
+      {isReferralOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-scale-up w-full max-w-md border-none p-8 shadow-2xl">
+            <h3 className="text-2xl font-black tracking-tight uppercase">
+              Refer Patient
+            </h3>
+            <p className="text-muted-foreground mt-2 text-xs font-medium tracking-widest uppercase">
+              Authorize outside medical investigation
+            </p>
+
+            <form onSubmit={handleReferral} className="mt-8 space-y-5">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                  Target Specialty
+                </label>
+                <select
+                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                  value={referralData.specialty}
+                  onChange={(e) =>
+                    setReferralData({ ...referralData, specialty: e.target.value })
+                  }
+                >
+                  <option>Orthopedic Surgeon</option>
+                  <option>Radiology (MRI/X-Ray)</option>
+                  <option>Neurologist</option>
+                  <option>Sports Physician</option>
+                  <option>Rheumatologist</option>
+                </select>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Preferred Date
+                  </label>
+                  <input
+                    type="date"
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={referralData.date || ''}
+                    onChange={(e) =>
+                      setReferralData({ ...referralData, date: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Time
+                  </label>
+                  <input
+                    type="time"
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={referralData.time || ''}
+                    onChange={(e) =>
+                      setReferralData({ ...referralData, time: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                  Clinical Reasoning
+                </label>
+                <textarea
+                  className="ring-primary/10 h-32 w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium transition-all outline-none focus:ring-4 dark:border-slate-800 dark:bg-slate-900"
+                  placeholder="State the reason for referral..."
+                  value={referralData.reason}
+                  onChange={(e) =>
+                    setReferralData({ ...referralData, reason: e.target.value })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-12 flex-1 rounded-xl text-[10px] font-black tracking-widest uppercase"
+                  onClick={() => setIsReferralOpen(false)}
+                >
+                  Dismiss
+                </Button>
+                <Button
+                  type="submit"
+                  className="h-12 flex-1 rounded-xl border-none bg-emerald-500 text-[10px] font-black tracking-widest text-white uppercase hover:bg-emerald-600"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Authorize Referral'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+
+      {/* Plan Modal */}
+      {isPlanOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-scale-up w-full max-w-lg border-none p-8 shadow-2xl">
+            <h3 className="text-2xl font-black tracking-tight uppercase">
+              Generate Treatment Plan
+            </h3>
+            <p className="text-muted-foreground mt-2 text-xs font-medium tracking-widest uppercase">
+              Construct recovery roadmap for {patient?.firstName}
+            </p>
+
+            <form onSubmit={handleCreatePlan} className="mt-8 space-y-5">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                  Treatment Goal
+                </label>
+                <input
+                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                  value={planData.goal}
+                  onChange={(e) => setPlanData({ ...planData, goal: e.target.value })}
+                  placeholder="e.g. Reduce inflammation and restore mobility"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Active Treatment
+                  </label>
+                  <input
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={planData.activeTreatment}
+                    onChange={(e) =>
+                      setPlanData({ ...planData, activeTreatment: e.target.value })
+                    }
+                    placeholder="e.g. Manual Therapy"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Home Exercise
+                  </label>
+                  <input
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={planData.homeExercise}
+                    onChange={(e) =>
+                      setPlanData({ ...planData, homeExercise: e.target.value })
+                    }
+                    placeholder="e.g. 3x10 Glute Bridges"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={planData.date}
+                    onChange={(e) => setPlanData({ ...planData, date: e.target.value })}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Time
+                  </label>
+                  <input
+                    type="time"
+                    required
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={planData.time}
+                    onChange={(e) => setPlanData({ ...planData, time: e.target.value })}
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-6">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="h-12 flex-1 rounded-xl text-[10px] font-black tracking-widest uppercase"
+                  onClick={() => setIsPlanOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  className="h-12 flex-1 rounded-xl border-none bg-[#7c4d7c] text-[10px] font-black tracking-widest text-white uppercase shadow-lg shadow-[#7c4d7c]/30 hover:bg-[#6a426a]"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Generating...' : 'Confirm Plan'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+
+      {/* Documents Modal */}
+      {isDocsOpen && (
+        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-scale-up flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden border-none shadow-2xl">
+            <div className="flex items-center justify-between border-b p-6">
+              <div>
+                <h3 className="text-xl font-black">Patient Documents</h3>
+                <p className="text-muted-foreground text-xs font-medium">
+                  Viewing clinical files for{' '}
+                  {patient ? `${patient.firstName} ${patient.lastName}` : 'this patient'}
+                </p>
+              </div>
+              <Button variant="ghost" size="icon" onClick={() => setIsDocsOpen(false)}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-6">
+              {isLoadingDocs ? (
+                <div className="flex h-40 flex-col items-center justify-center gap-3">
+                  <div className="border-primary h-8 w-8 animate-spin rounded-full border-b-2" />
+                  <p className="text-muted-foreground text-sm font-bold">
+                    Fetching files...
+                  </p>
+                </div>
+              ) : documents.length > 0 ? (
+                <div className="space-y-3">
+                  {documents.map((doc) => (
+                    <div
+                      key={doc._id}
+                      onClick={() => {
+                        if (!doc.fileType?.includes('pdf')) {
+                          setActiveImage({ src: doc.fileUrl, alt: doc.fileName });
+                        }
+                      }}
+                      className={cn(
+                        'hover:border-primary/50 group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 p-4 transition-all dark:border-slate-800 dark:bg-slate-900/40',
+                        !doc.fileType?.includes('pdf') && 'cursor-zoom-in'
+                      )}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="text-primary flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-slate-800">
+                          <FileIcon className="h-6 w-6" />
+                        </div>
+                        <div className="flex flex-col">
+                          <span className="max-w-[200px] truncate text-sm font-black">
+                            {doc.fileName}
+                          </span>
+                          <div className="mt-0.5 flex items-center gap-2">
+                            <Badge
+                              variant="outline"
+                              className="h-4 px-1 text-[8px] font-black uppercase"
+                            >
+                              {doc.category}
+                            </Badge>
+                            <span className="text-muted-foreground text-[10px] font-bold">
+                              {formatFileSize(doc.fileSize)} •{' '}
+                              {new Date(doc.createdAt).toLocaleDateString()}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        {doc.fileType?.includes('pdf') ? (
+                          <a
+                            href={doc.fileUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Button
+                              size="sm"
+                              variant="ghost"
+                              className="group-hover:bg-primary/10 group-hover:text-primary h-8 w-8 rounded-full p-0"
+                            >
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                          </a>
+                        ) : (
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setActiveImage({ src: doc.fileUrl, alt: doc.fileName });
+                            }}
+                            className="group-hover:bg-primary/10 group-hover:text-primary h-8 w-8 rounded-full p-0"
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                        )}
+                        <a
+                          href={doc.fileUrl}
+                          download={doc.fileName}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            className="group-hover:bg-primary/10 group-hover:text-primary h-8 w-8 rounded-full p-0"
+                          >
+                            <Download className="h-4 w-4" />
+                          </Button>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="flex h-40 flex-col items-center justify-center text-center">
+                  <FileText className="mb-2 h-10 w-10 text-slate-300" />
+                  <p className="text-sm font-bold text-slate-500">
+                    No documents found for this patient.
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className="border-t bg-slate-50/50 p-6 dark:bg-slate-900/20">
+              <Button
+                className="h-12 w-full rounded-xl font-black"
+                onClick={() => setIsDocsOpen(false)}
+              >
+                Close Viewer
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
+
+      {activeImage && (
+        <Lightbox
+          src={activeImage.src}
+          alt={activeImage.alt}
+          onClose={() => setActiveImage(null)}
+        />
+      )}
+
+      <StatusModal
+        isOpen={statusModal.isOpen}
+        onClose={() => setStatusModal({ ...statusModal, isOpen: false })}
+        title={statusModal.title}
+        message={statusModal.message}
+        type={statusModal.type}
+        onConfirm={() => {
+          if (statusModal.onConfirm) statusModal.onConfirm();
+          setStatusModal({ ...statusModal, isOpen: false });
+        }}
+      />
+    </div>
+  );
+}
+
+function ReportCard({ color, icon, title, desc, actionText = 'Book Now', onClick }) {
+  return (
+    <div
+      className={cn(
+        'flex min-h-[190px] flex-col justify-between rounded-[2rem] p-7 text-white shadow-md transition-all hover:-translate-y-1 hover:brightness-110',
+        color
+      )}
+    >
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          {React.cloneElement(icon, { className: 'h-5 w-5' })}
+          <span className="text-[12px] leading-none font-black tracking-widest uppercase opacity-80">
+            {title}
+          </span>
+        </div>
+        <p className="line-clamp-3 text-[11px] leading-relaxed font-bold opacity-90">
+          {desc}
+        </p>
+      </div>
+      <button
+        onClick={onClick}
+        className="mt-4 rounded-xl bg-white py-2.5 text-[10px] font-black text-gray-900 uppercase shadow-sm transition-all hover:bg-gray-100 active:scale-95"
+      >
+        {actionText}
+      </button>
     </div>
   );
 }

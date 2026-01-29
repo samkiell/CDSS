@@ -155,10 +155,7 @@ function PatientCard({ session }) {
       </div>
 
       {/* Action Button */}
-      <Link
-        href={`/clinician/dashboard/case/${session._id}`}
-        className="w-full sm:w-auto"
-      >
+      <Link href={`/clinician/cases/${session._id}`} className="w-full sm:w-auto">
         <Button className="bg-primary w-full rounded-xl border-none px-6 py-3 text-sm font-bold text-white transition-all hover:scale-105 active:scale-95 sm:w-auto sm:px-10">
           View Case
         </Button>
