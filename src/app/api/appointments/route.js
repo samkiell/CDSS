@@ -41,6 +41,15 @@ export async function POST(req) {
       status: 'Scheduled',
     });
 
+    // Create notification for the patient
+    await Notification.create({
+      userId: patientId,
+      title: 'New Appointment Scheduled',
+      description: `You have a new ${type || 'General Consultation'} scheduled with Dr. ${clinicianName} on ${appointmentDate.toLocaleDateString()} at ${appointmentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}.`,
+      type: 'Appointments',
+      link: '/patient/dashboard',
+    });
+
     return NextResponse.json({ success: true, appointment });
   } catch (error) {
     console.error('Appointment creation error:', error);
