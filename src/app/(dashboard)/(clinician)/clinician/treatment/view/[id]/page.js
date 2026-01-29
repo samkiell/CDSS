@@ -47,7 +47,7 @@ function BulletList({ items }) {
 }
 
 export default async function TreatmentPlanViewPage({ params }) {
-  const { id } = params;
+  const { id } = await params;
   const sessionUser = await auth();
   if (!sessionUser) redirect('/login');
 
