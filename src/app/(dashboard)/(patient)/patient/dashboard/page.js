@@ -225,7 +225,7 @@ export default async function PatientDashboardPage() {
               <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
                 Active Case
               </p>
-              <h3 className="max-w-37.5 truncate text-lg font-bold">
+              <h3 className="text-lg font-bold">
                 {latestSession?.patientFacingAnalysis?.temporalDiagnosis ||
                   latestSession?.aiAnalysis?.temporalDiagnosis ||
                   'No active case'}

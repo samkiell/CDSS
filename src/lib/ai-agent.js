@@ -57,21 +57,21 @@ export async function getAiPreliminaryAnalysis({
 
       Instructions:
       1. Analyze the symptoms using clinical reasoning.
-      2. Provide a temporal diagnosis and reasoning addressed DIRECTLY TO THE PATIENT.
-      3. Use second-person perspective (e.g., "You reported...", "Your symptoms suggest...") instead of third-person clinical reporting (e.g., "The patient reports...").
-      4. Calculate a dynamic "confidenceScore" (0-100) by refining the "Mathematical Baseline Confidence".
+      2. Provide a temporal diagnosis phrased as a SHORT, CLEAR HEADLINE (Max 10 words).
+      3. Address the analysis DIRECTLY TO THE PATIENT using second-person perspective (e.g., "You have...", "Your results suggest...").
+      4. Avoid third-person clinical reporting (e.g., "The patient displays...").
+      5. Calculate a dynamic "confidenceScore" (0-100) by refining the "Mathematical Baseline Confidence".
          - Adjust based on symptom specificity, red flags, and consistency.
-         - AVOID using fixed or placeholder numbers (like 85).
          - Be granular (e.g., 73, 88, 92).
-      5. For "reasoning", provide clear clinical indicators found in the symptoms, phrased so the patient understands why this diagnosis was reached.
-      6. CRITICAL: Do NOT include any internal tags, question IDs, or technical codes (e.g., "(lumbar_q_redflag)") in the reasoning. Use natural language only.
+      6. For "reasoning", provide clear clinical indicators found in the symptoms, phrased so the patient understands.
+      7. CRITICAL: Do NOT include any internal tags or technical codes (e.g., "(lumbar_q_redflag)").
 
       Output JSON only:
       {
-        "temporalDiagnosis": "String (Geared for the patient)",
+        "temporalDiagnosis": "Short Headline (Second Person, Max 10 words)",
         "confidenceScore": Number,
         "riskLevel": "Low" | "Moderate" | "Urgent",
-        "reasoning": ["String (Geared for the patient)"]
+        "reasoning": ["Clear, compassionate explanation points"]
       }
     `;
 
