@@ -1,56 +1,59 @@
-'use client';
-import { useState } from 'react';
-import SearchPaitent from '@/components/dashboard/clinician/search';
-import PatientInfoContainer from '@/components/dashboard/clinician/paitentContainer';
+import React from 'react';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
+import dbConnect from '@/lib/db/connect';
+import { DiagnosisSession } from '@/models';
+import CaseListClient from '@/components/dashboard/clinician/CaseListClient';
 
-export default function Page() {
-  const [searchQuery, setSearchQuery] = useState('');
+export default async function CasesPage() {
+  const session = await auth();
 
-  const patients = [
-    {
-      id: 1,
-      name: 'Bola Ahmed Tinubu',
-      gender: 'Male',
-      time: '8:00am',
-      date: '12-11-2025',
-      status: 'active',
-    },
-    {
-      id: 2,
-      name: 'Tomisi Faith John',
-      gender: 'Female',
-      time: '8:30am',
-      date: '12-11-2025',
-      status: 'active',
-    },
-    {
-      id: 3,
-      name: 'Henry Ahmed Garet',
-      gender: 'Male',
-      time: '10:00am',
-      date: '12-11-2025',
-      status: 'pending',
-    },
-    {
-      id: 4,
-      name: 'Bola Saed Dushak',
-      gender: 'Male',
-      time: '10:30am',
-      date: '12-11-2025',
-      status: 'urgent',
-    },
-  ];
+  if (!session || !session.user || session.user.role !== 'CLINICIAN') {
+    redirect('/login');
+  }
+
+  await dbConnect();
+
+  const clinicianId = session.user.id;
+
+  const assignedSessionsRaw = await DiagnosisSession.find({ clinicianId })
+    .populate('patientId', 'firstName lastName avatar gender')
+    .sort({ createdAt: -1 })
+    .lean();
+
+  const sessions = JSON.parse(JSON.stringify(assignedSessionsRaw));
+
+  // Transform data to match the expected format in PatientInfoContainer
+  const patients = sessions.map((sess) => ({
+    id: sess._id,
+    name: sess.patientId
+      ? `${sess.patientId.firstName} ${sess.patientId.lastName}`
+      : 'Unknown Patient',
+    gender: sess.patientId?.gender || 'Not Specified',
+    time: sess.createdAt
+      ? new Date(sess.createdAt).toLocaleTimeString([], {
+          hour: '2-digit',
+          minute: '2-digit',
+        })
+      : 'N/A',
+    date: sess.createdAt ? new Date(sess.createdAt).toLocaleDateString() : 'N/A',
+    status:
+      sess.aiAnalysis?.riskLevel?.toLowerCase() === 'urgent'
+        ? 'urgent'
+        : sess.status === 'assigned'
+          ? 'pending'
+          : 'active',
+  }));
 
   return (
-    <div className="mx-auto max-w-4xl">
-      <SearchPaitent searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-      <div className="space-y-4">
-        <PatientInfoContainer
-          patients={patients}
-          searchQuery={searchQuery}
-          url={'/clinician/cases'}
-        />
+    <div className="mx-auto max-w-4xl space-y-6">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-3xl font-bold tracking-tight">Case View</h1>
+        <p className="text-muted-foreground font-medium">
+          Manage and review diagnostic sessions assigned to you.
+        </p>
       </div>
+      <CaseListClient initialPatients={patients} />
     </div>
   );
 }
