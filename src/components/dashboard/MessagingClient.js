@@ -518,59 +518,86 @@ export default function MessagingClient({ currentUser, initialConversations = []
                   const isFromMe = m.senderId === currentUser.id;
 
                   return (
+                  return (
                     <div
                       key={m._id}
                       className={cn(
-                        'group flex max-w-[85%] flex-col',
-                        isFromMe ? 'ml-auto items-end' : 'items-start'
+                        'flex w-full items-end gap-3',
+                        isFromMe ? 'justify-end' : 'justify-start'
                       )}
                     >
+                      {!isFromMe && (
+                        <Avatar className="h-8 w-8 shrink-0 rounded-xl shadow-sm">
+                          <AvatarImage src={activeTab.otherUser.avatar} />
+                          <AvatarFallback className="text-[10px] font-bold">
+                            {getInitials(activeTab.otherUser.name)}
+                          </AvatarFallback>
+                        </Avatar>
+                      )}
+                      
                       <div
                         className={cn(
-                          'rounded-2xl px-4 py-3 shadow-sm transition-all duration-300',
-                          isFromMe
-                            ? 'bg-primary hover:shadow-primary/10 rounded-tr-none text-white hover:shadow-md'
-                            : 'dark:bg-muted border-border/50 rounded-tl-none border bg-white hover:shadow-md'
+                          'group flex max-w-[80%] flex-col',
+                          isFromMe ? 'items-end' : 'items-start'
                         )}
                       >
-                        {m.content.startsWith('IMAGE:') ? (
-                          <img
-                            src={m.content.replace('IMAGE:', '')}
-                            alt="Attachment"
-                            className="max-h-48 cursor-pointer rounded-xl object-cover transition-opacity hover:opacity-90"
-                            onClick={() =>
-                              setExpandedImage(m.content.replace('IMAGE:', ''))
-                            }
-                          />
-                        ) : (
-                          <p className="font-sans text-sm leading-snug">{m.content}</p>
-                        )}
+                        <div
+                          className={cn(
+                            'rounded-2xl px-4 py-3 shadow-sm transition-all duration-300',
+                            isFromMe
+                              ? 'bg-primary hover:shadow-primary/10 rounded-tr-none text-white hover:shadow-md'
+                              : 'dark:bg-muted border-border/50 rounded-tl-none border bg-white hover:shadow-md'
+                          )}
+                        >
+                          {m.content.startsWith('IMAGE:') ? (
+                            <img
+                              src={m.content.replace('IMAGE:', '')}
+                              alt="Attachment"
+                              className="max-h-48 cursor-pointer rounded-xl object-cover transition-opacity hover:opacity-90"
+                              onClick={() =>
+                                setExpandedImage(m.content.replace('IMAGE:', ''))
+                              }
+                            />
+                          ) : (
+                            <p className="font-sans text-sm leading-snug">{m.content}</p>
+                          )}
+                        </div>
+                        <div className="mt-1 flex items-center gap-2 px-1">
+                          <span className="text-muted-foreground text-[9px] font-medium opacity-50">
+                            {new Date(m.createdAt).toLocaleTimeString([], {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })}
+                          </span>
+                          {isFromMe && (
+                            <div className="flex items-center gap-1">
+                              {m.isRead ? (
+                                <>
+                                  <CheckCheck className="h-4 w-4 text-cyan-500" />
+                                  {isLastMessage && (
+                                    <span className="text-[8px] font-bold tracking-widest text-cyan-500 uppercase">
+                                      Seen
+                                    </span>
+                                  )}
+                                </>
+                              ) : (
+                                <Check className="text-muted-foreground h-4 w-4 opacity-50" />
+                              )}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <div className="mt-1 flex items-center gap-2 px-1">
-                        <span className="text-muted-foreground text-[9px] font-medium opacity-50">
-                          {new Date(m.createdAt).toLocaleTimeString([], {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
-                        </span>
-                        {isFromMe && (
-                          <div className="flex items-center gap-1">
-                            {m.isRead ? (
-                              <>
-                                <CheckCheck className="h-4 w-4 text-cyan-500" />
-                                {isLastMessage && (
-                                  <span className="text-[8px] font-bold tracking-widest text-cyan-500 uppercase">
-                                    Seen
-                                  </span>
-                                )}
-                              </>
-                            ) : (
-                              <Check className="text-muted-foreground h-4 w-4 opacity-50" />
-                            )}
-                          </div>
-                        )}
-                      </div>
+
+                      {isFromMe && (
+                        <Avatar className="h-8 w-8 shrink-0 rounded-xl shadow-sm">
+                          <AvatarImage src={currentUser.avatar} />
+                          <AvatarFallback className="bg-primary/20 text-primary text-[10px] font-bold">
+                            {getInitials(currentUser.name)}
+                          </AvatarFallback>
+                        </Avatar>
+                      )}
                     </div>
+                  );
                   );
                 })
               )}
