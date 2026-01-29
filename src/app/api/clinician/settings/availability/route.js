@@ -54,9 +54,12 @@ export async function PATCH(req) {
       { new: true, runValidators: true }
     );
 
+    const availabilityObj = user.availability
+      ? JSON.parse(JSON.stringify(user.availability))
+      : {};
     return NextResponse.json({
-      timezone: user.timezone, // Return user timezone as availability context
-      ...user.availability.toObject(), // Return full availability object
+      timezone: user.timezone,
+      ...availabilityObj,
     });
   } catch (error) {
     console.error('Error updating availability:', error);

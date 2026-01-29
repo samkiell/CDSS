@@ -37,7 +37,7 @@ export async function PATCH(req) {
       { new: true, runValidators: true }
     );
 
-    return NextResponse.json(user.clinical);
+    return NextResponse.json(JSON.parse(JSON.stringify(user.clinical)));
   } catch (error) {
     console.error('Error updating clinical preferences:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

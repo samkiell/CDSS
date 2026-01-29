@@ -58,7 +58,7 @@ export async function PATCH(req) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    return NextResponse.json(user.professional);
+    return NextResponse.json(JSON.parse(JSON.stringify(user.professional)));
   } catch (error) {
     console.error('Error updating professional details:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
