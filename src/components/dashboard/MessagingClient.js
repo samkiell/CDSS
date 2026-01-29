@@ -17,7 +17,14 @@ import {
   User,
   X,
 } from 'lucide-react';
-import { Button, Avatar, AvatarImage, AvatarFallback, Badge } from '@/components/ui';
+import {
+  Button,
+  Avatar,
+  AvatarImage,
+  AvatarFallback,
+  Badge,
+  Lightbox,
+} from '@/components/ui';
 import { ScrollArea } from '@/components/ui/ScrollArea';
 import {
   DropdownMenu,
@@ -629,22 +636,11 @@ export default function MessagingClient({ currentUser, initialConversations = []
         </div>
       )}
       {expandedImage && (
-        <div
-          className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-4 backdrop-blur-sm duration-200"
-          onClick={() => setExpandedImage(null)}
-        >
-          <button
-            className="absolute top-4 right-4 rounded-full bg-black/20 p-2 text-white/50 transition-colors hover:text-white"
-            onClick={() => setExpandedImage(null)}
-          >
-            <X className="h-8 w-8" />
-          </button>
-          <img
-            src={expandedImage}
-            alt="Full size"
-            className="animate-in zoom-in-95 max-h-full max-w-full rounded-lg object-contain shadow-2xl duration-200"
-          />
-        </div>
+        <Lightbox
+          src={expandedImage}
+          alt="Chat Attachment"
+          onClose={() => setExpandedImage(null)}
+        />
       )}
     </div>
   );
