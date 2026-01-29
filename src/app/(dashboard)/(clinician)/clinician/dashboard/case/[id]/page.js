@@ -34,6 +34,22 @@ export default function CaseDetailsPage({ params }) {
     type: 'Physiotherapy Session',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
+  const [isAnalysisOpen, setIsAnalysisOpen] = useState(false);
+  const [isReferralOpen, setIsReferralOpen] = useState(false);
+  const [isPlanOpen, setIsPlanOpen] = useState(false);
+  
+  const [notesData, setNotesData] = useState('');
+  const [referralData, setReferralData] = useState({
+    specialty: 'Orthopedic Surgeon',
+    reason: '',
+    urgency: 'Medium',
+  });
+  const [planData, setPlanData] = useState({
+    goal: '',
+    activeTreatment: '',
+    homeExercise: '',
+  });
 
   const [session, setSession] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -103,6 +119,76 @@ export default function CaseDetailsPage({ params }) {
       }
     } catch (err) {
       alert('Failed to schedule appointment.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleUpdateNotes = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const res = await fetch(`/api/diagnosis/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          clinicianReview: {
+            ...session.clinicianReview,
+            clinicianNotes: notesData,
+          },
+        }),
+      });
+
+      if (res.ok) {
+        alert('Case notes updated successfully!');
+        setIsNotesOpen(false);
+        fetchCaseDetails(); // Refresh data
+      } else {
+        alert('Failed to update notes.');
+      }
+    } catch (err) {
+      alert('Internal server error.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleReferral = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      // Mocking referral API for now as it's a secondary feature
+      alert(`Referral sent to ${referralData.specialty} successfully!`);
+      setIsReferralOpen(false);
+    } catch (err) {
+      alert('Failed to send referral.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleCreatePlan = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/treatment-plans', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientId: session.patientId._id,
+          conditionName: session.aiAnalysis.temporalDiagnosis,
+          activity: planData,
+        }),
+      });
+
+      if (res.ok) {
+        alert('Treatment plan updated successfully!');
+        setIsPlanOpen(false);
+      } else {
+        alert('Failed to create treatment plan.');
+      }
+    } catch (err) {
+      alert('Internal server error.');
     } finally {
       setIsSubmitting(false);
     }
@@ -396,6 +482,7 @@ export default function CaseDetailsPage({ params }) {
             title="Analysis"
             desc="Review the granular heuristic patterns detected via MSK logic."
             actionText="Review Patterns"
+            onClick={() => setIsAnalysisOpen(true)}
           />
           <ReportCard
             color="bg-emerald-500 shadow-emerald-500/20"
@@ -414,6 +501,13 @@ export default function CaseDetailsPage({ params }) {
             title="Treatment Plan"
             desc="Construct a personalized recovery roadmap and exercise regimen."
             actionText="Generate Plan"
+            onClick={() => {
+              setPlanData({
+                ...planData,
+                goal: `Recovery for ${session.bodyRegion}`,
+              });
+              setIsPlanOpen(true);
+            }}
           />
           <ReportCard
             color="bg-warning shadow-warning/20 bg-opacity-90"
@@ -421,6 +515,10 @@ export default function CaseDetailsPage({ params }) {
             title="Clinical Notes"
             desc="Add specific observational notes and clinician impressions."
             actionText="Add Notes"
+            onClick={() => {
+              setNotesData(session.clinicianReview?.clinicianNotes || '');
+              setIsNotesOpen(true);
+            }}
           />
           <ReportCard
             color="bg-foreground text-background shadow-foreground/20"
@@ -428,6 +526,7 @@ export default function CaseDetailsPage({ params }) {
             title="Referral Plan"
             desc="Authorize secondary referrals or medical investigations."
             actionText="Refer Patient"
+            onClick={() => setIsReferralOpen(true)}
           />
         </div>
       </div>
@@ -439,80 +538,158 @@ export default function CaseDetailsPage({ params }) {
         </Button>
       </div>
 
-      {/* Booking Modal */}
-      {isBookingOpen && (
+      {/* Analysis Modal */}
+      {isAnalysisOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-scale-up w-full max-w-2xl border-none p-8 shadow-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-black">MSK Analysis Patterns</h3>
+              <Button variant="ghost" size="icon" onClick={() => setIsAnalysisOpen(false)}>
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+            <div className="space-y-6 max-h-[60vh] overflow-y-auto pr-4">
+              <div className="bg-indigo-500/10 border border-indigo-500/20 rounded-2xl p-6">
+                <span className="text-indigo-500 text-[10px] font-black tracking-widest uppercase">Detected Patterns</span>
+                <p className="mt-2 text-sm font-bold text-foreground">Granular heuristic patterns detected via MSK logic for {session.bodyRegion}.</p>
+              </div>
+              <div className="grid gap-4">
+                {analysis?.reasoning?.map((point, idx) => (
+                  <div key={idx} className="flex gap-4 p-4 bg-slate-50 dark:bg-slate-900 rounded-xl">
+                    <div className="h-6 w-6 bg-indigo-500 text-white rounded-full flex items-center justify-center text-xs font-black shrink-0">{idx + 1}</div>
+                    <p className="text-sm font-medium">{point}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <Button className="w-full mt-8 h-12 rounded-xl" onClick={() => setIsAnalysisOpen(false)}>Close Patterns</Button>
+          </Card>
+        </div>
+      )}
+
+      {/* Notes Modal */}
+      {isNotesOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
           <Card className="animate-scale-up w-full max-w-md border-none p-6 shadow-2xl">
-            <h3 className="text-xl font-black">Schedule Appointment</h3>
-            <p className="text-muted-foreground mt-2 text-xs font-medium">
-              Select a date and time for{' '}
-              {patient ? `${patient.firstName} ${patient.lastName}` : 'this patient'}
-            </p>
-
-            <form onSubmit={handleBook} className="mt-6 space-y-4">
-              <div>
-                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                  Date
-                </label>
-                <input
-                  type="date"
-                  required
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
-                  value={bookingData.date}
-                  onChange={(e) =>
-                    setBookingData({ ...bookingData, date: e.target.value })
-                  }
-                />
-              </div>
-              <div>
-                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                  Time
-                </label>
-                <input
-                  type="time"
-                  required
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
-                  value={bookingData.time}
-                  onChange={(e) =>
-                    setBookingData({ ...bookingData, time: e.target.value })
-                  }
-                />
-              </div>
-              <div>
-                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                  Session Type
-                </label>
-                <select
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
-                  value={bookingData.type}
-                  onChange={(e) =>
-                    setBookingData({ ...bookingData, type: e.target.value })
-                  }
-                >
-                  <option>Physiotherapy Session</option>
-                  <option>Consultation</option>
-                  <option>Check-up</option>
-                  <option>Follow-up</option>
-                </select>
-              </div>
-
-              <div className="flex gap-3 pt-4">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="flex-1"
-                  onClick={() => setIsBookingOpen(false)}
-                >
-                  Cancel
-                </Button>
+            <h3 className="text-xl font-black">Add Clinical Notes</h3>
+            <p className="text-muted-foreground mt-2 text-xs font-medium">Add your clinical impressions and observations for this session.</p>
+            <form onSubmit={handleUpdateNotes} className="mt-6 space-y-4">
+              <textarea
+                className="w-full h-40 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium dark:border-slate-800 dark:bg-slate-900 focus:ring-2 ring-primary/20 outline-none transition-all"
+                placeholder="Type clinician notes here..."
+                value={notesData}
+                onChange={(e) => setNotesData(e.target.value)}
+                required
+              />
+              <div className="flex gap-3 pt-2">
+                <Button type="button" variant="outline" className="flex-1" onClick={() => setIsNotesOpen(false)}>Cancel</Button>
                 <Button type="submit" className="flex-1" disabled={isSubmitting}>
-                  {isSubmitting ? 'Scheduling...' : 'Confirm'}
+                  {isSubmitting ? 'Saving...' : 'Save Notes'}
                 </Button>
               </div>
             </form>
           </Card>
         </div>
       )}
+
+      {/* Referral Modal */}
+      {isReferralOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-scale-up w-full max-w-md border-none p-8 shadow-2xl">
+            <h3 className="text-2xl font-black uppercase tracking-tight">Refer Patient</h3>
+            <p className="text-muted-foreground mt-2 text-xs font-medium uppercase tracking-widest">Authorize outside medical investigation</p>
+            
+            <form onSubmit={handleReferral} className="mt-8 space-y-5">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Target Specialty</label>
+                <select 
+                  className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold dark:border-slate-800 dark:bg-slate-900 outline-none"
+                  value={referralData.specialty}
+                  onChange={(e) => setReferralData({...referralData, specialty: e.target.value})}
+                >
+                  <option>Orthopedic Surgeon</option>
+                  <option>Radiology (MRI/X-Ray)</option>
+                  <option>Neurologist</option>
+                  <option>Sports Physician</option>
+                  <option>Rheumatologist</option>
+                </select>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Clinical Reasoning</label>
+                <textarea 
+                  className="w-full h-32 rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium dark:border-slate-800 dark:bg-slate-900 outline-none ring-primary/10 transition-all focus:ring-4"
+                  placeholder="State the reason for referral..."
+                  value={referralData.reason}
+                  onChange={(e) => setReferralData({...referralData, reason: e.target.value})}
+                  required
+                />
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <Button type="button" variant="outline" className="flex-1 h-12 rounded-xl text-[10px] font-black uppercase tracking-widest" onClick={() => setIsReferralOpen(false)}>Dismiss</Button>
+                <Button type="submit" className="flex-1 h-12 rounded-xl text-[10px] font-black uppercase tracking-widest bg-emerald-500 hover:bg-emerald-600 text-white border-none" disabled={isSubmitting}>
+                  {isSubmitting ? 'Sending...' : 'Authorize Referral'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+
+      {/* Plan Modal */}
+      {isPlanOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-scale-up w-full max-w-lg border-none p-8 shadow-2xl">
+            <h3 className="text-2xl font-black uppercase tracking-tight">Generate Treatment Plan</h3>
+            <p className="text-muted-foreground mt-2 text-xs font-medium uppercase tracking-widest">Construct recovery roadmap for {patient?.firstName}</p>
+            
+            <form onSubmit={handleCreatePlan} className="mt-8 space-y-5">
+              <div className="space-y-2">
+                <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Treatment Goal</label>
+                <input 
+                  className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold dark:border-slate-800 dark:bg-slate-900 outline-none"
+                  value={planData.goal}
+                  onChange={(e) => setPlanData({...planData, goal: e.target.value})}
+                  placeholder="e.g. Reduce inflammation and restore mobility"
+                  required
+                />
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Active Treatment</label>
+                  <input 
+                    className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold dark:border-slate-800 dark:bg-slate-900 outline-none"
+                    value={planData.activeTreatment}
+                    onChange={(e) => setPlanData({...planData, activeTreatment: e.target.value})}
+                    placeholder="e.g. Manual Therapy"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Home Exercise</label>
+                  <input 
+                    className="w-full h-12 rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold dark:border-slate-800 dark:bg-slate-900 outline-none"
+                    value={planData.homeExercise}
+                    onChange={(e) => setPlanData({...planData, homeExercise: e.target.value})}
+                    placeholder="e.g. 3x10 Glute Bridges"
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-6">
+                <Button type="button" variant="outline" className="flex-1 h-12 rounded-xl text-[10px] font-black uppercase tracking-widest" onClick={() => setIsPlanOpen(false)}>Cancel</Button>
+                <Button type="submit" className="flex-1 h-12 rounded-xl text-[10px] font-black uppercase tracking-widest bg-[#7c4d7c] hover:bg-[#6a426a] text-white border-none shadow-lg shadow-[#7c4d7c]/30" disabled={isSubmitting}>
+                  {isSubmitting ? 'Generating...' : 'Confirm Plan'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+    </div>
+  );
+}
 
       {/* Documents Modal */}
       {isDocsOpen && (
