@@ -1,15 +1,7 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
-import {
-  Search,
-  FileOutput,
-  MapPin,
-  Calendar,
-  Clock,
-  ChevronRight,
-  User,
-} from 'lucide-react';
+import { Search, FileOutput, MapPin, Calendar, User, X, Clock } from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -18,11 +10,29 @@ import {
   Avatar,
   AvatarImage,
   AvatarFallback,
+  StatusModal,
 } from '@/components/ui';
 import { cn } from '@/lib/cn';
 
 export default function ReferralClient({ initialPatients = [] }) {
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedPatient, setSelectedPatient] = useState(null);
+  const [isReferralOpen, setIsReferralOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusModal, setStatusModal] = useState({
+    isOpen: false,
+    type: 'success',
+    title: '',
+    message: '',
+  });
+
+  const [referralData, setReferralData] = useState({
+    specialty: 'Orthopedic Surgeon',
+    reason: '',
+    urgency: 'Medium',
+    date: '',
+    time: '',
+  });
 
   const filteredPatients = useMemo(
     () =>
@@ -31,6 +41,65 @@ export default function ReferralClient({ initialPatients = [] }) {
       ),
     [initialPatients, searchQuery]
   );
+
+  const openReferralModal = (patient) => {
+    setSelectedPatient(patient);
+    setReferralData({
+      specialty: 'Orthopedic Surgeon',
+      reason: '',
+      urgency: 'Medium',
+      date: '',
+      time: '',
+    });
+    setIsReferralOpen(true);
+  };
+
+  const handleReferralSubmit = async (e) => {
+    e.preventDefault();
+    if (!selectedPatient) return;
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/referrals', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          patientId: selectedPatient.id,
+          specialty: referralData.specialty,
+          reason: referralData.reason,
+          preferredDate: referralData.date,
+          preferredTime: referralData.time,
+        }),
+      });
+
+      if (res.ok) {
+        setIsReferralOpen(false);
+        setStatusModal({
+          isOpen: true,
+          type: 'success',
+          title: 'Referral Sent',
+          message: `Referral for ${selectedPatient.name} to ${referralData.specialty} has been authorized.`,
+        });
+      } else {
+        setStatusModal({
+          isOpen: true,
+          type: 'error',
+          title: 'Referral Failed',
+          message: 'Could not create referral authorization. Please try again.',
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      setStatusModal({
+        isOpen: true,
+        type: 'error',
+        title: 'Network Error',
+        message: 'A system error occurred while processing the referral.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="space-y-10">
@@ -107,7 +176,10 @@ export default function ReferralClient({ initialPatients = [] }) {
 
                   {/* Action */}
                   <div className="bg-muted/10 flex items-center justify-center p-8 md:w-48">
-                    <Button className="bg-primary h-12 w-full gap-2 rounded-xl text-[10px] font-bold tracking-widest text-white uppercase shadow-sm transition-all hover:brightness-110 active:scale-95">
+                    <Button
+                      onClick={() => openReferralModal(patient)}
+                      className="bg-primary h-12 w-full gap-2 rounded-xl text-[10px] font-bold tracking-widest text-white uppercase shadow-sm transition-all hover:brightness-110 active:scale-95"
+                    >
                       <FileOutput className="h-4 w-4" />
                       Create
                     </Button>
@@ -149,6 +221,128 @@ export default function ReferralClient({ initialPatients = [] }) {
           Manage Facilities
         </Button>
       </div>
+
+      {/* Referral Modal */}
+      {isReferralOpen && selectedPatient && (
+        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+          <Card className="animate-in zoom-in-95 dark:bg-card w-full max-w-md border-none bg-white p-8 shadow-2xl">
+            <div className="flex items-start justify-between">
+              <div>
+                <h3 className="text-foreground text-2xl font-black tracking-tight uppercase">
+                  Refer Patient
+                </h3>
+                <p className="text-muted-foreground mt-2 text-xs font-bold tracking-widest uppercase">
+                  For {selectedPatient.name}
+                </p>
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setIsReferralOpen(false)}
+                className="h-8 w-8 rounded-full"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+
+            <form onSubmit={handleReferralSubmit} className="mt-8 space-y-5">
+              <div className="space-y-2">
+                <label className="text-muted-foreground text-[10px] font-black tracking-[0.2em] uppercase">
+                  Target Specialty
+                </label>
+                <select
+                  className="border-input bg-background focus:ring-primary/20 h-12 w-full rounded-xl border px-4 text-sm font-bold outline-none focus:ring-2"
+                  value={referralData.specialty}
+                  onChange={(e) =>
+                    setReferralData({ ...referralData, specialty: e.target.value })
+                  }
+                >
+                  <option>Orthopedic Surgeon</option>
+                  <option>Radiology (MRI/X-Ray)</option>
+                  <option>Neurologist</option>
+                  <option>Sports Physician</option>
+                  <option>Pain Management Specialist</option>
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-muted-foreground text-[10px] font-black tracking-[0.2em] uppercase">
+                  Clinical Reason
+                </label>
+                <textarea
+                  className="border-input bg-background focus:ring-primary/20 h-32 w-full resize-none rounded-xl border p-4 text-sm font-medium outline-none focus:ring-2"
+                  placeholder="Describe the clinical reason for this referral..."
+                  value={referralData.reason}
+                  onChange={(e) =>
+                    setReferralData({ ...referralData, reason: e.target.value })
+                  }
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-muted-foreground text-[10px] font-black tracking-[0.2em] uppercase">
+                    Urgency
+                  </label>
+                  <select
+                    className="border-input bg-background focus:ring-primary/20 h-12 w-full rounded-xl border px-4 text-sm font-bold outline-none focus:ring-2"
+                    value={referralData.urgency}
+                    onChange={(e) =>
+                      setReferralData({ ...referralData, urgency: e.target.value })
+                    }
+                  >
+                    <option>Low</option>
+                    <option>Medium</option>
+                    <option>High</option>
+                    <option>Critical</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-muted-foreground text-[10px] font-black tracking-[0.2em] uppercase">
+                    Pref. Date
+                  </label>
+                  <input
+                    type="date"
+                    className="border-input bg-background focus:ring-primary/20 h-12 w-full rounded-xl border px-4 text-sm font-bold outline-none focus:ring-2"
+                    value={referralData.date}
+                    onChange={(e) =>
+                      setReferralData({ ...referralData, date: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
+
+              <div className="flex gap-3 pt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsReferralOpen(false)}
+                  className="h-14 flex-1 rounded-2xl font-bold tracking-wider uppercase"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="bg-primary shadow-primary/20 h-14 flex-1 rounded-2xl font-bold tracking-wider text-white uppercase shadow-lg"
+                >
+                  {isSubmitting ? 'Processing...' : 'Authorize Referral'}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+      )}
+
+      {/* Status Modal for Feedback */}
+      <StatusModal
+        isOpen={statusModal.isOpen}
+        onClose={() => setStatusModal({ ...statusModal, isOpen: false })}
+        title={statusModal.title}
+        message={statusModal.message}
+        type={statusModal.type}
+      />
     </div>
   );
 }

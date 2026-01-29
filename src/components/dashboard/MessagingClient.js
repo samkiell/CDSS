@@ -261,29 +261,45 @@ export default function MessagingClient({ currentUser, initialConversations = []
     return parts[0][0].toUpperCase();
   };
 
-  const handleClearHistory = async () => {
-    if (
-      !activeTab ||
-      !window.confirm('Are you sure you want to clear this conversation history?')
-    )
-      return;
+  const [statusModal, setStatusModal] = useState({
+    isOpen: false,
+    type: 'info',
+    title: '',
+    message: '',
+    onConfirm: null,
+  });
 
-    try {
-      const result = await clearMessages(activeTab.otherUser.id);
-      if (result.success) {
-        setMessages([]);
-        // Update last message in conversation list
-        setConversations((prev) =>
-          prev.map((c) =>
-            c.id === activeTab.id
-              ? { ...c, lastMessage: 'No messages yet', lastMessageTime: '' }
-              : c
-          )
-        );
-      }
-    } catch (error) {
-      console.error('Failed to clear history:', error);
-    }
+  const handleClearHistory = () => {
+    if (!activeTab) return;
+
+    setStatusModal({
+      isOpen: true,
+      type: 'warning',
+      title: 'Clear History',
+      message:
+        'Are you sure you want to clear this conversation history? This action cannot be undone.',
+      confirmText: 'Clear Conversation',
+      onConfirm: async () => {
+        try {
+          const result = await clearMessages(activeTab.otherUser.id);
+          if (result.success) {
+            setMessages([]);
+            // Update last message in conversation list
+            setConversations((prev) =>
+              prev.map((c) =>
+                c.id === activeTab.id
+                  ? { ...c, lastMessage: 'No messages yet', lastMessageTime: '' }
+                  : c
+              )
+            );
+            setStatusModal((prev) => ({ ...prev, isOpen: false }));
+          }
+        } catch (error) {
+          console.error('Failed to clear history:', error);
+          // Optionally show error modal here
+        }
+      },
+    });
   };
 
   return (
