@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { useRouter, useParams, useSearchParams } from 'next/navigation';
 import { cn } from '@/lib/cn';
-import { Button, Card, Badge, StatusModal } from '@/components/ui';
+import { Button, Card, CardContent, Badge, StatusModal } from '@/components/ui';
 
 export default function DiagnosticTestPage() {
   const router = useRouter();
