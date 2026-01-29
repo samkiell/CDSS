@@ -12,7 +12,7 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 import Link from 'next/link';
-import { Badge, Card, CardContent } from '@/components/ui';
+import { Badge, Card, CardContent, Button } from '@/components/ui';
 import { cn } from '@/lib/cn';
 
 function SectionCard({ title, children, icon: Icon }) {
