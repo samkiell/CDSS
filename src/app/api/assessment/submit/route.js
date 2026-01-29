@@ -4,7 +4,10 @@ import DiagnosisSession from '@/models/DiagnosisSession';
 import CaseFile from '@/models/CaseFile';
 import User from '@/models/User';
 import { NextResponse } from 'next/server';
-import { getAiPreliminaryAnalysis } from '../../../../lib/ai-agent';
+import {
+  getAiPreliminaryAnalysis,
+  convertToTherapistFacingAnalysis,
+} from '../../../../lib/ai-agent';
 
 export async function POST(req) {
   try {
@@ -44,6 +47,16 @@ export async function POST(req) {
         throw new Error('AI analysis failed');
       }
     }
+8: 
+9:     // 1b. Convert to Therapist-Facing Analysis before persistence
+10:     // The patient-facing version is ephemeral and must never be stored.
+11:     let therapistFacingResult;
+12:     try {
+13:       therapistFacingResult = await convertToTherapistFacingAnalysis(finalAiResult);
+14:     } catch (error) {
+15:       console.error('Conversion to therapist format failed:', error);
+16:       throw new Error('Could not prepare assessment for clinical record');
+17:     }
 
     // 2. Persist DiagnosisSession
     const diagnosisSession = await DiagnosisSession.create({
@@ -52,7 +65,7 @@ export async function POST(req) {
       symptomData,
       mediaUrls,
       aiAnalysis: {
-        ...finalAiResult,
+        ...therapistFacingResult,
         isProvisional: true, // Crucial medical disclaimer requirement
       },
       status: 'pending_review',

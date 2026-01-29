@@ -120,3 +120,72 @@ export async function getAiPreliminaryAnalysis({
  * Compatibility alias for getWeightedAiAnalysis if needed
  */
 export const getWeightedAiAnalysis = getAiPreliminaryAnalysis;
+
+/**
+ * Converts a patient-facing analysis (second person) into a therapist-facing clinical narrative (third person).
+ * @param {Object} analysis - The patient-facing analysis object
+ * @returns {Promise<Object>} The transformed analysis in third person
+ */
+export async function convertToTherapistFacingAnalysis(analysis) {
+  try {
+    const prompt = `
+      You are a clinical transcription assistant. Convert the following patient-facing assessment (written in second person) into a therapist-facing clinical narrative (written in third person).
+      
+      Input Analysis:
+      Diagnosis: ${analysis.temporalDiagnosis}
+      Reasoning: ${Array.isArray(analysis.reasoning) ? analysis.reasoning.join(' ') : analysis.reasoning}
+      
+      Rules for Conversion:
+      1. Convert all second-person language ("you", "your", "you reported") into third-person clinical language referring to "the patient".
+      2. Use neutral, professional phrasing (e.g., "The patient reported...", "The patient describes...", "Findings suggest...").
+      3. Preserve: Medical meaning, risk level, and clinical uncertainty.
+      4. Do NOT: Add new diagnoses, add recommendations, or change severity.
+      5. Structure the output as professional clinical case notes.
+      6. Return a JSON object with two fields:
+         - "temporalDiagnosis": A brief clinical summary of the diagnosis in third person.
+         - "clinicalNarrative": A full clinical narrative incorporating the reasoning in third person.
+
+      Output JSON only:
+      {
+        "temporalDiagnosis": "String",
+        "clinicalNarrative": "String"
+      }
+    `;
+
+    const response = await axios.post(
+      'https://api.mistral.ai/v1/chat/completions',
+      {
+        model: 'mistral-medium',
+        messages: [
+          {
+            role: 'system',
+            content:
+              'You are a clinical transcription assistant. You convert patient-facing assessments into professional therapist-facing clinical notes. Output JSON only.',
+          },
+          { role: 'user', content: prompt },
+        ],
+        response_format: { type: 'json_object' },
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${process.env['CDSS_AI_API_KEY']}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    const result = JSON.parse(response.data.choices[0].message.content);
+
+    // Return transformed structured data
+    return {
+      temporalDiagnosis: result.temporalDiagnosis,
+      confidenceScore: analysis.confidenceScore,
+      riskLevel: analysis.riskLevel,
+      reasoning: [result.clinicalNarrative], // Store narrative in reasoning array to maintain compatibility
+      isProvisional: analysis.isProvisional ?? true,
+    };
+  } catch (error) {
+    console.error('Conversion Error:', error.response?.data || error.message);
+    throw new Error('Failed to convert analysis to therapist-facing format');
+  }
+}
