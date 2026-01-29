@@ -358,14 +358,17 @@ export default function MessagingClient({ currentUser, initialConversations = []
                             <Badge
                               className={cn(
                                 'rounded-full px-2 py-0.5 text-[8px] font-bold uppercase',
-                                conv.otherUser.role === 'ADMIN' || conv.otherUser.role === 'SUPER_ADMIN'
+                                conv.otherUser.role === 'ADMIN' ||
+                                  conv.otherUser.role === 'SUPER_ADMIN'
                                   ? 'bg-purple-500/10 text-purple-500'
                                   : conv.otherUser.role === 'CLINICIAN'
                                     ? 'bg-indigo-500/10 text-indigo-500'
                                     : 'bg-emerald-500/10 text-emerald-500'
                               )}
                             >
-                              {conv.otherUser.role === 'SUPER_ADMIN' ? 'ADMIN' : conv.otherUser.role}
+                              {conv.otherUser.role === 'SUPER_ADMIN'
+                                ? 'ADMIN'
+                                : conv.otherUser.role}
                             </Badge>
                           )}
                         </div>
