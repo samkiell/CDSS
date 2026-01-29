@@ -109,7 +109,9 @@ export default function ClinicianDiagnosticPage() {
             <Compass className="text-primary h-12 w-12" />
           </div>
           <div className="flex-1 text-center md:text-left">
-            <h1 className="mb-2 text-4xl font-black uppercase">Guided Diagnostic Mode</h1>
+            <h1 className="mb-2 text-4xl font-extrabold uppercase">
+              Guided Diagnostic Mode
+            </h1>
             <p className="max-w-xl text-base font-medium text-gray-400">
               Select a specialized medical module to perform structured clinical
               assessments. Data is automatically synchronized with the AI Heuristic
@@ -225,7 +227,7 @@ export default function ClinicianDiagnosticPage() {
               <Activity className="h-4 w-4" />
               Live Heuristic Processing
             </div>
-            <h3 className="mb-4 text-3xl font-black uppercase">
+            <h3 className="mb-4 text-3xl font-extrabold uppercase">
               Advanced Clinical Confirmatory Tests
             </h3>
             <p className="leading-relaxed font-medium text-white/80">

@@ -20,7 +20,7 @@ export default function DiagnosticTestPage() {
   const router = useRouter();
   const { id } = useParams();
   const searchParams = useSearchParams();
-  const patientName = searchParams.get('patient') || 'Bola';
+  const patientName = searchParams.get('patient') || 'Patient';
 
   const [findings, setFindings] = useState({}); // { testId: 'positive' | 'negative' | 'follow' }
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -107,7 +107,7 @@ export default function DiagnosticTestPage() {
               <User className="h-6 w-6" />
             </div>
             <div>
-              <h1 className="text-xl font-black tracking-tight">
+              <h1 className="text-xl font-extrabold tracking-tight">
                 {patientName}'s Guided Test
               </h1>
               <span className="text-muted-foreground text-xs font-bold tracking-widest uppercase">
@@ -126,10 +126,10 @@ export default function DiagnosticTestPage() {
 
       {/* Main Title Section - Removed Italics & Reduced Accent */}
       <div className="mb-10 text-center">
-        <h2 className="text-muted-foreground text-sm font-black tracking-[0.2em] uppercase">
+        <h2 className="text-muted-foreground text-sm font-extrabold tracking-[0.2em] uppercase">
           Dynamic Diagnostic Protocol
         </h2>
-        <h3 className="text-foreground mt-2 text-3xl font-black">
+        <h3 className="text-foreground mt-2 text-3xl font-extrabold">
           {testTitle === 'Lumbar-pain-screener' || id?.includes('lumbar')
             ? 'Lumbar Disc Herniation Assessment'
             : testTitle}
@@ -156,7 +156,9 @@ export default function DiagnosticTestPage() {
                     <Activity className="h-6 w-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-black tracking-tight">{test.title}</h3>
+                    <h3 className="text-lg font-extrabold tracking-tight">
+                      {test.title}
+                    </h3>
                     <div className="mt-1 flex gap-2">
                       <Badge
                         variant="secondary"
@@ -186,7 +188,7 @@ export default function DiagnosticTestPage() {
               <div className="grid gap-8 lg:grid-cols-2">
                 <div className="space-y-4">
                   <div>
-                    <span className="text-muted-foreground text-[10px] font-black tracking-widest uppercase">
+                    <span className="text-muted-foreground text-[10px] font-extrabold tracking-widest uppercase">
                       Purpose
                     </span>
                     <p className="text-foreground mt-1 text-sm leading-relaxed font-medium">
@@ -195,7 +197,7 @@ export default function DiagnosticTestPage() {
                   </div>
 
                   <div>
-                    <span className="text-muted-foreground text-[10px] font-black tracking-widest uppercase">
+                    <span className="text-muted-foreground text-[10px] font-extrabold tracking-widest uppercase">
                       Instructions
                     </span>
                     <div className="mt-2 space-y-2">
@@ -237,7 +239,7 @@ export default function DiagnosticTestPage() {
                       )}
                     >
                       <Clock className="h-5 w-5" />
-                      <span className="text-[10px] font-black uppercase">Follow</span>
+                      <span className="text-[10px] font-extrabold uppercase">Follow</span>
                     </button>
                     <button
                       onClick={() => handleResult(test.id, 'negative')}
@@ -249,7 +251,9 @@ export default function DiagnosticTestPage() {
                       )}
                     >
                       <CheckCircle2 className="h-5 w-5" />
-                      <span className="text-[10px] font-black uppercase">Negative</span>
+                      <span className="text-[10px] font-extrabold uppercase">
+                        Negative
+                      </span>
                     </button>
                     <button
                       onClick={() => handleResult(test.id, 'positive')}
@@ -261,7 +265,7 @@ export default function DiagnosticTestPage() {
                       )}
                     >
                       <XCircle className="h-5 w-5" />
-                      <span className="text-[10px] font-black uppercase">
+                      <span className="text-[10px] font-extrabold uppercase">
                         Update to positive
                       </span>
                     </button>
