@@ -122,3 +122,46 @@ export async function assignCase(sessionId, clinicianId) {
     return { success: false, error: error.message };
   }
 }
+
+/**
+ * Verifies a clinician's professional credentials.
+ */
+export async function verifyClinician(clinicianId) {
+  try {
+    await connectDB();
+    const clinician = await User.findById(clinicianId);
+    
+    if (!clinician) {
+      throw new Error('Clinician not found');
+    }
+
+    if (clinician.role !== ROLES.CLINICIAN) {
+      throw new Error('User is not a clinician');
+    }
+
+    // Update the professional verification status
+    clinician.professional = {
+      ...clinician.professional,
+      verified: true,
+      verifiedAt: new Date(),
+    };
+    await clinician.save();
+
+    // Notify the clinician about verification
+    await Notification.create({
+      userId: clinicianId,
+      title: 'Account Verified',
+      description:
+        'Your professional credentials have been verified. You can now receive patient assignments.',
+      type: 'SYSTEM',
+      link: '/clinician/dashboard',
+    });
+
+    revalidatePath('/admin/therapists');
+    revalidatePath('/admin/dashboard');
+    return { success: true };
+  } catch (error) {
+    console.error('Error verifying clinician:', error);
+    return { success: false, error: error.message };
+  }
+}
