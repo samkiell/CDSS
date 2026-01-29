@@ -18,6 +18,7 @@ const fetchSecuritySettings = async () => {
 export function useClinicianSettings() {
   const queryClient = useQueryClient();
   const { update: updateSession } = useSession();
+  const router = useRouter();
 
   // Fetch all settings
   const query = useQuery({
@@ -62,6 +63,7 @@ export function useClinicianSettings() {
       onSuccess: () => {
         toast.success(successMessage);
         queryClient.invalidateQueries({ queryKey: ['clinician-settings'] });
+        router.refresh();
       },
     });
   };
@@ -76,13 +78,14 @@ export function useClinicianSettings() {
   const originalUpdateProfile = updateProfile.mutate;
   updateProfile.mutate = (data) => {
     originalUpdateProfile(data, {
-      onSuccess: () => {
+      onSuccess: async () => {
         // If we updated name, we should push that to the session
         if (data.firstName || data.lastName) {
-          updateSession({
+          await updateSession({
             firstName: data.firstName,
             lastName: data.lastName,
           });
+          router.refresh();
         }
       },
     });
@@ -101,6 +104,7 @@ export function useClinicianSettings() {
     onSuccess: () => {
       toast.success('Clinical preferences saved');
       queryClient.invalidateQueries({ queryKey: ['clinician-settings'] });
+      router.refresh();
     },
     onError: (err) => {
       toast.error(`Error: ${err.response?.data?.error || err.message}`);
@@ -137,6 +141,7 @@ export function useClinicianSettings() {
       });
       await queryClient.invalidateQueries({ queryKey: ['clinician-settings'] });
       await updateSession({ image: data.avatarUrl }); // Force session update
+      router.refresh();
     },
     onError: (err) => {
       toast.error('Failed to upload avatar');
