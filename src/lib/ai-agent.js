@@ -57,21 +57,20 @@ export async function getAiPreliminaryAnalysis({
 
       Instructions:
       1. Analyze the symptoms using clinical reasoning.
-      2. Provide a temporal diagnosis phrased as a SHORT, CLEAR HEADLINE (Max 10 words).
-      3. Address the analysis DIRECTLY TO THE PATIENT using second-person perspective (e.g., "You have...", "Your results suggest...").
-      4. Avoid third-person clinical reporting (e.g., "The patient displays...").
-      5. Calculate a dynamic "confidenceScore" (0-100) by refining the "Mathematical Baseline Confidence".
-         - Adjust based on symptom specificity, red flags, and consistency.
-         - Be granular (e.g., 73, 88, 92).
-      6. For "reasoning", provide clear clinical indicators found in the symptoms, phrased so the patient understands.
-      7. CRITICAL: Do NOT include any internal tags or technical codes (e.g., "(lumbar_q_redflag)").
+      2. Provide a temporal diagnosis phrased as an EXTREMELY SHORT HEADLINE (Max 10 words).
+      3. CRITICAL: Use DIRECT SECOND-PERSON only. Start with "You have...", "Your...", or "Results suggest you...".
+      4. DO NOT use third-person (e.g., "The patient...").
+      5. DO NOT start with "You reported..." or "You describe...". Go straight to the likely condition.
+      6. Calculate a dynamic "confidenceScore" (0-100) by refining the "Mathematical Baseline Confidence".
+      7. For "reasoning", provide clear clinical indicators phrased for the patient.
+      8. CRITICAL: Do NOT include internal tags or technical codes.
 
       Output JSON only:
       {
-        "temporalDiagnosis": "Short Headline (Second Person, Max 10 words)",
+        "temporalDiagnosis": "Short Headline (You-focused, Max 10 words)",
         "confidenceScore": Number,
         "riskLevel": "Low" | "Moderate" | "Urgent",
-        "reasoning": ["Clear, compassionate explanation points"]
+        "reasoning": ["Clear explanation points"]
       }
     `;
 

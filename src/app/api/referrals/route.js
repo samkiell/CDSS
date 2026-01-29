@@ -10,7 +10,8 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { patientId, specialty, reason } = await req.json();
+    const { patientId, specialty, reason, preferredDate, preferredTime } =
+      await req.json();
 
     if (!patientId || !specialty) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -21,11 +22,17 @@ export async function POST(req) {
     const clinicianName =
       session.user.name || `${session.user.firstName} ${session.user.lastName}`;
 
+    let description = `Dr. ${clinicianName} has authorized a referral to a ${specialty}.`;
+    if (preferredDate) {
+      description += ` Recommended for ${preferredDate}${preferredTime ? ` at ${preferredTime}` : ''}.`;
+    }
+    description += ` Reason: ${reason || 'Clinical follow-up'}.`;
+
     // Create notification for the patient
     await Notification.create({
       userId: patientId,
       title: 'New Referral Authorized',
-      description: `Dr. ${clinicianName} has authorized a referral to a ${specialty}. Reason: ${reason || 'Clinical follow-up'}.`,
+      description,
       type: 'Assessments',
       link: '/patient/dashboard',
     });

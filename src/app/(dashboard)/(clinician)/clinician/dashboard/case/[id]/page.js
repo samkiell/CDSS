@@ -166,6 +166,8 @@ export default function CaseDetailsPage({ params }) {
           patientId: session.patientId._id,
           specialty: referralData.specialty,
           reason: referralData.reason,
+          preferredDate: referralData.date,
+          preferredTime: referralData.time,
         }),
       });
 
@@ -739,6 +741,35 @@ export default function CaseDetailsPage({ params }) {
                   <option>Sports Physician</option>
                   <option>Rheumatologist</option>
                 </select>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Preferred Date
+                  </label>
+                  <input
+                    type="date"
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={referralData.date || ''}
+                    onChange={(e) =>
+                      setReferralData({ ...referralData, date: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
+                    Time
+                  </label>
+                  <input
+                    type="time"
+                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
+                    value={referralData.time || ''}
+                    onChange={(e) =>
+                      setReferralData({ ...referralData, time: e.target.value })
+                    }
+                  />
+                </div>
               </div>
 
               <div className="space-y-2">
