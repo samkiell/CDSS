@@ -1,9 +1,9 @@
 'use client';
 
-import { Menu } from 'lucide-react';
+import { Menu, LogIn } from 'lucide-react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
-import { ThemeToggle } from '@/components/ui';
+import { ThemeToggle, Button } from '@/components/ui';
 import { Logo } from '@/components/ui/Logo';
 import { cn } from '@/lib/cn';
 import { useUIStore } from '@/store';
@@ -63,13 +63,26 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
       </div>
 
       {/* Right Actions */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
         <ThemeToggle />
 
+        {/* Sign In Button - Show when no session */}
+        {!session && (
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => router.push('/login')}
+            className="gap-2"
+          >
+            <LogIn className="h-4 w-4" />
+            <span className="hidden sm:inline">Sign In</span>
+          </Button>
+        )}
+
         {/* User Image Profile */}
-        {showUser && (
+        {showUser && session && (
           <button
-            className="border-background flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 shadow-md transition-transform hover:scale-105"
+            className="border-background flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border-2 shadow-md transition-transform hover:scale-105 sm:h-12 sm:w-12"
             aria-label="User menu"
             onClick={() => {
               const role = session?.user?.role;
@@ -87,7 +100,7 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
                 className="object-cover"
               />
             ) : (
-              <div className="bg-primary/10 text-primary flex h-full w-full items-center justify-center text-lg font-bold">
+              <div className="bg-primary/10 text-primary flex h-full w-full items-center justify-center text-sm font-bold sm:text-lg">
                 {session?.user?.firstName?.[0] || session?.user?.email?.[0] || 'U'}
               </div>
             )}
