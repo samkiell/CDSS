@@ -6,6 +6,8 @@ export default async function Layout({ children }) {
   if (!session || !session.user) redirect('/login');
 
   // Check Maintenance Mode
+  const connectDB = (await import('@/lib/db/connect')).default;
+  await connectDB();
   const { AdminSettings } = await import('@/models');
   const settings = await AdminSettings.getSettings();
   if (settings.system.maintenanceMode && session.user.role !== 'ADMIN') {
