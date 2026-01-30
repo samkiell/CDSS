@@ -75,7 +75,7 @@ export default function AdminUserListClient({ initialUsers = [] }) {
 
   const handleRoleUpdate = async (userId, newRole) => {
     try {
-      const res = await fetch(`/api/admin/users/${userId}/role`, {
+      const res = await fetch(`/api/admin/roles/${userId}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ role: newRole }),
@@ -85,6 +85,21 @@ export default function AdminUserListClient({ initialUsers = [] }) {
       router.refresh();
     } catch (error) {
       toast.error('Failed to update user role');
+    }
+  };
+
+  const handleStatusUpdate = async (userId, updates) => {
+    try {
+      const res = await fetch(`/api/admin/roles/${userId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updates),
+      });
+      if (!res.ok) throw new Error('Failed to update status');
+      toast.success('User status updated successfully');
+      router.refresh();
+    } catch (error) {
+      toast.error('Failed to update user status');
     }
   };
 
@@ -337,6 +352,39 @@ export default function AdminUserListClient({ initialUsers = [] }) {
                                 Make Patient
                               </DropdownMenuItem>
                             )}
+
+                            <DropdownMenuItem
+                              onClick={() =>
+                                handleStatusUpdate(user._id, {
+                                  verified: !(user.role === 'CLINICIAN'
+                                    ? user.professional?.verified
+                                    : user.isVerified),
+                                })
+                              }
+                              className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase"
+                            >
+                              <CheckCircle2 className="h-4 w-4" />
+                              {(
+                                user.role === 'CLINICIAN'
+                                  ? user.professional?.verified
+                                  : user.isVerified
+                              )
+                                ? 'Unverify'
+                                : 'Verify'}
+                            </DropdownMenuItem>
+
+                            <DropdownMenuItem
+                              onClick={() =>
+                                handleStatusUpdate(user._id, { isActive: !user.isActive })
+                              }
+                              className={cn(
+                                'flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase',
+                                user.isActive ? 'text-amber-600' : 'text-emerald-600'
+                              )}
+                            >
+                              <XCircle className="h-4 w-4" />
+                              {user.isActive ? 'Suspend' : 'Activate'}
+                            </DropdownMenuItem>
 
                             <DropdownMenuItem
                               onClick={() => handleDelete(user._id)}
