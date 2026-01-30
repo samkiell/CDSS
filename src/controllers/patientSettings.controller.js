@@ -5,20 +5,25 @@ import dbConnect from '@/lib/db/connect';
 
 /**
  * Controller for Patient Settings
+ * Handles business logic for fetching and updating patient-specific data.
  */
 export const PatientSettingsController = {
   /**
    * Get settings for the current user
+   * Returns only the nested settings object as per security constraints.
    * @param {string} userId - The ID of the authenticated user
    */
   async getSettings(userId) {
     await dbConnect();
+
+    // Explicitly select only the settings field to avoid leaking sensitive user data
     const user = await User.findById(userId).select('settings').lean();
     if (!user) {
       throw { status: 404, message: 'User not found' };
     }
 
-    // Apply defaults if settings object is missing or partially empty
+    // Deep structural defaults: Ensures that even if MongoDB document is missing keys,
+    // the API returns a consistent structure to the frontend.
     const settings = {
       profile: {
         firstName: user.settings?.profile?.firstName || '',
@@ -54,6 +59,7 @@ export const PatientSettingsController = {
 
   /**
    * Update patient settings with partial updates and deep merge
+   * Rejects unknown fields and validates input types strictly.
    * @param {string} userId - The ID of the authenticated user
    * @param {Object} updateData - Partial settings update object
    */
@@ -68,7 +74,7 @@ export const PatientSettingsController = {
       throw { status: 404, message: 'User not found' };
     }
 
-    // Initialize settings if not exists
+    // Initialize nested settings objects if the document is new/partially empty
     if (!user.settings) {
       user.settings = {
         profile: {},
@@ -77,56 +83,81 @@ export const PatientSettingsController = {
       };
     }
 
-    // Validate and Apply Profile Updates
+    // Security check: Nested validation and manual field mapping
+    // This prevents "pollution" of the database with unwanted fields.
+    const allowedTopFields = ['profile', 'preferences', 'privacy'];
+    const unknownTopFields = Object.keys(updateData).filter(
+      (key) => !allowedTopFields.includes(key)
+    );
+    if (unknownTopFields.length > 0) {
+      throw {
+        status: 400,
+        message: `Invalid configuration fields: ${unknownTopFields.join(', ')}`,
+      };
+    }
+
+    // 1. Profile Updates
     if (updateData.profile) {
+      const allowedProfileFields = ['firstName', 'lastName', 'phone', 'avatarUrl'];
+      const unknownProfileFields = Object.keys(updateData.profile).filter(
+        (key) => !allowedProfileFields.includes(key)
+      );
+      if (unknownProfileFields.length > 0) {
+        throw { status: 400, message: `Unknown profile fields detected.` };
+      }
+
       const { firstName, lastName, phone, avatarUrl } = updateData.profile;
+
       if (firstName !== undefined)
         user.settings.profile.firstName = String(firstName).trim();
       if (lastName !== undefined)
         user.settings.profile.lastName = String(lastName).trim();
+
       if (phone !== undefined) {
-        // Loose phone validation (digits, +, -, spaces)
+        // Loose phone validation: allows +, digits, spaces, hyphens
         if (phone && !/^[+0-9\s-]{7,20}$/.test(phone)) {
           throw { status: 400, message: 'Invalid phone number format' };
         }
         user.settings.profile.phone = String(phone).trim();
       }
+
       if (avatarUrl !== undefined) user.settings.profile.avatarUrl = avatarUrl;
     }
 
-    // Validate and Apply Preferences
+    // 2. Preferences Updates (Deep Merge)
     if (updateData.preferences) {
       const { language, notifications } = updateData.preferences;
 
       if (language !== undefined) {
         const allowedLanguages = ['en', 'fr', 'es'];
         if (!allowedLanguages.includes(language)) {
-          throw { status: 400, message: 'Language must be one of: en, fr, es' };
+          throw { status: 400, message: 'Supported languages: en, fr, es' };
         }
         user.settings.preferences.language = language;
       }
 
       if (notifications) {
         const { email, sms, inApp } = notifications;
+        // Strict boolean enforcement as requested
         if (email !== undefined) {
           if (typeof email !== 'boolean')
-            throw { status: 400, message: 'Email notification must be a boolean' };
+            throw { status: 400, message: 'Email preference must be boolean' };
           user.settings.preferences.notifications.email = email;
         }
         if (sms !== undefined) {
           if (typeof sms !== 'boolean')
-            throw { status: 400, message: 'SMS notification must be a boolean' };
+            throw { status: 400, message: 'SMS preference must be boolean' };
           user.settings.preferences.notifications.sms = sms;
         }
         if (inApp !== undefined) {
           if (typeof inApp !== 'boolean')
-            throw { status: 400, message: 'In-app notification must be a boolean' };
+            throw { status: 400, message: 'In-app preference must be boolean' };
           user.settings.preferences.notifications.inApp = inApp;
         }
       }
     }
 
-    // Validate and Apply Privacy
+    // 3. Privacy Updates
     if (updateData.privacy) {
       const { shareDataForResearch } = updateData.privacy;
       if (shareDataForResearch !== undefined) {
@@ -137,74 +168,13 @@ export const PatientSettingsController = {
       }
     }
 
-    // Security: Check for unknown fields in payload
-    const allowedTopFields = ['profile', 'preferences', 'privacy'];
-    const unknownTopFields = Object.keys(updateData).filter(
-      (key) => !allowedTopFields.includes(key)
-    );
-    if (unknownTopFields.length > 0) {
-      throw {
-        status: 400,
-        message: `Unknown keys rejected: ${unknownTopFields.join(', ')}`,
-      };
-    }
-
-    if (updateData.profile) {
-      const allowedProfileFields = ['firstName', 'lastName', 'phone', 'avatarUrl'];
-      const unknownProfileFields = Object.keys(updateData.profile).filter(
-        (key) => !allowedProfileFields.includes(key)
-      );
-      if (unknownProfileFields.length > 0) {
-        throw {
-          status: 400,
-          message: `Unknown profile fields: ${unknownProfileFields.join(', ')}`,
-        };
-      }
-    }
-
-    if (updateData.preferences) {
-      const allowedPrefFields = ['language', 'notifications'];
-      const unknownPrefFields = Object.keys(updateData.preferences).filter(
-        (key) => !allowedPrefFields.includes(key)
-      );
-      if (unknownPrefFields.length > 0) {
-        throw {
-          status: 400,
-          message: `Unknown preference fields: ${unknownPrefFields.join(', ')}`,
-        };
-      }
-
-      if (updateData.preferences.notifications) {
-        const allowedNotifFields = ['email', 'sms', 'inApp'];
-        const unknownNotifFields = Object.keys(
-          updateData.preferences.notifications
-        ).filter((key) => !allowedNotifFields.includes(key));
-        if (unknownNotifFields.length > 0) {
-          throw {
-            status: 400,
-            message: `Unknown notification fields: ${unknownNotifFields.join(', ')}`,
-          };
-        }
-      }
-    }
-
-    if (updateData.privacy) {
-      const allowedPrivacyFields = ['shareDataForResearch'];
-      const unknownPrivacyFields = Object.keys(updateData.privacy).filter(
-        (key) => !allowedPrivacyFields.includes(key)
-      );
-      if (unknownPrivacyFields.length > 0) {
-        throw {
-          status: 400,
-          message: `Unknown privacy fields: ${unknownPrivacyFields.join(', ')}`,
-        };
-      }
-    }
-
+    // Inform Mongoose about the modified nested object to ensure persistence
+    user.markModified('settings');
     await user.save();
+
     return {
       success: true,
-      message: 'Settings updated successfully',
+      message: 'Settings successfully merged',
       settings: user.settings,
     };
   },
@@ -217,36 +187,38 @@ export const PatientSettingsController = {
    */
   async updatePassword(userId, currentPassword, newPassword) {
     if (!currentPassword || !newPassword) {
-      throw { status: 400, message: 'Current and new password are required' };
+      throw { status: 400, message: 'Full credentials required for security' };
     }
 
     if (newPassword.length < 8) {
-      throw { status: 400, message: 'New password must be at least 8 characters' };
+      throw { status: 400, message: 'Security policy: Password must be 8+ characters' };
     }
 
     await dbConnect();
+    // Use select('+password') because it is hidden by default in the User Schema
     const user = await User.findById(userId).select('+password');
     if (!user) {
-      throw { status: 404, message: 'User not found' };
+      throw { status: 404, message: 'User account not found' };
     }
 
-    // Verify current password
+    // Verify current password before allowing change
     const isMatch = await bcrypt.compare(currentPassword, user.password);
     if (!isMatch) {
-      throw { status: 401, message: 'Incorrect current password' };
+      throw { status: 401, message: 'Authentication failed: Incorrect current password' };
     }
 
-    // Hash and save new password
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(newPassword, salt);
     await user.save();
 
-    // Invalidate existing sessions
-    await UserSession.deleteMany({ user: userId });
+    // Kill all active sessions to force re-authentication (Security Best Practice)
+    if (UserSession) {
+      await UserSession.deleteMany({ user: userId });
+    }
 
     return {
       success: true,
-      message: 'Password updated successfully. Please log in again if required.',
+      message: 'Credentials updated. Active sessions have been invalidated.',
     };
   },
 };

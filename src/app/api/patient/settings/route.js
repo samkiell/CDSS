@@ -1,14 +1,18 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/auth';
 import { PatientSettingsController } from '@/controllers/patientSettings.controller';
+import { ROLES } from '@/models/User';
 
 /**
  * GET /api/patient/settings
- * Fetch settings for the authenticated patient
+ * Fetch settings for the authenticated patient.
+ * Securely wraps the controller and enforces authorization.
  */
 export async function GET() {
   try {
     const session = await auth();
+
+    // Auth Check
     if (!session || !session.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
@@ -16,7 +20,8 @@ export async function GET() {
       );
     }
 
-    if (session.user.role !== 'PATIENT') {
+    // Role Check
+    if (session.user.role !== ROLES.PATIENT) {
       return NextResponse.json(
         { success: false, error: 'Access denied. Patient role required.' },
         { status: 403 }
@@ -36,11 +41,14 @@ export async function GET() {
 
 /**
  * PUT /api/patient/settings
- * Update settings for the authenticated patient
+ * Update settings for the authenticated patient.
+ * Handles partial updates and rejects unknown fields via the Controller.
  */
 export async function PUT(req) {
   try {
     const session = await auth();
+
+    // Auth Check
     if (!session || !session.user) {
       return NextResponse.json(
         { success: false, error: 'Unauthorized' },
@@ -48,7 +56,8 @@ export async function PUT(req) {
       );
     }
 
-    if (session.user.role !== 'PATIENT') {
+    // Role Check
+    if (session.user.role !== ROLES.PATIENT) {
       return NextResponse.json(
         { success: false, error: 'Access denied. Patient role required.' },
         { status: 403 }
