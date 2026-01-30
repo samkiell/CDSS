@@ -31,7 +31,9 @@ function VerifyContent() {
 
   useEffect(() => {
     if (!email) {
-      toast.error('No email provided for verification');
+      toast.error('Verification Error', {
+        description: 'No email provided for verification. Please go back and try again.',
+      });
     }
   }, [email]);
 
@@ -63,12 +65,16 @@ function VerifyContent() {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Failed to send OTP');
 
-      toast.success('Verification code resent!');
+      toast.success('Code Resent', {
+        description: `A new verification code has been sent to ${email}`,
+      });
       // Reset countdown
       setCountdown(60);
       setCanResend(false);
     } catch (err) {
-      toast.error(err.message);
+      toast.error('Resend Failed', {
+        description: err.message,
+      });
     } finally {
       setIsResending(false);
     }
@@ -84,20 +90,26 @@ function VerifyContent() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp }),
       });
-
       const data = await response.json();
 
       if (response.ok) {
         setIsVerified(true);
-        toast.success('Email verified successfully!');
+        toast.success('Verification Successful', {
+          description: 'Your email has been verified. Redirecting to login...',
+        });
         setTimeout(() => router.push('/login'), 2000);
       } else {
         setError(true);
-        toast.error(data.error || 'Verification failed');
+        toast.error('Verification Failed', {
+          description: data.error || 'The code you entered is invalid or expired.',
+        });
       }
     } catch (err) {
       setError(true);
-      toast.error('An error occurred. Please try again.');
+      toast.error('Connection Error', {
+        description:
+          'Could not connect to the server. Please check your internet connection.',
+      });
     } finally {
       setIsLoading(false);
     }

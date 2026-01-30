@@ -76,7 +76,12 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (!validate()) {
+      toast.error('Registration Failed', {
+        description: 'Please check the form for errors and try again.',
+      });
+      return;
+    }
 
     setIsLoading(true);
     try {
@@ -94,13 +99,19 @@ export default function RegisterPage() {
       });
 
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'Failed to initiate registration');
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to initiate registration');
+      }
 
-      toast.success('Verification code sent to your email!');
+      toast.success('Verification code sent!', {
+        description: `We've sent a 4-digit code to ${formData.email}`,
+      });
       // Move to verify page, passing only the email
       router.push(`/verify?email=${encodeURIComponent(formData.email)}`);
     } catch (err) {
-      toast.error(err.message);
+      toast.error('Registration Error', {
+        description: err.message,
+      });
     } finally {
       setIsLoading(false);
     }
