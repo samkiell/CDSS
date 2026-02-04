@@ -2,7 +2,7 @@
   "region": "shoulder",
   "title": "Shoulder Region",
   "source_file": "Shoulder Region.docx",
-  "extracted_at": "2026-02-04T03:54:04.365Z",
+  "extracted_at": "2026-02-04T03:56:25.617Z",
   "conditions": [
     {
       "name": "Initial Assessment",
@@ -877,51 +877,6 @@
       "questions": [
         {
           "id": "shoulder_q24",
-          "question": "For how long have you felt this present pain?",
-          "category": "general",
-          "answers": [
-            {
-              "value": "Less than 6 weeks",
-              "effects": {
-                "rule_out": [],
-                "increase_likelihood": [],
-                "decrease_likelihood": [],
-                "next_questions": [],
-                "red_flag": false,
-                "red_flag_text": null,
-                "notes": "Acute"
-              }
-            },
-            {
-              "value": "6 -  less than 12 weeks",
-              "effects": {
-                "rule_out": [],
-                "increase_likelihood": [],
-                "decrease_likelihood": [],
-                "next_questions": [],
-                "red_flag": false,
-                "red_flag_text": null,
-                "notes": "Subacute"
-              }
-            },
-            {
-              "value": "12 weeks or more",
-              "effects": {
-                "rule_out": [],
-                "increase_likelihood": [],
-                "decrease_likelihood": [],
-                "next_questions": [],
-                "red_flag": false,
-                "red_flag_text": null,
-                "notes": "Chronic"
-              }
-            }
-          ],
-          "source_line": 91,
-          "inputType": "select"
-        },
-        {
-          "id": "shoulder_q25",
           "question": "Does the pain resolve significantly after the precipitating activity is avoided?",
           "category": "activity",
           "answers": [
@@ -954,7 +909,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q26",
+          "id": "shoulder_q25",
           "question": "Palpate the anterior edge of the acromion with the arm in extension and flexion. (Subacute Tendinitis). Is pain present?",
           "category": "general",
           "answers": [
@@ -997,7 +952,7 @@
       "entry_criteria": [],
       "questions": [
         {
-          "id": "shoulder_q27",
+          "id": "shoulder_q26",
           "question": "Have you had a previous history of shoulder pain after repetitive use? (Link to question 11, maybe redundant)",
           "category": "history",
           "answers": [
@@ -1030,7 +985,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q28",
+          "id": "shoulder_q27",
           "question": "Does pain reduce with rest OR anti-inflammatory use?",
           "category": "general",
           "answers": [
@@ -1063,7 +1018,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q29",
+          "id": "shoulder_q28",
           "question": "Is there tenderness along the bicipital groove or on moving the biceps tendon?",
           "category": "general",
           "answers": [
@@ -1106,7 +1061,7 @@
       "entry_criteria": [],
       "questions": [
         {
-          "id": "shoulder_q30",
+          "id": "shoulder_q29",
           "question": "Are you above 45yrs of age?",
           "category": "demographic",
           "answers": [
@@ -1139,7 +1094,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q31",
+          "id": "shoulder_q30",
           "question": "Do you have a previous history of sprain or a jerking movement at the shoulder?",
           "category": "history",
           "answers": [
@@ -1338,7 +1293,7 @@
       "entry_criteria": [],
       "questions": [
         {
-          "id": "shoulder_q32",
+          "id": "shoulder_q31",
           "question": "What is the pain type?",
           "category": "general",
           "answers": [
@@ -1371,7 +1326,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q33",
+          "id": "shoulder_q32",
           "question": "How did the pain begin?",
           "category": "onset",
           "answers": [
@@ -1404,7 +1359,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q34",
+          "id": "shoulder_q33",
           "question": "Did the pain increase drastically within a few hours?",
           "category": "general",
           "answers": [
@@ -1473,7 +1428,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q35",
+          "id": "shoulder_q34",
           "question": "Can you perform the movements around the shoulder joint?",
           "category": "general",
           "answers": [
@@ -1506,7 +1461,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q36",
+          "id": "shoulder_q35",
           "question": "Does the pain subside after a few days and the shoulder is restored to normal functioning?",
           "category": "general",
           "answers": [
@@ -1591,7 +1546,7 @@
       ],
       "questions": [
         {
-          "id": "shoulder_q37",
+          "id": "shoulder_q36",
           "question": "Have you had a previous history of a shoulder dislocation?",
           "category": "location",
           "answers": [
@@ -1624,7 +1579,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q38",
+          "id": "shoulder_q37",
           "question": "Did the first episode occur with a pull on an abducted, laterally rotated-extended arm?",
           "category": "general",
           "answers": [
@@ -1657,7 +1612,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q39",
+          "id": "shoulder_q38",
           "question": "Do you experience a catching sensation followed by numbness or weakness (Dead-arm syndrome) when making overhead arm movements?",
           "category": "temporal",
           "answers": [
@@ -1750,7 +1705,7 @@
       "entry_criteria": [],
       "questions": [
         {
-          "id": "shoulder_q40",
+          "id": "shoulder_q39",
           "question": "Do you have a history of generalised Rheumatoid Arthritis?",
           "category": "history",
           "answers": [
@@ -1783,7 +1738,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q41",
+          "id": "shoulder_q40",
           "question": "Do you experience pain and swelling in both shoulder joints?",
           "category": "inflammation",
           "answers": [
@@ -1816,7 +1771,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q42",
+          "id": "shoulder_q41",
           "question": "Do you smoke?",
           "category": "general",
           "answers": [
@@ -1849,7 +1804,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q43",
+          "id": "shoulder_q42",
           "question": "Do you have episodes of fever that resolve spontaneously?",
           "category": "general",
           "answers": [
@@ -1882,7 +1837,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q44",
+          "id": "shoulder_q43",
           "question": "Is swelling present anteriorly and superiorly to the shoulder?",
           "category": "inflammation",
           "answers": [
@@ -1915,7 +1870,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q45",
+          "id": "shoulder_q44",
           "question": "Is swelling present in the axilla?",
           "category": "inflammation",
           "answers": [
@@ -1948,7 +1903,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q46",
+          "id": "shoulder_q45",
           "question": "Do you experience increasing limitations in performing self-care (styling hair, dressing, shaving)?",
           "category": "general",
           "answers": [
@@ -1998,7 +1953,7 @@
       ],
       "questions": [
         {
-          "id": "shoulder_q47",
+          "id": "shoulder_q46",
           "question": "Have you had a previous history of injury, shoulder dislocation, or painful arc syndrome?",
           "category": "location",
           "answers": [
@@ -2031,7 +1986,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q48",
+          "id": "shoulder_q47",
           "question": "Do you feel the pain more at night?",
           "category": "temporal",
           "answers": [
@@ -2066,7 +2021,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q49",
+          "id": "shoulder_q48",
           "question": "Is your shoulder movement restricted across ALL joint motions?",
           "category": "general",
           "answers": [
@@ -2101,7 +2056,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q50",
+          "id": "shoulder_q49",
           "question": "Do you experience early morning stiffness?",
           "category": "temporal",
           "answers": [
@@ -2134,7 +2089,7 @@
           "inputType": "select"
         },
         {
-          "id": "shoulder_q51",
+          "id": "shoulder_q50",
           "question": "If yes, does the stiffness wane within 30 minutes of waking?",
           "category": "stiffness",
           "answers": [

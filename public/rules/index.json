@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-04T03:54:04.416Z",
+  "generated_at": "2026-02-04T03:56:25.661Z",
   "regions": [
     {
       "region": "ankle",
@@ -7,7 +7,7 @@
       "source_file": "Ankle Region.docx",
       "json_file": "Ankle Region.json",
       "condition_count": 17,
-      "question_count": 85
+      "question_count": 84
     },
     {
       "region": "cervical",
@@ -47,7 +47,7 @@
       "source_file": "Shoulder Region.docx",
       "json_file": "Shoulder Region.json",
       "condition_count": 9,
-      "question_count": 51
+      "question_count": 50
     }
   ]
 }

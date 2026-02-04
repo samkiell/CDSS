@@ -2,7 +2,7 @@
   "region": "ankle",
   "title": "Ankle Region",
   "source_file": "Ankle Region.docx",
-  "extracted_at": "2026-02-04T03:54:03.455Z",
+  "extracted_at": "2026-02-04T03:56:23.665Z",
   "conditions": [
     {
       "name": "General Assessment",
@@ -2023,14 +2023,6 @@
         },
         {
           "id": "ankle_q51",
-          "question": "For Foot Compartment Syndrome?",
-          "category": "general",
-          "answers": [],
-          "source_line": 220,
-          "inputType": "text"
-        },
-        {
-          "id": "ankle_q52",
           "question": "Do you feel intense pain in the foot?",
           "category": "general",
           "answers": [
@@ -2063,7 +2055,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q53",
+          "id": "ankle_q52",
           "question": "Is bruising and swelling extensive?",
           "category": "inflammation",
           "answers": [
@@ -2096,7 +2088,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q54",
+          "id": "ankle_q53",
           "question": "Is sensation diminished at the foot?",
           "category": "general",
           "answers": [
@@ -2129,7 +2121,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q55",
+          "id": "ankle_q54",
           "question": "Do you experience pain on the dorsiflexion of the toes?",
           "category": "general",
           "answers": [
@@ -2179,7 +2171,7 @@
       "entry_criteria": [],
       "questions": [
         {
-          "id": "ankle_q56",
+          "id": "ankle_q55",
           "question": "Do you feel uncomfortable when you wear your shoes?",
           "category": "temporal",
           "answers": [
@@ -2212,7 +2204,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q57",
+          "id": "ankle_q56",
           "question": "Since the onset of this discomfort, do you walk less due to the discomfort?",
           "category": "function",
           "answers": [
@@ -2245,7 +2237,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q58",
+          "id": "ankle_q57",
           "question": "Do you feel pain at your metatarsophalangeal joint (forefoot)?",
           "category": "general",
           "answers": [
@@ -2278,7 +2270,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q59",
+          "id": "ankle_q58",
           "question": "Is the region of the metatarsophalangeal joint (forefoot) swollen?",
           "category": "location",
           "answers": [
@@ -2311,7 +2303,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q60",
+          "id": "ankle_q59",
           "question": "Is there tenderness at the metatarsaophalangeal joint (forefoot)?",
           "category": "general",
           "answers": [
@@ -2344,7 +2336,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q61",
+          "id": "ankle_q60",
           "question": "Do you feel pain when you press or squeeze the forefoot?",
           "category": "temporal",
           "answers": [
@@ -2377,7 +2369,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q62",
+          "id": "ankle_q61",
           "question": "Did this pain progress to the entire foot?",
           "category": "general",
           "answers": [
@@ -2410,7 +2402,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q63",
+          "id": "ankle_q62",
           "question": "Do you experience weakness of your foot muscles?",
           "category": "neurological",
           "answers": [
@@ -2463,7 +2455,7 @@
       "entry_criteria": [],
       "questions": [
         {
-          "id": "ankle_q64",
+          "id": "ankle_q63",
           "question": "Do you find it increasingly difficult to walk?",
           "category": "function",
           "answers": [
@@ -2496,7 +2488,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q65",
+          "id": "ankle_q64",
           "question": "Do you experience pain around your ankle?",
           "category": "general",
           "answers": [
@@ -2529,7 +2521,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q66",
+          "id": "ankle_q65",
           "question": "Is swelling and tenderness present behind the lateral and/or medial malleolus?",
           "category": "inflammation",
           "answers": [
@@ -2562,7 +2554,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q67",
+          "id": "ankle_q66",
           "question": "Do you find it painful to invert (turn inward) and evert (turn outward) your foot?",
           "category": "general",
           "answers": [
@@ -2595,7 +2587,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q68",
+          "id": "ankle_q67",
           "question": "Do you find the range of movement limited when you try to invert (turn inward) and evert (turn outward) your foot??",
           "category": "temporal",
           "answers": [
@@ -2628,7 +2620,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q69",
+          "id": "ankle_q68",
           "question": "Is a valgus deformity (turning outward of the foot) present?",
           "category": "general",
           "answers": [
@@ -2673,7 +2665,7 @@
       "entry_criteria": [],
       "questions": [
         {
-          "id": "ankle_q70",
+          "id": "ankle_q69",
           "question": "Have you had a previous diagnosis of osteoarthritis of other joints?",
           "category": "history",
           "answers": [
@@ -2706,7 +2698,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q71",
+          "id": "ankle_q70",
           "question": "Do you have any previous history of the following: malunited fracture, recurrent instability, and avascular necrosis of the talus?",
           "category": "history",
           "answers": [
@@ -2739,7 +2731,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q72",
+          "id": "ankle_q71",
           "question": "Do you experience pain and stiffness at the ankle joint?",
           "category": "stiffness",
           "answers": [
@@ -2772,7 +2764,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q73",
+          "id": "ankle_q72",
           "question": "Do you notice this pain more when standing up from rest?",
           "category": "temporal",
           "answers": [
@@ -2805,7 +2797,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q74",
+          "id": "ankle_q73",
           "question": "Is the ankle swollen?",
           "category": "general",
           "answers": [
@@ -2838,7 +2830,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q75",
+          "id": "ankle_q74",
           "question": "Do you experience limitation when bringing the foot upward towards (dorsiflexion) and pushing the foot downward away (plantar flexion) from the shin?",
           "category": "temporal",
           "answers": [
@@ -2887,7 +2879,7 @@
       "entry_criteria": [],
       "questions": [
         {
-          "id": "ankle_q76",
+          "id": "ankle_q75",
           "question": "Do you feel numbness, burning and tingling sensation in your foot and/or medial portion of your ankle?",
           "category": "neurological",
           "answers": [
@@ -2920,7 +2912,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q77",
+          "id": "ankle_q76",
           "question": "Do you experience weakness in your foot muscles (toe abductors and flexors)?",
           "category": "neurological",
           "answers": [
@@ -2953,7 +2945,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q78",
+          "id": "ankle_q77",
           "question": "Do you have a previous history of diabetes or osteoarthritis?",
           "category": "history",
           "answers": [
@@ -2986,7 +2978,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q79",
+          "id": "ankle_q78",
           "question": "Does your job or daily task involve running, excessive walking and standing?",
           "category": "function",
           "answers": [
@@ -3019,7 +3011,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q80",
+          "id": "ankle_q79",
           "question": "Do you have a previous history of trauma or dislocation at ankle region?",
           "category": "location",
           "answers": [
@@ -3052,7 +3044,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q81",
+          "id": "ankle_q80",
           "question": "Is tenderness present behind the medial malleolus?",
           "category": "general",
           "answers": [
@@ -3085,7 +3077,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q82",
+          "id": "ankle_q81",
           "question": "Do the symptoms you feel worsen with a forceful eversion (turning outward) of the foot OR dorsiflexion (moving foot upwards towards the shin)?",
           "category": "general",
           "answers": [
@@ -3118,7 +3110,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q83",
+          "id": "ankle_q82",
           "question": "Do you feel a stabbing pain in the medial sole of your foot while walking?",
           "category": "function",
           "answers": [
@@ -3151,7 +3143,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q84",
+          "id": "ankle_q83",
           "question": "Does the pain get aggravated with walking?",
           "category": "function",
           "answers": [
@@ -3184,7 +3176,7 @@
           "inputType": "select"
         },
         {
-          "id": "ankle_q85",
+          "id": "ankle_q84",
           "question": "Do you feel night pain that wake you up from sleep?",
           "category": "temporal",
           "answers": [
