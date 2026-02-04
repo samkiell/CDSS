@@ -302,6 +302,10 @@ const GuidedTestFlowSchema = new mongoose.Schema(
       type: RefinedDiagnosisSchema,
       default: null,
     },
+    currentNodeId: {
+      type: String,
+      default: null, // Tracks current position in the decision graph
+    },
     /**
      * LOCK FLAG
      * ==========
