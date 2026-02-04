@@ -103,12 +103,23 @@ export function getCurrentQuestion(state) {
       );
 
       if (!alreadyAsked) {
+        // Normalize the question structure for the component
+        // JSON uses: questionText, options
+        // Component expects: question, answers
         return {
-          ...question,
+          id: question.id,
+          question: question.questionText || question.question,
+          answers: question.options || question.answers || [],
+          category: question.category,
+          inputType: question.inputType,
+          metadata: question.metadata,
           conditionName: condition.name,
           conditionIndex: ci,
           questionIndex: qi,
-          totalQuestions: conditions.reduce((sum, c) => sum + c.questions.length, 0),
+          totalQuestions: conditions.reduce(
+            (sum, c) => sum + (c.questions?.length || 0),
+            0
+          ),
           answeredCount: state.askedQuestions.length,
         };
       }
