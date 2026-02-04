@@ -416,6 +416,25 @@ const DiagnosisSessionSchema = new mongoose.Schema(
       default: null,
     },
     /**
+     * GUIDED TEST RESULTS
+     * ====================
+     * Therapist-performed physical tests and refined diagnosis.
+     *
+     * COEXISTENCE RULE:
+     * - This does NOT overwrite aiAnalysis (temporal diagnosis)
+     * - Both are preserved for full traceability
+     * - aiAnalysis = AI temporal (preliminary) diagnosis
+     * - guidedTestResults = Clinician-guided diagnostic outcome
+     *
+     * LOCK MECHANISM:
+     * - Once isLocked is true, tests cannot be re-run
+     * - TODO: Admin reset capability
+     */
+    guidedTestResults: {
+      type: GuidedTestFlowSchema,
+      default: null,
+    },
+    /**
      * STATUS WORKFLOW
      * ================
      * pending_review -> submitted_to_therapist -> assigned -> completed -> archived
