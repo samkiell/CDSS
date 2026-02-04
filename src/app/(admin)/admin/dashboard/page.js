@@ -26,11 +26,13 @@ export default async function AdminDashboardPage() {
     isActive: true,
   });
 
-  // Fetch Triage Queue (New Cases)
-  const newCasesRaw = await DiagnosisSession.find({ status: 'pending_review' })
-    .populate('patientId', 'firstName lastName avatar phone gender')
+  // Fetch Triage Queue (New Cases - includes submitted_to_therapist and pending_review)
+  const newCasesRaw = await DiagnosisSession.find({ 
+    status: { $in: ['pending_review', 'submitted_to_therapist'] } 
+  })
+    .populate('patientId', 'firstName lastName avatar phone gender email')
     .sort({ createdAt: -1 })
-    .limit(5)
+    .limit(10)
     .lean();
 
   const newCases = JSON.parse(JSON.stringify(newCasesRaw));
