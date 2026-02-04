@@ -117,6 +117,12 @@ export default function PatientAssessmentPage() {
     setIsSubmitting(true);
 
     try {
+      /**
+       * ASSESSMENT SUBMISSION PAYLOAD
+       * ===============================
+       * Includes the biodata snapshot confirmed at the start of the assessment.
+       * This biodata is stored with the assessment for historical accuracy.
+       */
       const payload = {
         bodyRegion: selectedRegion,
         symptomData: Object.entries(responses).map(([questionId, answer]) => {
@@ -132,6 +138,14 @@ export default function PatientAssessmentPage() {
         }),
         mediaUrls: [], // For now, handle media separately if needed or add here
         aiAnalysis: aiAnalysis, // Pass the analysis matched during summary
+        /**
+         * BIODATA SNAPSHOT
+         * =================
+         * The biodata snapshot is included in the submission.
+         * This preserves the patient's information at the time of assessment.
+         * It does NOT update the patient's main profile/settings.
+         */
+        biodata: biodata,
       };
 
       const response = await fetch('/api/assessment/submit', {

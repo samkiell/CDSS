@@ -16,7 +16,21 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { bodyRegion, symptomData, mediaUrls, aiAnalysis } = await req.json();
+    /**
+     * REQUEST BODY
+     * =============
+     * bodyRegion: Selected body region for assessment
+     * symptomData: Array of question/answer pairs
+     * mediaUrls: Array of uploaded media URLs
+     * aiAnalysis: AI-generated preliminary analysis
+     * biodata: Per-assessment biodata snapshot (REQUIRED for new assessments)
+     *
+     * BIODATA SNAPSHOT:
+     * The biodata is confirmed by the patient before the assessment begins.
+     * It is stored with the assessment record for historical accuracy.
+     * This data does NOT update the patient's main profile/settings.
+     */
+    const { bodyRegion, symptomData, mediaUrls, aiAnalysis, biodata } = await req.json();
 
     if (!bodyRegion || !symptomData) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -58,9 +72,34 @@ export async function POST(req) {
       throw new Error('Could not prepare assessment for clinical record');
     }
 
-    // 2. Persist DiagnosisSession
+    /**
+     * BIODATA SNAPSHOT PERSISTENCE
+     * =============================
+     * The biodata snapshot is stored with the assessment record.
+     * This preserves the patient's information at the exact time of assessment.
+     *
+     * Why snapshot instead of reference?
+     * - Patient profile may change over time
+     * - Historical assessments need accurate point-in-time data
+     * - Legal/audit requirements for medical records
+     * - Each assessment is self-contained
+     */
+    const biodataSnapshot = biodata
+      ? {
+          fullName: biodata.fullName,
+          sex: biodata.sex,
+          ageRange: biodata.ageRange,
+          occupation: biodata.occupation,
+          education: biodata.education,
+          notes: biodata.notes || null,
+          confirmedAt: biodata.confirmedAt || new Date(),
+        }
+      : null;
+
+    // 2. Persist DiagnosisSession with biodata snapshot
     const diagnosisSession = await DiagnosisSession.create({
       patientId: session.user.id,
+      biodata: biodataSnapshot,
       bodyRegion,
       symptomData,
       mediaUrls,
