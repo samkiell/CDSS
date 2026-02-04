@@ -23,32 +23,22 @@ export async function GET() {
 }
 
 export async function POST(req) {
-  try {
-    const session = await auth();
-    if (!session || !session.user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const { testId, testTitle, category } = await req.json();
-
-    if (!testId || !testTitle || !category) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
-    }
-
-    await dbConnect();
-
-    // Check if experiment already exists (optional: user might want multiple completions over time)
-    // For now, let's just create a new record for each completion
-    const newTest = await SelfTest.create({
-      patientId: session.user.id,
-      testId,
-      testTitle,
-      category,
-    });
-
-    return NextResponse.json(newTest, { status: 201 });
-  } catch (error) {
-    console.error('Error saving self-test:', error);
-    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
-  }
+  /**
+   * SELF-GUIDED TEST - FEATURE DEPRECATED
+   * =====================================
+   * This endpoint is no longer accepting new self-test submissions.
+   * 
+   * The "New Assessment" flow is now the ONLY way patients can submit
+   * clinical assessments.
+   * 
+   * Historical self-test data remains accessible via GET.
+   * Database records are preserved as per requirements.
+   */
+  return NextResponse.json(
+    { 
+      error: 'Self-Guided Test feature has been deprecated',
+      message: 'Please use the New Assessment flow at /patient/assessment?new=true'
+    }, 
+    { status: 410 } // 410 Gone - resource no longer available
+  );
 }

@@ -19,7 +19,8 @@ import {
 export const patientLinks = [
   { href: '/patient/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/patient/assessment?new=true', label: 'New assessment', icon: ClipboardPlus },
-  { href: '/patient/self-test', label: 'Guided Self Test', icon: FlaskConical },
+  // REMOVED: Self-Guided Test feature has been deprecated
+  // The "New Assessment" entry point is now the primary way to begin clinical assessments
   { href: '/patient/progress', label: 'Progress', icon: TrendingUp },
   { href: '/patient/messages', label: 'Messages', icon: MessageSquare },
   { href: '/patient/notifications', label: 'Notifications', icon: Bell },

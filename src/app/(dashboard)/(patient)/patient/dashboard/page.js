@@ -9,7 +9,6 @@ import {
   ChevronRight,
   Play,
   PlusCircle,
-  Video,
   Clipboard,
   Upload,
   Clock,
@@ -371,6 +370,22 @@ export default async function PatientDashboardPage() {
         {/* Right Section: Actions & Details */}
         <div className="space-y-6 md:col-span-4">
           {/* Quick Action Grid */}
+          {/*
+           * ASSESSMENT FLOW ENTRY POINTS
+           * -----------------------------
+           * "New Assessment" is now the ONLY way patients can begin a clinical assessment.
+           *
+           * TODO: Future integration points for enhanced assessment flow:
+           * 1. PRE-ASSESSMENT BIODATA CONFIRMATION
+           *    - Before entering body map, confirm/update patient demographics
+           *    - Verify contact information, emergency contacts, allergies
+           *    - Location: Add new step before 'body-map' in assessment flow
+           *
+           * 2. BRANCHING DIAGNOSTIC QUESTIONS
+           *    - After body region selection, load region-specific questions from public/rules/
+           *    - Dynamic question flow based on red flags and responses
+           *    - Location: Enhance QuestionCard component with rule-based branching
+           */}
           <div className="grid grid-cols-2 gap-3">
             {[
               {
@@ -391,12 +406,8 @@ export default async function PatientDashboardPage() {
                 icon: Clipboard,
                 bg: 'bg-emerald-500',
               },
-              {
-                href: '/patient/self-test',
-                label: 'Self Test',
-                icon: Video,
-                bg: 'bg-blue-500',
-              },
+              // REMOVED: Self-Guided Test feature has been deprecated
+              // The assessment flow now serves as the single entry point for patient diagnostics
             ].map((action, i) => (
               <Link key={i} href={action.href} className="group animate-scale-up">
                 <Card className="hover:border-primary/50 h-full transition-all hover:shadow-md">
