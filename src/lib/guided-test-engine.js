@@ -1,279 +1,156 @@
-/**
- * GUIDED DIAGNOSIS TEST ENGINE
- * =============================
- * Implements therapist-guided physical testing for diagnosis refinement.
- *
- * BEHAVIOR:
- * - Loads recommended tests based on temporal diagnosis and region
- * - Presents tests one at a time
- * - Records positive/negative results
- * - Rules in or rules out conditions based on results
- * - Generates refined diagnosis when clarity threshold reached
- *
- * IMPORTANT:
- * - All medical logic comes from JSON rules only
- * - Do NOT invent test interpretations
- * - Results are immutable once saved
- * - All actions are fully traceable
- *
- * @module GuidedTestEngine
- */
+import testFlowGraphs from './decision-engine/test-flow-graphs.json';
 
 /**
- * TEST STATE SCHEMA
- * ==================
+ * TEST STATE SCHEMA (ENHANCED FOR FLOWCHART)
+ * =========================================
  * {
  *   assessmentId: string,
  *   therapistId: string,
  *   region: string,
- *   temporalDiagnosis: string,
- *   suspectedConditions: [],     // From temporal diagnosis
- *   availableTests: [],          // All tests for this region/conditions
- *   completedTests: [],          // Tests already performed
- *   currentTestIndex: number,
- *   conditionStates: {},         // Current likelihood per condition
+ *   currentNodeId: string,       // Port of the graph we are currently at
+ *   graph: Object,               // The decision graph for this region
+ *   completedTests: [],          // Path taken through the graph
  *   isComplete: boolean,
- *   completionReason: string,
+ *   terminalNode: Object,        // The final diagnosis/conclusion node
  *   startedAt: string,
  * }
  */
 
 /**
- * Extract recommended tests from rules JSON for given conditions
- * @param {Object} rulesJson - Region-specific rules JSON
- * @param {Array} suspectedConditions - List of suspected condition names
- * @returns {Array} List of recommended tests with metadata
- */
-export function extractRecommendedTests(rulesJson, suspectedConditions) {
-  if (!rulesJson || !rulesJson.conditions) {
-    return [];
-  }
-
-  const tests = [];
-  const addedTestNames = new Set();
-
-  rulesJson.conditions.forEach((condition) => {
-    // Check if this condition is suspected
-    const isSuspected = suspectedConditions.some(
-      (sc) =>
-        condition.name.toLowerCase().includes(sc.toLowerCase()) ||
-        sc.toLowerCase().includes(condition.name.toLowerCase())
-    );
-
-    if (!isSuspected && suspectedConditions.length > 0) {
-      // Only extract tests for suspected conditions if we have any
-      // If no suspected conditions, extract all tests
-      return;
-    }
-
-    // Extract recommended_tests
-    if (condition.recommended_tests && condition.recommended_tests.length > 0) {
-      condition.recommended_tests.forEach((testText) => {
-        // Parse test name and instruction from text
-        const colonIndex = testText.indexOf(':');
-        let testName = testText;
-        let instruction = '';
-        let positiveImplication = '';
-        let negativeImplication = '';
-
-        if (colonIndex > 0) {
-          testName = testText.substring(0, colonIndex).trim();
-          instruction = testText.substring(colonIndex + 1).trim();
-        }
-
-        // Extract positive/negative implications if present
-        const positiveMatch = instruction.match(/positive[:\s]+([^.]+)/i);
-        const negativeMatch = instruction.match(/negative[:\s]+([^.]+)/i);
-
-        if (positiveMatch) {
-          positiveImplication = positiveMatch[1].trim();
-        }
-        if (negativeMatch) {
-          negativeImplication = negativeMatch[1].trim();
-        }
-
-        // Avoid duplicates
-        if (!addedTestNames.has(testName.toLowerCase())) {
-          addedTestNames.add(testName.toLowerCase());
-          tests.push({
-            id: `test_${tests.length + 1}`,
-            name: testName,
-            instruction: instruction || 'Perform test as per clinical protocol.',
-            positiveImplication:
-              positiveImplication || `Supports presence of ${condition.name}`,
-            negativeImplication:
-              negativeImplication || `Reduces likelihood of ${condition.name}`,
-            associatedConditions: [condition.name],
-            source: 'JSON rules',
-          });
-        } else {
-          // Add condition to existing test
-          const existingTest = tests.find(
-            (t) => t.name.toLowerCase() === testName.toLowerCase()
-          );
-          if (
-            existingTest &&
-            !existingTest.associatedConditions.includes(condition.name)
-          ) {
-            existingTest.associatedConditions.push(condition.name);
-          }
-        }
-      });
-    }
-
-    // Also extract observations as potential tests
-    if (condition.observations && condition.observations.length > 0) {
-      condition.observations.forEach((obsText) => {
-        const obsName = obsText.replace(/^Check\s+(if|for)\s+/i, '').trim();
-
-        if (!addedTestNames.has(obsName.toLowerCase())) {
-          addedTestNames.add(obsName.toLowerCase());
-          tests.push({
-            id: `obs_${tests.length + 1}`,
-            name: `Observe: ${obsName}`,
-            instruction: obsText,
-            positiveImplication: `Finding present, supports ${condition.name}`,
-            negativeImplication: `Finding absent`,
-            associatedConditions: [condition.name],
-            source: 'JSON rules (observation)',
-            isObservation: true,
-          });
-        }
-      });
-    }
-  });
-
-  return tests;
-}
-
-/**
- * Initialize the guided test engine state
- * @param {Object} params - Initialization parameters
- * @returns {Object} Initial engine state
+ * Initialize the guided test engine state using clinical flowcharts
  */
 export function initializeGuidedTestEngine({
   assessmentId,
   therapistId,
   region,
-  temporalDiagnosis,
-  suspectedConditions,
-  differentialDiagnoses,
-  rulesJson,
 }) {
-  // Get all suspected conditions including differentials
-  const allSuspected = [
-    ...(suspectedConditions || []),
-    ...(differentialDiagnoses || []),
-  ].filter(Boolean);
-
-  // Extract all applicable tests
-  const availableTests = extractRecommendedTests(rulesJson, allSuspected);
-
-  // Initialize condition states
-  const conditionStates = {};
-  allSuspected.forEach((condition, index) => {
-    conditionStates[condition] = {
-      likelihood: index === 0 ? 70 : 50 - index * 5, // Primary gets higher likelihood
-      supportingTests: [],
-      contraryTests: [],
-      status: 'investigating', // investigating | ruled_out | confirmed
-    };
-  });
+  const regionKey = region?.toLowerCase().includes('lumbar') ? 'lumbar' : 
+                   region?.toLowerCase().includes('shoulder') ? 'shoulder' : null;
+  
+  const graph = testFlowGraphs[regionKey] || null;
+  const startNodeId = graph?.startNode || null;
 
   return {
     assessmentId,
     therapistId,
     region,
-    temporalDiagnosis,
-    suspectedConditions: allSuspected,
-    availableTests,
+    graph,
+    currentNodeId: startNodeId,
     completedTests: [],
-    currentTestIndex: 0,
-    conditionStates,
     isComplete: false,
-    completionReason: null,
+    terminalNode: null,
     startedAt: new Date().toISOString(),
   };
 }
 
 /**
- * Get the current test to perform
- * @param {Object} state - Current engine state
- * @returns {Object|null} Current test or null if complete
+ * Get the current test to perform from the decision graph
  */
 export function getCurrentTest(state) {
-  if (state.isComplete) {
+  if (state.isComplete || !state.graph || !state.currentNodeId) {
     return null;
   }
 
-  // Get next test that hasn't been completed
-  const remainingTests = state.availableTests.filter(
-    (test) => !state.completedTests.some((ct) => ct.testId === test.id)
-  );
-
-  if (remainingTests.length === 0) {
+  const node = state.graph.nodes[state.currentNodeId];
+  if (!node || node.isTerminal) {
     return null;
   }
 
   return {
-    ...remainingTests[0],
+    id: node.id,
+    name: node.name,
+    instruction: node.instruction,
     testNumber: state.completedTests.length + 1,
-    totalTests: state.availableTests.length,
-    remainingTests: remainingTests.length,
+    isObservation: node.isObservation || false,
+    source: 'Flowchart'
   };
 }
 
 /**
- * Record a test result and update condition states
- * @param {Object} state - Current engine state
- * @param {string} testId - ID of the test being recorded
- * @param {string} result - 'positive' or 'negative'
- * @param {string} [notes] - Optional therapist notes
- * @returns {Object} Updated engine state
+ * Record a test result and advance the state through the flowchart
  */
 export function recordTestResult(state, testId, result, notes = '') {
-  const test = state.availableTests.find((t) => t.id === testId);
-  if (!test) {
-    console.warn(`Test not found: ${testId}`);
+  if (state.isComplete || !state.graph || !state.currentNodeId) {
     return state;
   }
 
-  // Record the completed test
-  const testResult = {
-    testId: test.id,
-    testName: test.name,
+  const currentNode = state.graph.nodes[state.currentNodeId];
+  if (!currentNode || currentNode.id !== testId) {
+    console.warn(`Node mismatch: Expected ${state.currentNodeId}, got ${testId}`);
+    return state;
+  }
+
+  // Record the path entry
+  const pathEntry = {
+    testId: currentNode.id,
+    testName: currentNode.name,
     result, // 'positive' or 'negative'
     notes,
     timestamp: new Date().toISOString(),
-    associatedConditions: test.associatedConditions,
   };
 
-  const newCompletedTests = [...state.completedTests, testResult];
+  const newCompletedTests = [...state.completedTests, pathEntry];
 
-  // Update condition states based on result
-  const newConditionStates = { ...state.conditionStates };
+  // Determine next node
+  const nextNodeId = result === 'positive' ? currentNode.onPositive : currentNode.onNegative;
+  const nextNode = state.graph.nodes[nextNodeId];
 
-  test.associatedConditions.forEach((conditionName) => {
-    if (!newConditionStates[conditionName]) {
-      newConditionStates[conditionName] = {
-        likelihood: 50,
-        supportingTests: [],
-        contraryTests: [],
-        status: 'investigating',
-      };
-    }
+  let isComplete = false;
+  let terminalNode = null;
 
-    const conditionState = { ...newConditionStates[conditionName] };
+  if (!nextNode || nextNode.isTerminal) {
+    isComplete = true;
+    terminalNode = nextNode || null;
+  }
 
-    if (result === 'positive') {
-      // Positive result supports this condition
-      conditionState.supportingTests = [...conditionState.supportingTests, test.name];
-      conditionState.likelihood = Math.min(100, conditionState.likelihood + 15);
-    } else {
-      // Negative result reduces likelihood
-      conditionState.contraryTests = [...conditionState.contraryTests, test.name];
-      conditionState.likelihood = Math.max(0, conditionState.likelihood - 20);
-    }
+  return {
+    ...state,
+    currentNodeId: nextNodeId,
+    completedTests: newCompletedTests,
+    isComplete,
+    terminalNode,
+    completionReason: isComplete ? (terminalNode ? 'terminal_node_reached' : 'flow_ended') : null,
+  };
+}
+
+/**
+ * REMOVED: skipTest - As per "No test skipping" requirement.
+ */
+
+/**
+ * Generate the refined diagnosis summary from the flowchart path
+ */
+export function generateRefinedDiagnosis(state) {
+  if (!state.isComplete) return null;
+
+  const finalDiagnosis = state.terminalNode?.diagnosisMapping || 'Differential Narrowed';
+
+  return {
+    label: 'Flowchart-Driven Clinical Outcome',
+    finalSuspectedCondition: {
+      name: finalDiagnosis,
+      instruction: state.terminalNode?.instruction || 'End of clinical sequence reached.'
+    },
+    pathTaken: state.completedTests.map(t => `${t.testName} (${t.result})`),
+    testsPerformed: state.completedTests,
+    startedAt: state.startedAt,
+    completedAt: new Date().toISOString(),
+    supportingEvidence: state.completedTests
+      .filter((t) => t.result === 'positive')
+      .map((t) => ({
+        test: t.testName,
+        result: 'Positive',
+        timestamp: t.timestamp,
+      })),
+    contraryEvidence: state.completedTests
+      .filter((t) => t.result === 'negative')
+      .map((t) => ({
+        test: t.testName,
+        result: 'Negative',
+        timestamp: t.timestamp,
+      })),
+  };
+}
 
     // Check if condition should be ruled out
     if (conditionState.likelihood < 20 && conditionState.contraryTests.length >= 2) {

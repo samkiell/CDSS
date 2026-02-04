@@ -1,0 +1,155 @@
+{
+  "lumbar": {
+    "startNode": "slr_test",
+    "nodes": {
+      "slr_test": {
+        "id": "slr_test",
+        "name": "Straight Leg Raise (SLR)",
+        "instruction": "Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Positive if patient feels pain along the course of the sciatic nerve (30-70 degrees).",
+        "onPositive": "bragard_test",
+        "onNegative": "femoral_stretch_test",
+        "isTerminal": false
+      },
+      "bragard_test": {
+        "id": "bragard_test",
+        "name": "Bragard Test",
+        "instruction": "Modification of SLR: dorsiflexion is applied at the end of the SLR. Confirming neurogenic origin of pain.",
+        "onPositive": "bowstring_test",
+        "onNegative": "slump_test",
+        "isTerminal": false
+      },
+      "bowstring_test": {
+        "id": "bowstring_test",
+        "name": "Bowstring Test (Popliteal Compression)",
+        "instruction": "Flex the knee and apply pressure on the popliteal fossa evoking sciatica.",
+        "onPositive": "diag_lumbar_disc_herniation",
+        "onNegative": "diag_sciatica",
+        "isTerminal": false
+      },
+      "femoral_stretch_test": {
+        "id": "femoral_stretch_test",
+        "name": "Femoral Nerve Stretch Test",
+        "instruction": "Patient prone, knee flexed and hip extended. Positive if pain in anterior thigh.",
+        "onPositive": "diag_l2_l4_compression",
+        "onNegative": "diag_non_specific_lbp",
+        "isTerminal": false
+      },
+      "slump_test": {
+        "id": "slump_test",
+        "name": "Slump Test",
+        "instruction": "Patient slumps forward while seated, examiner dorsiflexes foot and extends knee.",
+        "onPositive": "diag_sciatica",
+        "onNegative": "diag_facet_joint",
+        "isTerminal": false
+      },
+      "diag_lumbar_disc_herniation": {
+        "id": "diag_lumbar_disc_herniation",
+        "name": "Refined Diagnosis: Lumbar Disc Herniation",
+        "instruction": "The provocative results strongly indicate disc herniation with nerve root involvement.",
+        "isTerminal": true,
+        "diagnosisMapping": "Lumbar Disc Herniation"
+      },
+      "diag_sciatica": {
+        "id": "diag_sciatica",
+        "name": "Refined Diagnosis: Sciatica / Neural Tension",
+        "instruction": "Significant neural tension without definitive disc-level confirmation.",
+        "isTerminal": true,
+        "diagnosisMapping": "Sciatica"
+      },
+      "diag_l2_l4_compression": {
+        "id": "diag_l2_l4_compression",
+        "name": "Refined Diagnosis: L2-L4 Compression",
+        "instruction": "Anterior neural tension points to upper lumbar segment involvement.",
+        "isTerminal": true,
+        "diagnosisMapping": "L2-L4 Compression"
+      },
+      "diag_non_specific_lbp": {
+        "id": "diag_non_specific_lbp",
+        "name": "Refined Diagnosis: Non-Specific LBP",
+        "instruction": "Tests negative for neural tension. Pain likely muscular or mechanical non-specific.",
+        "isTerminal": true,
+        "diagnosisMapping": "Non-specific low-back pain"
+      },
+      "diag_facet_joint": {
+        "id": "diag_facet_joint",
+        "name": "Refined Diagnosis: Facet Joint Syndrome",
+        "instruction": "Mechanical pattern without neural involvement suggests facetogenic origin.",
+        "isTerminal": true,
+        "diagnosisMapping": "Facet Joint Syndrome"
+      }
+    }
+  },
+  "shoulder": {
+    "startNode": "painful_arc",
+    "nodes": {
+      "painful_arc": {
+        "id": "painful_arc",
+        "name": "Painful Arc Test",
+        "instruction": "Active abduction of the arm. Positive if pain between 60° and 120°.",
+        "onPositive": "neers_test",
+        "onNegative": "hawkins_kennedy",
+        "isTerminal": false
+      },
+      "neers_test": {
+        "id": "neers_test",
+        "name": "Neer's Test",
+        "instruction": "Examiner stabilises scapula and passively flexes the arm to end-range.",
+        "onPositive": "empty_can_test",
+        "onNegative": "hawkins_kennedy",
+        "isTerminal": false
+      },
+       "empty_can_test": {
+        "id": "empty_can_test",
+        "name": "Empty Can Test (Jobe)",
+        "instruction": "Arm at 90° abduction, 30° horizontal flexion, internal rotation. Resisted elevation.",
+        "onPositive": "diag_rotator_cuff_tear",
+        "onNegative": "diag_subacromial_impingement",
+        "isTerminal": false
+      },
+      "hawkins_kennedy": {
+        "id": "hawkins_kennedy",
+        "name": "Hawkins-Kennedy Test",
+        "instruction": "Shoulder and elbow flexed to 90°, then examiner forces internal rotation.",
+        "onPositive": "diag_subacromial_impingement",
+        "onNegative": "diag_frozen_shoulder_check",
+        "isTerminal": false
+      },
+      "diag_frozen_shoulder_check": {
+        "id": "diag_frozen_shoulder_check",
+        "name": "Passive Range of Motion Check",
+        "instruction": "Check for significant global reduction in ROM (capsular pattern).",
+        "onPositive": "diag_adhesive_capsulitis",
+        "onNegative": "diag_bicipital_tendinitis",
+        "isTerminal": false
+      },
+      "diag_rotator_cuff_tear": {
+        "id": "diag_rotator_cuff_tear",
+        "name": "Refined Diagnosis: Rotator Cuff Tear",
+        "instruction": "Positive impingement and weakness strongly support cuff pathology.",
+        "isTerminal": true,
+        "diagnosisMapping": "Rotator Cuff Tear"
+      },
+      "diag_subacromial_impingement": {
+        "id": "diag_subacromial_impingement",
+        "name": "Refined Diagnosis: Subacromial Impingement",
+        "instruction": "Positive Hawkins/Neer without significant weakness indicates impingement.",
+        "isTerminal": true,
+        "diagnosisMapping": "Subacromial Impingement Syndrome"
+      },
+       "diag_adhesive_capsulitis": {
+        "id": "diag_adhesive_capsulitis",
+        "name": "Refined Diagnosis: Adhesive Capsulitis",
+        "instruction": "Global ROM restriction indicates Frozen Shoulder.",
+        "isTerminal": true,
+        "diagnosisMapping": "Adhesive Capsulitis (Frozen Shoulder)"
+      },
+      "diag_bicipital_tendinitis": {
+        "id": "diag_bicipital_tendinitis",
+        "name": "Refined Diagnosis: Bicipital Tendinitis",
+        "instruction": "Mechanism and localized tenderness suggests biceps involvement.",
+        "isTerminal": true,
+        "diagnosisMapping": "Bicipital Tendinitis"
+      }
+    }
+  }
+}
