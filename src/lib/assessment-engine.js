@@ -231,7 +231,7 @@ export function processAnswer(state, questionId, answerValue) {
         ...newConditionStates[matchingCondition],
         confirmationReasons: [
           ...newConditionStates[matchingCondition].confirmationReasons,
-          { question: question.question.question, answer: answerValue },
+          { question: rawQuestion.questionText || rawQuestion.question, answer: answerValue },
         ],
         likelihood: Math.min(100, newConditionStates[matchingCondition].likelihood + 15),
       };
@@ -258,7 +258,7 @@ export function processAnswer(state, questionId, answerValue) {
   const newRedFlags = [...state.redFlags];
   if (effects.red_flag) {
     newRedFlags.push({
-      question: question.question.question,
+      question: rawQuestion.questionText || rawQuestion.question,
       answer: answerValue,
       redFlagText: effects.red_flag_text,
       timestamp: new Date().toISOString(),
@@ -266,8 +266,8 @@ export function processAnswer(state, questionId, answerValue) {
   }
 
   // Advance to next question
-  let newConditionIndex = question.conditionIndex;
-  let newQuestionIndex = question.questionIndex + 1;
+  let newConditionIndex = questionData.conditionIndex;
+  let newQuestionIndex = questionData.questionIndex + 1;
 
   // Check if we need to advance to the next condition
   if (newQuestionIndex >= state.conditions[newConditionIndex].questions.length) {
