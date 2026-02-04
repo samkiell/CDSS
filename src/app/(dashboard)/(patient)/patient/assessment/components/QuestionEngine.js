@@ -136,18 +136,6 @@ export default function QuestionEngine() {
             });
           }
 
-          // Check for newly ruled-out conditions
-          const oldRuledOut = engineState.ruledOutConditions?.size || 0;
-          const newRuledOut = newState.ruledOutConditions?.size || 0;
-          if (newRuledOut > oldRuledOut) {
-            const ruledOutNames = Array.from(newState.ruledOutConditions);
-            const newlyRuledOut = ruledOutNames.slice(-1)[0];
-            toast.info(`${newlyRuledOut} ruled out`, {
-              description: 'Questions for this condition will be skipped.',
-              icon: <X className="h-4 w-4" />,
-            });
-          }
-
           // Get next valid question (with branching logic)
           const nextQuestion = getCurrentQuestion(newState);
 
@@ -157,7 +145,8 @@ export default function QuestionEngine() {
           } else {
             // No more questions - complete assessment
             toast.success('Assessment Progress Saved', {
-              description: 'Your responses have been recorded. Please complete the final review.',
+              description:
+                'Your responses have been recorded. Please complete the final review.',
             });
             completeQuestions();
           }
@@ -217,6 +206,9 @@ export default function QuestionEngine() {
         if (nextQuestion) {
           setCurrentQuestion(nextQuestion);
           setSelectedAnswer(null);
+        } else {
+          completeQuestions();
+        }
       } catch (error) {
         console.error('Error skipping question:', error);
         toast.error('Error moving to next question. Please try again.');
@@ -288,11 +280,15 @@ export default function QuestionEngine() {
     <div className="mx-auto max-w-2xl space-y-6">
       {/* Assessment Progress Header */}
       <div className="text-center">
-        <h1 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Assessment Progress</h1>
-        <div className="flex items-center justify-center gap-4 text-sm mb-4">
-          <span className="text-muted-foreground font-medium">Question {answered + 1}</span>
+        <h1 className="mb-2 text-xl font-bold text-slate-900 dark:text-white">
+          Assessment Progress
+        </h1>
+        <div className="mb-4 flex items-center justify-center gap-4 text-sm">
+          <span className="text-muted-foreground font-medium">
+            Question {answered + 1}
+          </span>
           <span className="text-muted-foreground/30">•</span>
-          <div className="flex-1 max-w-[200px] h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div className="h-2 max-w-[200px] flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
             <div
               className="bg-primary h-full transition-all duration-500 ease-out"
               style={{ width: `${Math.min(progress, 100)}%` }}
@@ -301,8 +297,6 @@ export default function QuestionEngine() {
         </div>
       </div>
 
-
-
       {/* Question Card */}
       <Card className="border-2 border-slate-100 dark:border-slate-800">
         <CardContent className="p-6">
@@ -310,8 +304,6 @@ export default function QuestionEngine() {
           <h2 className="mb-6 text-lg leading-relaxed font-semibold">
             {currentQuestion.question}
           </h2>
-
-
 
           {/* Answer Options */}
           <div className="space-y-3">
@@ -410,15 +402,14 @@ export default function QuestionEngine() {
                   Observations recorded for review
                 </p>
                 <p className="text-muted-foreground mt-1 text-xs">
-                  Your notes and responses have been flagged for clinical review by the therapist.
+                  Your notes and responses have been flagged for clinical review by the
+                  therapist.
                 </p>
               </div>
             </div>
           </CardContent>
         </Card>
       )}
-
-
     </div>
   );
 }

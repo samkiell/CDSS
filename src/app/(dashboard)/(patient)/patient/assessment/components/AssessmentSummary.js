@@ -133,10 +133,9 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
     <div className="mx-auto max-w-2xl space-y-6">
       {/* Header */}
       <div className="text-center">
-        <h2 className="text-2xl font-bold">Review Your Assessment</h2>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Assessment Progress</h1>
         <p className="text-muted-foreground mt-2">
-          Please review your answers before submitting for AI analysis. No diagnosis will
-          be shown until you confirm.
+          You&apos;ve completed the required questions. Your responses have been recorded for review.
         </p>
       </div>
 
@@ -180,24 +179,24 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
         </CardContent>
       </Card>
 
-      {/* Red Flags Warning */}
+      {/* Observations Summary */}
       {redFlags.length > 0 && (
-        <Card className="border-2 border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-900/20">
+        <Card className="border-2 border-slate-100 bg-slate-50/50 dark:border-slate-800 dark:bg-slate-900/40">
           <CardContent className="p-4">
             <div className="flex items-start gap-3">
-              <AlertTriangle className="h-6 w-6 shrink-0 text-red-500" />
+              <CheckCircle2 className="h-6 w-6 shrink-0 text-slate-400" />
               <div>
-                <p className="font-bold text-red-700 dark:text-red-400">
-                  {redFlags.length} Clinical Concern{redFlags.length > 1 ? 's' : ''}{' '}
-                  Detected
+                <p className="font-bold text-slate-800 dark:text-slate-200">
+                  Assessment Notes Recorded
                 </p>
                 <p className="text-muted-foreground mt-1 text-sm">
-                  These concerns will be prioritized for the reviewing therapist.
+                  The following details have been highlighted for the reviewing therapist to prioritize.
                 </p>
-                <ul className="mt-2 space-y-1">
+                <ul className="mt-3 space-y-2">
                   {summary.redFlagsDetected.map((flag, index) => (
-                    <li key={index} className="text-sm text-red-600">
-                      • {flag.redFlagText || flag.question}
+                    <li key={index} className="text-sm font-medium text-slate-600 dark:text-slate-400 flex gap-2">
+                      <span className="text-slate-300">•</span>
+                      {flag.redFlagText || flag.question}
                     </li>
                   ))}
                 </ul>
@@ -207,41 +206,7 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
         </Card>
       )}
 
-      {/* Conditions Ruled Out */}
-      {(summary.conditionsRuledOut?.length > 0 ||
-        engineState?.ruledOutConditions?.size > 0) && (
-        <Card className="border-2 border-amber-200 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-900/20">
-          <CardContent className="p-4">
-            <div className="flex items-start gap-3">
-              <div className="rounded-full bg-amber-100 p-2 dark:bg-amber-900/30">
-                <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400" />
-              </div>
-              <div>
-                <p className="font-medium text-amber-800 dark:text-amber-200">
-                  Conditions Ruled Out
-                </p>
-                <p className="text-muted-foreground mt-1 text-sm">
-                  Based on your answers, the following conditions were ruled out and their
-                  questions skipped.
-                </p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {(
-                    summary.conditionsRuledOut ||
-                    Array.from(engineState?.ruledOutConditions || [])
-                  ).map((cond, index) => (
-                    <span
-                      key={index}
-                      className="rounded-full bg-amber-100 px-3 py-1 text-xs font-medium text-amber-800 dark:bg-amber-900/40 dark:text-amber-200"
-                    >
-                      {typeof cond === 'string' ? cond : cond.name || cond}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+
 
       {/* Questions & Answers List */}
       <Card className="border-2 border-slate-100 dark:border-slate-800">
@@ -305,12 +270,12 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
           {isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              Analyzing...
+              Submitting...
             </>
           ) : (
             <>
               <Send className="mr-2 h-5 w-5" />
-              Submit for Analysis
+              Submit for Review
             </>
           )}
         </Button>
