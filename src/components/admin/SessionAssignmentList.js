@@ -171,7 +171,14 @@ export function SessionAssignmentList({ sessions, clinicians, initialSelectedId 
                       : 'text-yellow-500'
                 }
               >
-                {session.status.replace('_', ' ')}
+                {session.status === 'pending_review' ||
+                session.status === 'submitted_to_therapist'
+                  ? 'Pending Review'
+                  : session.status === 'assigned'
+                    ? 'Assigned'
+                    : session.status === 'completed'
+                      ? 'Completed'
+                      : session.status.replace('_', ' ')}
               </span>
               <span className="mx-2 h-1 w-1 rounded-full bg-gray-300"></span>
               <span className="text-gray-400">

@@ -18,10 +18,10 @@ import {
  * - Receives structured symptom data from branching engine
  * - Triggers AI temporal diagnosis (non-ML)
  * - Stores full assessment trace for therapist review
- * - Marks assessment as submitted_to_therapist (locks editing)
+ * - Marks assessment as pending_review (locks editing)
  *
  * TASK 7 HANDOFF:
- * - After submission, status is set to 'submitted_to_therapist'
+ * - After submission, status is set to 'pending_review'
  * - Patient answers are locked from editing
  * - Assessment becomes visible in therapist dashboard
  */
@@ -184,7 +184,7 @@ export async function POST(req) {
      * ==========================
      * Creates the assessment record with all traceability data.
      *
-     * TASK 7: Status is set to 'submitted_to_therapist'
+     * TASK 7: Status is set to 'pending_review'
      * - Locks patient answers from editing
      * - Makes assessment visible in therapist dashboard
      */
@@ -207,8 +207,8 @@ export async function POST(req) {
           'A qualified therapist will review your case and provide clinical confirmation.',
       },
       patientFacingAnalysis: aiAnalysisResult,
-      /* TASK 7: Handoff to Therapist */
-      status: 'submitted_to_therapist',
+      /* TASK 7: Handoff to Therapist - status set to pending_review */
+      status: 'pending_review',
       submittedToTherapistAt: new Date(),
       assessmentType: 'MSK_BRANCHING_ENGINE_V1',
     });
@@ -246,7 +246,7 @@ export async function POST(req) {
             'This is a preliminary assessment. A therapist will review your case.',
         },
         redFlagsCount: redFlags?.length || 0,
-        status: 'submitted_to_therapist',
+        status: 'pending_review',
         caseFileId,
         /**
          * TODO: THERAPIST-GUIDED TESTING
