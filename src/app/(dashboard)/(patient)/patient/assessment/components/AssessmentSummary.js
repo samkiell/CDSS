@@ -12,7 +12,6 @@ import {
   ChevronDown,
   ChevronUp,
   Send,
-  Edit3,
   User,
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -101,38 +100,6 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
       console.error('Error preparing submission:', error);
       toast.error('Error preparing your assessment. Please try again.');
       setIsSubmitting(false);
-    }
-  };
-
-  /**
-   * HANDLE EDIT ANSWERS
-   * ====================
-   * Returns to the questions step to modify answers.
-   * In current implementation, this resets the engine state.
-   */
-  const handleEditAnswers = () => {
-    try {
-      // Revert the last answer to un-complete the assessment and allow editing
-      const prevState = previousQuestion(engineState);
-
-      // CRITICAL: Ensure the reverted state is marked as NOT complete
-      const revertedState = {
-        ...prevState,
-        isComplete: false,
-        completionReason: null,
-      };
-
-      updateEngineState(revertedState);
-      setStep('questions');
-      toast.info('Returning to assessment...');
-    } catch (error) {
-      console.error('Error returning to questions:', error);
-      // Fallback: just try to go back
-      setStep('questions');
-    }
-
-    if (onEdit) {
-      onEdit();
     }
   };
 
@@ -269,22 +236,12 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
       </Card>
 
       {/* Action Buttons */}
-      <div className="flex gap-4">
-        <Button
-          variant="outline"
-          size="lg"
-          onClick={handleEditAnswers}
-          disabled={isSubmitting}
-          className="flex-1"
-        >
-          <Edit3 className="mr-2 h-5 w-5" />
-          Edit Answers
-        </Button>
+      <div className="flex justify-center">
         <Button
           size="lg"
           onClick={handleSubmitForAnalysis}
           disabled={isSubmitting}
-          className="bg-primary hover:bg-primary/90 flex-1 font-bold"
+          className="bg-primary hover:bg-primary/90 min-w-[200px] flex-1 font-bold"
         >
           {isSubmitting ? (
             <>

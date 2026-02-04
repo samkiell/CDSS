@@ -101,8 +101,6 @@ export default function QuestionEngine() {
       loadRules();
     } else {
       // Resume from existing state
-      // If the engine state was previously marked complete but isComplete is now false (due to 'Edit Answers'),
-      // getCurrentQuestion will correctly find the last question.
       const question = getCurrentQuestion(engineState);
 
       // If we are resumed but state is still complete, we should probably be in summary
