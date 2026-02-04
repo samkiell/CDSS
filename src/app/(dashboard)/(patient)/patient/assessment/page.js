@@ -197,59 +197,68 @@ export default function PatientAssessmentPage() {
         {/*
          * PATIENT ASSESSMENT FLOW - PRIMARY ENTRY POINT
          * ==============================================
-         * This is now the ONLY way patients can begin a clinical assessment.
+         * This is the ONLY way patients can begin a clinical assessment.
          * The self-guided test feature has been deprecated.
          *
-         * CURRENT FLOW:
-         * 1. body-map    → Patient selects affected body region
-         * 2. questions   → Dynamic symptom questions based on region
-         * 3. upload      → Supporting media/documents
-         * 4. summary     → AI analysis and review
-         * 5. complete    → Confirmation screen
+         * CURRENT FLOW (IMPLEMENTED):
+         * 1. biodata   → Patient confirms/edits biodata (MANDATORY - cannot be skipped)
+         * 2. body-map  → Patient selects affected body region
+         * 3. questions → Dynamic symptom questions based on region
+         * 4. upload    → Supporting media/documents
+         * 5. summary   → AI analysis and review
+         * 6. complete  → Confirmation screen
          *
-         * TODO: FUTURE INTEGRATION POINTS
-         * ================================
+         * BIODATA STEP GUARDRAILS:
+         * - Biodata confirmation is MANDATORY before proceeding
+         * - Changes to biodata here do NOT update patient's main profile
+         * - Biodata is snapshotted per assessment for historical accuracy
          *
-         * 1. PRE-ASSESSMENT BIODATA CONFIRMATION (before body-map step)
-         *    --------------------------------------------------------
-         *    Location: Add new step 'biodata' before 'body-map'
-         *    Purpose: Confirm/update patient demographics before assessment
+         * TODO: FUTURE INTEGRATION - BRANCHING DIAGNOSTIC QUESTIONS
+         * ===========================================================
+         * Location: Enhance QuestionCard component during 'questions' step
+         * Purpose: Load region-specific questions from public/rules/
          *
-         *    Implementation notes:
-         *    - Create new component: BiodataConfirmation.js
-         *    - Fields: Name, DOB, Contact, Emergency contact, Known allergies
-         *    - Load existing data from patient profile
-         *    - Allow quick updates before proceeding
-         *    - Data source: /api/patient/profile or user session
-         *
-         * 2. BRANCHING DIAGNOSTIC QUESTIONS (during questions step)
-         *    ------------------------------------------------------
-         *    Location: Enhance QuestionCard component
-         *    Purpose: Load region-specific questions from public/rules/
-         *
-         *    Implementation notes:
-         *    - Rule files expected in: public/rules/{region}.json
-         *    - If rule file missing, show TODO/fallback message
-         *    - Dynamic question flow based on red flags and responses
-         *    - Support for conditional branching (if answer X, ask question Y)
-         *    - Do NOT invent medical logic - only use rules from files
+         * Implementation notes:
+         * - Rule files exist in: public/rules/{region}.docx (DOCX format)
+         * - If rule file missing or unreadable, show TODO/fallback message
+         * - Dynamic question flow based on red flags and responses
+         * - Support for conditional branching (if answer X, ask question Y)
+         * - Do NOT invent medical logic - only use rules from files
          */}
 
+        {/*
+         * STEP 1: BIODATA CONFIRMATION (MANDATORY)
+         * =========================================
+         * Patient must confirm their biodata before any assessment questions.
+         * This step cannot be skipped or bypassed.
+         * Biodata is snapshotted and stored with the assessment record.
+         */}
+        {currentStep === 'biodata' && <BiodataConfirmation />}
+
+        {/*
+         * STEP 2: BODY REGION SELECTION
+         * ==============================
+         * Only accessible after biodata confirmation.
+         * Guardrail in store prevents direct navigation without confirmed biodata.
+         */}
         {currentStep === 'body-map' && <BodyMapPicker />}
 
         {/*
-         * TODO: BIODATA CONFIRMATION STEP
-         * --------------------------------
-         * Insert biodata confirmation component here when implemented:
+         * STEP 3: DIAGNOSTIC QUESTIONS
+         * =============================
+         * TODO: This is where branching diagnostic logic will be integrated.
          *
-         * {currentStep === 'biodata' && <BiodataConfirmation />}
+         * FUTURE IMPLEMENTATION:
+         * - Load questions from public/rules/{selectedRegion}.docx
+         * - Parse rule file to extract question tree
+         * - Implement conditional branching based on responses
+         * - If rule file missing, show fallback with TODO marker
          *
-         * This step should:
-         * - Display current patient profile data
-         * - Allow confirmation or quick edits
-         * - Proceed to body-map after confirmation
+         * IMPORTANT CONSTRAINTS:
+         * - Do NOT invent medical logic
+         * - Only use rules from files in public/rules/
+         * - Leave TODO comments if rules are missing
          */}
-
         {currentStep === 'questions' && <QuestionCard />}
 
         {currentStep === 'upload' && <SupportingMediaGrid />}

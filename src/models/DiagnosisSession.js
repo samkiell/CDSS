@@ -1,5 +1,53 @@
 import mongoose from 'mongoose';
 
+/**
+ * BIODATA SNAPSHOT SCHEMA
+ * ========================
+ * Stores a snapshot of patient biodata at the time of assessment.
+ *
+ * WHY SNAPSHOT?
+ * - Preserves historical accuracy (patient's data at time of assessment)
+ * - Patient profile may change over time, but assessment records remain accurate
+ * - Each assessment is self-contained for audit/legal purposes
+ * - Changes to biodata during assessment do NOT update patient's main profile
+ */
+const BiodataSnapshotSchema = new mongoose.Schema(
+  {
+    fullName: {
+      type: String,
+      required: true,
+    },
+    sex: {
+      type: String,
+      enum: ['Male', 'Female', 'Other'],
+      required: true,
+    },
+    ageRange: {
+      type: String,
+      enum: ['15-20', '21-30', '31-40', '41-50', '51-60', '60+'],
+      required: true,
+    },
+    occupation: {
+      type: String,
+      enum: ['Sedentary', 'Light manual', 'Heavy manual', 'Athlete'],
+      required: true,
+    },
+    education: {
+      type: String,
+      required: true,
+    },
+    notes: {
+      type: String,
+      default: null,
+    },
+    confirmedAt: {
+      type: Date,
+      required: true,
+    },
+  },
+  { _id: false }
+);
+
 const DiagnosisSessionSchema = new mongoose.Schema(
   {
     patientId: {
@@ -13,6 +61,20 @@ const DiagnosisSessionSchema = new mongoose.Schema(
       ref: 'User',
       default: null,
       index: true,
+    },
+    /**
+     * BIODATA SNAPSHOT
+     * =================
+     * Per-assessment snapshot of patient biodata.
+     * This data is confirmed by the patient before starting the assessment.
+     * It does NOT update the patient's main profile/settings.
+     *
+     * Required for new assessments (after this feature was added).
+     * May be null for legacy assessments created before this feature.
+     */
+    biodata: {
+      type: BiodataSnapshotSchema,
+      default: null,
     },
     bodyRegion: {
       type: String,
