@@ -230,28 +230,58 @@ export default function QuestionEngine() {
             {currentQuestion.question}
           </h2>
 
-          {/* Answer Options - Click to proceed immediately */}
+          {/* Answer Options - Click to proceed immediately if buttons exist */}
           <div className="space-y-3">
-            {currentQuestion.answers.map((answer, index) => (
-              <button
-                key={index}
-                type="button"
-                onClick={() => handleAnswerClick(answer.value)}
-                disabled={isProcessing}
-                className={`w-full rounded-xl border-2 p-4 text-left transition-all ${
-                  selectedAnswer === answer.value
-                    ? 'border-primary bg-primary/10 scale-[0.98]'
-                    : 'hover:border-primary/50 dark:hover:border-primary/50 border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800'
-                } ${isProcessing ? 'cursor-not-allowed opacity-50' : 'cursor-pointer active:scale-[0.98]'}`}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="font-medium">{answer.value}</span>
-                  {selectedAnswer === answer.value && (
-                    <CheckCircle2 className="text-primary h-5 w-5" />
+            {currentQuestion.answers.length > 0 ? (
+              currentQuestion.answers.map((answer, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  onClick={() => handleAnswerClick(answer.value)}
+                  disabled={isProcessing}
+                  className={`w-full rounded-xl border-2 p-4 text-left transition-all ${
+                    selectedAnswer === answer.value
+                      ? 'border-primary bg-primary/10 scale-[0.98]'
+                      : 'hover:border-primary/50 dark:hover:border-primary/50 border-slate-200 hover:bg-slate-50 dark:border-slate-700 dark:hover:bg-slate-800'
+                  } ${isProcessing ? 'cursor-not-allowed opacity-50' : 'cursor-pointer active:scale-[0.98]'}`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">{answer.value}</span>
+                    {selectedAnswer === answer.value && (
+                      <CheckCircle2 className="text-primary h-5 w-5" />
+                    )}
+                  </div>
+                </button>
+              ))
+            ) : (
+              /* Open-ended Question: Show Text Area */
+              <div className="space-y-4">
+                <textarea
+                  className="ring-primary/20 min-h-[120px] w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium transition-all outline-none focus:ring-2 dark:border-slate-800 dark:bg-slate-900"
+                  placeholder="Please describe here..."
+                  value={selectedAnswer || ''}
+                  onChange={(e) => setSelectedAnswer(e.target.value)}
+                  disabled={isProcessing}
+                />
+                <Button
+                  size="lg"
+                  className="h-14 w-full text-lg font-bold"
+                  onClick={() => handleAnswerClick(selectedAnswer)}
+                  disabled={
+                    !selectedAnswer || selectedAnswer.trim().length === 0 || isProcessing
+                  }
+                >
+                  {isProcessing ? (
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                  ) : (
+                    <>
+                      Continue
+                      <ChevronRight className="ml-2 h-5 w-5" />
+                    </>
                   )}
-                </div>
-              </button>
-            ))}
+                </Button>
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>
