@@ -2,7 +2,7 @@
   "region": "lumbar",
   "title": "Lumbar Region",
   "source_file": "Lumbar Region.docx",
-  "extracted_at": "2026-02-04T08:57:16.296Z",
+  "extracted_at": "2026-02-04T09:23:50.311Z",
   "conditions": [
     {
       "name": "Non-specific low-back pain",
@@ -507,17 +507,10 @@
           "inputType": "select"
         }
       ],
-      "source_line": 1,
-      "tests": [
-        {
-          "name": "Lasegue’s Test (Straight-Leg Raise)",
-          "procedure": "Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion."
-        },
-        {
-          "name": "Bragard Test",
-          "procedure": "This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive."
-        }
-      ]
+      "recommended_tests": [],
+      "confirmation_methods": [],
+      "observations": [],
+      "source_line": 1
     },
     {
       "name": "Sciatica",
@@ -722,29 +715,17 @@
           "inputType": "select"
         }
       ],
-      "source_line": 48,
-      "tests": [
-        {
-          "name": "Lasegue’s Test (Straight-Leg Raise)",
-          "procedure": "Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion."
-        },
-        {
-          "name": "Bragard Test",
-          "procedure": "This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive."
-        },
-        {
-          "name": "Bowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign)",
-          "procedure": "This can be done while patient is lying in supine or sitting position. The examiner flexes the knee and applies pressure on the popliteal fossa evoking sciatica."
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check if knee jerk reflex is present"
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check if ankle jerk reflex is present"
-        }
-      ]
+      "recommended_tests": [
+        "Lasegue’s Test (Straight-Leg Raise): Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion.",
+        "Bragard Test: This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive.",
+        "Bowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign): This can be done while patient is lying in supine or sitting position. The examiner flexes the knee and applies pressure on the popliteal fossa evoking sciatica."
+      ],
+      "confirmation_methods": [],
+      "observations": [
+        "Check if knee jerk reflex is present",
+        "Check if ankle jerk reflex is present"
+      ],
+      "source_line": 48
     },
     {
       "name": "Lumbar spinal stenosis",
@@ -982,33 +963,19 @@
           "inputType": "select"
         }
       ],
-      "source_line": 74,
-      "tests": [
-        {
-          "name": "Bicycle Stress Test",
-          "procedure": "Record the amount of time the patient spends on a cycle ergometer while in a neutral lumbar position and slumped position. If patient spends more time in the slumped position, a lumbar spinal stenosis is indicated."
-        },
-        {
-          "name": "Two-stage Treadmill Test",
-          "procedure": "The patient walks on a flat treadmill and the amount of time spent is recorded and compared with the amount of time while the treadmill is inclined such that patient walks in flexion."
-        },
-        {
-          "name": "The Lumbar Extension-Loading Test",
-          "procedure": "The examiner ensures that the lumbar region is in moderate extension (10-30 deg) while standing and patient lies supine. Check if there are changes in the symptoms that the patient feels."
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check if a wide-based gait is present"
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check if Trendenlenburg’s sign is present"
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check if Achilles tendon reflex is diminished"
-        }
-      ]
+      "recommended_tests": [
+        "Bicycle Stress Test: Record the amount of time the patient spends on a cycle ergometer while in a neutral lumbar position and slumped position. If patient spends more time in the slumped position, a lumbar spinal stenosis is indicated.",
+        "Two-stage Treadmill Test: The patient walks on a flat treadmill and the amount of time spent is recorded and compared with the amount of time while the treadmill is inclined such that patient walks in flexion.",
+        "The Lumbar Extension-Loading Test: The examiner ensures that the lumbar region is in moderate extension (10-30 deg) while standing and patient lies supine. Check if there are changes in the symptoms that the patient feels."
+      ],
+      "confirmation_methods": [],
+      "observations": [
+        "Check if a wide-based gait is present",
+        "Check if Trendenlenburg’s sign is present",
+        "Check for negative romberg test",
+        "Check if Achilles tendon reflex is diminished"
+      ],
+      "source_line": 74
     },
     {
       "name": "Lumbar Disc Herniation",
@@ -1185,61 +1152,25 @@
           "inputType": "select"
         }
       ],
-      "source_line": 105,
-      "tests": [
-        {
-          "name": "Lasegue’s Test (Straight-Leg Raise)",
-          "procedure": "Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion."
-        },
-        {
-          "name": "Bragard Test",
-          "procedure": "This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive."
-        },
-        {
-          "name": "Bowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign)",
-          "procedure": "This can be done while patient is lying in supine or sitting position. The examiner flexes the knee and applies pressure on the popliteal fossa evoking sciatica."
-        },
-        {
-          "name": "Femoral Nerve Stretch Test (Wasserman sign)",
-          "procedure": "Patient is in prone position, knee is flexed and hip is extended. Reproduction of pain in anterior thigh is positive."
-        },
-        {
-          "name": "Kernig Test",
-          "procedure": "Patient’s neck is flexed, hip flexed and the leg is extended. Pain is reproduced in this position."
-        },
-        {
-          "name": "Milgram Test",
-          "procedure": "pain is reproduced on straight leg elevation for 30 seconds."
-        },
-        {
-          "name": "Radiographic confirmation",
-          "procedure": ""
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check for tenderness in the paraspinal musculature"
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check for spasms in the paraspinal musculature"
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check for decreased reflexes: patellar and ankle jerk"
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check for trendenenburg’s sign"
-        },
-        {
-          "name": "TESTS",
-          "procedure": ""
-        },
-        {
-          "name": "MRI test.",
-          "procedure": ""
-        }
-      ]
+      "recommended_tests": [],
+      "confirmation_methods": [
+        "Radiographic confirmation:"
+      ],
+      "observations": [
+        "Check for tenderness in the paraspinal musculature",
+        "Check for spasms in the paraspinal musculature",
+        "Check for decreased reflexes: patellar and ankle jerk",
+        "Check for trendenenburg’s sign",
+        "TESTS:",
+        "Lasegue’s Test (Straight-Leg Raise): Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion.",
+        "Bragard Test: This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive.",
+        "Bowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign): This can be done while patient is lying in supine or sitting position. The examiner flexes the knee and applies pressure on the popliteal fossa evoking sciatica.",
+        "Femoral Nerve Stretch Test (Wasserman sign): Patient is in prone position, knee is flexed and hip is extended. Reproduction of pain in anterior thigh is positive.",
+        "Kernig Test: Patient’s neck is flexed, hip flexed and the leg is extended. Pain is reproduced in this position.",
+        "Milgram Test: pain is reproduced on straight leg elevation for 30 seconds.",
+        "MRI test."
+      ],
+      "source_line": 105
     },
     {
       "name": "Cauda Equina Syndrome",
@@ -1510,17 +1441,14 @@
           "inputType": "select"
         }
       ],
-      "source_line": 136,
-      "tests": [
-        {
-          "name": "Radiographic confirmation",
-          "procedure": ""
-        },
-        {
-          "name": "Clinical Observation",
-          "procedure": "Check for babinski sign and clonus to rule out upper motor neuron involvement"
-        }
-      ]
+      "recommended_tests": [],
+      "confirmation_methods": [
+        "Radiographic confirmation"
+      ],
+      "observations": [
+        "Check for babinski sign and clonus to rule out upper motor neuron involvement"
+      ],
+      "source_line": 136
     },
     {
       "name": "Axial spondyloarthropathy",
@@ -1895,42 +1823,21 @@
           "inputType": "select"
         }
       ],
-      "source_line": 166,
-      "tests": [
-        {
-          "name": "Lateral lumbar flexion (Finger tip to Floor Test)",
-          "procedure": ""
-        },
-        {
-          "name": "The patient stands with heel touching wall and feet wide apart, and back against the wall. Then the examiner measures the distance from middle finger to the floor. Then patient bends to side (lateral flexion)",
-          "procedure": ". The distance between the middle finger and the floor is measured again. This measurement is done for both sides."
-        },
-        {
-          "name": "Modified Schrober’s test",
-          "procedure": "Examiner marks both posterior superior iliac spine, and a horizontal line is drawn between both marks. A second line is marked 5cm below the first line, and a third line is marked 10 cm above the first line. Patient is then instructed to flex forward as if attempting to touch their toes.An increase of less than 5cm, shows decreased lumbar spine range of motion, and ankylosing spondylitis."
-        },
-        {
-          "name": "Chest expansion- Normal chest expansion is ≥ 5 cm.",
-          "procedure": ""
-        },
-        {
-          "name": "Occiput to wall distance- Normally is 0",
-          "procedure": ""
-        },
-        {
-          "name": "Tragus to wall distance- Normally is < 15cm",
-          "procedure": ""
-        },
-        {
-          "name": "Intermalleolar distance- Normally >100 cm",
-          "procedure": ""
-        },
-        {
-          "name": "Confirmatory test through laboratory investigations.",
-          "procedure": ""
-        }
-      ]
+      "recommended_tests": [
+        "Lateral lumbar flexion (Finger tip to Floor Test)",
+        "The patient stands with heel touching wall and feet wide apart, and back against the wall. Then the examiner measures the distance from middle finger to the floor. Then patient bends to side (lateral flexion). The distance between the middle finger and the floor is measured again. This measurement is done for both sides.",
+        "Modified Schrober’s test: Examiner marks both posterior superior iliac spine, and a horizontal line is drawn between both marks. A second line is marked 5cm below the first line, and a third line is marked 10 cm above the first line. Patient is then instructed to flex forward as if attempting to touch their toes.An increase of less than 5cm, shows decreased lumbar spine range of motion, and ankylosing spondylitis.",
+        "Chest expansion- Normal chest expansion is ≥ 5 cm.",
+        "Occiput to wall distance- Normally is 0",
+        "Tragus to wall distance- Normally is < 15cm",
+        "Intermalleolar distance- Normally >100 cm",
+        "Confirmatory test through laboratory investigations."
+      ],
+      "confirmation_methods": [],
+      "observations": [],
+      "source_line": 166
     }
   ],
-  "version": "2.0.0"
+  "raw_text": "For Non-specific low-back pain\n\nWhere is your pain located?\n\nLower back only\n\nRadiates down one leg\t\t(Rule out sciatica)\n\nRadiates down both legs\t\t(Rule out cauda equina syndrome)\n\nHow did the pain begin?\n\nSudden\t\t\t\t(Rule out lumbar disc herniation)\n\nGradual\n\nHow long have you been experiencing the pain?\n\nLess than 1 week\n\n1-4 weeks\n\n1-3 months\n\nMore than 3 months\n\nWhat currently aggravates your pain?\n\nSitting\n\nStanding\t\t(Rule out facet joint syndrome)\n\nWalking\n\nLifting heavy objects\n\nWhat makes your pain better?\n\nResting\n\nChanging positions\n\nExercise\n\nPain medications\n\nDo you experience any numbness or tingling sensation in your legs or feet?\n\nYes\t(Rule out lumbar disc herniation or cauda equina syndrome)\n\nNo\n\nHave you experienced any weakness in your legs?\n\nYes\t\t(Rule out cauda equina)\n\nNo\n\nHave you had any recent trauma or injury to your lower back?\n\nYes\n\nNo\n\nHave you had any previous episodes of low-back pain?\n\nYes\t(Recurrent low-back pain)\n\nNo\n\nAre you experiencing any bowel or bladder dysfunction, such as difficulty or loss of control in urination or defecation?\n\nYes\t\t(Rule out cauda equina syndrome)\n\nNo\t\n\nHave you had any recent fever, chills, or other signs of infection?\n\nYes\t\t(Rule out ankylosing spondylitis or bone tumours and infection)\n\nNo\n\nHave you had any recent unintended weight loss?\n\nYes\t\t(Rule out cancers/infection)\n\nNo\n\nTEST:\n\nLasegue’s Test (Straight-Leg Raise): Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion.\n\nBragard Test: This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive.\n\n\n\nFor Sciatica\n\nDo you experience paraesthesia or abnormal sensation in the affected leg?\n\nYes\n\nNo\n\nDoes your job or daily tasks involve adopting physically awkward positions?\n\nYes\n\nNo\n\nDo you experience muscle weakness in the affected leg?\n\nYes\n\nNo\n\nIs the pain worsened with flexion of the spine, twisting, bending and/or coughing?\n\nYes\n\nNo\n\nDo you experience pain when elevating the heel or tip-toeing?\n\nYes\n\nNo\n\nHave you had a previous surgical procedure and/or injection recently?\n\nYes\n\nNo\n\nObservation\n\nCheck if knee jerk reflex is present\n\nCheck if ankle jerk reflex is present\n\nTESTS\n\nLasegue’s Test (Straight-Leg Raise): Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion.\n\nBragard Test: This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive.\n\nBowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign): This can be done while patient is lying in supine or sitting position. The examiner flexes the knee and applies pressure on the popliteal fossa evoking sciatica. \n\n\n\nFor Lumbar spinal stenosis\n\nIs the pain you feel aggravated by prolonged walking, standing and lumbar extension?\n\nYes\n\nNo\n\nDo you experience pain radiating to the buttocks, thigh and legs after walking a certain distance?\n\nYes\n\nNo\n\nIs the numbness you feel over the entire leg?\n\nYes\n\nNo\n\nIs the pain you feel relieved by forward flexion (bending forward)?\n\nYes\n\nNo\n\nDo you find walking upstairs easier than walking downstairs?\n\nYes\n\nNo\n\nDo you experience any form of erectile dysfunction?\n\nYes\n\nNo\n\nIs tenderness present at the lumbar, paraspinal or gluteal region?\n\nYes\n\nNo\n\nObservations\n\nCheck if a wide-based gait is present\n\nCheck if Trendenlenburg’s sign is present\n\nCheck for negative romberg test\n\nCheck if Achilles tendon reflex is diminished\n\nTEST\n\nBicycle Stress Test: Record the amount of time the patient spends on a cycle ergometer while in a neutral lumbar position and slumped position. If patient spends more time in the slumped position, a lumbar spinal stenosis is indicated.\n\nTwo-stage Treadmill Test: The patient walks on a flat treadmill and the amount of time spent is recorded and compared with the amount of time while the treadmill is inclined such that patient walks in flexion.\n\nThe Lumbar Extension-Loading Test: The examiner ensures that the lumbar region is in moderate extension (10-30 deg) while standing and patient lies supine. Check if there are changes in the symptoms that the patient feels.\n\n\n\n\n\n\n\nFor Lumbar Disc Herniation\n\nAge (Below 40)\n\nWas the pain onset immediately after a heavy lifting?\n\nYes\n\nNo\n\nDoes your job or daily task involve long sitting with lateral bending and rotation?\n\nYes\n\nNo\n\nDo your symptoms feel better when lying supine with your hips and knees flexed?\n\nYes\n\nNo\n\nDo you experience pain radiating to buttock and leg?\n\nYes\n\nNo\n\nIf yes, does this pain get worse with sitting and relieved with standing?\n\nYes\n\nNo\n\n\n\nObservations\n\nCheck for tenderness in the paraspinal musculature\n\nCheck for spasms in the paraspinal musculature\n\nCheck for decreased reflexes: patellar and ankle jerk\n\nCheck for trendenenburg’s sign\n\nTESTS:\n\nLasegue’s Test (Straight-Leg Raise): Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion.\n\nBragard Test: This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive.\n\nBowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign): This can be done while patient is lying in supine or sitting position. The examiner flexes the knee and applies pressure on the popliteal fossa evoking sciatica. \n\nFemoral Nerve Stretch Test (Wasserman sign): Patient is in prone position, knee is flexed and hip is extended. Reproduction of pain in anterior thigh is positive. \n\nKernig Test: Patient’s neck is flexed, hip flexed and the leg is extended. Pain is reproduced in this position.\n\nMilgram Test: pain is reproduced on straight leg elevation for 30 seconds.\n\nRadiographic confirmation:\n\nMRI test.\n\n\n\nFor Cauda Equina Syndrome\n\nDo you experience pain radiating to both legs?\n\nYes\n\nNo\n\nDo you have a previous history of tumors or trauma to lower back?\n\nYes\n\nNo\n\nDo you experience reduced sensation around your perineal (around genitals) region?\n\nYes\n\nNo\n\nDo you experience reduced sensation in the region of your inner thighs (groin)?\n\nYes\n\nNo\n\nHave you just undergone a lumbar spinal surgery?\n\nYes\n\nNo\n\nDo you find it difficult to initiate urination or experience urinary retention (inability to empty the bladder completely)?\n\nYes\n\nNo\n\nDo you experience bowel incontinence and/or constipation?\n\nYes\n\nNo\n\nDo you experience reduced sexual sensations?\n\nYes\n\nNo\n\nObservation\n\nCheck for babinski sign and clonus to rule out upper motor neuron involvement\n\nTEST\n\nRadiographic confirmation\n\nMRI test\n\n\n\nFor Axial spondyloarthropathy (ankylosing spondylitis)\n\nAge (common in teens and early adults)\n\nSex (common in male, 3:1)\n\nDo you have a family history of ankylosing spondylitis or any other autoimmune diseases?\n\nYes\n\nNo\n\nIs the pain worse at night and early morning?\n\nYes\n\nNo\n\nDoes exercise and physical activity relieve the pain?\n\nYes\n\nNo\n\nDo you experience pain and stiffness in your hips and/or buttocks?\n\nYes\n\nNo\n\nDo exercises and physical activity reduce the associated stiffness?\n\nYes\n\nNo\n\nDo you experience pain and stiffness in your neck or upper back?\n\nYes\n\nNo\n\nDo you experience fatigue, difficulty sleeping and/or general feelings of unwellness?\n\nYes\n\nNo\n\nDo you experience chest pain or discomfort, especially when you take deep breaths?\n\nYes\n\nNo\n\nHave you experienced any symptoms such as red, scaly patches on your skin that may be accompanied by itching or discomfort (psoriasis)?\n\nYes\t\t(psoriartic ankylosing spondylitis)\n\nNo\n\nHave you experienced changes in your posture, such as stooping or hunching forward (question mark sign)?\n\nYes\n\nNo\n\nHave you had any instances of eye inflammation or redness, or increased sensitivity to light (uveitis)?\n\nYes\n\nNo\n\n\n\n\n\nTEST\n\nLateral lumbar flexion (Finger tip to Floor Test)\n\nThe patient stands with heel touching wall and feet wide apart, and back against the wall. Then the examiner measures the distance from middle finger to the floor. Then patient bends to side (lateral flexion). The distance between the middle finger and the floor is measured again. This measurement is done for both sides.\n\nModified Schrober’s test: Examiner marks both posterior superior iliac spine, and a horizontal line is drawn between both marks. A second line is marked 5cm below the first line, and a third line is marked 10 cm above the first line. Patient is then instructed to flex forward as if attempting to touch their toes.An increase of less than 5cm, shows decreased lumbar spine range of motion, and ankylosing spondylitis.\n\nChest expansion- Normal chest expansion is ≥ 5 cm.\n\nOcciput to wall distance- Normally is 0\n\nTragus to wall distance- Normally is < 15cm\n\nIntermalleolar distance- Normally >100 cm\n\nConfirmatory test through laboratory investigations.\n\n\n\n\n\n",
+  "extraction_messages": []
 }
