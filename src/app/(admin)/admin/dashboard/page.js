@@ -27,8 +27,8 @@ export default async function AdminDashboardPage() {
   });
 
   // Fetch Triage Queue (New Cases - includes submitted_to_therapist and pending_review)
-  const newCasesRaw = await DiagnosisSession.find({ 
-    status: { $in: ['pending_review', 'submitted_to_therapist'] } 
+  const newCasesRaw = await DiagnosisSession.find({
+    status: { $in: ['pending_review', 'submitted_to_therapist'] },
   })
     .populate('patientId', 'firstName lastName avatar phone gender email')
     .sort({ createdAt: -1 })
@@ -113,13 +113,18 @@ export default async function AdminDashboardPage() {
       {/* Row 2: New Cases (Triage Queue) */}
       <section>
         <div className="mb-6 flex items-center justify-between">
-          <h3 className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white">
+          <h3 className="flex items-center gap-3 text-xl font-bold text-gray-900 dark:text-white">
             <span className="flex h-3 w-3 animate-pulse rounded-full bg-red-500"></span>
-            New Cases (Triage Queue)
+            New Assessments Queue
+            {newCases.length > 0 && (
+              <span className="inline-flex items-center justify-center rounded-full bg-red-500 px-2.5 py-0.5 text-xs font-bold text-white">
+                {newCases.length}
+              </span>
+            )}
           </h3>
-          <button className="text-primary text-sm font-bold hover:underline">
-            View All Queue
-          </button>
+          <Link href="/admin/sessions" className="text-primary text-sm font-bold hover:underline">
+            View All Cases
+          </Link>
         </div>
         <TriageQueue cases={newCases} />
       </section>
