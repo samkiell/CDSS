@@ -9,6 +9,22 @@ import {
   convertToTherapistFacingAnalysis,
 } from '../../../../lib/ai-agent';
 
+/**
+ * ASSESSMENT SUBMISSION API
+ * ==========================
+ * Handles submission of branching assessment data with full traceability.
+ *
+ * TASK 5 & 6 IMPLEMENTATION:
+ * - Receives structured symptom data from branching engine
+ * - Triggers AI temporal diagnosis (non-ML)
+ * - Stores full assessment trace for therapist review
+ * - Marks assessment as submitted_to_therapist (locks editing)
+ *
+ * TASK 7 HANDOFF:
+ * - After submission, status is set to 'submitted_to_therapist'
+ * - Patient answers are locked from editing
+ * - Assessment becomes visible in therapist dashboard
+ */
 export async function POST(req) {
   try {
     const session = await auth();
@@ -17,72 +33,114 @@ export async function POST(req) {
     }
 
     /**
-     * REQUEST BODY
-     * =============
-     * bodyRegion: Selected body region for assessment
-     * symptomData: Array of question/answer pairs
-     * mediaUrls: Array of uploaded media URLs
-     * aiAnalysis: AI-generated preliminary analysis
-     * biodata: Per-assessment biodata snapshot (REQUIRED for new assessments)
-     *
-     * BIODATA SNAPSHOT:
-     * The biodata is confirmed by the patient before the assessment begins.
-     * It is stored with the assessment record for historical accuracy.
-     * This data does NOT update the patient's main profile/settings.
+     * REQUEST BODY - BRANCHING ENGINE PAYLOAD
+     * ========================================
+     * region: Selected body region
+     * biodata: Per-assessment biodata snapshot
+     * symptomData: Array of question/answer pairs with effects
+     * redFlags: Array of detected red flags
+     * conditionAnalysis: Ranked conditions by likelihood
+     * primarySuspicion: Primary suspected condition
+     * differentialDiagnoses: Ranked differential diagnoses
+     * assessmentMetadata: Timestamps and completion info
      */
-    const { bodyRegion, symptomData, mediaUrls, aiAnalysis, biodata } = await req.json();
+    const {
+      region,
+      biodata,
+      symptomData,
+      redFlags,
+      conditionAnalysis,
+      primarySuspicion,
+      differentialDiagnoses,
+      assessmentMetadata,
+      mediaUrls,
+    } = await req.json();
 
-    if (!bodyRegion || !symptomData) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    // Validate required fields
+    if (!region || !symptomData || symptomData.length === 0) {
+      return NextResponse.json(
+        { error: 'Missing required fields: region and symptomData are required' },
+        { status: 400 }
+      );
     }
 
     await connectDB();
 
-    // Fetch user for naming convention
+    // Fetch user for naming convention and validation
     const user = await User.findById(session.user.id);
     if (!user) {
       return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
-    // 1. Use existing AI analysis or regenerate if missing
-    let finalAiResult = aiAnalysis;
+    /**
+     * AI TEMPORAL DIAGNOSIS
+     * ======================
+     * The AI must:
+     * - Reason over the structured answers
+     * - Apply clinical logic based on the rule context
+     * - Produce a TEMPORAL diagnosis, not a final diagnosis
+     *
+     * IMPORTANT:
+     * - This is NOT machine learning
+     * - AI is used for reasoning and summarization only
+     * - Diagnosis is always marked as provisional
+     */
+    let aiAnalysisResult;
+    try {
+      const result = await getAiPreliminaryAnalysis({
+        selectedRegion: region,
+        symptomData: symptomData.map((sd) => ({
+          questionId: sd.questionId,
+          question: sd.question,
+          response: sd.response,
+          questionCategory: sd.questionCategory,
+        })),
+        redFlags: redFlags || [],
+        conditionAnalysis: conditionAnalysis || [],
+        primarySuspicion: primarySuspicion || null,
+        differentialDiagnoses: differentialDiagnoses || [],
+        patientBiodata: biodata,
+      });
+      aiAnalysisResult = result.analysis;
+    } catch (error) {
+      console.error('AI temporal diagnosis error:', error);
 
-    if (!finalAiResult) {
-      try {
-        const result = await getAiPreliminaryAnalysis({
-          selectedRegion: bodyRegion,
-          symptomData,
-        });
-        finalAiResult = result.analysis;
-      } catch (error) {
-        console.error('AI analysis error in submission:', error);
-        // We don't necessarily want to fail the whole submission if AI fails,
-        // but for now we follow the existing logic which throws.
-        throw new Error('AI analysis failed');
-      }
+      /**
+       * FALLBACK ANALYSIS
+       * ==================
+       * If AI fails, create a safe fallback that still allows submission
+       * but requires immediate therapist review.
+       */
+      aiAnalysisResult = {
+        temporalDiagnosis: 'Unable to generate AI analysis - Therapist review required',
+        confidenceScore: 0,
+        riskLevel: redFlags?.length > 0 ? 'Urgent' : 'Moderate',
+        reasoning: [
+          'AI analysis could not be completed',
+          'Manual therapist review is required',
+          ...(redFlags?.map(
+            (rf) => `Red flag detected: ${rf.redFlagText || rf.question}`
+          ) || []),
+        ],
+        differentialDiagnoses: primarySuspicion
+          ? [primarySuspicion.name]
+          : conditionAnalysis?.slice(0, 3).map((c) => c.name) || [],
+      };
     }
 
-    // 1b. Convert to Therapist-Facing Analysis before persistence
-    // The patient-facing version is ephemeral and must never be stored.
+    // Convert to therapist-facing format
     let therapistFacingResult;
     try {
-      therapistFacingResult = await convertToTherapistFacingAnalysis(finalAiResult);
+      therapistFacingResult = await convertToTherapistFacingAnalysis(aiAnalysisResult);
     } catch (error) {
       console.error('Conversion to therapist format failed:', error);
-      throw new Error('Could not prepare assessment for clinical record');
+      therapistFacingResult = aiAnalysisResult;
     }
 
     /**
      * BIODATA SNAPSHOT PERSISTENCE
      * =============================
-     * The biodata snapshot is stored with the assessment record.
-     * This preserves the patient's information at the exact time of assessment.
-     *
-     * Why snapshot instead of reference?
-     * - Patient profile may change over time
-     * - Historical assessments need accurate point-in-time data
-     * - Legal/audit requirements for medical records
-     * - Each assessment is self-contained
+     * Preserves patient information at the exact time of assessment.
      */
     const biodataSnapshot = biodata
       ? {
@@ -96,40 +154,106 @@ export async function POST(req) {
         }
       : null;
 
-    // 2. Persist DiagnosisSession with biodata snapshot
+    /**
+     * ASSESSMENT TRACE
+     * =================
+     * Full traceability record for therapist review.
+     *
+     * TASK 6: Stores the following per assessment:
+     * - Biodata snapshot
+     * - Selected region
+     * - Full question and answer log
+     * - Rule-out decisions
+     * - AI temporal diagnosis output
+     * - Timestamped events
+     */
+    const assessmentTrace = {
+      region,
+      startedAt: assessmentMetadata?.startedAt || new Date(),
+      completedAt: assessmentMetadata?.completedAt || new Date(),
+      totalQuestions: symptomData.length,
+      questionsAnswered: symptomData,
+      conditionAnalysis: conditionAnalysis || [],
+      redFlags: redFlags || [],
+      primarySuspicion: primarySuspicion || null,
+      differentialDiagnoses: differentialDiagnoses || [],
+    };
+
+    /**
+     * PERSIST DIAGNOSIS SESSION
+     * ==========================
+     * Creates the assessment record with all traceability data.
+     *
+     * TASK 7: Status is set to 'submitted_to_therapist'
+     * - Locks patient answers from editing
+     * - Makes assessment visible in therapist dashboard
+     */
     const diagnosisSession = await DiagnosisSession.create({
       patientId: session.user.id,
       biodata: biodataSnapshot,
-      bodyRegion,
-      symptomData,
-      mediaUrls,
+      bodyRegion: region,
+      symptomData: symptomData,
+      mediaUrls: mediaUrls || [],
+      assessmentTrace,
       aiAnalysis: {
-        ...therapistFacingResult,
-        isProvisional: true, // Crucial medical disclaimer requirement
+        temporalDiagnosis: therapistFacingResult.temporalDiagnosis,
+        confidenceScore: therapistFacingResult.confidenceScore,
+        riskLevel: therapistFacingResult.riskLevel,
+        reasoning: therapistFacingResult.reasoning,
+        differentialDiagnoses: aiAnalysisResult.differentialDiagnoses || [],
+        isProvisional: true, // ALWAYS provisional - medical disclaimer requirement
+        disclaimer:
+          'This is a preliminary AI-generated assessment and not a final diagnosis. ' +
+          'A qualified therapist will review your case and provide clinical confirmation.',
       },
-      patientFacingAnalysis: finalAiResult, // Persist for patient-dashboard consistency
-      status: 'pending_review',
+      patientFacingAnalysis: aiAnalysisResult,
+      /* TASK 7: Handoff to Therapist */
+      status: 'submitted_to_therapist',
+      submittedToTherapistAt: new Date(),
+      assessmentType: 'MSK_BRANCHING_ENGINE_V1',
     });
 
-    // 3. Create CaseFile entry for Admin
-    const caseFileId = `${user.firstName.toLowerCase()}_${user.lastName.toLowerCase()}-${diagnosisSession._id.toString().slice(-6)}`;
+    // Create CaseFile entry for Admin/Therapist dashboard
+    const caseFileId = `${user.firstName?.toLowerCase() || 'patient'}_${user.lastName?.toLowerCase() || 'unknown'}-${diagnosisSession._id.toString().slice(-6)}`;
 
     await CaseFile.create({
       patientId: user._id,
       sessionId: diagnosisSession._id,
       caseFileId,
-      fileName: `${bodyRegion} Assessment - ${new Date().toLocaleDateString()}`,
-      fileUrl: 'internal://assessment-session', // Indicating this is a session record
+      fileName: `${region} Assessment - ${new Date().toLocaleDateString()}`,
+      fileUrl: 'internal://assessment-session',
       fileType: 'application/json',
       category: 'Other',
     });
 
+    /**
+     * RESPONSE INCLUDES:
+     * - sessionId for tracking
+     * - Patient-facing AI analysis for display
+     * - Red flags count for emphasis
+     * - Status confirmation
+     */
     return NextResponse.json(
       {
         success: true,
         sessionId: diagnosisSession._id,
-        aiAnalysis: diagnosisSession.aiAnalysis,
+        aiAnalysis: {
+          temporalDiagnosis: aiAnalysisResult.temporalDiagnosis,
+          confidenceScore: aiAnalysisResult.confidenceScore,
+          riskLevel: aiAnalysisResult.riskLevel,
+          reasoning: aiAnalysisResult.reasoning,
+          disclaimer:
+            'This is a preliminary assessment. A therapist will review your case.',
+        },
+        redFlagsCount: redFlags?.length || 0,
+        status: 'submitted_to_therapist',
         caseFileId,
+        /**
+         * TODO: THERAPIST-GUIDED TESTING
+         * ===============================
+         * After this point, the therapist dashboard will show the case.
+         * Implementation of therapist-side logic is pending.
+         */
       },
       { status: 201 }
     );
