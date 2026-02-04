@@ -112,48 +112,80 @@ export function PublicNavbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Backdrop Overlay */}
       <div
         className={cn(
-          'bg-background/95 fixed inset-x-0 top-16 bottom-0 z-40 block border-t backdrop-blur-xl transition-all duration-300 md:hidden',
-          isMenuOpen
-            ? 'translate-y-0 opacity-100'
-            : 'pointer-events-none -translate-y-full opacity-0'
+          'fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden',
+          isMenuOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
+        )}
+        onClick={() => setIsMenuOpen(false)}
+      />
+
+      {/* Mobile Menu Slide-out Drawer */}
+      <div
+        className={cn(
+          'bg-card fixed top-0 right-0 z-50 h-screen w-[280px] border-l shadow-2xl transition-transform duration-300 ease-in-out md:hidden',
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
-        <div className="flex max-h-[calc(100vh-64px)] flex-col space-y-4 overflow-y-auto p-6">
-          <Link
-            href="/"
-            onClick={() => setIsMenuOpen(false)}
-            className="text-foreground hover:text-primary border-border/50 border-b pb-2 text-lg font-semibold transition-colors"
-          >
-            Home
-          </Link>
-          {navLinks.map((link) => (
-            <a
-              key={link.id}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href, link.id)}
-              className="text-foreground hover:text-primary border-border/50 border-b pb-2 text-lg font-semibold transition-colors"
-            >
-              {link.name}
-            </a>
-          ))}
-          <div className="flex flex-col gap-4 pt-4">
-            <Link
-              href="/login"
+        <div className="flex h-full flex-col">
+          {/* Header in drawer */}
+          <div className="flex h-16 items-center justify-between border-b px-6">
+            <span className="text-xl font-bold tracking-tight">Menu</span>
+            <button
               onClick={() => setIsMenuOpen(false)}
-              className="text-muted-foreground hover:text-foreground text-center text-lg font-medium transition-colors"
+              className="text-muted-foreground hover:text-primary p-1 transition-colors"
             >
-              Sign In
-            </Link>
+              <X className="h-6 w-6" />
+            </button>
+          </div>
+
+          <div className="flex flex-1 flex-col gap-1 overflow-y-auto p-6">
             <Link
-              href="/register"
+              href="/"
               onClick={() => setIsMenuOpen(false)}
-              className="from-primary hover:from-primary/90 shadow-primary/25 hover:shadow-primary/30 rounded-xl bg-gradient-to-r to-blue-600 px-6 py-4 text-center text-lg font-bold text-white shadow-lg transition-all hover:to-blue-600/90"
+              className={cn(
+                'hover:bg-accent hover:text-primary rounded-xl px-4 py-3 text-lg font-bold transition-all',
+                pathname === '/' ? 'bg-primary/10 text-primary' : 'text-foreground'
+              )}
             >
-              Get Started
+              Home
             </Link>
+
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={(e) => handleLinkClick(e, link.href, link.id)}
+                className="text-foreground hover:bg-accent hover:text-primary rounded-xl px-4 py-3 text-lg font-bold transition-all"
+              >
+                {link.name}
+              </a>
+            ))}
+
+            <div className="mt-6 flex flex-col gap-4 border-t pt-8">
+              <Link
+                href="/login"
+                onClick={() => setIsMenuOpen(false)}
+                className="text-muted-foreground hover:text-foreground flex items-center justify-center gap-2 rounded-xl py-3 text-lg font-bold transition-all"
+              >
+                <LogIn className="h-5 w-5" />
+                Sign In
+              </Link>
+              <Link
+                href="/register"
+                onClick={() => setIsMenuOpen(false)}
+                className="from-primary hover:from-primary/90 rounded-xl bg-gradient-to-r to-blue-600 px-6 py-4 text-center text-lg font-bold text-white shadow-lg transition-all hover:to-blue-600 active:scale-95"
+              >
+                Get Started
+              </Link>
+            </div>
+          </div>
+
+          <div className="border-t p-6">
+            <p className="text-muted-foreground text-center text-xs">
+              © {new Date().getFullYear()} CDSS Healthcare
+            </p>
           </div>
         </div>
       </div>
