@@ -454,6 +454,28 @@ const DiagnosisSessionSchema = new mongoose.Schema(
       default: null,
     },
     /**
+     * RECOMMENDED CLINICAL TESTS
+     * ===========================
+     * Determined by the assessment engine upon submission.
+     * These are immutable and traceable back to the initial assessment.
+     * Therapist uses these as the primary guidance for physical examination.
+     */
+    recommendedTests: [
+      {
+        id: String,
+        name: String,
+        instruction: String,
+        positiveImplication: String,
+        negativeImplication: String,
+        associatedConditions: [String],
+        isObservation: {
+          type: Boolean,
+          default: false,
+        },
+        source: String,
+      },
+    ],
+    /**
      * STATUS WORKFLOW
      * ================
      * pending_review -> submitted_to_therapist -> assigned -> completed -> archived

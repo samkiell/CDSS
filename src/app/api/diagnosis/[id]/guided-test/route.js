@@ -67,39 +67,47 @@ export async function GET(request, { params }) {
       });
     }
 
-    // Load region-specific rules
-    const regionName =
-      diagnosisSession.bodyRegion.charAt(0).toUpperCase() +
-      diagnosisSession.bodyRegion.slice(1);
+    // Get recommended tests (Prefer stored tests from the session)
+    let recommendedTests = diagnosisSession.recommendedTests || [];
 
-    let rulesJson = null;
-    try {
-      // Fetch JSON rules (server-side)
-      const fs = await import('fs/promises');
-      const path = await import('path');
-      const rulesPath = path.join(
-        process.cwd(),
-        'public',
-        'rules',
-        `${regionName} Region.json`
-      );
-      const rulesContent = await fs.readFile(rulesPath, 'utf-8');
-      rulesJson = JSON.parse(rulesContent);
-    } catch (err) {
-      console.warn(`Could not load rules for ${regionName}:`, err.message);
-      // Continue without rules - will have empty tests
+    // Fallback: If no tests are stored (legacy assessments), compute them on the fly
+    if (recommendedTests.length === 0) {
+      // Load region-specific rules
+      const regionName =
+        diagnosisSession.bodyRegion.charAt(0).toUpperCase() +
+        diagnosisSession.bodyRegion.slice(1);
+
+      let rulesJson = null;
+      try {
+        // Fetch JSON rules (server-side)
+        const fs = await import('fs/promises');
+        const path = await import('path');
+        const rulesPath = path.join(
+          process.cwd(),
+          'public',
+          'rules',
+          `${regionName} Region.json`
+        );
+        const rulesContent = await fs.readFile(rulesPath, 'utf-8');
+        rulesJson = JSON.parse(rulesContent);
+      } catch (err) {
+        console.warn(`Could not load rules for ${regionName}:`, err.message);
+        // Continue without rules - will have empty tests
+      }
+
+      // Extract suspected conditions from AI analysis
+      const suspectedConditions = [
+        diagnosisSession.aiAnalysis?.temporalDiagnosis,
+        ...(diagnosisSession.aiAnalysis?.differentialDiagnoses || []),
+      ].filter(Boolean);
+
+      // Compute recommended tests
+      recommendedTests = rulesJson
+        ? extractRecommendedTests(rulesJson, suspectedConditions)
+        : [];
+
+      console.log(`Computed ${recommendedTests.length} legacy tests for ${id}`);
     }
-
-    // Extract suspected conditions from AI analysis
-    const suspectedConditions = [
-      diagnosisSession.aiAnalysis?.temporalDiagnosis,
-      ...(diagnosisSession.aiAnalysis?.differentialDiagnoses || []),
-    ].filter(Boolean);
-
-    // Get recommended tests
-    const recommendedTests = rulesJson
-      ? extractRecommendedTests(rulesJson, suspectedConditions)
-      : [];
 
     return NextResponse.json({
       success: true,

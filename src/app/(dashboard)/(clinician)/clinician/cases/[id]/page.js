@@ -102,6 +102,10 @@ export default function CaseDetailsPage() {
       const result = await res.json();
       if (result.success) {
         setSession(result.data);
+        // If recommendedTests are already stored in the session, use them immediately
+        if (result.data.recommendedTests?.length > 0) {
+          setRecommendedTests(result.data.recommendedTests);
+        }
         // Fetch other assessments for this patient
         if (result.data.patientId?._id) {
           fetchPatientAssessments(result.data.patientId._id);

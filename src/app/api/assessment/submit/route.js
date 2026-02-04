@@ -8,6 +8,7 @@ import {
   getAiPreliminaryAnalysis,
   convertToTherapistFacingAnalysis,
 } from '../../../../lib/ai-agent';
+import { extractRecommendedTests } from '@/lib/guided-test-engine';
 
 /**
  * ASSESSMENT SUBMISSION API
@@ -138,6 +139,37 @@ export async function POST(req) {
     }
 
     /**
+     * EXTRACT RECOMMENDED TESTS
+     * ==========================
+     * Determine physical tests to be performed by therapist based on AI analysis.
+     * Captured at submission time to ensure immutability and traceability.
+     */
+    let recommendedTests = [];
+    try {
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      const regionName = region.charAt(0).toUpperCase() + region.slice(1);
+      const rulesPath = path.join(
+        process.cwd(),
+        'public',
+        'rules',
+        `${regionName} Region.json`
+      );
+      const rulesContent = await fs.readFile(rulesPath, 'utf-8');
+      const rulesJson = JSON.parse(rulesContent);
+
+      const suspectedConditionsForTests = [
+        therapistFacingResult.temporalDiagnosis,
+        ...(aiAnalysisResult.differentialDiagnoses || []),
+      ].filter(Boolean);
+
+      recommendedTests = extractRecommendedTests(rulesJson, suspectedConditionsForTests);
+      console.log(`Extracted ${recommendedTests.length} recommended tests for ${region}`);
+    } catch (err) {
+      console.warn(`Could not load rules for ${region} to extract tests:`, err.message);
+    }
+
+    /**
      * BIODATA SNAPSHOT PERSISTENCE
      * =============================
      * Preserves patient information at the exact time of assessment.
@@ -195,6 +227,7 @@ export async function POST(req) {
       symptomData: symptomData,
       mediaUrls: mediaUrls || [],
       assessmentTrace,
+      recommendedTests, // Storing pre-determined tests for therapist guidance
       aiAnalysis: {
         temporalDiagnosis: therapistFacingResult.temporalDiagnosis,
         confidenceScore: therapistFacingResult.confidenceScore,
