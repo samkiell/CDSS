@@ -176,7 +176,7 @@ export default function LandingPage() {
         <div className="from-primary/10 absolute top-0 right-0 h-1/2 w-1/2 rounded-full bg-gradient-to-bl to-transparent blur-3xl" />
         <div className="absolute bottom-0 left-0 h-1/3 w-1/3 rounded-full bg-gradient-to-tr from-blue-500/10 to-transparent blur-3xl" />
 
-        <div className="relative mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
+        <div className="relative mx-auto max-w-7xl px-6 pt-8 pb-24 lg:px-8 lg:pt-10 lg:pb-32">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Hero Content */}
             <div
