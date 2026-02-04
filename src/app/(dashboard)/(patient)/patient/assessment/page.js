@@ -1,32 +1,44 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import useAssessmentStore from '@/store/assessmentStore';
 import BiodataConfirmation from './components/BiodataConfirmation';
 import BodyMapPicker from './components/BodyMapPicker';
-import QuestionCard from './components/QuestionCard';
+import QuestionEngine from './components/QuestionEngine';
+import AssessmentSummary from './components/AssessmentSummary';
 import ProgressBar from './components/ProgressBar';
-import SupportingMediaGrid from './components/SupportingMediaGrid';
 import DisclaimerModal from './components/DisclaimerModal';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import {
   CheckCircle2,
   ChevronRight,
-  FileJson,
   ClipboardList,
-  Image as ImageIcon,
   AlertTriangle,
   Loader2,
+  User,
+  Stethoscope,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { useEffect, useRef } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { cn } from '@/lib/cn';
 
-import { useSearchParams, useRouter } from 'next/navigation';
-import { MEDICAL_RULES } from '@/constants/medicalRules';
-
+/**
+ * PATIENT ASSESSMENT PAGE
+ * ========================
+ * Main entry point for the patient assessment flow.
+ *
+ * FLOW ORDER:
+ * 1. biodata   → Patient confirms/edits biodata (MANDATORY - cannot be skipped)
+ * 2. body-map  → Patient selects affected body region
+ * 3. questions → Dynamic branching questions based on JSON rules
+ * 4. summary   → Review all answers before AI analysis
+ * 5. analyzing → AI temporal diagnosis in progress
+ * 6. complete  → Confirmation and therapist handoff
+ *
+ * BRANCHING ENGINE:
+ * This page now uses the QuestionEngine component which loads
+ * region-specific JSON rules and implements dynamic branching.
+ */
 export default function PatientAssessmentPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -44,12 +56,17 @@ export default function PatientAssessmentPage() {
     setAiAnalysis,
     biodataConfirmed,
     biodata,
+    engineState,
+    assessmentTrace,
+    submittedToTherapist,
+    submitToTherapist,
   } = useAssessmentStore();
+
   const [isDisclaimerOpen, setIsDisclaimerOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const hasResetOnce = useRef(false);
+  const [submissionResult, setSubmissionResult] = useState(null);
 
   useEffect(() => {
     setIsHydrated(true);
@@ -60,98 +77,31 @@ export default function PatientAssessmentPage() {
 
     if (isNewAssessment) {
       resetAssessment();
-      // Remove the query param to prevent accidental resets on refreshes
       const timeout = setTimeout(() => {
         router.replace('/patient/assessment');
       }, 100);
       return () => clearTimeout(timeout);
     }
-
-    if (currentStep === 'complete' && !isNewAssessment) {
-      // If we are finished but not starting fresh, don't auto-reset
-      // unless we want to allow viewing the complete screen only once.
-    }
   }, [isNewAssessment, resetAssessment, isHydrated, router]);
 
-  const handleAiAnalysis = async () => {
+  /**
+   * HANDLE AI SUBMISSION
+   * =====================
+   * Called from AssessmentSummary when patient confirms submission.
+   * Sends the prepared payload to the submission API.
+   */
+  const handleAiSubmission = async (aiPayload) => {
     setIsAnalyzing(true);
-    try {
-      const response = await fetch('/api/diagnosis/ai-analysis', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          selectedRegion,
-          responses,
-          redFlags,
-        }),
-      });
-
-      const data = await response.json();
-      if (data.success) {
-        setAiAnalysis(data.analysis);
-      } else {
-        throw new Error(data.error);
-      }
-    } catch (error) {
-      console.error('AI Analysis Error:', error);
-      toast.error('Could not generate preliminary AI analysis.');
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
-
-  const handleConfirmAndAnalyze = () => {
-    setIsDisclaimerOpen(true);
-  };
-
-  const handleDisclaimerConfirm = async () => {
-    setIsDisclaimerOpen(false);
-    if (!aiAnalysis) {
-      await handleAiAnalysis();
-    } else {
-      await handleFinalSubmit();
-    }
-  };
-
-  const handleFinalSubmit = async () => {
-    setIsSubmitting(true);
+    setStep('analyzing');
 
     try {
-      /**
-       * ASSESSMENT SUBMISSION PAYLOAD
-       * ===============================
-       * Includes the biodata snapshot confirmed at the start of the assessment.
-       * This biodata is stored with the assessment for historical accuracy.
-       */
-      const payload = {
-        bodyRegion: selectedRegion,
-        symptomData: Object.entries(responses).map(([questionId, answer]) => {
-          // Find the question object from MEDICAL_RULES if possible
-          const regionRules = MEDICAL_RULES[selectedRegion];
-          const questionObj = regionRules?.questions[questionId];
-          return {
-            questionId,
-            question: questionObj?.text || questionId,
-            response: answer,
-            questionCategory: questionObj?.category || 'general',
-          };
-        }),
-        mediaUrls: [], // For now, handle media separately if needed or add here
-        aiAnalysis: aiAnalysis, // Pass the analysis matched during summary
-        /**
-         * BIODATA SNAPSHOT
-         * =================
-         * The biodata snapshot is included in the submission.
-         * This preserves the patient's information at the time of assessment.
-         * It does NOT update the patient's main profile/settings.
-         */
-        biodata: biodata,
-      };
-
       const response = await fetch('/api/assessment/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify({
+          ...aiPayload,
+          mediaUrls: files.map((f) => f.url).filter(Boolean),
+        }),
       });
 
       const data = await response.json();
@@ -160,16 +110,34 @@ export default function PatientAssessmentPage() {
         throw new Error(data.error || 'Failed to submit assessment');
       }
 
-      toast.success('Assessment submitted successfully! A clinician will review it.');
+      // Store the AI analysis result
+      setAiAnalysis(data.aiAnalysis);
+      setSubmissionResult(data);
 
-      resetAssessment();
-      setStep('complete');
+      // Mark as submitted to therapist
+      submitToTherapist();
+
+      toast.success('Assessment submitted successfully!', {
+        description: 'A therapist will review your case shortly.',
+      });
     } catch (error) {
       console.error('Submission Error:', error);
       toast.error(error.message || 'Failed to submit assessment. Please try again.');
+      setStep('summary'); // Allow retry
     } finally {
-      setIsSubmitting(false);
+      setIsAnalyzing(false);
     }
+  };
+
+  /**
+   * HANDLE DISCLAIMER CONFIRM
+   * ==========================
+   * Called when patient accepts the disclaimer before analysis.
+   */
+  const handleDisclaimerConfirm = () => {
+    setIsDisclaimerOpen(false);
+    // Move to summary step for review
+    setStep('summary');
   };
 
   if (!isHydrated) {
@@ -184,6 +152,7 @@ export default function PatientAssessmentPage() {
     <div className="container mx-auto min-h-screen max-w-5xl px-4 py-2 pb-32">
       <ProgressBar />
 
+      {/* Resume Session Banner */}
       {currentStep === 'body-map' && selectedRegion && !isNewAssessment && (
         <div className="animate-in slide-in-from-top-4 mb-8 duration-500">
           <Card className="border-primary/20 bg-primary/5">
@@ -212,325 +181,189 @@ export default function PatientAssessmentPage() {
          * PATIENT ASSESSMENT FLOW - PRIMARY ENTRY POINT
          * ==============================================
          * This is the ONLY way patients can begin a clinical assessment.
-         * The self-guided test feature has been deprecated.
          *
-         * CURRENT FLOW (IMPLEMENTED):
-         * 1. biodata   → Patient confirms/edits biodata (MANDATORY - cannot be skipped)
+         * CURRENT FLOW (IMPLEMENTED WITH BRANCHING ENGINE):
+         * 1. biodata   → Patient confirms/edits biodata (MANDATORY)
          * 2. body-map  → Patient selects affected body region
-         * 3. questions → Dynamic symptom questions based on region
-         * 4. upload    → Supporting media/documents
-         * 5. summary   → AI analysis and review
-         * 6. complete  → Confirmation screen
-         *
-         * BIODATA STEP GUARDRAILS:
-         * - Biodata confirmation is MANDATORY before proceeding
-         * - Changes to biodata here do NOT update patient's main profile
-         * - Biodata is snapshotted per assessment for historical accuracy
-         *
-         * TODO: FUTURE INTEGRATION - BRANCHING DIAGNOSTIC QUESTIONS
-         * ===========================================================
-         * Location: Enhance QuestionCard component during 'questions' step
-         * Purpose: Load region-specific questions from public/rules/
-         *
-         * Implementation notes:
-         * - Rule files exist in: public/rules/{region}.docx (DOCX format)
-         * - If rule file missing or unreadable, show TODO/fallback message
-         * - Dynamic question flow based on red flags and responses
-         * - Support for conditional branching (if answer X, ask question Y)
-         * - Do NOT invent medical logic - only use rules from files
+         * 3. questions → Branching engine with JSON rules
+         * 4. summary   → Review all answers before submission
+         * 5. analyzing → AI temporal diagnosis in progress
+         * 6. complete  → Confirmation and therapist handoff
          */}
 
-        {/*
-         * STEP 1: BIODATA CONFIRMATION (MANDATORY)
-         * =========================================
-         * Patient must confirm their biodata before any assessment questions.
-         * This step cannot be skipped or bypassed.
-         * Biodata is snapshotted and stored with the assessment record.
-         */}
+        {/* STEP 1: BIODATA CONFIRMATION (MANDATORY) */}
         {currentStep === 'biodata' && <BiodataConfirmation />}
 
-        {/*
-         * STEP 2: BODY REGION SELECTION
-         * ==============================
-         * Only accessible after biodata confirmation.
-         * Guardrail in store prevents direct navigation without confirmed biodata.
-         */}
+        {/* STEP 2: BODY REGION SELECTION */}
         {currentStep === 'body-map' && <BodyMapPicker />}
 
         {/*
-         * STEP 3: DIAGNOSTIC QUESTIONS
-         * =============================
-         * TODO: This is where branching diagnostic logic will be integrated.
-         *
-         * FUTURE IMPLEMENTATION:
-         * - Load questions from public/rules/{selectedRegion}.docx
-         * - Parse rule file to extract question tree
-         * - Implement conditional branching based on responses
-         * - If rule file missing, show fallback with TODO marker
-         *
-         * IMPORTANT CONSTRAINTS:
-         * - Do NOT invent medical logic
-         * - Only use rules from files in public/rules/
-         * - Leave TODO comments if rules are missing
+         * STEP 3: BRANCHING QUESTION ENGINE
+         * ==================================
+         * Uses the new QuestionEngine component that:
+         * - Loads region-specific JSON rules
+         * - Implements dynamic branching based on answers
+         * - Tracks condition likelihood and rule-out decisions
+         * - Handles red flag detection
          */}
-        {currentStep === 'questions' && <QuestionCard />}
+        {currentStep === 'questions' && <QuestionEngine />}
 
-        {currentStep === 'upload' && <SupportingMediaGrid />}
+        {/*
+         * STEP 4: ASSESSMENT SUMMARY
+         * ===========================
+         * Shows all questions and answers for patient review.
+         * Patient must confirm before AI analysis.
+         * No diagnosis is shown before confirmation.
+         */}
+        {currentStep === 'summary' && <AssessmentSummary onSubmit={handleAiSubmission} />}
 
-        {currentStep === 'summary' && (
-          <div className="animate-in zoom-in mx-auto max-w-2xl space-y-8 duration-300">
+        {/* STEP 5: ANALYZING (AI Processing) */}
+        {currentStep === 'analyzing' && (
+          <div className="animate-in fade-in flex min-h-[400px] items-center justify-center duration-500">
             <div className="text-center">
-              <h2 className="text-2xl font-bold">Review Your Report</h2>
-              <p className="mt-2 text-slate-500">
-                Almost done. Review your answers before sending to our AI agent.
+              <Loader2 className="text-primary mx-auto h-16 w-16 animate-spin" />
+              <h2 className="mt-6 text-xl font-bold">Analyzing Your Assessment</h2>
+              <p className="text-muted-foreground mt-2">
+                Our AI is processing your responses and generating a preliminary
+                analysis...
               </p>
-            </div>
-
-            <Card className="border-2 border-slate-100 dark:border-slate-800">
-              <CardContent className="divide-y divide-slate-100 p-6 dark:divide-slate-800">
-                {/* Biodata Summary */}
-                {biodata && (
-                  <div className="py-4">
-                    <span className="mb-3 block text-xs font-bold tracking-wider text-slate-400 uppercase">
-                      Your Information
-                    </span>
-                    <div className="grid grid-cols-2 gap-3 text-sm">
-                      <div>
-                        <span className="text-slate-500">Name:</span>{' '}
-                        <span className="font-medium">{biodata.fullName}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-500">Sex:</span>{' '}
-                        <span className="font-medium">{biodata.sex}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-500">Age Range:</span>{' '}
-                        <span className="font-medium">{biodata.ageRange}</span>
-                      </div>
-                      <div>
-                        <span className="text-slate-500">Occupation:</span>{' '}
-                        <span className="font-medium">{biodata.occupation}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Region Header */}
-                <div className="flex justify-between py-4">
-                  <span className="font-medium text-slate-500">Assessment Region</span>
-                  <span className="text-primary font-bold tracking-wide uppercase">
-                    {selectedRegion}
-                  </span>
-                </div>
-
-                {/* Compact Assessment Overview */}
-                <div className="py-6">
-                  <span className="mb-4 block text-xs font-bold tracking-wider text-slate-400 uppercase">
-                    Assessment Overview
-                  </span>
-                  <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                    <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50 p-4 text-center dark:border-slate-800 dark:bg-slate-900/50">
-                      <ClipboardList className="text-primary mb-2" size={20} />
-                      <span className="text-xl font-bold">
-                        {Object.keys(responses).length}
-                      </span>
-                      <span className="text-[10px] font-medium tracking-tight text-slate-500 uppercase">
-                        Answers
-                      </span>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-center rounded-2xl border border-slate-100 bg-slate-50 p-4 text-center dark:border-slate-800 dark:bg-slate-900/50">
-                      <ImageIcon className="mb-2 text-indigo-500" size={20} />
-                      <span className="text-xl font-bold">{files.length}</span>
-                      <span className="text-[10px] font-medium tracking-tight text-slate-500 uppercase">
-                        Images
-                      </span>
-                    </div>
-
-                    <div
-                      className={cn(
-                        'flex flex-col items-center justify-center rounded-2xl border p-4 text-center transition-colors',
-                        redFlags.length > 0
-                          ? 'border-red-100 bg-red-50 dark:border-red-900/30 dark:bg-red-900/10'
-                          : 'border-slate-100 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50'
-                      )}
-                    >
-                      <AlertTriangle
-                        className={
-                          redFlags.length > 0
-                            ? 'mb-2 text-red-500'
-                            : 'mb-2 text-slate-400'
-                        }
-                        size={20}
-                      />
-                      <span
-                        className={cn(
-                          'text-xl font-bold',
-                          redFlags.length > 0 && 'text-red-600 dark:text-red-400'
-                        )}
-                      >
-                        {redFlags.length}
-                      </span>
-                      <span className="text-[10px] font-medium tracking-tight text-slate-500 uppercase">
-                        Alerts
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* AI Analysis Section */}
-                <div className="py-6">
-                  <span className="mb-3 block font-medium text-slate-500">
-                    Preliminary AI Analysis
-                  </span>
-                  {isAnalyzing ? (
-                    <div className="animate-in fade-in zoom-in flex items-center justify-center gap-3 rounded-xl border border-slate-100 bg-slate-50 p-8 dark:border-slate-800 dark:bg-slate-900">
-                      <Loader2 className="text-primary animate-spin" size={24} />
-                      <div className="flex flex-col">
-                        <span className="text-sm font-bold text-slate-900 dark:text-white">
-                          Analyzing Symptoms
-                        </span>
-                        <span className="animate-pulse text-xs text-slate-500">
-                          Our clinical AI agent is processing your data...
-                        </span>
-                      </div>
-                    </div>
-                  ) : aiAnalysis ? (
-                    <div className="prose prose-blue dark:prose-invert prose-p:leading-relaxed prose-headings:mb-4 prose-headings:mt-6 animate-in slide-in-from-bottom-4 max-w-none rounded-2xl border border-blue-100 bg-blue-50/50 p-4 duration-500 md:p-8 dark:border-blue-900/30 dark:bg-blue-900/10">
-                      {typeof aiAnalysis === 'string' ? (
-                        <ReactMarkdown>
-                          {aiAnalysis
-                            .replace(/^```(markdown|md)?\n/, '')
-                            .replace(/\n```$/, '')}
-                        </ReactMarkdown>
-                      ) : (
-                        <div className="space-y-4 text-slate-900 dark:text-white">
-                          <div className="flex items-center justify-between gap-3">
-                            <h3 className="text-lg font-bold md:text-xl">
-                              {aiAnalysis.temporalDiagnosis}
-                            </h3>
-                            <span
-                              className={cn(
-                                'shrink-0 rounded-full px-3 py-1 text-[10px] font-bold tracking-wider uppercase md:text-xs',
-                                aiAnalysis.riskLevel === 'Urgent'
-                                  ? 'bg-red-100 text-red-700'
-                                  : aiAnalysis.riskLevel === 'Moderate'
-                                    ? 'bg-orange-100 text-orange-700'
-                                    : 'bg-green-100 text-green-700'
-                              )}
-                            >
-                              {aiAnalysis.riskLevel} Risk
-                            </span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs font-medium text-slate-500 md:text-sm">
-                              Confidence:
-                            </span>
-                            <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                              <div
-                                className="bg-primary h-full"
-                                style={{ width: `${aiAnalysis.confidenceScore}%` }}
-                              />
-                            </div>
-                            <span className="text-xs font-bold md:text-sm">
-                              {aiAnalysis.confidenceScore}%
-                            </span>
-                          </div>
-                          <div className="space-y-2">
-                            <p className="text-[10px] font-bold tracking-tight text-slate-400 uppercase md:text-xs">
-                              Clinical Reasoning
-                            </p>
-                            <ul className="list-inside list-disc space-y-1 text-xs text-slate-600 md:text-sm dark:text-slate-400">
-                              {aiAnalysis.reasoning?.map((item, i) => (
-                                <li key={i}>{item}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ) : (
-                    <div className="rounded-2xl border-2 border-dashed border-slate-100 bg-slate-50/30 p-8 text-center dark:border-slate-800/50 dark:bg-slate-900/10">
-                      <div className="text-sm font-medium text-slate-400">
-                        Click below to generate your preliminary AI clinical report.
-                      </div>
-                    </div>
-                  )}
-                </div>
-                {redFlags.length > 0 && (
-                  <div className="py-4">
-                    <span className="mb-2 block text-xs font-bold tracking-wider text-red-500 uppercase">
-                      Clinical Alerts
-                    </span>
-                    <ul className="space-y-1">
-                      {redFlags.map((flag, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-center gap-2 text-sm font-medium text-red-600 dark:text-red-400"
-                        >
-                          <div className="h-1.5 w-1.5 rounded-full bg-red-500" />
-                          {flag}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-
-            <div className="flex flex-col gap-4">
-              {!aiAnalysis ? (
-                <Button
-                  size="lg"
-                  onClick={handleConfirmAndAnalyze}
-                  loading={isAnalyzing}
-                  className="h-14 w-full text-lg"
-                >
-                  Generate AI Preliminary Report
-                  <ChevronRight size={18} className="ml-2" />
-                </Button>
-              ) : (
-                <Button
-                  size="lg"
-                  onClick={handleFinalSubmit}
-                  loading={isSubmitting}
-                  className="h-14 w-full bg-green-600 text-lg hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700"
-                >
-                  Submit Final Assessment
-                  <ChevronRight size={18} className="ml-2" />
-                </Button>
-              )}
-
-              <Button
-                variant="ghost"
-                onClick={() => setStep('upload')}
-                disabled={isAnalyzing || isSubmitting}
-              >
-                Go back to uploads
-              </Button>
+              <p className="text-muted-foreground mt-4 text-sm">
+                This usually takes 10-30 seconds
+              </p>
             </div>
           </div>
         )}
 
+        {/* STEP 6: COMPLETE - Therapist Handoff */}
         {currentStep === 'complete' && (
-          <div className="animate-in fade-in py-20 text-center duration-1000">
-            <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-50">
-              <CheckCircle2 size={48} className="text-green-500" />
+          <div className="animate-in fade-in py-16 text-center duration-1000">
+            <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-green-50 dark:bg-green-900/20">
+              <CheckCircle2 size={56} className="text-green-500" />
             </div>
-            <h1 className="text-3xl font-bold">Assessment Received</h1>
-            <p className="mx-auto mt-4 max-w-md text-slate-500">
-              Your preliminary report is being processed by our AI agent and will be
-              shared with your assigned clinician shortly.
+            <h1 className="text-3xl font-bold">Assessment Submitted</h1>
+            <p className="mx-auto mt-4 max-w-lg text-slate-500">
+              Your assessment has been submitted for therapist review. A qualified
+              professional will analyze your case and provide clinical confirmation.
             </p>
+
+            {/* AI Analysis Summary */}
+            {aiAnalysis && (
+              <Card className="mx-auto mt-8 max-w-lg border-slate-200 dark:border-slate-800">
+                <CardContent className="p-6 text-left">
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="bg-primary/10 rounded-full p-2">
+                      <Stethoscope className="text-primary h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="font-bold">Preliminary Analysis</p>
+                      <p className="text-xs text-slate-500">
+                        AI-Generated (Pending Therapist Review)
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3">
+                    <div>
+                      <p className="text-sm font-medium text-slate-500">
+                        Suspected Condition
+                      </p>
+                      <p className="text-lg font-semibold">
+                        {aiAnalysis.temporalDiagnosis}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <div>
+                        <p className="text-sm font-medium text-slate-500">Confidence</p>
+                        <p className="font-semibold">{aiAnalysis.confidenceScore}%</p>
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-slate-500">Risk Level</p>
+                        <span
+                          className={`inline-block rounded-full px-2 py-0.5 text-xs font-bold ${
+                            aiAnalysis.riskLevel === 'Urgent'
+                              ? 'bg-red-100 text-red-700'
+                              : aiAnalysis.riskLevel === 'Moderate'
+                                ? 'bg-yellow-100 text-yellow-700'
+                                : 'bg-green-100 text-green-700'
+                          }`}
+                        >
+                          {aiAnalysis.riskLevel}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Disclaimer */}
+                  <div className="mt-4 rounded-lg bg-amber-50 p-3 text-xs text-amber-800 dark:bg-amber-900/20 dark:text-amber-200">
+                    <AlertTriangle className="mb-1 inline h-4 w-4" />{' '}
+                    {aiAnalysis.disclaimer}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Red Flags Notice */}
+            {submissionResult?.redFlagsCount > 0 && (
+              <Card className="mx-auto mt-4 max-w-lg border-red-200 bg-red-50 dark:border-red-900 dark:bg-red-900/20">
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="h-5 w-5 shrink-0 text-red-500" />
+                    <div className="text-left">
+                      <p className="font-bold text-red-700 dark:text-red-400">
+                        {submissionResult.redFlagsCount} Clinical Concern
+                        {submissionResult.redFlagsCount > 1 ? 's' : ''} Detected
+                      </p>
+                      <p className="text-sm text-red-600 dark:text-red-300">
+                        These have been flagged for priority review by your therapist.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Next Steps */}
+            <div className="mx-auto mt-8 max-w-lg">
+              <h3 className="mb-4 font-bold">What Happens Next?</h3>
+              <div className="space-y-3 text-left">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-bold dark:bg-slate-800">
+                    1
+                  </div>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    A qualified therapist will review your assessment and AI analysis
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-bold dark:bg-slate-800">
+                    2
+                  </div>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    They may request additional information or schedule a consultation
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-slate-100 text-xs font-bold dark:bg-slate-800">
+                    3
+                  </div>
+                  <p className="text-sm text-slate-600 dark:text-slate-400">
+                    You'll receive a notification when your diagnosis is confirmed
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <Button
               className="mt-10"
-              variant="secondary"
+              size="lg"
               onClick={() => {
                 resetAssessment();
                 router.push('/patient/dashboard');
               }}
             >
               Return to Dashboard
+              <ChevronRight size={18} className="ml-2" />
             </Button>
           </div>
         )}

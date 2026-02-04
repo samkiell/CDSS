@@ -1,7 +1,6 @@
 'use client';
 
 import useAssessmentStore from '@/store/assessmentStore';
-import { MEDICAL_RULES } from '@/constants/medicalRules';
 
 /**
  * PROGRESS BAR COMPONENT
@@ -9,15 +8,15 @@ import { MEDICAL_RULES } from '@/constants/medicalRules';
  * Shows the patient's progress through the assessment flow.
  *
  * FLOW ORDER:
- * 1. biodata   → Patient confirms biodata (Step 0 - no bar shown yet)
- * 2. body-map  → Patient selects body region (Step 1)
- * 3. questions → Dynamic symptom questions
- * 4. upload    → Supporting documents
- * 5. summary   → Review and submit
- * 6. complete  → Confirmation
+ * 1. biodata    → Patient confirms biodata (Step 0 - no bar shown yet)
+ * 2. body-map   → Patient selects body region (Step 1)
+ * 3. questions  → Dynamic branching questions
+ * 4. summary    → Review all answers (Step 4)
+ * 5. analyzing  → AI processing (Step 5)
+ * 6. complete   → Confirmation (Step 6)
  */
 export default function ProgressBar() {
-  const { currentStep, history, selectedRegion, biodataConfirmed } = useAssessmentStore();
+  const { currentStep, engineState, biodataConfirmed } = useAssessmentStore();
 
   // Don't show progress bar during biodata confirmation (it's a pre-step)
   if (currentStep === 'biodata') return null;
@@ -25,8 +24,9 @@ export default function ProgressBar() {
   // Don't show on body-map if biodata not confirmed (shouldn't happen due to guardrails)
   if (!biodataConfirmed) return null;
 
-  // Simple heuristic for progress during questioning
-  // In a real logic tree, total length is variable, so we estimate based on average path
+  // Don't show on complete step
+  if (currentStep === 'complete') return null;
+
   let progress = 0;
   let label = '';
 
@@ -34,20 +34,20 @@ export default function ProgressBar() {
     progress = 10;
     label = 'Select Body Region';
   } else if (currentStep === 'questions') {
-    const historyLength = history.length;
-    // Assume average assessment is ~15 questions
-    // Start from 15% (after body-map) and go up to 85%
-    progress = Math.min(15 + (historyLength / 15) * 70, 85);
-    label = `Question ${historyLength + 1} of ~15`;
-  } else if (currentStep === 'upload') {
-    progress = 90;
-    label = 'Supporting Documents';
+    // Use engine state for accurate progress
+    const answeredCount = engineState?.askedQuestions?.length || 0;
+    const totalQuestions =
+      engineState?.conditions?.reduce((sum, c) => sum + c.questions.length, 0) || 50; // Fallback estimate
+
+    // Progress from 15% to 75% during questions
+    progress = Math.min(15 + (answeredCount / totalQuestions) * 60, 75);
+    label = `Question ${answeredCount + 1}`;
   } else if (currentStep === 'summary') {
+    progress = 85;
+    label = 'Review Your Answers';
+  } else if (currentStep === 'analyzing') {
     progress = 95;
-    label = 'Ready to Submit';
-  } else if (currentStep === 'complete') {
-    progress = 100;
-    label = 'Complete';
+    label = 'AI Analysis in Progress';
   }
 
   return (
