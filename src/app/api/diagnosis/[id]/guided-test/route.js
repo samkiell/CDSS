@@ -127,21 +127,25 @@ export async function GET(request, { params }) {
  *
  * Body:
  * - testName: string (required)
+ * - testId: string (optional, for traceability)
  * - result: 'positive' | 'negative' | 'skipped' (required)
  * - notes: string (optional)
  *
- * TASK 4: Each result is immutable once saved.
+ * DATA INTEGRITY:
+ * - Each result is immutable once saved
+ * - Linked to assessmentId, testId, therapistId
+ * - Timestamped for audit purposes
  */
 export async function POST(request, { params }) {
   try {
-    const session = await auth();
-    if (!session?.user || session.user.role !== 'CLINICIAN') {
+    const authSession = await auth();
+    if (!authSession?.user || authSession.user.role !== 'CLINICIAN') {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const { id } = await params;
     const body = await request.json();
-    const { testName, result, notes } = body;
+    const { testName, testId, result, notes, associatedConditions } = body;
 
     if (!testName || !result) {
       return NextResponse.json(

@@ -451,17 +451,15 @@ export default function GuidedTestPage() {
             </div>
           </div>
           <div className="text-right">
-            <p className="text-muted-foreground text-xs font-bold uppercase">
-              Region
-            </p>
+            <p className="text-muted-foreground text-xs font-bold uppercase">Region</p>
             <Badge className="bg-primary/10 text-primary">
               {assessmentData.region || contextRegion}
             </Badge>
           </div>
         </div>
         {assessmentData.differentialDiagnoses?.length > 0 && (
-          <div className="mt-3 pt-3 border-t border-primary/20">
-            <p className="text-muted-foreground text-xs mb-2">Differential Diagnoses:</p>
+          <div className="border-primary/20 mt-3 border-t pt-3">
+            <p className="text-muted-foreground mb-2 text-xs">Differential Diagnoses:</p>
             <div className="flex flex-wrap gap-2">
               {assessmentData.differentialDiagnoses.map((diff, index) => (
                 <Badge key={index} variant="outline" className="text-xs">
@@ -497,18 +495,23 @@ export default function GuidedTestPage() {
               <Activity className="h-6 w-6" />
             </div>
             <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
+              <div className="mb-1 flex items-center gap-2">
                 <h2 className="text-xl font-black">{currentTest.name}</h2>
                 {currentTest.isObservation && (
-                  <Badge variant="outline" className="text-xs">Observation</Badge>
+                  <Badge variant="outline" className="text-xs">
+                    Observation
+                  </Badge>
                 )}
               </div>
-              <div className="flex flex-wrap gap-2 mb-2">
+              <div className="mb-2 flex flex-wrap gap-2">
                 <Badge className="bg-muted text-muted-foreground text-xs">
                   {assessmentData.region || contextRegion} Region
                 </Badge>
                 {currentTest.associatedConditions?.map((condition, index) => (
-                  <Badge key={index} className="bg-warning/10 text-warning-foreground text-xs">
+                  <Badge
+                    key={index}
+                    className="bg-warning/10 text-warning-foreground text-xs"
+                  >
                     {condition}
                   </Badge>
                 ))}
