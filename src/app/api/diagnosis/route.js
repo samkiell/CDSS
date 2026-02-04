@@ -25,7 +25,7 @@ export async function GET(request) {
     // Build query
     const query = {};
     if (patientId) query.patientId = patientId;
-    if (status) query.sessionStatus = status;
+    if (status) query.status = status;
 
     // Execute query with pagination
     const sessions = await DiagnosisSession.find(query)

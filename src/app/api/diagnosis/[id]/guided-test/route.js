@@ -77,6 +77,7 @@ export async function GET(request, { params }) {
       assessmentId: id,
       region: diagnosisSession.bodyRegion,
       currentTest,
+      recommendedTests: diagnosisSession.recommendedTests || [],
       completedTestsCount: engineState.completedTests.length,
       isLocked: false,
     });

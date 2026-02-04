@@ -16,12 +16,31 @@ import { cn } from '@/lib/cn';
 import Link from 'next/link';
 
 export default function ClinicianDiagnosticPage() {
+  const [pendingAssessments, setPendingAssessments] = useState([]);
+  const [isLoadingPending, setIsLoadingPending] = useState(true);
   const [statusModal, setStatusModal] = useState({
     isOpen: false,
     type: 'success',
     title: '',
     message: '',
   });
+
+  React.useEffect(() => {
+    const fetchPending = async () => {
+      try {
+        const res = await fetch('/api/diagnosis?status=pending_review&limit=10');
+        const data = await res.json();
+        if (data.success) {
+          setPendingAssessments(data.data || []);
+        }
+      } catch (err) {
+        console.error('Error fetching pending assessments:', err);
+      } finally {
+        setIsLoadingPending(false);
+      }
+    };
+    fetchPending();
+  }, []);
 
   const diagnosticModules = [
     {
@@ -133,8 +152,102 @@ export default function ClinicianDiagnosticPage() {
         </div>
       </header>
 
-      {/* Main Grid */}
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {/* Pending Physical Validation Section */}
+      <section className="space-y-6">
+        <div className="flex items-center justify-between px-4">
+          <h2 className="text-2xl font-black tracking-tight uppercase">
+            Pending Physical Validation
+          </h2>
+          <Badge
+            variant="outline"
+            className="text-primary border-primary/20 px-4 py-1.5 font-bold"
+          >
+            {pendingAssessments.length} Active Cases
+          </Badge>
+        </div>
+
+        {isLoadingPending ? (
+          <div className="flex h-40 items-center justify-center">
+            <Activity className="text-primary h-8 w-8 animate-spin" />
+          </div>
+        ) : pendingAssessments.length > 0 ? (
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {pendingAssessments.map((session) => (
+              <Card
+                key={session._id}
+                className="border-primary/20 bg-primary/5 hover:border-primary/40 overflow-hidden border-2 transition-all"
+              >
+                <CardContent className="p-6">
+                  <div className="mb-4 flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="bg-primary/10 text-primary flex h-10 w-10 items-center justify-center rounded-xl">
+                        <Stethoscope className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h4 className="font-black">
+                          {session.patientId?.firstName} {session.patientId?.lastName}
+                        </h4>
+                        <p className="text-muted-foreground text-xs font-bold uppercase">
+                          {session.bodyRegion} •{' '}
+                          {new Date(session.createdAt).toLocaleDateString()}
+                        </p>
+                      </div>
+                    </div>
+                    <Badge className="bg-primary text-white">
+                      {session.recommendedTests?.length || 0} Recommended Tests
+                    </Badge>
+                  </div>
+
+                  <div className="mb-6 space-y-2">
+                    <p className="text-muted-foreground text-[10px] font-black tracking-widest uppercase">
+                      Recommended Sequence
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {(session.recommendedTests || []).slice(0, 3).map((test, ti) => (
+                        <Badge
+                          key={ti}
+                          variant="secondary"
+                          className="bg-white/50 font-bold dark:bg-black/20"
+                        >
+                          {test.name}
+                        </Badge>
+                      ))}
+                      {session.recommendedTests?.length > 3 && (
+                        <span className="text-muted-foreground text-xs font-bold">
+                          +{session.recommendedTests.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <Link href={`/clinician/cases/${session._id}`} className="block">
+                    <Button className="bg-primary/10 text-primary hover:bg-primary border-primary/20 h-12 w-full rounded-xl border font-black tracking-widest uppercase transition-all hover:text-white">
+                      Review Case & Start Tests
+                      <ChevronRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-muted/30 border-border rounded-[2.5rem] border border-dashed py-16 text-center">
+            <ShieldCheck className="text-muted-foreground/30 mx-auto mb-4 h-12 w-12" />
+            <h3 className="text-muted-foreground font-black uppercase">
+              No Pending Validations
+            </h3>
+            <p className="text-muted-foreground/60 text-sm font-medium">
+              All physical confirmatory tests have been completed and synchronized.
+            </p>
+          </div>
+        )}
+      </section>
+
+      {/* Main Grid: Clinical Modules */}
+      <div className="space-y-6">
+        <h2 className="px-4 text-2xl font-black tracking-tight uppercase">
+          Standard Diagnostic Modules
+        </h2>
         {diagnosticModules.map((module, i) => (
           <Card
             key={i}

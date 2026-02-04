@@ -151,5 +151,119 @@
         "diagnosisMapping": "Bicipital Tendinitis"
       }
     }
+  },
+  "cervical": {
+    "startNode": "spurlings_test",
+    "nodes": {
+      "spurlings_test": {
+        "id": "spurlings_test",
+        "name": "Spurling's Test (Foraminal Compression)",
+        "instruction": "Patient's head is side-flexed and downward pressure is applied. Positive if pain radiates into the arm.",
+        "onPositive": "distraction_test",
+        "onNegative": "upper_limb_tension_test",
+        "isTerminal": false
+      },
+      "distraction_test": {
+        "id": "distraction_test",
+        "name": "Cervical Distraction Test",
+        "instruction": "Examiner applies upward traction to the head. Positive if symptoms are reduced or eliminated.",
+        "onPositive": "diag_cervical_radiculopathy",
+        "onNegative": "diag_nerve_root_compression",
+        "isTerminal": false
+      },
+      "upper_limb_tension_test": {
+        "id": "upper_limb_tension_test",
+        "name": "Upper Limb Tension Test (ULTT1)",
+        "instruction": "Specific sequence of arm movements to stress the median nerve. Positive if symptoms are reproduced.",
+        "onPositive": "diag_median_nerve_tension",
+        "onNegative": "diag_mechanical_neck_pain",
+        "isTerminal": false
+      },
+      "diag_cervical_radiculopathy": {
+        "id": "diag_cervical_radiculopathy",
+        "name": "Refined Diagnosis: Cervical Radiculopathy",
+        "instruction": "Classic pattern of compression relieved by distraction confirms nerve root involvement.",
+        "isTerminal": true,
+        "diagnosisMapping": "Cervical Radiculopathy"
+      },
+      "diag_nerve_root_compression": {
+        "id": "diag_nerve_root_compression",
+        "name": "Refined Diagnosis: Foraminal Stenosis / Compression",
+        "instruction": "Provocative pattern suggests compression without typical relief response.",
+        "isTerminal": true,
+        "diagnosisMapping": "Nerve Root Compression"
+      },
+      "diag_median_nerve_tension": {
+        "id": "diag_median_nerve_tension",
+        "name": "Refined Diagnosis: Neural Tension (Median Nerve)",
+        "instruction": "Symptoms reproduced by neural glide suggest neurodynamic sensitivity.",
+        "isTerminal": true,
+        "diagnosisMapping": "Median Nerve Tension"
+      },
+      "diag_mechanical_neck_pain": {
+        "id": "diag_mechanical_neck_pain",
+        "name": "Refined Diagnosis: Mechanical Neck Pain",
+        "instruction": "Neurological tests are negative. Pain likely muscular or facetogenic.",
+        "isTerminal": true,
+        "diagnosisMapping": "Non-specific Mechanical Neck Pain"
+      }
+    }
+  },
+  "ankle": {
+    "startNode": "anterior_drawer_ankle",
+    "nodes": {
+      "anterior_drawer_ankle": {
+        "id": "anterior_drawer_ankle",
+        "name": "Anterior Drawer Test (Ankle)",
+        "instruction": "Examiner stabilizes tibia and pulls calcaneus forward. Positive if excessive laxity (ATFL tear).",
+        "onPositive": "talar_tilt_test",
+        "onNegative": "squeeze_test_ankle",
+        "isTerminal": false
+      },
+      "talar_tilt_test": {
+        "id": "talar_tilt_test",
+        "name": "Talar Tilt Test (CFL)",
+        "instruction": "Examiner adducts/inverts the calcaneus. Positive if excessive laxity (CFL tear).",
+        "onPositive": "diag_atfl_cfl_rupture",
+        "onNegative": "diag_isolated_atfl_tear",
+        "isTerminal": false
+      },
+      "squeeze_test_ankle": {
+        "id": "squeeze_test_ankle",
+        "name": "Squeeze Test (Syndesmosis)",
+        "instruction": "Squeeze the tibia and fibula together at mid-calf. Positive if pain at the distal syndesmosis.",
+        "onPositive": "diag_syndesmosis_injury",
+        "onNegative": "diag_ankle_sprain_grade1",
+        "isTerminal": false
+      },
+      "diag_atfl_cfl_rupture": {
+        "id": "diag_atfl_cfl_rupture",
+        "name": "Refined Diagnosis: Severe Ankle Sprain (ATFL & CFL)",
+        "instruction": "Laxity in both drawer and tilt tests indicates multi-ligamentous involvement.",
+        "isTerminal": true,
+        "diagnosisMapping": "Severe Ankle Sprain (Grade III)"
+      },
+      "diag_isolated_atfl_tear": {
+        "id": "diag_isolated_atfl_tear",
+        "name": "Refined Diagnosis: Isolated ATFL Tear",
+        "instruction": "Isolated laxity in anterior drawer suggests Grade II ATFL involvement.",
+        "isTerminal": true,
+        "diagnosisMapping": "Lateral Ankle Sprain (Grade II)"
+      },
+      "diag_syndesmosis_injury": {
+        "id": "diag_syndesmosis_injury",
+        "name": "Refined Diagnosis: High Ankle Sprain (Syndesmosis)",
+        "instruction": "Positive squeeze test points to inferior tibiofibular ligament involvement.",
+        "isTerminal": true,
+        "diagnosisMapping": "Syndesmosis Injury"
+      },
+      "diag_ankle_sprain_grade1": {
+        "id": "diag_ankle_sprain_grade1",
+        "name": "Refined Diagnosis: Mild Ankle Sprain / Inversion Trauma",
+        "instruction": "No significant laxity or syndesmosis involvement. Likely Grade I sprain.",
+        "isTerminal": true,
+        "diagnosisMapping": "Lateral Ankle Sprain (Grade I)"
+      }
+    }
   }
 }
