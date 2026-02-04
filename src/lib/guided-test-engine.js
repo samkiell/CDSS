@@ -286,17 +286,30 @@ export function extractRecommendedTests(rulesJson, suspectedConditions) {
     const testName = typeof test === 'string' ? test : test.name;
     const existing = recommendations.find((r) => r.name === testName);
 
+    // Find rich data from library if available
+    const libraryTest = provocativeTests.find(
+      (t) =>
+        t.name.toLowerCase() === testName.toLowerCase() ||
+        t.id === (typeof test === 'string' ? null : test.id)
+    );
+
     if (!existing) {
       recommendations.push({
-        name: testName,
+        id: libraryTest?.id || null,
+        name: libraryTest?.name || testName,
         instruction:
+          libraryTest?.instructions?.join(' ') ||
           test.instruction ||
           (typeof test === 'string' ? 'Perform as per clinical protocol.' : null),
-        positiveImplication: test.positiveImplication || 'Supports suspected condition.',
+        positiveImplication:
+          test.positiveImplication ||
+          libraryTest?.purpose ||
+          'Supports suspected condition.',
         negativeImplication:
           test.negativeImplication || 'Decreases likelihood of condition.',
         associatedConditions: [conditionName],
         source: source,
+        image: libraryTest?.image || null,
       });
     } else {
       if (!existing.associatedConditions.includes(conditionName)) {
@@ -322,7 +335,7 @@ export function extractRecommendedTests(rulesJson, suspectedConditions) {
     });
   }
 
-  // 2. Add Clinical Fallbacks if recommendations are sparse or for specific conditions
+  // 2. Add Clinical Fallbacks if recommendations are sparse
   normalizedSuspected.forEach((suspect) => {
     Object.keys(clinicalFallbackTests).forEach((key) => {
       if (suspect.includes(key) || key.includes(suspect)) {

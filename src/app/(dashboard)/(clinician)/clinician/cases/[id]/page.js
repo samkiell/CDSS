@@ -662,15 +662,27 @@ export default function CaseDetailsPage() {
                       size="lg"
                       className="h-14 px-8 text-lg font-bold shadow-lg transition-all hover:shadow-xl"
                       onClick={() => {
-                        // Pass context via URL search params
+                        // Pass context via URL search params to the unified diagnostic executor
                         const params = new URLSearchParams({
-                          assessmentId: id,
-                          patientId: patient?._id || '',
-                          region: session.bodyRegion || '',
-                          testCount: recommendedTests.length.toString(),
+                          caseId: id,
+                          patient: patient?.firstName
+                            ? `${patient.firstName} ${patient.lastName}`
+                            : 'Patient',
                         });
+
+                        // Map region to module slug
+                        const regionSlug = session.bodyRegion
+                          ?.toLowerCase()
+                          .includes('lumbar')
+                          ? 'lumbar-pain-screener'
+                          : session.bodyRegion?.toLowerCase().includes('shoulder')
+                            ? 'shoulder-mobility-screener'
+                            : session.bodyRegion?.toLowerCase().includes('cervical')
+                              ? 'cervical-posture-diagnostic'
+                              : 'ankle-stability-test';
+
                         router.push(
-                          `/clinician/cases/${id}/guided-test?${params.toString()}`
+                          `/clinician/diagnostic/${regionSlug}?${params.toString()}`
                         );
                       }}
                     >
