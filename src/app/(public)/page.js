@@ -723,16 +723,14 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="flex items-center gap-3">
-              <div className="relative h-10 w-auto">
-                <Image
-                  src="/logo.png"
-                  alt="CDSS - Clinical Decision Support System"
-                  width={120}
-                  height={40}
-                  className="object-contain"
-                />
-              </div>
-              <span className="text-muted-foreground hidden text-sm sm:inline">
+              <Image
+                src="/logo.png"
+                alt="CDSS - Clinical Decision Support System"
+                width={100}
+                height={36}
+                className="object-contain"
+              />
+              <span className="text-muted-foreground text-sm">
                 Clinical Decision Support System
               </span>
             </div>
