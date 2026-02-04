@@ -154,10 +154,12 @@ export function processAnswer(state, questionId, answerValue) {
       a.value === answerValue || a.value?.toLowerCase() === answerValue?.toLowerCase()
   );
 
-  const effects = answerObj?.effects || {
-    rule_out: [],
-    increase_likelihood: [],
-    decrease_likelihood: [],
+  // Ensure effects always has all required arrays (handle partial/missing effects)
+  const rawEffects = answerObj?.effects || {};
+  const effects = {
+    rule_out: rawEffects.rule_out || [],
+    increase_likelihood: rawEffects.increase_likelihood || [],
+    decrease_likelihood: rawEffects.decrease_likelihood || [],
   };
 
   // Record the answered question
@@ -205,7 +207,10 @@ export function processAnswer(state, questionId, answerValue) {
         active: true,
         ruleOutReasons: [
           ...newConditionStates[matchingCondition].ruleOutReasons,
-          { question: question.question.question, answer: answerValue },
+          {
+            question: rawQuestion.questionText || rawQuestion.question,
+            answer: answerValue,
+          },
         ],
         // Increase likelihood slightly when a condition is being investigated
         likelihood: Math.min(100, newConditionStates[matchingCondition].likelihood + 10),
