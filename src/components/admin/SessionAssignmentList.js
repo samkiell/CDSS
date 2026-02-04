@@ -43,6 +43,9 @@ export function SessionAssignmentList({ sessions, clinicians, initialSelectedId 
         return <CheckCircle2 className="h-4 w-4 text-green-500" />;
       case 'assigned':
         return <Clock className="h-4 w-4 text-blue-500" />;
+      case 'pending_review':
+      case 'submitted_to_therapist':
+        return <AlertCircle className="h-4 w-4 text-yellow-500" />;
       default:
         return <AlertCircle className="h-4 w-4 text-yellow-500" />;
     }
