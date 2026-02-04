@@ -111,8 +111,18 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
    * In current implementation, this resets the engine state.
    */
   const handleEditAnswers = () => {
-    toast.info('Returning to questions...');
-    setStep('questions');
+    try {
+      // Revert the last answer to un-complete the assessment and allow editing
+      const prevState = previousQuestion(engineState);
+      updateEngineState(prevState);
+      setStep('questions');
+      toast.info('Returning to assessment...');
+    } catch (error) {
+      console.error('Error returning to questions:', error);
+      // Fallback: just try to go back
+      setStep('questions');
+    }
+
     if (onEdit) {
       onEdit();
     }
@@ -133,9 +143,12 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
     <div className="mx-auto max-w-2xl space-y-6">
       {/* Header */}
       <div className="text-center">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Assessment Progress</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+          Assessment Progress
+        </h1>
         <p className="text-muted-foreground mt-2">
-          You&apos;ve completed the required questions. Your responses have been recorded for review.
+          You&apos;ve completed the required questions. Your responses have been recorded
+          for review.
         </p>
       </div>
 
@@ -190,11 +203,15 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
                   Assessment Notes Recorded
                 </p>
                 <p className="text-muted-foreground mt-1 text-sm">
-                  The following details have been highlighted for the reviewing therapist to prioritize.
+                  The following details have been highlighted for the reviewing therapist
+                  to prioritize.
                 </p>
                 <ul className="mt-3 space-y-2">
                   {summary.redFlagsDetected.map((flag, index) => (
-                    <li key={index} className="text-sm font-medium text-slate-600 dark:text-slate-400 flex gap-2">
+                    <li
+                      key={index}
+                      className="flex gap-2 text-sm font-medium text-slate-600 dark:text-slate-400"
+                    >
                       <span className="text-slate-300">•</span>
                       {flag.redFlagText || flag.question}
                     </li>
@@ -205,8 +222,6 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
           </CardContent>
         </Card>
       )}
-
-
 
       {/* Questions & Answers List */}
       <Card className="border-2 border-slate-100 dark:border-slate-800">
@@ -237,11 +252,7 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
                     <CheckCircle2 className="mr-2 inline h-4 w-4 text-green-500" />
                     {qa.answer}
                   </p>
-                  {qa.category && (
-                    <span className="mt-1 inline-block rounded-full bg-slate-100 px-2 py-0.5 text-xs dark:bg-slate-800">
-                      {qa.category}
-                    </span>
-                  )}
+                  {/* Removed category tags per user request */}
                 </div>
               ))}
             </div>
