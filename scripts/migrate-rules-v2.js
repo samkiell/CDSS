@@ -133,15 +133,34 @@ function applyClinicialEnhancements(
   const aLower = (answer.value || '').toLowerCase();
 
   // STIFFNESS QUESTIONS
-  // "Do you experience ankle joint stiffness?" → No → Rule out Osteoarthritis
-  if (qLower.includes('stiffness') && aLower === 'no') {
+  // "Do you experience ankle joint stiffness?"
+  // → No → Rule out Osteoarthritis (no stiffness = unlikely OA)
+  // → Yes → Trigger investigation of Osteoarthritis (stiffness = possible OA)
+  if (qLower.includes('stiffness') && !qLower.includes('if yes')) {
     const oaCondition = availableConditions.find((c) =>
       c.toLowerCase().includes('osteoarthritis')
     );
     if (oaCondition) {
-      enhancements.excludedConditions = enhancements.excludedConditions || [];
-      if (!enhancements.excludedConditions.includes(oaCondition)) {
-        enhancements.excludedConditions.push(oaCondition);
+      if (aLower === 'no') {
+        // No stiffness = rule out OA
+        enhancements.excludedConditions = enhancements.excludedConditions || [];
+        if (!enhancements.excludedConditions.includes(oaCondition)) {
+          enhancements.excludedConditions.push(oaCondition);
+        }
+        // IMPORTANT: Clear any incorrect rule_out inherited from source
+        enhancements._clearExcluded = false; // Signal to not inherit
+      } else if (aLower === 'yes') {
+        // Has stiffness = trigger OA investigation (increase likelihood)
+        enhancements.triggeredConditions = enhancements.triggeredConditions || [];
+        if (!enhancements.triggeredConditions.includes(oaCondition)) {
+          enhancements.triggeredConditions.push(oaCondition);
+        }
+        enhancements.increaseLikelihood = enhancements.increaseLikelihood || [];
+        if (!enhancements.increaseLikelihood.includes(oaCondition)) {
+          enhancements.increaseLikelihood.push(oaCondition);
+        }
+        // IMPORTANT: Clear any incorrect rule_out from source that says Yes rules out OA
+        enhancements._clearExcludedForYes = true;
       }
     }
   }
@@ -227,6 +246,9 @@ function migrateQuestion(question, conditionName, availableConditions) {
 
       // Merge enhancements
       Object.keys(enhancements).forEach((key) => {
+        // Skip internal flags
+        if (key.startsWith('_')) return;
+
         if (Array.isArray(enhancements[key])) {
           migratedEffects[key] = migratedEffects[key] || [];
           enhancements[key].forEach((item) => {
@@ -238,6 +260,14 @@ function migrateQuestion(question, conditionName, availableConditions) {
           migratedEffects[key] = enhancements[key];
         }
       });
+
+      // Handle clinical corrections: Clear incorrect excludedConditions for "Yes" stiffness answers
+      if (enhancements._clearExcludedForYes) {
+        // Remove OA from excludedConditions since "Yes" to stiffness should NOT rule out OA
+        migratedEffects.excludedConditions = (
+          migratedEffects.excludedConditions || []
+        ).filter((c) => !c.toLowerCase().includes('osteoarthritis'));
+      }
 
       return {
         value: answer.value,
