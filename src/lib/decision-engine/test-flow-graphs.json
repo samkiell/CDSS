@@ -1,45 +1,35 @@
 {
-  "lumbar": {
+  "lumbar-pain-screener": {
     "startNode": "slr_test",
     "nodes": {
       "slr_test": {
         "id": "slr_test",
-        "name": "Straight Leg Raise (SLR)",
-        "instruction": "Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Positive if patient feels pain along the course of the sciatic nerve (30-70 degrees).",
         "onPositive": "bragard_test",
-        "onNegative": "femoral_stretch_test",
+        "onNegative": "femoral_nerve_stretch",
         "isTerminal": false
       },
       "bragard_test": {
         "id": "bragard_test",
-        "name": "Bragard Test",
-        "instruction": "Modification of SLR: dorsiflexion is applied at the end of the SLR. Confirming neurogenic origin of pain.",
         "onPositive": "bowstring_test",
         "onNegative": "slump_test",
         "isTerminal": false
       },
       "bowstring_test": {
         "id": "bowstring_test",
-        "name": "Bowstring Test (Popliteal Compression)",
-        "instruction": "Flex the knee and apply pressure on the popliteal fossa evoking sciatica.",
         "onPositive": "diag_lumbar_disc_herniation",
         "onNegative": "diag_sciatica",
         "isTerminal": false
       },
-      "femoral_stretch_test": {
-        "id": "femoral_stretch_test",
-        "name": "Femoral Nerve Stretch Test",
-        "instruction": "Patient prone, knee flexed and hip extended. Positive if pain in anterior thigh.",
+      "femoral_nerve_stretch": {
+        "id": "femoral_nerve_stretch",
         "onPositive": "diag_l2_l4_compression",
         "onNegative": "diag_non_specific_lbp",
         "isTerminal": false
       },
       "slump_test": {
         "id": "slump_test",
-        "name": "Slump Test",
-        "instruction": "Patient slumps forward while seated, examiner dorsiflexes foot and extends knee.",
         "onPositive": "diag_sciatica",
-        "onNegative": "diag_facet_joint",
+        "onNegative": "diag_facet_joint_lumbar",
         "isTerminal": false
       },
       "diag_lumbar_disc_herniation": {
@@ -70,8 +60,8 @@
         "isTerminal": true,
         "diagnosisMapping": "Non-specific low-back pain"
       },
-      "diag_facet_joint": {
-        "id": "diag_facet_joint",
+      "diag_facet_joint_lumbar": {
+        "id": "diag_facet_joint_lumbar",
         "name": "Refined Diagnosis: Facet Joint Syndrome",
         "instruction": "Mechanical pattern without neural involvement suggests facetogenic origin.",
         "isTerminal": true,
@@ -79,46 +69,36 @@
       }
     }
   },
-  "shoulder": {
-    "startNode": "painful_arc",
+  "shoulder-mobility-screener": {
+    "startNode": "painful_arc_test",
     "nodes": {
-      "painful_arc": {
-        "id": "painful_arc",
-        "name": "Painful Arc Test",
-        "instruction": "Active abduction of the arm. Positive if pain between 60° and 120°.",
-        "onPositive": "neers_test",
-        "onNegative": "hawkins_kennedy",
+      "painful_arc_test": {
+        "id": "painful_arc_test",
+        "onPositive": "neer_impingement_sign",
+        "onNegative": "hawkins_kennedy_test",
         "isTerminal": false
       },
-      "neers_test": {
-        "id": "neers_test",
-        "name": "Neer's Test",
-        "instruction": "Examiner stabilises scapula and passively flexes the arm to end-range.",
+      "neer_impingement_sign": {
+        "id": "neer_impingement_sign",
         "onPositive": "empty_can_test",
-        "onNegative": "hawkins_kennedy",
+        "onNegative": "hawkins_kennedy_test",
         "isTerminal": false
       },
-       "empty_can_test": {
+      "empty_can_test": {
         "id": "empty_can_test",
-        "name": "Empty Can Test (Jobe)",
-        "instruction": "Arm at 90° abduction, 30° horizontal flexion, internal rotation. Resisted elevation.",
         "onPositive": "diag_rotator_cuff_tear",
         "onNegative": "diag_subacromial_impingement",
         "isTerminal": false
       },
-      "hawkins_kennedy": {
-        "id": "hawkins_kennedy",
-        "name": "Hawkins-Kennedy Test",
-        "instruction": "Shoulder and elbow flexed to 90°, then examiner forces internal rotation.",
+      "hawkins_kennedy_test": {
+        "id": "hawkins_kennedy_test",
         "onPositive": "diag_subacromial_impingement",
-        "onNegative": "diag_frozen_shoulder_check",
+        "onNegative": "apprehension_test",
         "isTerminal": false
       },
-      "diag_frozen_shoulder_check": {
-        "id": "diag_frozen_shoulder_check",
-        "name": "Passive Range of Motion Check",
-        "instruction": "Check for significant global reduction in ROM (capsular pattern).",
-        "onPositive": "diag_adhesive_capsulitis",
+      "apprehension_test": {
+        "id": "apprehension_test",
+        "onPositive": "diag_shoulder_instability",
         "onNegative": "diag_bicipital_tendinitis",
         "isTerminal": false
       },
@@ -136,133 +116,141 @@
         "isTerminal": true,
         "diagnosisMapping": "Subacromial Impingement Syndrome"
       },
-       "diag_adhesive_capsulitis": {
-        "id": "diag_adhesive_capsulitis",
-        "name": "Refined Diagnosis: Adhesive Capsulitis",
-        "instruction": "Global ROM restriction indicates Frozen Shoulder.",
+      "diag_shoulder_instability": {
+        "id": "diag_shoulder_instability",
+        "name": "Refined Diagnosis: Anterior Shoulder Instability",
+        "instruction": "Positive apprehension suggests instability, potentially labral involvement.",
         "isTerminal": true,
-        "diagnosisMapping": "Adhesive Capsulitis (Frozen Shoulder)"
+        "diagnosisMapping": "Shoulder Instability"
       },
       "diag_bicipital_tendinitis": {
         "id": "diag_bicipital_tendinitis",
         "name": "Refined Diagnosis: Bicipital Tendinitis",
-        "instruction": "Mechanism and localized tenderness suggests biceps involvement.",
+        "instruction": "Clinical patterns suggests localized biceps tendon inflammation.",
         "isTerminal": true,
         "diagnosisMapping": "Bicipital Tendinitis"
       }
     }
   },
-  "cervical": {
+  "cervical-posture-diagnostic": {
     "startNode": "spurlings_test",
     "nodes": {
       "spurlings_test": {
         "id": "spurlings_test",
-        "name": "Spurling's Test (Foraminal Compression)",
-        "instruction": "Patient's head is side-flexed and downward pressure is applied. Positive if pain radiates into the arm.",
-        "onPositive": "distraction_test",
-        "onNegative": "upper_limb_tension_test",
-        "isTerminal": false
+        "onPositive": "cervical_distraction_test",
+        "onNegative": "diag_mechanical_neck_pain"
       },
-      "distraction_test": {
-        "id": "distraction_test",
-        "name": "Cervical Distraction Test",
-        "instruction": "Examiner applies upward traction to the head. Positive if symptoms are reduced or eliminated.",
+      "cervical_distraction_test": {
+        "id": "cervical_distraction_test",
         "onPositive": "diag_cervical_radiculopathy",
-        "onNegative": "diag_nerve_root_compression",
-        "isTerminal": false
-      },
-      "upper_limb_tension_test": {
-        "id": "upper_limb_tension_test",
-        "name": "Upper Limb Tension Test (ULTT1)",
-        "instruction": "Specific sequence of arm movements to stress the median nerve. Positive if symptoms are reproduced.",
-        "onPositive": "diag_median_nerve_tension",
-        "onNegative": "diag_mechanical_neck_pain",
-        "isTerminal": false
+        "onNegative": "diag_nerve_root_compression"
       },
       "diag_cervical_radiculopathy": {
         "id": "diag_cervical_radiculopathy",
         "name": "Refined Diagnosis: Cervical Radiculopathy",
-        "instruction": "Classic pattern of compression relieved by distraction confirms nerve root involvement.",
+        "instruction": "Relief with distraction confirms nerve root irritiation.",
         "isTerminal": true,
         "diagnosisMapping": "Cervical Radiculopathy"
       },
       "diag_nerve_root_compression": {
         "id": "diag_nerve_root_compression",
-        "name": "Refined Diagnosis: Foraminal Stenosis / Compression",
-        "instruction": "Provocative pattern suggests compression without typical relief response.",
+        "name": "Refined Diagnosis: Foraminal Compression",
         "isTerminal": true,
         "diagnosisMapping": "Nerve Root Compression"
-      },
-      "diag_median_nerve_tension": {
-        "id": "diag_median_nerve_tension",
-        "name": "Refined Diagnosis: Neural Tension (Median Nerve)",
-        "instruction": "Symptoms reproduced by neural glide suggest neurodynamic sensitivity.",
-        "isTerminal": true,
-        "diagnosisMapping": "Median Nerve Tension"
       },
       "diag_mechanical_neck_pain": {
         "id": "diag_mechanical_neck_pain",
         "name": "Refined Diagnosis: Mechanical Neck Pain",
-        "instruction": "Neurological tests are negative. Pain likely muscular or facetogenic.",
         "isTerminal": true,
-        "diagnosisMapping": "Non-specific Mechanical Neck Pain"
+        "diagnosisMapping": "Mechanical Neck Pain"
       }
     }
   },
-  "ankle": {
+  "ankle-stability-test": {
     "startNode": "anterior_drawer_ankle",
     "nodes": {
       "anterior_drawer_ankle": {
         "id": "anterior_drawer_ankle",
-        "name": "Anterior Drawer Test (Ankle)",
-        "instruction": "Examiner stabilizes tibia and pulls calcaneus forward. Positive if excessive laxity (ATFL tear).",
         "onPositive": "talar_tilt_test",
-        "onNegative": "squeeze_test_ankle",
-        "isTerminal": false
+        "onNegative": "squeeze_test_ankle"
       },
       "talar_tilt_test": {
         "id": "talar_tilt_test",
-        "name": "Talar Tilt Test (CFL)",
-        "instruction": "Examiner adducts/inverts the calcaneus. Positive if excessive laxity (CFL tear).",
-        "onPositive": "diag_atfl_cfl_rupture",
-        "onNegative": "diag_isolated_atfl_tear",
-        "isTerminal": false
+        "onPositive": "diag_cfl_rupture",
+        "onNegative": "diag_atfl_tear"
       },
       "squeeze_test_ankle": {
         "id": "squeeze_test_ankle",
-        "name": "Squeeze Test (Syndesmosis)",
-        "instruction": "Squeeze the tibia and fibula together at mid-calf. Positive if pain at the distal syndesmosis.",
         "onPositive": "diag_syndesmosis_injury",
-        "onNegative": "diag_ankle_sprain_grade1",
-        "isTerminal": false
+        "onNegative": "thompson_test"
       },
-      "diag_atfl_cfl_rupture": {
-        "id": "diag_atfl_cfl_rupture",
-        "name": "Refined Diagnosis: Severe Ankle Sprain (ATFL & CFL)",
-        "instruction": "Laxity in both drawer and tilt tests indicates multi-ligamentous involvement.",
-        "isTerminal": true,
-        "diagnosisMapping": "Severe Ankle Sprain (Grade III)"
+      "thompson_test": {
+        "id": "thompson_test",
+        "onPositive": "diag_achilles_rupture",
+        "onNegative": "diag_minor_ankle_sprain"
       },
-      "diag_isolated_atfl_tear": {
-        "id": "diag_isolated_atfl_tear",
-        "name": "Refined Diagnosis: Isolated ATFL Tear",
-        "instruction": "Isolated laxity in anterior drawer suggests Grade II ATFL involvement.",
+      "diag_achilles_rupture": {
+        "id": "diag_achilles_rupture",
+        "name": "Refined Diagnosis: Achilles Tendon Rupture",
         "isTerminal": true,
-        "diagnosisMapping": "Lateral Ankle Sprain (Grade II)"
+        "diagnosisMapping": "Achilles Tendon Rupture"
+      },
+      "diag_atfl_tear": {
+        "id": "diag_atfl_tear",
+        "name": "Refined Diagnosis: ATFL Tear (Grade II)",
+        "isTerminal": true,
+        "diagnosisMapping": "Isolated ATFL Tear"
+      },
+      "diag_cfl_rupture": {
+        "id": "diag_cfl_rupture",
+        "name": "Refined Diagnosis: Combined ATFL/CFL Tear",
+        "isTerminal": true,
+        "diagnosisMapping": "Multi-ligamentous Ankle Sprain"
       },
       "diag_syndesmosis_injury": {
         "id": "diag_syndesmosis_injury",
-        "name": "Refined Diagnosis: High Ankle Sprain (Syndesmosis)",
-        "instruction": "Positive squeeze test points to inferior tibiofibular ligament involvement.",
+        "name": "Refined Diagnosis: High Ankle Sprain",
         "isTerminal": true,
         "diagnosisMapping": "Syndesmosis Injury"
       },
-      "diag_ankle_sprain_grade1": {
-        "id": "diag_ankle_sprain_grade1",
-        "name": "Refined Diagnosis: Mild Ankle Sprain / Inversion Trauma",
-        "instruction": "No significant laxity or syndesmosis involvement. Likely Grade I sprain.",
+      "diag_minor_ankle_sprain": {
+        "id": "diag_minor_ankle_sprain",
+        "name": "Refined Diagnosis: Grade I Sprain",
         "isTerminal": true,
-        "diagnosisMapping": "Lateral Ankle Sprain (Grade I)"
+        "diagnosisMapping": "Minor Lateral Ankle Sprain"
+      }
+    }
+  },
+  "knee-pain-assessment": {
+    "startNode": "drawer_test_knee",
+    "nodes": {
+      "drawer_test_knee": {
+        "id": "drawer_test_knee",
+        "onPositive": "valgus_stress_test_knee",
+        "onNegative": "diag_meniscal_pathology_suspected"
+      },
+      "valgus_stress_test_knee": {
+        "id": "valgus_stress_test_knee",
+        "onPositive": "diag_mcl_injury",
+        "onNegative": "diag_acl_injury"
+      },
+      "diag_acl_injury": {
+        "id": "diag_acl_injury",
+        "name": "Refined Diagnosis: ACL Rupture suspected",
+        "isTerminal": true,
+        "diagnosisMapping": "ACL Injury"
+      },
+      "diag_mcl_injury": {
+        "id": "diag_mcl_injury",
+        "name": "Refined Diagnosis: MCL Sprain",
+        "isTerminal": true,
+        "diagnosisMapping": "MCL Injury"
+      },
+      "diag_meniscal_pathology_suspected": {
+        "id": "diag_meniscal_pathology_suspected",
+        "name": "Refined Diagnosis: Meniscal Pathology Suspected",
+        "isTerminal": true,
+        "diagnosisMapping": "Meniscal Injury"
       }
     }
   }

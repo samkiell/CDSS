@@ -1,0 +1,476 @@
+[
+  {
+    "id": "thompson_test",
+    "name": "Thompson’s or Simmond’s Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for Achilles tendon rupture.",
+    "instructions": [
+      "Patient lies prone with feet hanging off the edge of the table.",
+      "Examiner squeezes the calf muscle.",
+      "Positive: Absence of plantar flexion indicates Achilles tendon rupture."
+    ],
+    "image": "/images/clinical/thompson-test.jpg"
+  },
+  {
+    "id": "talar_tilt_test",
+    "name": "Talar Tilt Test",
+    "type": "Clinical Test",
+    "purpose": "To assess the integrity of the calcaneofibular ligament (CFL).",
+    "instructions": [
+      "Patient seated with legs hanging.",
+      "Examiner stabilizes the distal tibia and inverts the calcaneus.",
+      "Positive: Excessive laxity or pain relative to the unaffected side."
+    ],
+    "image": "/images/clinical/talar-tilt.jpg"
+  },
+  {
+    "id": "anterior_drawer_ankle",
+    "name": "Anterior Drawer Test (Ankle)",
+    "type": "Clinical Test",
+    "purpose": "To assess the integrity of the anterior talofibular ligament (ATFL).",
+    "instructions": [
+      "Patient supine with foot in 20° plantar flexion.",
+      "Examiner stabilizes the tibia and pulls the calcaneus anteriorly.",
+      "Positive: Excessive anterior translation of the talus."
+    ],
+    "image": "/images/clinical/anterior-drawer-ankle.jpg"
+  },
+  {
+    "id": "squeeze_test_ankle",
+    "name": "Squeeze Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for syndesmosis (high ankle) injury.",
+    "instructions": [
+      "Patient seated or supine.",
+      "Examiner squeezes the tibia and fibula together at mid-calf level.",
+      "Positive: Pain elicited at the distal tibiofibular syndesmosis."
+    ],
+    "image": "/images/clinical/squeeze-test.jpg"
+  },
+  {
+    "id": "tinels_sign",
+    "name": "Tinel’s Sign",
+    "type": "Clinical Test",
+    "purpose": "To detect irritated nerves by percussing over the nerve.",
+    "instructions": [
+      "Examiner taps over the suspected nerve pathway (e.g., carpal tunnel or tarsal tunnel).",
+      "Positive: Tingling or 'pins and needles' sensation in the nerve distribution."
+    ],
+    "image": "/images/clinical/tinels-sign.jpg"
+  },
+  {
+    "id": "dorsiflexion_eversion_test",
+    "name": "Dorsiflexion–Eversion Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for Tarsal Tunnel Syndrome.",
+    "instructions": [
+      "Examiner passively dorsiflexes and everts the foot to its end-range.",
+      "Hold for 5-10 seconds while percussing over the tarsal tunnel.",
+      "Positive: Reproduction of symptoms along the plantar aspect of the foot."
+    ],
+    "image": "/images/clinical/dorsiflexion-eversion.jpg"
+  },
+  {
+    "id": "spurlings_test",
+    "name": "Spurling’s Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for cervical radiculopathy.",
+    "instructions": [
+      "Patient's head is side-flexed to the affected side.",
+      "Examiner applies a downward axial load to the head.",
+      "Positive: Pain radiating into the arm on the same side."
+    ],
+    "image": "/images/clinical/spurlings-test.jpg"
+  },
+  {
+    "id": "cervical_distraction_test",
+    "name": "Cervical Distraction Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for cervical radiculopathy (relief test).",
+    "instructions": [
+      "Patient supine.",
+      "Examiner applies upward traction to the patient's head.",
+      "Positive: Reduction or elimination of radicular symptoms."
+    ],
+    "image": "/images/clinical/cervical-distraction.jpg"
+  },
+  {
+    "id": "maudsleys_test",
+    "name": "Maudsley’s Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for lateral epicondylalgia (Tennis Elbow) involving the extensor digitorum.",
+    "instructions": [
+      "Patient's elbow is extended.",
+      "Examiner resists extension of the third digit (middle finger).",
+      "Positive: Pain over the lateral epicondyle."
+    ],
+    "image": "/images/clinical/maudsleys-test.jpg"
+  },
+  {
+    "id": "cozens_test",
+    "name": "Cozen’s Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for lateral epicondylalgia.",
+    "instructions": [
+      "Patient's elbow is flexed to 90°, forearm pronated.",
+      "Examiner resists active wrist extension and radial deviation.",
+      "Positive: Sudden pain at the lateral epicondyle."
+    ],
+    "image": "/images/clinical/cozens-test.jpg"
+  },
+  {
+    "id": "mills_sign",
+    "name": "Mill’s Sign",
+    "type": "Clinical Test",
+    "purpose": "To assess for lateral epicondylalgia.",
+    "instructions": [
+      "Examiner passively pronates the forearm, flexes the wrist fully, and extends the elbow.",
+      "Positive: Pain over the lateral epicondyle."
+    ],
+    "image": "/images/clinical/mills-sign.jpg"
+  },
+  {
+    "id": "valgus_stress_test_knee",
+    "name": "Valgus Stress Test",
+    "type": "Clinical Test",
+    "purpose": "To assess the integrity of the Medial Collateral Ligament (MCL).",
+    "instructions": [
+      "Patient supine, knee in 20-30° flexion.",
+      "Examiner applies a valgus (inward) force to the knee while stabilizing the ankle.",
+      "Positive: Excessive medial opening or pain."
+    ],
+    "image": "/images/clinical/valgus-stress-knee.jpg"
+  },
+  {
+    "id": "odriscolls_hook_test",
+    "name": "O’Driscoll’s Hook Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for distal biceps tendon rupture.",
+    "instructions": [
+      "Patient's elbow is flexed to 90°, forearm supinated.",
+      "Examiner attempts to hook the lateral edge of the biceps tendon with their finger.",
+      "Positive: Inability to hook the tendon."
+    ],
+    "image": "/images/clinical/hook-test.jpg"
+  },
+  {
+    "id": "slr_test",
+    "name": "Straight-Leg Raise (Lasegue’s Test)",
+    "type": "Clinical Test",
+    "purpose": "To assess for lumbar nerve root irritation.",
+    "instructions": [
+      "Patient supine.",
+      "Examiner slowly lifts the symptomatic leg with the knee extended.",
+      "Positive: Radicular pain below the knee between 30-70°."
+    ],
+    "image": "/images/clinical/slr-test.jpg"
+  },
+  {
+    "id": "bragard_test",
+    "name": "Bragard Test",
+    "type": "Clinical Test",
+    "purpose": "Confirmatory test for neural origin in SLR.",
+    "instructions": [
+      "Perform SLR to the level of pain, then lower the leg 5°.",
+      "Passively dorsiflex the foot.",
+      "Positive: Reproduction of radicular symptoms."
+    ],
+    "image": "/images/clinical/bragard-test.jpg"
+  },
+  {
+    "id": "bowstring_test",
+    "name": "Bowstring Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for sciatic nerve tension.",
+    "instructions": [
+      "Perform SLR to paint point, then flex the knee slightly (20°).",
+      "Apply pressure to the popliteal nerve in the fossa.",
+      "Positive: Reproduction of radicular symptoms."
+    ],
+    "image": "/images/clinical/bowstring-test.jpg"
+  },
+  {
+    "id": "bicycle_stress_test",
+    "name": "Bicycle Stress Test",
+    "type": "Clinical Test",
+    "purpose": "To differentiate between neurogenic and vascular claudication.",
+    "instructions": [
+      "Patient pedals a stationary bike in an upright posture until symptoms appear.",
+      "Patient pedals again while leaning forward (flexed spine).",
+      "Positive for neurogenic: Increased exercise tolerance when flexed."
+    ],
+    "image": "/images/clinical/bicycle-test.jpg"
+  },
+  {
+    "id": "two_stage_treadmill_test",
+    "name": "Two-Stage Treadmill Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for spinal stenosis.",
+    "instructions": [
+      "Test 1: Patient walks on a level treadmill.",
+      "Test 2: Patient walks on an uphill treadmill.",
+      "Positive: Symptoms take longer to appear or are less severe on the uphill (flexed) walk."
+    ],
+    "image": "/images/clinical/treadmill-test.jpg"
+  },
+  {
+    "id": "lumbar_extension_loading",
+    "name": "Lumbar Extension-Loading Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for facet joint syndrome or spondylolysis.",
+    "instructions": [
+      "Patient stands and extends the lumbar spine while rotating toward the symptomatic side.",
+      "Positive: Reproduction of localized low back pain."
+    ],
+    "image": "/images/clinical/extension-loading.jpg"
+  },
+  {
+    "id": "femoral_nerve_stretch",
+    "name": "Femoral Nerve Stretch Test (Wasserman Sign)",
+    "type": "Clinical Test",
+    "purpose": "To assess for L2-L4 nerve root irritation.",
+    "instructions": [
+      "Patient prone.",
+      "Examiner flexes the patient's knee and then extends the hip.",
+      "Positive: Pain in the anterior thigh."
+    ],
+    "image": "/images/clinical/femoral-stretch.jpg"
+  },
+  {
+    "id": "kernig_test",
+    "name": "Kernig Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for meningeal irritation or dural tension.",
+    "instructions": [
+      "Patient supine with hip and knee flexed to 90°.",
+      "Examiner attempts to passively extend the knee.",
+      "Positive: Resistance to extension and pain in the neck or back."
+    ],
+    "image": "/images/clinical/kernig-test.jpg"
+  },
+  {
+    "id": "milgram_test",
+    "name": "Milgram Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for increased intrathecal pressure (e.g., disc herniation).",
+    "instructions": [
+      "Patient supine.",
+      "Patient is asked to lift both legs 2 inches off the table and hold for 30 seconds.",
+      "Positive: Inability to hold or reproduction of symptoms."
+    ],
+    "image": "/images/clinical/milgram-test.jpg"
+  },
+  {
+    "id": "lateral_lumbar_flexion",
+    "name": "Lateral Lumbar Flexion (Finger Tip to Floor Test)",
+    "type": "Clinical Test",
+    "purpose": "To assess lumbar mobility and asymmetry.",
+    "instructions": [
+      "Patient stands with feet together.",
+      "Patient slides their hand down the side of their leg as far as possible.",
+      "Measure distance from third finger to floor.",
+      "Positive: Significant asymmetry between sides."
+    ],
+    "image": "/images/clinical/finger-tip-floor.jpg"
+  },
+  {
+    "id": "modified_schober_test",
+    "name": "Modified Schober’s Test",
+    "type": "Clinical Test",
+    "purpose": "To measure lumbar spine flexion range of motion.",
+    "instructions": [
+      "Mark S2 spinous process and 10cm above, 5cm below.",
+      "Patient bends forward as far as possible.",
+      "Positive: Extension of distance less than 5cm suggests restricted mobility (e.g., AS)."
+    ],
+    "image": "/images/clinical/schober-test.jpg"
+  },
+  {
+    "id": "painful_arc_test",
+    "name": "Painful Arc Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for subacromial impingement.",
+    "instructions": [
+      "Patient actively abducts the arm in the scapular plane.",
+      "Positive: Pain between 60° and 120° of abduction."
+    ],
+    "image": "/images/clinical/painful-arc.jpg"
+  },
+  {
+    "id": "neer_impingement_sign",
+    "name": "Neer Impingement Sign",
+    "type": "Clinical Test",
+    "purpose": "To assess for subacromial impingement.",
+    "instructions": [
+      "Examiner stabilizes the scapula and passively flexes the arm to its end-range.",
+      "Positive: Pain in the subacromial region."
+    ],
+    "image": "/images/clinical/neer-sign.jpg"
+  },
+  {
+    "id": "hawkins_kennedy_test",
+    "name": "Hawkins–Kennedy Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for subacromial impingement.",
+    "instructions": [
+      "Patient's shoulder and elbow flexed to 90°.",
+      "Examiner forces internal rotation of the humerus.",
+      "Positive: Pain in the subacromial region."
+    ],
+    "image": "/images/clinical/hawkins-kennedy.jpg"
+  },
+  {
+    "id": "jobes_test",
+    "name": "Jobe’s Test",
+    "type": "Clinical Test",
+    "purpose": "To assess the supraspinatus tendon.",
+    "instructions": [
+      "Arm at 90° abduction, 30° horizontal flexion, full internal rotation ('thumb down').",
+      "Examiner applies downward pressure while patient resists.",
+      "Positive: Pain or weakness."
+    ],
+    "image": "/images/clinical/jobes-test.jpg"
+  },
+  {
+    "id": "empty_can_test",
+    "name": "Empty Can Test (Supraspinatus)",
+    "type": "Clinical Test",
+    "purpose": "Identical to Jobe's test, specifically for supraspinatus.",
+    "instructions": [
+      "Abduct arm to 90°, 30° forward, internal rotation.",
+      "Resist downward force.",
+      "Positive: Weakness or pain."
+    ],
+    "image": "/images/clinical/empty-can.jpg"
+  },
+  {
+    "id": "infraspinatus_test",
+    "name": "Infraspinatus Test",
+    "type": "Clinical Test",
+    "purpose": "To assess the infraspinatus tendon.",
+    "instructions": [
+      "Arm at side, elbow flexed to 90°.",
+      "Examiner resists the patient’s attempt at external rotation.",
+      "Positive: Pain or weakness."
+    ],
+    "image": "/images/clinical/infraspinatus-test.jpg"
+  },
+  {
+    "id": "belly_press_test",
+    "name": "Subscapularis (Belly Press Test)",
+    "type": "Clinical Test",
+    "purpose": "To assess the subscapularis muscle when internal rotation is limited.",
+    "instructions": [
+      "Patient places hand on belly and presses inward.",
+      "Positive: Elbow drops behind the plane of the body or inability to press."
+    ],
+    "image": "/images/clinical/belly-press.jpg"
+  },
+  {
+    "id": "external_rotation_lag_sign",
+    "name": "Lag Sign (External Rotation)",
+    "type": "Clinical Test",
+    "purpose": "To assess for full-thickness infraspinatus/supraspinatus tears.",
+    "instructions": [
+      "Arm at side, flexed elbow, examiner passively rotates arm to full external rotation.",
+      "Patient is asked to hold the position.",
+      "Positive: 'Lag' or inability to maintain the position."
+    ],
+    "image": "/images/clinical/lag-sign.jpg"
+  },
+  {
+    "id": "drop_sign",
+    "name": "Drop Sign",
+    "type": "Clinical Test",
+    "purpose": "To assess for infraspinatus tears.",
+    "instructions": [
+      "Arm in 90° abduction, elbow flexed 90°, full external rotation.",
+      "Examiner releases the arm and patient tries to hold.",
+      "Positive: Arm 'drops' toward internal rotation."
+    ],
+    "image": "/images/clinical/drop-sign.jpg"
+  },
+  {
+    "id": "lift_off_test",
+    "name": "Lift-Off Test",
+    "type": "Clinical Test",
+    "purpose": "To assess the subscapularis muscle.",
+    "instructions": [
+      "Patient places the back of their hand on their lumbar spine.",
+      "Patient is asked to lift the hand away from the back.",
+      "Positive: Inability to lift the hand."
+    ],
+    "image": "/images/clinical/lift-off.jpg"
+  },
+  {
+    "id": "speed_test",
+    "name": "Speed Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for bicipital tendinopathy.",
+    "instructions": [
+      "Patient's arm extended, forearm supinated.",
+      "Examiner resists active shoulder flexion from 0 to 60°.",
+      "Positive: Pain in the bicipital groove."
+    ],
+    "image": "/images/clinical/speed-test.jpg"
+  },
+  {
+    "id": "yergasons_test",
+    "name": "Yergason’s Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for bicipital tendinopathy or SLAP lesions.",
+    "instructions": [
+      "Elbow flexed to 90°, forearm pronated.",
+      "Examiner resists the patient’s attempt to supinate and externally rotate.",
+      "Positive: Pain in the bicipital groove."
+    ],
+    "image": "/images/clinical/yergasons-test.jpg"
+  },
+  {
+    "id": "obriens_test",
+    "name": "O’Brien’s Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for SLAP lesions or AC joint pathology.",
+    "instructions": [
+      "Part 1: Arm 90° flexion, 10° adduction, full internal rotation. Resist downward force.",
+      "Part 2: Repeat with full external rotation.",
+      "Positive: Pain during Part 1 that is relieved during Part 2."
+    ],
+    "image": "/images/clinical/obriens-test.jpg"
+  },
+  {
+    "id": "apprehension_test",
+    "name": "Apprehension Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for anterior shoulder instability.",
+    "instructions": [
+      "Arm 90° abduction, 90° external rotation.",
+      "Examiner slowly increases external rotation.",
+      "Positive: Patient looks apprehensive or expresses fear of dislocation."
+    ],
+    "image": "/images/clinical/apprehension-test.jpg"
+  },
+  {
+    "id": "fulcrum_test",
+    "name": "Fulcrum’s Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for anterior shoulder instability.",
+    "instructions": [
+      "Perform Apprehension Test while placing a hand under the glenohumeral joint (fulcrum).",
+      "Positive: Reproduction of symptoms or apprehension."
+    ],
+    "image": "/images/clinical/fulcrum-test.jpg"
+  },
+  {
+    "id": "drawer_test_knee",
+    "name": "Drawer’s Test (Knee)",
+    "type": "Clinical Test",
+    "purpose": "To assess the integrity of the ACL or PCL.",
+    "instructions": [
+      "Patient supine, knee flexed to 90°.",
+      "Examiner pulls the tibia anteriorly (ACL) or pushes posteriorly (PCL).",
+      "Positive: Excessive translation of the tibia."
+    ],
+    "image": "/images/clinical/drawer-test-knee.jpg"
+  }
+]
