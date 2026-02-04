@@ -2,8 +2,889 @@
   "region": "elbow",
   "title": "Elbow Region",
   "source_file": "Elbow Region.docx",
-  "extracted_at": "2026-02-04T02:45:34.956Z",
-  "conditions": [],
+  "extracted_at": "2026-02-04T02:48:30.458Z",
+  "conditions": [
+    {
+      "name": "General Assessment",
+      "entry_criteria": [
+        {
+          "type": "age",
+          "description": "Age (40 - 55)"
+        }
+      ],
+      "questions": [
+        {
+          "id": "elbow_q1",
+          "question": "What region is pain present in?",
+          "category": "location",
+          "answers": [
+            {
+              "value": "Shoulder",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "Clavicular region",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "Elbow",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 3
+        },
+        {
+          "id": "elbow_q2",
+          "question": "Do you have a recent history of fall or trauma in the affected region?",
+          "category": "location",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 7
+        },
+        {
+          "id": "elbow_q3",
+          "question": "Was the pain onset sudden or gradual?",
+          "category": "general",
+          "answers": [],
+          "source_line": 10
+        },
+        {
+          "id": "elbow_q4",
+          "question": "Do you experience tingling or abnormal sensations?",
+          "category": "neurological",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 13
+        },
+        {
+          "id": "elbow_q5",
+          "question": "Do the following: lifting an object, repetitive wrist extension, gripping objects tightly, and twisting/rotating the forearm as in using a screwdriver or opening a door knob aggravate this pain?",
+          "category": "mechanical",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 16
+        },
+        {
+          "id": "elbow_q6",
+          "question": "Does your job or daily tasks involve repetitive forearm movement?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "no",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 22
+        },
+        {
+          "id": "elbow_q7",
+          "question": "Do your symptoms radiate to the forearm?",
+          "category": "radiation",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 29
+        },
+        {
+          "id": "elbow_q8",
+          "question": "Do you experience early morning stiffness?",
+          "category": "temporal",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 32
+        },
+        {
+          "id": "elbow_q9",
+          "question": "Do you experience weakness in the muscles of the forearm?",
+          "category": "neurological",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 35
+        },
+        {
+          "id": "elbow_q10",
+          "question": "Do you experience discomfort during activities involving lifting, shaking of hands, and gripping?",
+          "category": "mechanical",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 38
+        }
+      ],
+      "recommended_tests": [],
+      "confirmation_methods": [],
+      "observations": [
+        "Provocative Tests",
+        "Maudsley’s test: Resisted extension of the middle finger elicits pain",
+        "Cozen’s test: Pain on resisted wrist extension",
+        "Mill’s Sign: Pt closes hands, dorsiflexes wrist and elbow is extended. The examiner then forces the wrist into palmar flexion against resistance; pain in the epicondyle is positive.",
+        "MEDIAL EPICONDYLITIS (Golfer’s Elbow)",
+        "Age (40 - 55)",
+        "If yes, describe the level of your repetitive activities involving the forearm prior to this condition.",
+        "Medium",
+        "The patient resists forearm pronation with the forearm in extension.",
+        "Patient resists wrist flexion with the forearm in extension and supination (i.e. therapist resists wrist extension with the forearm in extension and supination)",
+        "The test is positive if pain is elicited.",
+        "Rule out ulnar nerve entrapment and medial ligament injury"
+      ],
+      "source_line": 1,
+      "is_general": true
+    },
+    {
+      "name": "Ulnar Nerve Entrapment",
+      "entry_criteria": [],
+      "questions": [
+        {
+          "id": "elbow_q11",
+          "question": "Do you experience pain, numbness or abnormal sensation in the forearm, fourth and ring finger?",
+          "category": "neurological",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 80
+        },
+        {
+          "id": "elbow_q12",
+          "question": "Do you experience weakness of the hand muscles?",
+          "category": "neurological",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No (Could be both)",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": "Could be both"
+              }
+            }
+          ],
+          "source_line": 83
+        }
+      ],
+      "recommended_tests": [],
+      "confirmation_methods": [],
+      "observations": [],
+      "source_line": 79
+    },
+    {
+      "name": "Medial Ligament Injury",
+      "entry_criteria": [
+        {
+          "type": "age",
+          "description": "Age (40-59)"
+        }
+      ],
+      "questions": [
+        {
+          "id": "elbow_q13",
+          "question": "Do you exercise often by lifting weights?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 91
+        }
+      ],
+      "recommended_tests": [],
+      "confirmation_methods": [],
+      "observations": [
+        "Pain indicates the presence of a biceps tendinopathy",
+        "AVULSION OF THE DISTAL BICEPS TENDON",
+        "Start from pain is sudden",
+        "Age (40s)",
+        "Special Test:",
+        "O’Driscoll’s hook test: Palpate for biceps tendon in the antecubital fossa with arms flexed, shoulder ABducted and forearm in supination.",
+        "Test is positive if the biceps tendon cannot be hooked",
+        "OLECRANON BURSITIS (Student’s Elbow)",
+        "If yes to 1 and 2, rule out rheumatoid arthritis."
+      ],
+      "source_line": 87
+    },
+    {
+      "name": "RHEUMATOID ARTHRITIS",
+      "entry_criteria": [],
+      "questions": [
+        {
+          "id": "elbow_q14",
+          "question": "Is a nodule present at the back of the elbow?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 124
+        },
+        {
+          "id": "elbow_q15",
+          "question": "Do you smoke?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 127
+        },
+        {
+          "id": "elbow_q16",
+          "question": "Do you have episodes of fever that resolve spontaneously?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 130
+        },
+        {
+          "id": "elbow_q17",
+          "question": "Is swelling present at the lateral aspect of the radio-humeral joint?",
+          "category": "inflammation",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 133
+        },
+        {
+          "id": "elbow_q18",
+          "question": "Do you experience pain (or tenderness) at the lateral aspect of the radiohumeral joint?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 136
+        }
+      ],
+      "recommended_tests": [
+        "Check for osteopenia, bone erosions, destruction of the radial head and widening of the sigmoid notch.Other laboratories tests as may be necessary"
+      ],
+      "confirmation_methods": [],
+      "observations": [],
+      "source_line": 123
+    },
+    {
+      "name": "OSTEOARTHRITIS",
+      "entry_criteria": [
+        {
+          "type": "age",
+          "description": "Age (60-69) and Male."
+        }
+      ],
+      "questions": [
+        {
+          "id": "elbow_q19",
+          "question": "Do you work a manual job?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 143
+        },
+        {
+          "id": "elbow_q20",
+          "question": "Have you had a previous history of fracture, dislocation, or gout?",
+          "category": "location",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 146
+        },
+        {
+          "id": "elbow_q21",
+          "question": "Are extension and flexion movements limited at elbow?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 149
+        },
+        {
+          "id": "elbow_q22",
+          "question": "Do you experience increasing limitations in performing self-care (styling hair, dressing, shaving)?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 152
+        },
+        {
+          "id": "elbow_q23",
+          "question": "Do you experience pain in the lateral part of the elbow?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 155
+        },
+        {
+          "id": "elbow_q24",
+          "question": "Is tenderness present around the joint?",
+          "category": "general",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 158
+        },
+        {
+          "id": "elbow_q25",
+          "question": "Do you hear a crackling sound on moving the elbow?",
+          "category": "mechanical",
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "rule_out": [],
+                "increase_likelihood": [],
+                "decrease_likelihood": [],
+                "next_questions": [],
+                "red_flag": false,
+                "red_flag_text": null,
+                "notes": null
+              }
+            }
+          ],
+          "source_line": 161
+        }
+      ],
+      "recommended_tests": [],
+      "confirmation_methods": [
+        "Radiographic confirmation – Check for joint space narrowing, osteophyte formation, and subchondral sclerosis."
+      ],
+      "observations": [],
+      "source_line": 141
+    }
+  ],
   "raw_text": "ELBOW TENDINOPATHIES  (General Questions)\n\n\n\nAge\n\nWhat region is pain present in?\n\nShoulder\n\nClavicular region\n\nElbow\n\nDo you have a recent history of fall or trauma in the affected region?\n\nYes\n\nNo\n\nWas the pain onset sudden or gradual?\n\nSudden (Rule out rupture, link to avulsion of the biceps tendon)\n\nGradual\n\nDo you experience tingling or abnormal sensations?\n\nYes\n\nNo\n\nDo the following: lifting an object, repetitive wrist extension, gripping objects tightly, and twisting/rotating the forearm as in using a screwdriver or opening a door knob aggravate this pain? \n\nYes\n\nNo\n\nNB: If yes to 6, probe the following conditions.\n\n\n\nLATERAL ELBOW TENDINOPATHY (aka Tennis Elbow or Lateral Epicondylitis)\n\nAge (40 - 55)\n\nDoes your job or daily tasks involve repetitive forearm movement?\n\nYes\n\nno\n\nIf yes, describe the level of your repetitive activities involving the forearm prior to this condition.\n\nLow\n\nMedium\n\nHigh\n\nDo your symptoms radiate to the forearm?\n\nYes\n\nNo\n\nDo you experience early morning stiffness?\n\nYes\n\nNo\n\nDo you experience weakness in the muscles of the forearm?\n\nYes\n\nNo\n\nDo you experience discomfort during activities involving lifting, shaking of hands, and gripping?\n\nYes\n\nNo\n\nObservation\n\nTest:\n\nIs palpation of the lateral epicondyle painful?\n\nYes\n\nNo\n\n\n\nProvocative Tests\n\nMaudsley’s test: Resisted extension of the middle finger elicits pain\n\nCozen’s test: Pain on resisted wrist extension\n\nMill’s Sign: Pt closes hands, dorsiflexes wrist and elbow is extended. The examiner then forces the wrist into palmar flexion against resistance; pain in the epicondyle is positive.\n\n\n\n\n\nMEDIAL EPICONDYLITIS (Golfer’s Elbow)\n\nAge (40 - 55)\n\nIs tenderness present over the medial epicondyle?\n\nYes\n\nNo\n\nDoes your job or daily tasks involve repetitive forearm movement?\n\nYes\n\nno\n\nIf yes, describe the level of your repetitive activities involving the forearm prior to this condition.\n\nLow\n\nMedium\n\nHigh\n\nDo your symptoms radiate to the forearm?\n\nYes\n\nNo\n\nDo you experience early morning stiffness?\n\nYes\n\nNo\n\nDo you experience weakness in the muscles of the forearm?\n\nYes\n\nNo\n\nDo you experience discomfort during activities involving lifting and shaking of hands?\n\nYes\n\nNo\n\nObservation\n\nThe patient resists forearm pronation with the forearm in extension.\n\nPatient resists wrist flexion with the forearm in extension and supination (i.e. therapist resists wrist extension with the forearm in extension and supination)\n\nThe test is positive if pain is elicited.\n\n\n\nRule out ulnar nerve entrapment and medial ligament injury\n\nFor Ulnar Nerve Entrapment:\n\nDo you experience pain, numbness or abnormal sensation in the forearm, fourth and ring finger?\n\nYes\n\nNo\n\nDo you experience weakness of the hand muscles?\n\nYes\n\nNo (Could be both)\n\nCheck if muscle bulk in hand is normal (Extreme cases may include atrophy)\n\n\n\nFor Medial Ligament Injury:\n\nValgus Stress Test: Place forearm in supine position, flex elbow up till about 30 deg. Palpate MCL and apply lateral pressure (Abduction)Positive test: Increased laxity of MCL and pain.\n\n\n\n\n\n\n\n\n\n\n\n\n\nDISTAL BICEPS TENDINOPATHY (Confirmation)\n\nAge (40-59)\n\nDo you exercise often by lifting weights? \n\nYes\n\nNo\n\n\n\nObservation\n\nCheck if pain is present on resisted forearm supination?\n\nPain indicates the presence of a biceps tendinopathy\n\n\n\nAVULSION OF THE DISTAL BICEPS TENDON\n\nStart from pain is sudden\n\nAge (40s)\n\nDid you perform any strenuous activity recently involving your forearm?\n\nYes\n\nNo\n\nDo you feel weakness in the anterior portion of your forearm?\n\nYes\n\nNo\n\nDid you feel a tearing sensation accompanying the pain onset?\n\nYes\n\nNo\n\nDid you observe a shift in the position of the biceps belly?\n\nYes\n\nNo\n\nSpecial Test:\n\nO’Driscoll’s hook test: Palpate for biceps tendon in the antecubital fossa with arms flexed, shoulder ABducted and forearm in supination.\n\nTest is positive if the biceps tendon cannot be hooked\n\n\n\nOLECRANON BURSITIS (Student’s Elbow)\n\nHistory of repeated pressure or friction to the olecranon?\n\nYes\n\nNo\n\nIs olecranon region engorged?\n\nYes\n\nNo\n\nIf yes to 1 and 2, rule out rheumatoid arthritis. \n\n\n\nFOR RHEUMATOID ARTHRITIS\n\nIs a nodule present at the back of the elbow?\n\nYes\n\nNo\n\nDo you smoke?\n\nYes\n\nNo\n\nDo you have episodes of fever that resolve spontaneously?\n\nYes\n\nNo\n\nIs swelling present at the lateral aspect of the radio-humeral joint?\n\nYes\n\nNo\n\nDo you experience pain (or tenderness) at the lateral aspect of the radiohumeral joint?\n\nYes\n\nNo\n\nTEST\n\nCheck for osteopenia, bone erosions, destruction of the radial head and widening of the sigmoid notch.Other laboratories tests as may be necessary\n\n\n\n\n\nFOR OSTEOARTHRITIS \n\nAge (60-69) and Male.\n\nDo you work a manual job?\n\nYes\n\nNo\n\nHave you had a previous history of fracture, dislocation, or gout?\n\nYes\n\nNo\n\nAre extension and flexion movements limited at elbow?\n\nYes\n\nNo\n\nDo you experience increasing limitations in performing self-care (styling hair, dressing, shaving)?\n\nYes\n\nNo\n\nDo you experience pain in the lateral part of the elbow?\n\nYes\n\nNo\n\nIs tenderness present around the joint?\n\nYes\n\nNo\n\nDo you hear a crackling sound on moving the elbow?\n\nYes\n\nNo\n\nTEST\n\nRadiographic confirmation – Check for joint space narrowing, osteophyte formation, and subchondral sclerosis.\n\n",
   "extraction_messages": []
 }
