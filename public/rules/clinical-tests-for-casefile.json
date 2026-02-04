@@ -1,5 +1,1347 @@
 {
-  "generatedAt": "2026-02-04T09:29:41.403Z",
+  "generatedAt": "2026-02-04T09:31:19.122Z",
   "version": "1.0.0",
-  "conditionTests": []
+  "conditionTests": [
+    {
+      "region": "ankle",
+      "condition": "General Assessment",
+      "conditionId": "ankle_general_assessment",
+      "recommendedTests": [
+        "Clinical Assessment"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Achilles Tendinopathy",
+      "conditionId": "ankle_achilles_tendinopathy",
+      "recommendedTests": [
+        "Radiographic Confirmation",
+        "Imaging Study"
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic Confirmation",
+          "procedure": "Imaging study to confirm diagnosis",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Imaging Study",
+          "procedure": "Use ultrasound to investigate tears",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Achilles Tendon Rupture",
+      "conditionId": "ankle_achilles_tendon_rupture",
+      "recommendedTests": [
+        "Clinical Observation",
+        "Thompson’s or Simmond’s Test",
+        "Radiographic Imaging"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if plantarflexion of the ankle is weak.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Thompson’s or Simmond’s Test",
+          "procedure": "Patient lies prone and the calf is squeezed. If tendon is ruptured, the foot will remain still when it ought to contract involuntarily.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Radiographic Imaging",
+          "procedure": "Use ultrasound to confirm the diagnosis.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Traction Apophysitis (Sever’s Disease)",
+      "conditionId": "ankle_traction_apophysitis_(sever’s_disease)",
+      "recommendedTests": [
+        "Radiographic confirmation",
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic confirmation",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for density of apophysitis and check for fragmentation of the apophysitis.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Calcaneal Bursitis",
+      "conditionId": "ankle_calcaneal_bursitis",
+      "recommendedTests": [
+        "Clinical Assessment"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Plantar Fasciitis",
+      "conditionId": "ankle_plantar_fasciitis",
+      "recommendedTests": [
+        "Confirmation using ultrasound to check for thickening around the heel.",
+        "Doppler test to show increased local blood flow and neovascularisation"
+      ],
+      "procedures": [
+        {
+          "testName": "Confirmation using ultrasound to check for thickening around the heel.",
+          "procedure": "Ultrasound imaging to assess soft tissue structures.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Doppler test to show increased local blood flow and neovascularisation",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "ANKLE LIGAMENT INJURIES",
+      "conditionId": "ankle_ankle_ligament_injuries",
+      "recommendedTests": [
+        "Clinical Assessment"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Acute Injury of Lateral Ligaments",
+      "conditionId": "ankle_acute_injury_of_lateral_ligaments",
+      "recommendedTests": [
+        "Radiographic Confirmation"
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic Confirmation",
+          "procedure": "Imaging study to confirm diagnosis",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Recurrent Lateral Instability",
+      "conditionId": "ankle_recurrent_lateral_instability",
+      "recommendedTests": [
+        "Talar tilt test",
+        "Anterior Drawer Test",
+        "Special Test for Recurrent Lateral Instability"
+      ],
+      "procedures": [
+        {
+          "testName": "Talar tilt test",
+          "procedure": "The ankle is held in the neutral position, examiner stabilised the tibia just above the ankle and then tries to force the ankle into maximum inversion. The ROM can be measured or compared with the contralateral side.Inversion laxity suggests injury to calcaneofibular and anterior talofibular ligaments (ATFL).",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Anterior Drawer Test",
+          "procedure": "Patient sits with knee flexed at 90 deg and ankle in plantarflexion of about 10 deg. The lower leg is stabilised by the examiner and the force patient’s heel forward over the tibia. If positive, the talus can be felt sliding forwards and backwards. Laxity indicates tear of the ATFL.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Special Test for Recurrent Lateral Instability",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Deltoid Ligament Tear",
+      "conditionId": "ankle_deltoid_ligament_tear",
+      "recommendedTests": [
+        "Radiographic Confirmation",
+        "Clinical Observation",
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic Confirmation",
+          "procedure": "Imaging study to confirm diagnosis",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if foot is everted and externally rotated.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for widening of the medial joint space in the mortise view, check if talus is tilted, check for fracture or dislocation of the proximal fibula.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Tears of Inferior Tibiofibular Ligaments",
+      "conditionId": "ankle_tears_of_inferior_tibiofibular_ligaments",
+      "recommendedTests": [
+        "Squeeze Test"
+      ],
+      "procedures": [
+        {
+          "testName": "Squeeze Test",
+          "procedure": "Compress the leg firmly above the ankle. Test is positive if pain is felt over the syndesmosis.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "MALLEOLAR FRACTURES OF THE ANKLE",
+      "conditionId": "ankle_malleolar_fractures_of_the_ankle",
+      "recommendedTests": [
+        "Confirm fracture using radiographic imaging"
+      ],
+      "procedures": [
+        {
+          "testName": "Confirm fracture using radiographic imaging",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "CALCANEAL FRACTURES",
+      "conditionId": "ankle_calcaneal_fractures",
+      "recommendedTests": [
+        "Radiographic Confirmation",
+        "Yes (Refer for laboratory confirmation)",
+        "Clinical Observation",
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic Confirmation",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Yes (Refer for laboratory confirmation)",
+          "procedure": "Imaging study to confirm clinical diagnosis.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if two-point discrimination is present.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if pain is present on passive movement of the toes",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "RHEUMATOID ARTHRITIS",
+      "conditionId": "ankle_rheumatoid_arthritis",
+      "recommendedTests": [
+        "Radiographic Confirmation",
+        "Clinical Observation",
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic Confirmation",
+          "procedure": "Imaging study to confirm diagnosis",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for the following deformities",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for osteoporosis, and periarticular erosion at the metatarsophalangeal joint.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "RA of Ankle and Hindfoot",
+      "conditionId": "ankle_ra_of_ankle_and_hindfoot",
+      "recommendedTests": [
+        "Radiographic confirmation. Check for osteoporosis, erosion of the tarsal and ankle joints and the swelling of soft-tissues."
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic confirmation. Check for osteoporosis, erosion of the tarsal and ankle joints and the swelling of soft-tissues.",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "OSTEOARTHRITIS",
+      "conditionId": "ankle_osteoarthritis",
+      "recommendedTests": [
+        "Radiographic confirmation – check for joint space narrowing, osteophytes formation, subchondral sclerosis, and cyst formation.",
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic confirmation – check for joint space narrowing, osteophytes formation, subchondral sclerosis, and cyst formation.",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if there:",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "ankle",
+      "condition": "Tarsal Tunnel Syndrome",
+      "conditionId": "ankle_tarsal_tunnel_syndrome",
+      "recommendedTests": [
+        "Tinel’s sign",
+        "Dorsiflexion-Eversion Test",
+        "Clinical Observation",
+        "Clinical Observation",
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Tinel’s sign",
+          "procedure": "Percussion of the tarsal tunnel. Positive if this results in a distal radiation of paraesthesia",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Dorsiflexion-Eversion Test",
+          "procedure": "Place the patient’s foot into dorsiflexion and eversion and hold for 5-10 seconds. Positive if patient’s symptom is elicited.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for atrophy of the abductor hallucis",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for arch stability",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for the position of the talus and calcaneus",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "cervical",
+      "condition": "Cervical Disc Herniation",
+      "conditionId": "cervical_cervical_disc_herniation",
+      "recommendedTests": [
+        "Spurling’s Test (Maximal Cervical Compression and Foraminal Compression Test)",
+        "Cervical Distraction Test",
+        "Radiographic confirmation",
+        "Clinical Observation",
+        "MRI test"
+      ],
+      "procedures": [
+        {
+          "testName": "Spurling’s Test (Maximal Cervical Compression and Foraminal Compression Test)",
+          "procedure": "The neck is placed in extension, lateral flexion, and axial compression. The test is positive if pain is present and radiates to the arm.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Cervical Distraction Test",
+          "procedure": "The patient lies supine and the neck is positioned comfortably.  The examiner places hand around the patient’s mastoid process. The examiner then slightly flexes the patient’s neck and pull the head towards your torso.Test is positive if the symptoms reduces or is eliminated with traction.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Radiographic confirmation",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if cervical rotation on the affected side is less than 60 degrees.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "MRI test",
+          "procedure": "MRI imaging study to visualize soft tissue structures and confirm diagnosis.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "cervical",
+      "condition": "Cervical Spondylosis",
+      "conditionId": "cervical_cervical_spondylosis",
+      "recommendedTests": [
+        "Spurling’s Test (Maximal Cervical Compression and Foraminal Compression Test)",
+        "Radiographic confirmation"
+      ],
+      "procedures": [
+        {
+          "testName": "Spurling’s Test (Maximal Cervical Compression and Foraminal Compression Test)",
+          "procedure": "The neck is placed in extension, lateral flexion, and axial compression. The test is positive if pain is present and radiates to the arm.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Radiographic confirmation",
+          "procedure": "check for loss of normal cervical lordosis, and degeneration.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "elbow",
+      "condition": "General Assessment",
+      "conditionId": "elbow_general_assessment",
+      "recommendedTests": [
+        "Provocative Tests",
+        "Maudsley’s test",
+        "Cozen’s test",
+        "Mill’s Sign",
+        "Patient resists wrist flexion with the forearm in extension and supination (i.e. therapist resists wrist extension with the forearm in extension and supination)",
+        "The test is positive if pain is elicited."
+      ],
+      "procedures": [
+        {
+          "testName": "Provocative Tests",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Maudsley’s test",
+          "procedure": "Resisted extension of the middle finger elicits pain",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Cozen’s test",
+          "procedure": "Pain on resisted wrist extension",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Mill’s Sign",
+          "procedure": "Pt closes hands, dorsiflexes wrist and elbow is extended. The examiner then forces the wrist into palmar flexion against resistance; pain in the epicondyle is positive.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Patient resists wrist flexion with the forearm in extension and supination (i.e. therapist resists wrist extension with the forearm in extension and supination)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "The test is positive if pain is elicited.",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "elbow",
+      "condition": "Ulnar Nerve Entrapment",
+      "conditionId": "elbow_ulnar_nerve_entrapment",
+      "recommendedTests": [
+        "Clinical Assessment"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "elbow",
+      "condition": "Medial Ligament Injury",
+      "conditionId": "elbow_medial_ligament_injury",
+      "recommendedTests": [
+        "Special Test",
+        "O’Driscoll’s hook test",
+        "Test is positive if the biceps tendon cannot be hooked"
+      ],
+      "procedures": [
+        {
+          "testName": "Special Test",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "O’Driscoll’s hook test",
+          "procedure": "Palpate for biceps tendon in the antecubital fossa with arms flexed, shoulder ABducted and forearm in supination.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Test is positive if the biceps tendon cannot be hooked",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "elbow",
+      "condition": "RHEUMATOID ARTHRITIS",
+      "conditionId": "elbow_rheumatoid_arthritis",
+      "recommendedTests": [
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for osteopenia, bone erosions, destruction of the radial head and widening of the sigmoid notch.Other laboratories tests as may be necessary",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "elbow",
+      "condition": "OSTEOARTHRITIS",
+      "conditionId": "elbow_osteoarthritis",
+      "recommendedTests": [
+        "Radiographic confirmation – Check for joint space narrowing, osteophyte formation, and subchondral sclerosis."
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic confirmation – Check for joint space narrowing, osteophyte formation, and subchondral sclerosis.",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "lumbar",
+      "condition": "Non-specific low-back pain",
+      "conditionId": "lumbar_non-specific_low-back_pain",
+      "recommendedTests": [
+        "Lasegue’s Test (Straight-Leg Raise)",
+        "Bragard Test"
+      ],
+      "procedures": [
+        {
+          "testName": "Lasegue’s Test (Straight-Leg Raise)",
+          "procedure": "Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Bragard Test",
+          "procedure": "This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "lumbar",
+      "condition": "Sciatica",
+      "conditionId": "lumbar_sciatica",
+      "recommendedTests": [
+        "Lasegue’s Test (Straight-Leg Raise)",
+        "Bragard Test",
+        "Bowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign)",
+        "Clinical Observation",
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Lasegue’s Test (Straight-Leg Raise)",
+          "procedure": "Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Bragard Test",
+          "procedure": "This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Bowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign)",
+          "procedure": "This can be done while patient is lying in supine or sitting position. The examiner flexes the knee and applies pressure on the popliteal fossa evoking sciatica.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if knee jerk reflex is present",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if ankle jerk reflex is present",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "lumbar",
+      "condition": "Lumbar spinal stenosis",
+      "conditionId": "lumbar_lumbar_spinal_stenosis",
+      "recommendedTests": [
+        "Bicycle Stress Test",
+        "Two-stage Treadmill Test",
+        "The Lumbar Extension-Loading Test",
+        "Clinical Observation",
+        "Clinical Observation",
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Bicycle Stress Test",
+          "procedure": "Record the amount of time the patient spends on a cycle ergometer while in a neutral lumbar position and slumped position. If patient spends more time in the slumped position, a lumbar spinal stenosis is indicated.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Two-stage Treadmill Test",
+          "procedure": "The patient walks on a flat treadmill and the amount of time spent is recorded and compared with the amount of time while the treadmill is inclined such that patient walks in flexion.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "The Lumbar Extension-Loading Test",
+          "procedure": "The examiner ensures that the lumbar region is in moderate extension (10-30 deg) while standing and patient lies supine. Check if there are changes in the symptoms that the patient feels.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if a wide-based gait is present",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if Trendenlenburg’s sign is present",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if Achilles tendon reflex is diminished",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "lumbar",
+      "condition": "Lumbar Disc Herniation",
+      "conditionId": "lumbar_lumbar_disc_herniation",
+      "recommendedTests": [
+        "Lasegue’s Test (Straight-Leg Raise)",
+        "Bragard Test",
+        "Bowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign)",
+        "Femoral Nerve Stretch Test (Wasserman sign)",
+        "Kernig Test",
+        "Milgram Test",
+        "Radiographic confirmation",
+        "Clinical Observation",
+        "Clinical Observation",
+        "Clinical Observation",
+        "Clinical Observation",
+        "MRI test."
+      ],
+      "procedures": [
+        {
+          "testName": "Lasegue’s Test (Straight-Leg Raise)",
+          "procedure": "Examiner raises legs of patient up so that hip flexion is achieved while knee is extended. Test is positive if patient feels pain along the course of the sciatic nerve and below the knee when hip is between 30 - 70 degrees of flexion.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Bragard Test",
+          "procedure": "This is a modification of the SLR and dorsiflexion is applied at the end of the SLR. This reduces the angle where the test is positive.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Bowstring Test (Popliteal Compression Test/ Tibial Nerve Stretch Sign)",
+          "procedure": "This can be done while patient is lying in supine or sitting position. The examiner flexes the knee and applies pressure on the popliteal fossa evoking sciatica.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Femoral Nerve Stretch Test (Wasserman sign)",
+          "procedure": "Patient is in prone position, knee is flexed and hip is extended. Reproduction of pain in anterior thigh is positive.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Kernig Test",
+          "procedure": "Patient’s neck is flexed, hip flexed and the leg is extended. Pain is reproduced in this position.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Milgram Test",
+          "procedure": "pain is reproduced on straight leg elevation for 30 seconds.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Radiographic confirmation",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for tenderness in the paraspinal musculature",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for spasms in the paraspinal musculature",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for decreased reflexes: patellar and ankle jerk",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for trendenenburg’s sign",
+          "positiveSign": ""
+        },
+        {
+          "testName": "MRI test.",
+          "procedure": "MRI imaging study to visualize soft tissue structures and confirm diagnosis.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "lumbar",
+      "condition": "Cauda Equina Syndrome",
+      "conditionId": "lumbar_cauda_equina_syndrome",
+      "recommendedTests": [
+        "Radiographic confirmation",
+        "Clinical Observation"
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic confirmation",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check for babinski sign and clonus to rule out upper motor neuron involvement",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "lumbar",
+      "condition": "Axial spondyloarthropathy",
+      "conditionId": "lumbar_axial_spondyloarthropathy",
+      "recommendedTests": [
+        "Lateral lumbar flexion (Finger tip to Floor Test)",
+        "The patient stands with heel touching wall and feet wide apart, and back against the wall. Then the examiner measures the distance from middle finger to the floor. Then patient bends to side (lateral flexion)",
+        "Modified Schrober’s test",
+        "Chest expansion- Normal chest expansion is ≥ 5 cm.",
+        "Occiput to wall distance- Normally is 0",
+        "Tragus to wall distance- Normally is < 15cm",
+        "Intermalleolar distance- Normally >100 cm",
+        "Confirmatory test through laboratory investigations."
+      ],
+      "procedures": [
+        {
+          "testName": "Lateral lumbar flexion (Finger tip to Floor Test)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "The patient stands with heel touching wall and feet wide apart, and back against the wall. Then the examiner measures the distance from middle finger to the floor. Then patient bends to side (lateral flexion)",
+          "procedure": ". The distance between the middle finger and the floor is measured again. This measurement is done for both sides.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Modified Schrober’s test",
+          "procedure": "Examiner marks both posterior superior iliac spine, and a horizontal line is drawn between both marks. A second line is marked 5cm below the first line, and a third line is marked 10 cm above the first line. Patient is then instructed to flex forward as if attempting to touch their toes.An increase of less than 5cm, shows decreased lumbar spine range of motion, and ankylosing spondylitis.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Chest expansion- Normal chest expansion is ≥ 5 cm.",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Occiput to wall distance- Normally is 0",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Tragus to wall distance- Normally is < 15cm",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Intermalleolar distance- Normally >100 cm",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Confirmatory test through laboratory investigations.",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "shoulder",
+      "condition": "Initial Assessment",
+      "conditionId": "shoulder_initial_assessment",
+      "recommendedTests": [
+        "Clinical Assessment"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "shoulder",
+      "condition": "Shoulder Impingement Syndrome",
+      "conditionId": "shoulder_shoulder_impingement_syndrome",
+      "recommendedTests": [
+        "Clinical Assessment"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "shoulder",
+      "condition": "Subacute tendinitis OR Painfularc syndrome",
+      "conditionId": "shoulder_subacute_tendinitis_or_painfularc_syndrome",
+      "recommendedTests": [
+        "Clinical Assessment"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "shoulder",
+      "condition": "Chronic Tendinitis",
+      "conditionId": "shoulder_chronic_tendinitis",
+      "recommendedTests": [
+        "Clinical Assessment"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "shoulder",
+      "condition": "Cuff Disruption",
+      "conditionId": "shoulder_cuff_disruption",
+      "recommendedTests": [
+        "Clinical Assessment"
+      ],
+      "procedures": [
+        {
+          "testName": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "shoulder",
+      "condition": "CALCIFIC TENDINITIS",
+      "conditionId": "shoulder_calcific_tendinitis",
+      "recommendedTests": [
+        "Check X-ray to rule asymptomatic calcification",
+        "Lesions of the Biceps Tendon (Confirmation)",
+        "Biccipital Tendinitis as above",
+        "Speed Test",
+        "A positive sign, pain in the bicipital grove is replicable",
+        "Yergasom’s test",
+        "A positive sign, this replicates the pain in the bicipital group tenderness.",
+        "Rupture of the Biceps Tendon (Confirmation)",
+        "Age (over 50yrs)",
+        "Ask pt to lift or offer resistance to biceps contraction",
+        "Is a prominent lump is seen in lower arm",
+        "The upper arm becomes painful and bruised",
+        "Hypertrophy and intra-articular entrapment (the hourglass biceps)",
+        "Ask patient to elevate the shoulder",
+        "SLAP LESION (Confirmation)",
+        "Ask the patient to throw to reach a far distance where above shoulder movement is indicated.",
+        "Patient is unable to",
+        "Patient is able to",
+        "Patient is able to (with pain involvement)",
+        "Instruct the patient to flex the arm up to 90 deg with the elbow in full extension.Then ask pt to adduct arm 10-15 deg medial to sagittal plane. Arm is maximally internally rotated and examiner applies downward pressure while patient is asked to resist.  Procedure is then repeated in supination",
+        "Positive",
+        "ADHESIVE CAPSULITIS (Frozen Shoulder Syndrome)",
+        "Age (40-60)",
+        "Yes (Check for adhesive capsulitis– early phase. Carry out active and passive movements)",
+        "Currently, do you find it difficult to turn your shoulder in (Internal rotation)",
+        "Yes (Check for adhesive capsulitis – freezing phase)",
+        "Yes (Traumatic Adhesive Capsulitis)",
+        "No (Non-traumatic Adhesive Capsulitis)",
+        "Test for Adhesive Capsulitis",
+        "Clinical Observation",
+        "Active and Passive range of motion is limited in Adhesive Capsulitis",
+        "Rule out other causes of stiffness with imaging",
+        "Special Test for Biccipital Tendinitis",
+        "Is buckling of tendon present?",
+        "Do you feel pain on shoulder elevation?",
+        "Can the patient elevate the arm up till the end of the range?",
+        "Did you have any history of fall or trauma with hand stretched out?",
+        "Did you have any history of loading the shoulder region with weight?",
+        "Do you feel a ‘painful click’ when you lift your arm above shoulder height?",
+        "Do you feel weakness in your arm when doing activities above shoulder height?",
+        "Special Test for SLAP (O’Brien’s test)",
+        "At the early phase of this pain, did you find it difficult to turn your shoulder out (External rotation)",
+        "Do you find it easier to move your shoulder backwards (extension)",
+        "Do you experience progressive stiffness in your shoulder?",
+        "Is the pain worse at night?",
+        "Have you had any of the following conditions before",
+        "Have you undergone a neurosurgical procedure before?",
+        "Previous history of fall or trauma to affected side?"
+      ],
+      "procedures": [
+        {
+          "testName": "Check X-ray to rule asymptomatic calcification",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Lesions of the Biceps Tendon (Confirmation)",
+          "procedure": "Imaging study to confirm clinical diagnosis.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Biccipital Tendinitis as above",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Speed Test",
+          "procedure": "Place pt’s arm in shoulder flexion, forearm supination and elbow extension. The examiner then applies pressure to the arm as downward action.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "A positive sign, pain in the bicipital grove is replicable",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Yergasom’s test",
+          "procedure": "Pt places the forearm in the supine position, and the examiner applies resistance against supination.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "A positive sign, this replicates the pain in the bicipital group tenderness.",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Rupture of the Biceps Tendon (Confirmation)",
+          "procedure": "Imaging study to confirm clinical diagnosis.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Age (over 50yrs)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Ask pt to lift or offer resistance to biceps contraction",
+          "procedure": "CT scan to provide detailed cross-sectional imaging.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Is a prominent lump is seen in lower arm",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "The upper arm becomes painful and bruised",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Hypertrophy and intra-articular entrapment (the hourglass biceps)",
+          "procedure": "-(Confirmation)",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Ask patient to elevate the shoulder",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "SLAP LESION (Confirmation)",
+          "procedure": "Imaging study to confirm clinical diagnosis.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Ask the patient to throw to reach a far distance where above shoulder movement is indicated.",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Patient is unable to",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Patient is able to",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Patient is able to (with pain involvement)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Instruct the patient to flex the arm up to 90 deg with the elbow in full extension.Then ask pt to adduct arm 10-15 deg medial to sagittal plane. Arm is maximally internally rotated and examiner applies downward pressure while patient is asked to resist.  Procedure is then repeated in supination",
+          "procedure": "CT scan to provide detailed cross-sectional imaging.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Positive",
+          "procedure": "Pain is elicited by the first manoeuvre, and is reduced or eliminated by the second.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "ADHESIVE CAPSULITIS (Frozen Shoulder Syndrome)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Age (40-60)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Yes (Check for adhesive capsulitis– early phase. Carry out active and passive movements)",
+          "procedure": "CT scan to provide detailed cross-sectional imaging.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Currently, do you find it difficult to turn your shoulder in (Internal rotation)",
+          "procedure": "or move your arms towards your body/chest (Adduction)",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Yes (Check for adhesive capsulitis – freezing phase)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Yes (Traumatic Adhesive Capsulitis)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "No (Non-traumatic Adhesive Capsulitis)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Test for Adhesive Capsulitis",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Clinical Observation",
+          "procedure": "Check if the Active range of motion and passive range of motion is full across shoulder joints",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Active and Passive range of motion is limited in Adhesive Capsulitis",
+          "procedure": "CT scan to provide detailed cross-sectional imaging.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Rule out other causes of stiffness with imaging",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Special Test for Biccipital Tendinitis",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Is buckling of tendon present?",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Do you feel pain on shoulder elevation?",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Can the patient elevate the arm up till the end of the range?",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Did you have any history of fall or trauma with hand stretched out?",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Did you have any history of loading the shoulder region with weight?",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Do you feel a ‘painful click’ when you lift your arm above shoulder height?",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Do you feel weakness in your arm when doing activities above shoulder height?",
+          "procedure": "CT scan to provide detailed cross-sectional imaging.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Special Test for SLAP (O’Brien’s test)",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "At the early phase of this pain, did you find it difficult to turn your shoulder out (External rotation)",
+          "procedure": "and/or take your arm away from your body (abduction)?",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Do you find it easier to move your shoulder backwards (extension)",
+          "procedure": "?",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Do you experience progressive stiffness in your shoulder?",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Is the pain worse at night?",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Have you had any of the following conditions before",
+          "procedure": "Diabetes, Dupuytren’s, hyperlipidemia, hyperthyroidism, cardiac disease, hemiplegia?",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Have you undergone a neurosurgical procedure before?",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Previous history of fall or trauma to affected side?",
+          "procedure": "CT scan to provide detailed cross-sectional imaging.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "shoulder",
+      "condition": "RECURRENT SHOULDER SUBLUXATION",
+      "conditionId": "shoulder_recurrent_shoulder_subluxation",
+      "recommendedTests": [
+        "Apprehension Test",
+        "Patient is in sitting or lying position, the examiner lifts the arn gently into ABduction, external rotation and then extension. Test is positive if Pt senses that humeral head is about to slip out anteriorly and body stiffens in apprehension.",
+        "The test is repeated with the anterior part of shoulder protected.",
+        "Fulcrum’s Test",
+        "Pt lies supine, arm ABducted up to 90 deg. The examiner places their hands over the shoulder to set the fulcrum base. The humeral head is levered forward by extending and externally rotating arm. The patient immediately becomes apprehensive.",
+        "Drawer’s Test",
+        "Patient lies supine , scapula is stabilised with one hand while the upper arm is grasped firmly with the other, and manoeuvring is done forward and backward (like a drawer)"
+      ],
+      "procedures": [
+        {
+          "testName": "Apprehension Test",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Patient is in sitting or lying position, the examiner lifts the arn gently into ABduction, external rotation and then extension. Test is positive if Pt senses that humeral head is about to slip out anteriorly and body stiffens in apprehension.",
+          "procedure": "CT scan to provide detailed cross-sectional imaging.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "The test is repeated with the anterior part of shoulder protected.",
+          "procedure": "CT scan to provide detailed cross-sectional imaging.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Fulcrum’s Test",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Pt lies supine, arm ABducted up to 90 deg. The examiner places their hands over the shoulder to set the fulcrum base. The humeral head is levered forward by extending and externally rotating arm. The patient immediately becomes apprehensive.",
+          "procedure": "CT scan to provide detailed cross-sectional imaging.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Drawer’s Test",
+          "procedure": "Perform clinical test as described in standard protocols.",
+          "positiveSign": ""
+        },
+        {
+          "testName": "Patient lies supine , scapula is stabilised with one hand while the upper arm is grasped firmly with the other, and manoeuvring is done forward and backward (like a drawer)",
+          "procedure": ". The drawer’s test is positive if instability is marked.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "shoulder",
+      "condition": "RHEUMATOID ARTHRITIS",
+      "conditionId": "shoulder_rheumatoid_arthritis",
+      "recommendedTests": [
+        "Radiographic confirmation – check for periarticular erosions, subchondral sclerosis, and resorption."
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic confirmation – check for periarticular erosions, subchondral sclerosis, and resorption.",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    },
+    {
+      "region": "shoulder",
+      "condition": "OSTEOARTHRITIS",
+      "conditionId": "shoulder_osteoarthritis",
+      "recommendedTests": [
+        "Radiographic confirmation – check for distortion of the joint, subchondral sclerosis, osteophyte formation, and narrowing of articular space."
+      ],
+      "procedures": [
+        {
+          "testName": "Radiographic confirmation – check for distortion of the joint, subchondral sclerosis, osteophyte formation, and narrowing of articular space.",
+          "procedure": "Radiographic imaging to assess bony structures and joint alignment.",
+          "positiveSign": ""
+        }
+      ],
+      "confirmationMethods": [],
+      "clinicalObservations": []
+    }
+  ]
 }
