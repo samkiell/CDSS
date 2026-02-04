@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -12,6 +12,8 @@ import {
   Stethoscope,
   Activity,
   ChevronRight,
+  ClipboardList,
+  Target,
 } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { Button, Card, Badge } from '@/components/ui';
@@ -29,6 +31,11 @@ import { toast } from 'sonner';
  * 4. Results rule in or rule out conditions
  * 5. Stop when diagnostic clarity reached or no tests remain
  *
+ * CONTEXT-DRIVEN ENTRY:
+ * - Accepts context from case file via URL search params
+ * - assessmentId, patientId, region, testCount
+ * - Initializes directly into recommended test flow
+ *
  * CONSTRAINTS:
  * - Results are immutable once saved
  * - All actions are fully traceable
@@ -37,6 +44,12 @@ import { toast } from 'sonner';
 export default function GuidedTestPage() {
   const { id } = useParams();
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Context from case file (passed via URL params)
+  const contextRegion = searchParams.get('region');
+  const contextPatientId = searchParams.get('patientId');
+  const contextTestCount = searchParams.get('testCount');
 
   const [isLoading, setIsLoading] = useState(true);
   const [assessmentData, setAssessmentData] = useState(null);
@@ -57,7 +70,13 @@ export default function GuidedTestPage() {
   const fetchTestData = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(`/api/diagnosis/${id}/guided-test`);
+      // Pass context to API for proper initialization
+      const queryParams = new URLSearchParams();
+      if (contextRegion) queryParams.set('region', contextRegion);
+      if (contextPatientId) queryParams.set('patientId', contextPatientId);
+
+      const url = `/api/diagnosis/${id}/guided-test${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
+      const res = await fetch(url);
       const result = await res.json();
 
       if (!result.success) {
@@ -72,12 +91,24 @@ export default function GuidedTestPage() {
         return;
       }
 
+      // Validate that we have tests to perform
+      if (!result.recommendedTests || result.recommendedTests.length === 0) {
+        toast.warning('No recommended tests available for this assessment.');
+        router.push(`/clinician/cases/${id}`);
+        return;
+      }
+
       setAssessmentData(result);
 
       // Load existing completed tests if resuming
       if (result.guidedTestResults?.tests?.length > 0) {
         setCompletedTests(result.guidedTestResults.tests);
         setCurrentTestIndex(result.guidedTestResults.tests.length);
+      }
+
+      // Show initialization message with context
+      if (contextRegion) {
+        toast.success(`Initialized for ${contextRegion} region assessment`);
       }
     } catch (err) {
       console.error('Error loading test data:', err);
@@ -225,10 +256,37 @@ export default function GuidedTestPage() {
               Guided Diagnosis Complete
             </h1>
             <p className="text-muted-foreground text-sm">
-              {assessmentData.patientName} • {assessmentData.region}
+              {assessmentData.patientName} • {assessmentData.region || contextRegion}
             </p>
           </div>
         </div>
+
+        {/* Assessment Context Card */}
+        <Card className="border-primary/20 bg-primary/5 p-4">
+          <div className="grid grid-cols-3 gap-4 text-sm">
+            <div className="flex items-center gap-2">
+              <ClipboardList className="text-primary h-4 w-4" />
+              <div>
+                <p className="text-muted-foreground text-xs">Assessment ID</p>
+                <p className="font-mono text-xs font-bold">{id.slice(-8)}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Target className="text-primary h-4 w-4" />
+              <div>
+                <p className="text-muted-foreground text-xs">Region</p>
+                <p className="font-bold">{assessmentData.region || contextRegion}</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <Activity className="text-primary h-4 w-4" />
+              <div>
+                <p className="text-muted-foreground text-xs">Tests Performed</p>
+                <p className="font-bold">{completedTests.length}</p>
+              </div>
+            </div>
+          </div>
+        </Card>
 
         {/* Refined Diagnosis */}
         {refinedDiagnosis ? (
@@ -369,7 +427,7 @@ export default function GuidedTestPage() {
           <div>
             <h1 className="text-2xl font-black tracking-tight">Guided Diagnosis Test</h1>
             <p className="text-muted-foreground text-sm">
-              {assessmentData.patientName} • {assessmentData.region}
+              {assessmentData.patientName} • {assessmentData.region || contextRegion}
             </p>
           </div>
         </div>
@@ -380,17 +438,39 @@ export default function GuidedTestPage() {
         )}
       </div>
 
-      {/* Initial Diagnosis Reference */}
+      {/* Context Summary Card */}
       <Card className="border-primary/20 bg-primary/5 p-4">
-        <div className="flex items-center gap-3">
-          <Stethoscope className="text-primary h-5 w-5" />
-          <div>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Stethoscope className="text-primary h-5 w-5" />
+            <div>
+              <p className="text-muted-foreground text-xs font-bold uppercase">
+                AI Temporal Diagnosis
+              </p>
+              <p className="font-bold">{assessmentData.temporalDiagnosis}</p>
+            </div>
+          </div>
+          <div className="text-right">
             <p className="text-muted-foreground text-xs font-bold uppercase">
-              AI Temporal Diagnosis
+              Region
             </p>
-            <p className="font-bold">{assessmentData.temporalDiagnosis}</p>
+            <Badge className="bg-primary/10 text-primary">
+              {assessmentData.region || contextRegion}
+            </Badge>
           </div>
         </div>
+        {assessmentData.differentialDiagnoses?.length > 0 && (
+          <div className="mt-3 pt-3 border-t border-primary/20">
+            <p className="text-muted-foreground text-xs mb-2">Differential Diagnoses:</p>
+            <div className="flex flex-wrap gap-2">
+              {assessmentData.differentialDiagnoses.map((diff, index) => (
+                <Badge key={index} variant="outline" className="text-xs">
+                  {diff}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )}
       </Card>
 
       {/* Progress */}
@@ -416,8 +496,23 @@ export default function GuidedTestPage() {
             <div className="bg-primary/10 text-primary rounded-full p-3">
               <Activity className="h-6 w-6" />
             </div>
-            <div>
-              <h2 className="text-xl font-black">{currentTest.name}</h2>
+            <div className="flex-1">
+              <div className="flex items-center gap-2 mb-1">
+                <h2 className="text-xl font-black">{currentTest.name}</h2>
+                {currentTest.isObservation && (
+                  <Badge variant="outline" className="text-xs">Observation</Badge>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-2 mb-2">
+                <Badge className="bg-muted text-muted-foreground text-xs">
+                  {assessmentData.region || contextRegion} Region
+                </Badge>
+                {currentTest.associatedConditions?.map((condition, index) => (
+                  <Badge key={index} className="bg-warning/10 text-warning-foreground text-xs">
+                    {condition}
+                  </Badge>
+                ))}
+              </div>
               <p className="text-muted-foreground mt-2">{currentTest.instruction}</p>
             </div>
           </div>

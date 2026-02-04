@@ -524,14 +524,16 @@ export default function CaseDetailsPage() {
       </CollapsibleSection>
 
       {/* ============================================================
-          SECTION 5: RECOMMENDED TESTS
+          SECTION 5: RECOMMENDED CLINICAL TESTS
           ==============================================================
           Based on temporal diagnosis, shows suggested physical tests.
-          Includes "Begin Guided Diagnosis Test" button.
+          Each test displays: name, associated region, purpose/trigger.
+          Test recommendations are immutable - determined by assessment logic.
+          Includes prominent "Start Test" button for therapist action.
        */}
       <CollapsibleSection
-        title="Recommended Physical Tests"
-        subtitle={`${recommendedTests.length} tests suggested`}
+        title="Recommended Clinical Tests"
+        subtitle={`${recommendedTests.length} tests determined from assessment`}
         icon={<Activity className="h-5 w-5" />}
         isExpanded={expandedSections.tests}
         onToggle={() => toggleSection('tests')}
@@ -539,59 +541,171 @@ export default function CaseDetailsPage() {
         {isLoadingTests ? (
           <div className="flex items-center justify-center py-8">
             <Loader2 className="text-primary h-6 w-6 animate-spin" />
-            <span className="text-muted-foreground ml-2">Loading tests...</span>
+            <span className="text-muted-foreground ml-2">
+              Loading recommended tests...
+            </span>
           </div>
         ) : recommendedTests.length > 0 ? (
           <div className="space-y-4">
-            {recommendedTests.map((test, index) => (
-              <div key={index} className="border-border rounded-xl border p-4">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <p className="font-bold">{test.name}</p>
-                    <p className="text-muted-foreground mt-1 text-sm">
-                      {test.instruction}
-                    </p>
-                    <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
-                      <div className="bg-success/10 rounded-lg p-2">
-                        <p className="text-success font-bold">If Positive:</p>
-                        <p className="text-muted-foreground">
-                          {test.positiveImplication}
-                        </p>
+            {/* Tests Summary Header */}
+            <div className="bg-primary/5 border-primary/20 rounded-xl border p-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
+                    Based on Assessment Results
+                  </p>
+                  <p className="mt-1 text-sm">
+                    <span className="font-bold">{recommendedTests.length}</span> clinical
+                    tests recommended for{' '}
+                    <span className="font-bold">{session.bodyRegion}</span> region
+                  </p>
+                </div>
+                {analysis?.temporalDiagnosis && (
+                  <Badge className="bg-primary/10 text-primary">
+                    {analysis.temporalDiagnosis}
+                  </Badge>
+                )}
+              </div>
+            </div>
+
+            {/* Test List */}
+            <div className="space-y-3">
+              {recommendedTests.map((test, index) => (
+                <div
+                  key={index}
+                  className="border-border hover:border-primary/30 rounded-xl border p-4 transition-colors"
+                >
+                  <div className="flex items-start gap-4">
+                    {/* Test Number */}
+                    <div className="bg-primary/10 text-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold">
+                      {index + 1}
+                    </div>
+
+                    <div className="flex-1">
+                      {/* Test Name */}
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-lg font-bold">{test.name}</h4>
+                        {test.isObservation && (
+                          <Badge variant="outline" className="text-xs">
+                            Observation
+                          </Badge>
+                        )}
                       </div>
-                      <div className="bg-destructive/10 rounded-lg p-2">
-                        <p className="text-destructive font-bold">If Negative:</p>
-                        <p className="text-muted-foreground">
-                          {test.negativeImplication}
-                        </p>
+
+                      {/* Region & Associated Conditions */}
+                      <div className="mt-1 flex flex-wrap items-center gap-2 text-xs">
+                        <span className="bg-muted rounded-md px-2 py-1 font-medium">
+                          {session.bodyRegion} Region
+                        </span>
+                        {test.associatedConditions?.map((condition, ci) => (
+                          <span
+                            key={ci}
+                            className="bg-warning/10 text-warning-foreground rounded-md px-2 py-1"
+                          >
+                            {condition}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Purpose / Instruction */}
+                      <p className="text-muted-foreground mt-2 text-sm">
+                        <span className="text-foreground font-medium">Purpose: </span>
+                        {test.instruction || 'Perform test as per clinical protocol.'}
+                      </p>
+
+                      {/* Clinical Implications */}
+                      <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
+                        <div className="bg-success/10 rounded-lg p-2">
+                          <p className="text-success flex items-center gap-1 font-bold">
+                            <CheckCircle2 className="h-3 w-3" />
+                            Positive Finding:
+                          </p>
+                          <p className="text-muted-foreground mt-1">
+                            {test.positiveImplication}
+                          </p>
+                        </div>
+                        <div className="bg-destructive/10 rounded-lg p-2">
+                          <p className="text-destructive flex items-center gap-1 font-bold">
+                            <AlertCircle className="h-3 w-3" />
+                            Negative Finding:
+                          </p>
+                          <p className="text-muted-foreground mt-1">
+                            {test.negativeImplication}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
 
-            {/* Begin Guided Diagnosis Test Button */}
-            {!guidedResults?.isLocked && (
-              <div className="pt-4">
-                <Button
-                  size="lg"
-                  className="h-14 w-full text-lg font-bold"
-                  onClick={() => router.push(`/clinician/cases/${id}/guided-test`)}
-                >
-                  <Stethoscope className="mr-2 h-5 w-5" />
-                  Begin Guided Diagnosis Test
-                </Button>
+            {/* Start Test Action Button */}
+            {!guidedResults?.isLocked ? (
+              <div className="border-border mt-6 border-t pt-6">
+                <div className="from-primary/10 to-primary/5 rounded-2xl bg-gradient-to-r p-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h4 className="text-lg font-bold">
+                        Ready for Physical Examination
+                      </h4>
+                      <p className="text-muted-foreground mt-1 text-sm">
+                        Proceed through {recommendedTests.length} recommended tests
+                        sequentially
+                      </p>
+                    </div>
+                    <Button
+                      size="lg"
+                      className="h-14 px-8 text-lg font-bold shadow-lg transition-all hover:shadow-xl"
+                      onClick={() => {
+                        // Pass context via URL search params
+                        const params = new URLSearchParams({
+                          assessmentId: id,
+                          patientId: patient?._id || '',
+                          region: session.bodyRegion || '',
+                          testCount: recommendedTests.length.toString(),
+                        });
+                        router.push(
+                          `/clinician/cases/${id}/guided-test?${params.toString()}`
+                        );
+                      }}
+                    >
+                      <Stethoscope className="mr-2 h-6 w-6" />
+                      Start Test
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="border-border mt-4 border-t pt-4">
+                <div className="bg-success/10 flex items-center gap-3 rounded-xl p-4">
+                  <CheckCircle2 className="text-success h-5 w-5" />
+                  <div>
+                    <p className="text-success font-bold">Guided Tests Completed</p>
+                    <p className="text-muted-foreground text-sm">
+                      See results in the Clinician-Guided Diagnostic Outcome section
+                      below.
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
           </div>
         ) : (
-          <div className="text-muted-foreground py-6 text-center">
-            <p className="text-sm italic">
+          <div className="text-muted-foreground py-8 text-center">
+            <Activity className="mx-auto mb-4 h-12 w-12 opacity-30" />
+            <p className="text-sm font-medium">
               No recommended tests found for this assessment.
             </p>
             <p className="mt-2 text-xs opacity-75">
-              Tests are extracted from region-specific clinical rules.
+              Tests are determined by the assessment engine based on patient responses and
+              clinical rules.
             </p>
+            {/* Disabled Start Test button when no tests */}
+            <Button size="lg" className="mt-6 h-14 px-8" disabled>
+              <Stethoscope className="mr-2 h-5 w-5" />
+              Start Test
+            </Button>
           </div>
         )}
       </CollapsibleSection>
