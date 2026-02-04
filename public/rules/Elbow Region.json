@@ -3,7 +3,7 @@
   "title": "Elbow Region",
   "source_file": "Elbow Region.docx",
   "extracted_at": "2026-02-04T09:27:25.047Z",
-  "migrated_at": "2026-02-04T11:00:58.395Z",
+  "migrated_at": "2026-02-04T11:09:54.150Z",
   "engine_version": "v2-branching",
   "conditions": [
     {
@@ -715,9 +715,13 @@
               "effects": {
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
-                "triggeredConditions": [],
+                "triggeredConditions": [
+                  "OSTEOARTHRITIS"
+                ],
                 "excludedConditions": [],
-                "increaseLikelihood": [],
+                "increaseLikelihood": [
+                  "OSTEOARTHRITIS"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -749,9 +753,13 @@
               "effects": {
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
-                "triggeredConditions": [],
+                "triggeredConditions": [
+                  "OSTEOARTHRITIS"
+                ],
                 "excludedConditions": [],
-                "increaseLikelihood": [],
+                "increaseLikelihood": [
+                  "OSTEOARTHRITIS"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,

@@ -3,7 +3,7 @@
   "title": "Ankle Region",
   "source_file": "Ankle Region.docx",
   "extracted_at": "2026-02-04T09:27:24.946Z",
-  "migrated_at": "2026-02-04T11:00:58.306Z",
+  "migrated_at": "2026-02-04T11:09:53.992Z",
   "engine_version": "v2-branching",
   "conditions": [
     {
@@ -301,11 +301,13 @@
               "effects": {
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
-                "triggeredConditions": [],
-                "excludedConditions": [
+                "triggeredConditions": [
                   "OSTEOARTHRITIS"
                 ],
-                "increaseLikelihood": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [
+                  "OSTEOARTHRITIS"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -337,11 +339,13 @@
               "effects": {
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
-                "triggeredConditions": [],
-                "excludedConditions": [
+                "triggeredConditions": [
                   "OSTEOARTHRITIS"
                 ],
-                "increaseLikelihood": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [
+                  "OSTEOARTHRITIS"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5985,9 +5989,13 @@
               "effects": {
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
-                "triggeredConditions": [],
+                "triggeredConditions": [
+                  "OSTEOARTHRITIS"
+                ],
                 "excludedConditions": [],
-                "increaseLikelihood": [],
+                "increaseLikelihood": [
+                  "OSTEOARTHRITIS"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -6019,9 +6027,13 @@
               "effects": {
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
-                "triggeredConditions": [],
+                "triggeredConditions": [
+                  "OSTEOARTHRITIS"
+                ],
                 "excludedConditions": [],
-                "increaseLikelihood": [],
+                "increaseLikelihood": [
+                  "OSTEOARTHRITIS"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
