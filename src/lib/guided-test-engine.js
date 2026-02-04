@@ -204,12 +204,19 @@ export function extractRecommendedTests(rulesJson, suspectedConditions) {
       condition.tests.forEach((test) => {
         const testName = typeof test === 'string' ? test : test.name;
         // Avoid duplicates
-        if (!recommendations.some((r) => r.testName === testName)) {
+        if (!recommendations.some((r) => r.name === testName)) {
           recommendations.push({
-            testName: testName,
-            rationale: `Recommended based on suspected ${condition.name}`,
+            name: testName,
+            instruction: typeof test === 'string' ? null : test.instruction,
+            associatedConditions: [condition.name],
             source: 'Heuristic Match',
           });
+        } else {
+          // If already added, add this condition to associatedConditions
+          const existing = recommendations.find((r) => r.name === testName);
+          if (!existing.associatedConditions.includes(condition.name)) {
+            existing.associatedConditions.push(condition.name);
+          }
         }
       });
     }
