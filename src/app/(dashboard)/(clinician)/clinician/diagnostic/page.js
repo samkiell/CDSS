@@ -329,34 +329,6 @@ export default function ClinicianDiagnosticPage() {
         ))}
       </div>
 
-      {/* Integration Banner */}
-      <div className="to-primary group relative overflow-hidden rounded-[3rem] bg-gradient-to-r from-indigo-600 p-12 text-white">
-        <div className="absolute top-0 right-0 rotate-12 p-12 opacity-10 transition-all group-hover:opacity-20">
-          <Zap className="h-48 w-48" />
-        </div>
-        <div className="relative z-10 flex flex-col items-center justify-between gap-10 lg:flex-row">
-          <div className="max-w-2xl text-center lg:text-left">
-            <div className="mb-4 flex items-center gap-2 text-[10px] font-black tracking-[0.2em] text-white/70 uppercase">
-              <Activity className="h-4 w-4" />
-              Live Heuristic Processing
-            </div>
-            <h3 className="mb-4 text-3xl font-extrabold uppercase">
-              Advanced Clinical Confirmatory Tests
-            </h3>
-            <p className="leading-relaxed font-medium text-white/80">
-              Access region-specific physical validation modules like Lasegue’s Test
-              (SLR), Spurling’s, and Thompson’s directly within your case review flow.
-            </p>
-          </div>
-          <Button
-            onClick={handleRulebook}
-            className="h-16 shrink-0 rounded-2xl bg-white px-12 text-sm font-black tracking-widest text-gray-900 uppercase shadow-xl hover:bg-gray-100 active:scale-95"
-          >
-            Access Rulebook
-          </Button>
-        </div>
-      </div>
-
       <StatusModal
         isOpen={statusModal.isOpen}
         onClose={() => setStatusModal({ ...statusModal, isOpen: false })}
