@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-02-04T02:45:35.261Z",
+  "regions": [
+    {
+      "region": "ankle",
+      "title": "Ankle Region",
+      "source_file": "Ankle Region.docx",
+      "json_file": "Ankle Region.json",
+      "condition_count": 0
+    },
+    {
+      "region": "cervical",
+      "title": "Cervical Region",
+      "source_file": "Cervical Region.docx",
+      "json_file": "Cervical Region.json",
+      "condition_count": 0
+    },
+    {
+      "region": "elbow",
+      "title": "Elbow Region",
+      "source_file": "Elbow Region.docx",
+      "json_file": "Elbow Region.json",
+      "condition_count": 0
+    },
+    {
+      "region": "general",
+      "title": "General Features",
+      "source_file": "General Features.docx",
+      "json_file": "General Features.json",
+      "condition_count": 0
+    },
+    {
+      "region": "lumbar",
+      "title": "Lumbar Region",
+      "source_file": "Lumbar Region.docx",
+      "json_file": "Lumbar Region.json",
+      "condition_count": 0
+    },
+    {
+      "region": "shoulder",
+      "title": "Shoulder Region",
+      "source_file": "Shoulder Region.docx",
+      "json_file": "Shoulder Region.json",
+      "condition_count": 0
+    }
+  ]
+}
