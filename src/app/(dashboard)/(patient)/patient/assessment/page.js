@@ -191,7 +191,61 @@ export default function PatientAssessmentPage() {
       )}
 
       <main className="transform-gpu transition-all duration-300">
+        {/*
+         * PATIENT ASSESSMENT FLOW - PRIMARY ENTRY POINT
+         * ==============================================
+         * This is now the ONLY way patients can begin a clinical assessment.
+         * The self-guided test feature has been deprecated.
+         *
+         * CURRENT FLOW:
+         * 1. body-map    → Patient selects affected body region
+         * 2. questions   → Dynamic symptom questions based on region
+         * 3. upload      → Supporting media/documents
+         * 4. summary     → AI analysis and review
+         * 5. complete    → Confirmation screen
+         *
+         * TODO: FUTURE INTEGRATION POINTS
+         * ================================
+         *
+         * 1. PRE-ASSESSMENT BIODATA CONFIRMATION (before body-map step)
+         *    --------------------------------------------------------
+         *    Location: Add new step 'biodata' before 'body-map'
+         *    Purpose: Confirm/update patient demographics before assessment
+         *
+         *    Implementation notes:
+         *    - Create new component: BiodataConfirmation.js
+         *    - Fields: Name, DOB, Contact, Emergency contact, Known allergies
+         *    - Load existing data from patient profile
+         *    - Allow quick updates before proceeding
+         *    - Data source: /api/patient/profile or user session
+         *
+         * 2. BRANCHING DIAGNOSTIC QUESTIONS (during questions step)
+         *    ------------------------------------------------------
+         *    Location: Enhance QuestionCard component
+         *    Purpose: Load region-specific questions from public/rules/
+         *
+         *    Implementation notes:
+         *    - Rule files expected in: public/rules/{region}.json
+         *    - If rule file missing, show TODO/fallback message
+         *    - Dynamic question flow based on red flags and responses
+         *    - Support for conditional branching (if answer X, ask question Y)
+         *    - Do NOT invent medical logic - only use rules from files
+         */}
+
         {currentStep === 'body-map' && <BodyMapPicker />}
+
+        {/*
+         * TODO: BIODATA CONFIRMATION STEP
+         * --------------------------------
+         * Insert biodata confirmation component here when implemented:
+         *
+         * {currentStep === 'biodata' && <BiodataConfirmation />}
+         *
+         * This step should:
+         * - Display current patient profile data
+         * - Allow confirmation or quick edits
+         * - Proceed to body-map after confirmation
+         */}
 
         {currentStep === 'questions' && <QuestionCard />}
 

@@ -334,53 +334,17 @@ export default async function ProgressPage() {
         </CardContent>
       </Card>
 
-      {/* Completed Guided Self-Tests */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Completed Guided Self-Tests</CardTitle>
-          <CardDescription>
-            Tests you have performed yourself with our guidance
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          {selfTests.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-12 text-center">
-              <ClipboardCheck className="text-muted-foreground mb-4 h-12 w-12" />
-              <p className="text-muted-foreground">No self-tests completed yet</p>
-              <p className="text-muted-foreground mt-1 text-sm">
-                Follow the self-test guides to track specific physical metrics
-              </p>
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {selfTests.map((test) => (
-                <div
-                  key={test._id}
-                  className="border-border flex items-center justify-between rounded-lg border p-4"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="rounded-lg bg-green-500/10 p-2">
-                      <CheckCircle2 className="h-5 w-5 text-green-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold">{test.testTitle}</h4>
-                      <p className="text-muted-foreground text-sm">
-                        {test.category} •{' '}
-                        {new Date(test.createdAt).toLocaleDateString('en-US', {
-                          month: 'long',
-                          day: 'numeric',
-                          year: 'numeric',
-                        })}
-                      </p>
-                    </div>
-                  </div>
-                  <Badge className="bg-green-500/10 text-green-600">Completed</Badge>
-                </div>
-              ))}
-            </div>
-          )}
-        </CardContent>
-      </Card>
+      {/*
+       * SELF-GUIDED TESTS SECTION - DEPRECATED
+       * =======================================
+       * The "Completed Guided Self-Tests" UI section has been removed.
+       *
+       * Historical self-test data (selfTests array) is still loaded and counted
+       * in the "Completed" stats card above to preserve accurate historical metrics.
+       *
+       * The "New Assessment" flow is now the ONLY way patients can submit
+       * clinical assessments. See /patient/assessment?new=true
+       */}
     </div>
   );
 }
