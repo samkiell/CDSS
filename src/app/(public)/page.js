@@ -89,13 +89,16 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl">
-                <Image src="/logo.png" alt="CDSS Logo" fill className="object-contain" />
+            <Link href="/" className="flex items-center">
+              <div className="relative h-10 w-auto">
+                <Image
+                  src="/logo.png"
+                  alt="CDSS - Clinical Decision Support System"
+                  width={120}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
-              <span className="from-primary bg-gradient-to-r to-blue-600 bg-clip-text text-lg font-bold text-transparent">
-                CDSS
-              </span>
             </Link>
 
             {/* Navigation Links */}
@@ -715,13 +718,16 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div className="flex items-center gap-3">
-              <div className="relative h-8 w-8 overflow-hidden rounded-lg">
-                <Image src="/logo.png" alt="CDSS Logo" fill className="object-contain" />
+              <div className="relative h-10 w-auto">
+                <Image
+                  src="/logo.png"
+                  alt="CDSS - Clinical Decision Support System"
+                  width={120}
+                  height={40}
+                  className="object-contain"
+                />
               </div>
-              <span className="from-primary bg-gradient-to-r to-blue-600 bg-clip-text font-bold text-transparent">
-                CDSS
-              </span>
-              <span className="text-muted-foreground text-sm">
+              <span className="text-muted-foreground hidden text-sm sm:inline">
                 Clinical Decision Support System
               </span>
             </div>
