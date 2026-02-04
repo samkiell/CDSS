@@ -3,7 +3,13 @@
 import { useState, useEffect } from 'react';
 import useAssessmentStore from '@/store/assessmentStore';
 import { Card, CardContent, Button } from '@/components/ui';
-import { Loader2, AlertTriangle, CheckCircle2, ChevronRight } from 'lucide-react';
+import {
+  Loader2,
+  AlertTriangle,
+  CheckCircle2,
+  ChevronRight,
+  SkipForward,
+} from 'lucide-react';
 import { toast } from 'sonner';
 import {
   initializeEngine,
@@ -173,6 +179,43 @@ export default function QuestionEngine() {
     }
   };
 
+  /**
+   * HANDLE SKIP - Skip current question without answering
+   */
+  const handleSkip = () => {
+    if (isProcessing || !currentQuestion || !engineState) {
+      return;
+    }
+
+    setIsProcessing(true);
+
+    setTimeout(() => {
+      try {
+        // Process with "Skipped" as the answer value
+        const newState = processAnswer(engineState, currentQuestion.id, 'Skipped');
+        updateEngineState(newState);
+
+        // Get next question
+        const nextQuestion = getCurrentQuestion(newState);
+
+        if (nextQuestion) {
+          setCurrentQuestion(nextQuestion);
+          setSelectedAnswer(null);
+        } else {
+          toast.success('Assessment Complete', {
+            description: 'Please review your answers before submission.',
+          });
+          completeQuestions();
+        }
+      } catch (error) {
+        console.error('Error skipping question:', error);
+        toast.error('Error skipping question. Please try again.');
+      } finally {
+        setIsProcessing(false);
+      }
+    }, 150);
+  };
+
   // Loading state
   if (isLoading) {
     return (
@@ -318,6 +361,16 @@ export default function QuestionEngine() {
               className="h-10 rounded-xl px-4"
             >
               Previous Question
+            </Button>
+
+            <Button
+              variant="ghost"
+              onClick={handleSkip}
+              disabled={isProcessing}
+              className="text-muted-foreground hover:text-foreground h-10 rounded-xl px-4"
+            >
+              <SkipForward className="mr-2 h-4 w-4" />
+              Skip
             </Button>
 
             <p className="text-muted-foreground text-[10px] font-bold tracking-widest uppercase">
