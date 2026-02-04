@@ -7,6 +7,16 @@ export const middleware = auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
+  // Logging for verification
+  if (isLoggedIn) {
+    const cookieHeader = req.headers.get('cookie') || '';
+    if (cookieHeader.length > 2000) {
+      console.warn(
+        `[Middleware] LARGE COOKIE DETECTED for ${nextUrl.pathname}: ${cookieHeader.length} bytes`
+      );
+    }
+  }
+
   const isApiAuthRoute = nextUrl.pathname.startsWith('/api/auth');
   const isPublicRoute = ['/', '/login', '/register', '/verify', '/admin'].includes(
     nextUrl.pathname

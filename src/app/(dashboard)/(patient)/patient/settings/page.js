@@ -132,6 +132,17 @@ export default function PatientSettingsPage() {
 
       if (data.success) {
         toast.success('Personal information updated successfully');
+        // Sync with global auth store
+        try {
+          const { useAuthStore } = await import('@/store');
+          useAuthStore.getState().updateUser({
+            firstName: personalInfo.firstName,
+            lastName: personalInfo.lastName,
+            avatar: profileImage,
+          });
+        } catch (err) {
+          console.error('Failed to sync auth store:', err);
+        }
       } else {
         toast.error(data.error || 'Failed to update profile');
       }
@@ -183,7 +194,7 @@ export default function PatientSettingsPage() {
     return (
       <div className="flex h-[60vh] items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <Loader2 className="text-primary h-8 w-8 animate-spin" />
           <p className="text-muted-foreground">Loading your profile...</p>
         </div>
       </div>
@@ -191,7 +202,7 @@ export default function PatientSettingsPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl space-y-8 pb-10 animate-fade-in">
+    <div className="animate-fade-in mx-auto max-w-5xl space-y-8 pb-10">
       {/* Header Section */}
       <div className="flex flex-col gap-2">
         <h1 className="text-3xl font-bold tracking-tight md:text-4xl">Settings</h1>
@@ -204,11 +215,11 @@ export default function PatientSettingsPage() {
         {/* Left Column: Profile & Main Form */}
         <div className="space-y-8 lg:col-span-2">
           {/* Profile Picture Section */}
-          <Card className="overflow-hidden border-none bg-gradient-to-br from-card via-card to-primary/5 shadow-xl ring-1 ring-border/50">
+          <Card className="from-card via-card to-primary/5 ring-border/50 overflow-hidden border-none bg-gradient-to-br shadow-xl ring-1">
             <CardContent className="pt-8">
               <div className="flex flex-col items-center gap-8 md:flex-row">
-                <div className="relative group">
-                  <div className="h-32 w-32 overflow-hidden rounded-full border-4 border-background bg-accent shadow-2xl transition-all duration-300 group-hover:scale-105 group-hover:ring-4 group-hover:ring-primary/20">
+                <div className="group relative">
+                  <div className="border-background bg-accent group-hover:ring-primary/20 h-32 w-32 overflow-hidden rounded-full border-4 shadow-2xl transition-all duration-300 group-hover:scale-105 group-hover:ring-4">
                     {profileImage ? (
                       <img
                         src={profileImage}
@@ -216,14 +227,14 @@ export default function PatientSettingsPage() {
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                     ) : (
-                      <div className="flex h-full w-full items-center justify-center bg-gradient-to-tr from-primary/10 to-primary/30">
-                        <User className="h-16 w-16 text-primary" />
+                      <div className="from-primary/10 to-primary/30 flex h-full w-full items-center justify-center bg-gradient-to-tr">
+                        <User className="text-primary h-16 w-16" />
                       </div>
                     )}
                   </div>
                   <label
                     htmlFor="profile-upload"
-                    className="absolute bottom-1 right-1 cursor-pointer rounded-full bg-primary p-2.5 text-primary-foreground shadow-lg transition-all hover:scale-110 hover:bg-primary/90 active:scale-95"
+                    className="bg-primary text-primary-foreground hover:bg-primary/90 absolute right-1 bottom-1 cursor-pointer rounded-full p-2.5 shadow-lg transition-all hover:scale-110 active:scale-95"
                     title="Upload photo"
                   >
                     <Camera size={18} />
@@ -240,8 +251,8 @@ export default function PatientSettingsPage() {
                 <div className="flex-1 space-y-3 text-center md:text-left">
                   <h3 className="text-2xl font-bold">Profile Picture</h3>
                   <p className="text-muted-foreground max-w-md text-sm leading-relaxed">
-                    Upload a high-quality image. This picture will be visible to your healthcare
-                    providers to help with identification.
+                    Upload a high-quality image. This picture will be visible to your
+                    healthcare providers to help with identification.
                   </p>
                   <div className="flex flex-wrap justify-center gap-3 pt-2 md:justify-start">
                     <Button
@@ -271,10 +282,10 @@ export default function PatientSettingsPage() {
           </Card>
 
           {/* Personal Information */}
-          <Card className="shadow-lg ring-1 ring-border/50">
-            <CardHeader className="border-b bg-muted/30 pb-4">
+          <Card className="ring-border/50 shadow-lg ring-1">
+            <CardHeader className="bg-muted/30 border-b pb-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <div className="bg-primary/10 text-primary flex h-8 w-8 items-center justify-center rounded-lg">
                   <User size={18} />
                 </div>
                 <div>
@@ -289,7 +300,9 @@ export default function PatientSettingsPage() {
               <form onSubmit={handleSavePersonalInfo} className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-foreground/80">First Name</label>
+                    <label className="text-foreground/80 text-sm font-semibold">
+                      First Name
+                    </label>
                     <Input
                       name="firstName"
                       value={personalInfo.firstName}
@@ -299,7 +312,9 @@ export default function PatientSettingsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-foreground/80">Last Name</label>
+                    <label className="text-foreground/80 text-sm font-semibold">
+                      Last Name
+                    </label>
                     <Input
                       name="lastName"
                       value={personalInfo.lastName}
@@ -311,9 +326,11 @@ export default function PatientSettingsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground/80">Email Address</label>
-                  <div className="relative group">
-                    <Mail className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                  <label className="text-foreground/80 text-sm font-semibold">
+                    Email Address
+                  </label>
+                  <div className="group relative">
+                    <Mail className="text-muted-foreground group-focus-within:text-primary absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transition-colors" />
                     <Input
                       name="email"
                       type="email"
@@ -327,9 +344,11 @@ export default function PatientSettingsPage() {
 
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-foreground/80">Phone Number</label>
-                    <div className="relative group">
-                      <Phone className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                    <label className="text-foreground/80 text-sm font-semibold">
+                      Phone Number
+                    </label>
+                    <div className="group relative">
+                      <Phone className="text-muted-foreground group-focus-within:text-primary absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transition-colors" />
                       <Input
                         name="phone"
                         value={personalInfo.phone}
@@ -340,9 +359,11 @@ export default function PatientSettingsPage() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-foreground/80">Date of Birth</label>
-                    <div className="relative group">
-                      <Calendar className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                    <label className="text-foreground/80 text-sm font-semibold">
+                      Date of Birth
+                    </label>
+                    <div className="group relative">
+                      <Calendar className="text-muted-foreground group-focus-within:text-primary absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transition-colors" />
                       <Input
                         name="dob"
                         type="date"
@@ -355,14 +376,16 @@ export default function PatientSettingsPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-sm font-semibold text-foreground/80">Gender</label>
-                  <div className="relative group">
-                    <User className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
+                  <label className="text-foreground/80 text-sm font-semibold">
+                    Gender
+                  </label>
+                  <div className="group relative">
+                    <User className="text-muted-foreground group-focus-within:text-primary absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 transition-colors" />
                     <select
                       name="gender"
                       value={personalInfo.gender}
                       onChange={handlePersonalInfoChange}
-                      className="border-input bg-muted/20 placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full rounded-lg border px-3 py-2 pl-10 text-sm transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 appearance-none cursor-pointer"
+                      className="border-input bg-muted/20 placeholder:text-muted-foreground focus-visible:ring-ring flex h-10 w-full cursor-pointer appearance-none rounded-lg border px-3 py-2 pl-10 text-sm transition-all focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       <option value="">Select gender</option>
                       <option value="male">Male</option>
@@ -374,7 +397,11 @@ export default function PatientSettingsPage() {
                 </div>
 
                 <div className="flex items-center justify-end gap-3 pt-4">
-                  <Button type="button" variant="ghost" className="hover:bg-muted font-normal text-muted-foreground">
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    className="hover:bg-muted text-muted-foreground font-normal"
+                  >
                     <X className="mr-2 h-4 w-4" />
                     Cancel
                   </Button>
@@ -391,10 +418,10 @@ export default function PatientSettingsPage() {
         {/* Right Column: Security & Preferences */}
         <div className="space-y-8">
           {/* Security Settings */}
-          <Card className="shadow-lg ring-1 ring-border/50">
-            <CardHeader className="border-b bg-muted/30 pb-4">
+          <Card className="ring-border/50 shadow-lg ring-1">
+            <CardHeader className="bg-muted/30 border-b pb-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <div className="bg-primary/10 text-primary flex h-8 w-8 items-center justify-center rounded-lg">
                   <ShieldCheck size={18} />
                 </div>
                 <CardTitle className="text-lg">Security</CardTitle>
@@ -403,7 +430,7 @@ export default function PatientSettingsPage() {
             <CardContent className="pt-6">
               <form onSubmit={handleSaveSecurity} className="space-y-5">
                 <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <label className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
                     Current Password
                   </label>
                   <PasswordInput
@@ -415,7 +442,7 @@ export default function PatientSettingsPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <label className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
                     New Password
                   </label>
                   <PasswordInput
@@ -427,7 +454,7 @@ export default function PatientSettingsPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                  <label className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
                     Confirm Password
                   </label>
                   <PasswordInput
@@ -438,7 +465,12 @@ export default function PatientSettingsPage() {
                     className="bg-muted/10 font-mono"
                   />
                 </div>
-                <Button type="submit" variant="secondary" className="w-full shadow-sm" loading={isLoading}>
+                <Button
+                  type="submit"
+                  variant="secondary"
+                  className="w-full shadow-sm"
+                  loading={isLoading}
+                >
                   Change Password
                 </Button>
               </form>
@@ -446,10 +478,10 @@ export default function PatientSettingsPage() {
           </Card>
 
           {/* Notification Preferences */}
-          <Card className="shadow-lg ring-1 ring-border/50 overflow-hidden">
-            <CardHeader className="border-b bg-muted/30 pb-4">
+          <Card className="ring-border/50 overflow-hidden shadow-lg ring-1">
+            <CardHeader className="bg-muted/30 border-b pb-4">
               <div className="flex items-center gap-3">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <div className="bg-primary/10 text-primary flex h-8 w-8 items-center justify-center rounded-lg">
                   <Bell size={18} />
                 </div>
                 <CardTitle className="text-lg">Notifications</CardTitle>
@@ -457,35 +489,45 @@ export default function PatientSettingsPage() {
             </CardHeader>
             <CardContent className="space-y-4 pt-6">
               <div
-                className="group flex cursor-pointer items-center justify-between rounded-xl border bg-card p-4 transition-all hover:border-primary/30 hover:bg-accent/50"
+                className="group bg-card hover:border-primary/30 hover:bg-accent/50 flex cursor-pointer items-center justify-between rounded-xl border p-4 transition-all"
                 onClick={() => handleNotificationChange('email')}
               >
                 <div className="space-y-1">
-                  <p className="font-semibold text-sm">Email Alerts</p>
-                  <p className="text-xs text-muted-foreground">Receive updates via email</p>
+                  <p className="text-sm font-semibold">Email Alerts</p>
+                  <p className="text-muted-foreground text-xs">
+                    Receive updates via email
+                  </p>
                 </div>
-                <div className={`h-6 w-11 rounded-full p-1 transition-colors duration-200 ease-in-out ${notifications.email ? 'bg-primary' : 'bg-muted'}`}>
-                   <div className={`h-4 w-4 rounded-full bg-white shadow-sm transition-transform duration-200 ease-in-out ${notifications.email ? 'translate-x-5' : 'translate-x-0'}`} />
+                <div
+                  className={`h-6 w-11 rounded-full p-1 transition-colors duration-200 ease-in-out ${notifications.email ? 'bg-primary' : 'bg-muted'}`}
+                >
+                  <div
+                    className={`h-4 w-4 rounded-full bg-white shadow-sm transition-transform duration-200 ease-in-out ${notifications.email ? 'translate-x-5' : 'translate-x-0'}`}
+                  />
                 </div>
               </div>
-              
+
               <div
-                className="group flex cursor-pointer items-center justify-between rounded-xl border bg-card p-4 transition-all hover:border-primary/30 hover:bg-accent/50"
+                className="group bg-card hover:border-primary/30 hover:bg-accent/50 flex cursor-pointer items-center justify-between rounded-xl border p-4 transition-all"
                 onClick={() => handleNotificationChange('sms')}
               >
                 <div className="space-y-1">
-                  <p className="font-semibold text-sm">SMS Alerts</p>
-                  <p className="text-xs text-muted-foreground">Urgent updates via text</p>
+                  <p className="text-sm font-semibold">SMS Alerts</p>
+                  <p className="text-muted-foreground text-xs">Urgent updates via text</p>
                 </div>
-                <div className={`h-6 w-11 rounded-full p-1 transition-colors duration-200 ease-in-out ${notifications.sms ? 'bg-primary' : 'bg-muted'}`}>
-                   <div className={`h-4 w-4 rounded-full bg-white shadow-sm transition-transform duration-200 ease-in-out ${notifications.sms ? 'translate-x-5' : 'translate-x-0'}`} />
+                <div
+                  className={`h-6 w-11 rounded-full p-1 transition-colors duration-200 ease-in-out ${notifications.sms ? 'bg-primary' : 'bg-muted'}`}
+                >
+                  <div
+                    className={`h-4 w-4 rounded-full bg-white shadow-sm transition-transform duration-200 ease-in-out ${notifications.sms ? 'translate-x-5' : 'translate-x-0'}`}
+                  />
                 </div>
               </div>
             </CardContent>
             <CardFooter className="bg-muted/10 border-t pt-4">
               <Button
                 variant="ghost"
-                className="w-full text-primary hover:bg-primary/5 hover:text-primary"
+                className="text-primary hover:bg-primary/5 hover:text-primary w-full"
                 size="sm"
                 onClick={() => toast.success('Preferences saved')}
               >
@@ -495,17 +537,18 @@ export default function PatientSettingsPage() {
           </Card>
 
           {/* Quick Help */}
-          <div className="rounded-2xl bg-gradient-to-br from-primary to-primary/80 p-6 text-primary-foreground shadow-xl">
-             <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
-                <ShieldCheck size={20} className="text-white" />
-             </div>
-             <h4 className="mb-2 font-bold text-lg">Account Protection</h4>
-             <p className="mb-4 text-primary-foreground/80 text-sm leading-relaxed">
-               Your medical data is encrypted and protected with industry-standard protocols.
-             </p>
-             <button className="text-xs font-bold uppercase tracking-tighter transition-all hover:underline">
-               Learn more about security
-             </button>
+          <div className="from-primary to-primary/80 text-primary-foreground rounded-2xl bg-gradient-to-br p-6 shadow-xl">
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
+              <ShieldCheck size={20} className="text-white" />
+            </div>
+            <h4 className="mb-2 text-lg font-bold">Account Protection</h4>
+            <p className="text-primary-foreground/80 mb-4 text-sm leading-relaxed">
+              Your medical data is encrypted and protected with industry-standard
+              protocols.
+            </p>
+            <button className="text-xs font-bold tracking-tighter uppercase transition-all hover:underline">
+              Learn more about security
+            </button>
           </div>
         </div>
       </div>
