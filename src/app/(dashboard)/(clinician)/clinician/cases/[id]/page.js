@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 import {
   ArrowLeft,
   User,
@@ -16,22 +17,59 @@ import {
   FileIcon,
   X,
   AlertCircle,
+  AlertTriangle,
+  ChevronDown,
+  ChevronRight,
+  Stethoscope,
+  Activity,
+  Clock,
+  Loader2,
 } from 'lucide-react';
 import { cn } from '@/lib/cn';
 import { Button, Card, Badge, Lightbox, StatusModal } from '@/components/ui';
-import { useParams, useRouter } from 'next/navigation';
 
+/**
+ * THERAPIST CASE FILE - REDESIGNED
+ * ==================================
+ * Implements TASK 1-6 for therapist-facing functionality.
+ *
+ * STRUCTURE (in order):
+ * 1. Patient Biodata (Assessment-Scoped)
+ * 2. Assessment History (if multiple)
+ * 3. Patient Question & Answer Log
+ * 4. AI Temporal Diagnosis (Preliminary)
+ * 5. Recommended Tests
+ * 6. Guided Test Results (if performed)
+ */
 export default function CaseDetailsPage() {
   const { id } = useParams();
   const router = useRouter();
 
-  const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [isDocsOpen, setIsDocsOpen] = useState(false);
-  const [documents, setDocuments] = useState([]);
-  const [isLoadingDocs, setIsLoadingDocs] = useState(false);
-  const [activeImage, setActiveImage] = useState(null); // { src, alt }
+  const [session, setSession] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [activeAssessmentId, setActiveAssessmentId] = useState(id);
+  const [patientAssessments, setPatientAssessments] = useState([]);
+  const [recommendedTests, setRecommendedTests] = useState([]);
+  const [isLoadingTests, setIsLoadingTests] = useState(false);
+  const [expandedSections, setExpandedSections] = useState({
+    biodata: true,
+    history: false,
+    qa: true,
+    temporal: true,
+    tests: true,
+    guided: true,
+  });
 
-  // Status Modal State
+  // Modal states
+  const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isNotesOpen, setIsNotesOpen] = useState(false);
+  const [bookingData, setBookingData] = useState({
+    date: '',
+    time: '',
+    type: 'Physiotherapy Session',
+  });
+  const [notesData, setNotesData] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [statusModal, setStatusModal] = useState({
     isOpen: false,
     type: 'info',
@@ -41,56 +79,21 @@ export default function CaseDetailsPage() {
   });
 
   const showAlert = (title, message, type = 'info', onConfirm = null) => {
-    setStatusModal({
-      isOpen: true,
-      type,
-      title,
-      message,
-      onConfirm,
-    });
+    setStatusModal({ isOpen: true, type, title, message, onConfirm });
   };
-
-  const [bookingData, setBookingData] = useState({
-    date: '',
-    time: '',
-    type: 'Physiotherapy Session',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isNotesOpen, setIsNotesOpen] = useState(false);
-  const [isAnalysisOpen, setIsAnalysisOpen] = useState(false);
-  const [isReferralOpen, setIsReferralOpen] = useState(false);
-  const [isPlanOpen, setIsPlanOpen] = useState(false);
-
-  const [notesData, setNotesData] = useState('');
-  const [referralData, setReferralData] = useState({
-    specialty: 'Orthopedic Surgeon',
-    reason: '',
-    urgency: 'Medium',
-    date: '',
-    time: '',
-  });
-  const [planData, setPlanData] = useState({
-    goal: '',
-    activeTreatment: '',
-    homeExercise: '',
-    date: new Date().toISOString().split('T')[0],
-    time: new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' }),
-  });
-
-  const [session, setSession] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     if (id) {
       fetchCaseDetails();
+      fetchRecommendedTests();
     }
   }, [id]);
 
   useEffect(() => {
-    if (isDocsOpen && session?.patientId?._id) {
-      fetchDocuments();
+    if (activeAssessmentId && activeAssessmentId !== id) {
+      router.push(`/clinician/cases/${activeAssessmentId}`);
     }
-  }, [isDocsOpen, session]);
+  }, [activeAssessmentId, id, router]);
 
   const fetchCaseDetails = async () => {
     setIsLoading(true);
@@ -99,6 +102,10 @@ export default function CaseDetailsPage() {
       const result = await res.json();
       if (result.success) {
         setSession(result.data);
+        // Fetch other assessments for this patient
+        if (result.data.patientId?._id) {
+          fetchPatientAssessments(result.data.patientId._id);
+        }
       }
     } catch (err) {
       console.error('Error fetching case details:', err);
@@ -107,19 +114,30 @@ export default function CaseDetailsPage() {
     }
   };
 
-  const fetchDocuments = async () => {
-    if (!session?.patientId?._id) return;
-    setIsLoadingDocs(true);
+  const fetchPatientAssessments = async (patientId) => {
     try {
-      const res = await fetch(`/api/documents?patientId=${session.patientId._id}`);
-      const data = await res.json();
-      if (data.success) {
-        setDocuments(data.documents);
+      const res = await fetch(`/api/diagnosis?patientId=${patientId}`);
+      const result = await res.json();
+      if (result.success && Array.isArray(result.data)) {
+        setPatientAssessments(result.data);
       }
     } catch (err) {
-      console.error('Error fetching documents:', err);
+      console.error('Error fetching patient assessments:', err);
+    }
+  };
+
+  const fetchRecommendedTests = async () => {
+    setIsLoadingTests(true);
+    try {
+      const res = await fetch(`/api/diagnosis/${id}/guided-test`);
+      const result = await res.json();
+      if (result.success) {
+        setRecommendedTests(result.recommendedTests || []);
+      }
+    } catch (err) {
+      console.error('Error fetching recommended tests:', err);
     } finally {
-      setIsLoadingDocs(false);
+      setIsLoadingTests(false);
     }
   };
 
@@ -135,7 +153,6 @@ export default function CaseDetailsPage() {
           ...bookingData,
         }),
       });
-
       if (res.ok) {
         showAlert('Schedule Confirmed', 'Appointment scheduled successfully!', 'success');
         setIsBookingOpen(false);
@@ -164,11 +181,10 @@ export default function CaseDetailsPage() {
           },
         }),
       });
-
       if (res.ok) {
         showAlert('Notes Saved', 'Case notes updated successfully!', 'success');
         setIsNotesOpen(false);
-        fetchCaseDetails(); // Refresh data
+        fetchCaseDetails();
       } else {
         showAlert('Update Failed', 'Failed to update notes.', 'error');
       }
@@ -179,91 +195,15 @@ export default function CaseDetailsPage() {
     }
   };
 
-  const handleReferral = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const res = await fetch('/api/referrals', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          patientId: session.patientId._id,
-          specialty: referralData.specialty,
-          reason: referralData.reason,
-          preferredDate: referralData.date,
-          preferredTime: referralData.time,
-        }),
-      });
-
-      if (res.ok) {
-        showAlert(
-          'Referral Sent',
-          `Referral sent to ${referralData.specialty} successfully!`,
-          'success'
-        );
-        setIsReferralOpen(false);
-      } else {
-        showAlert('Referral Failed', 'Failed to send referral.', 'error');
-      }
-    } catch (err) {
-      showAlert('Referral Error', 'Failed to send referral.', 'error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleCreatePlan = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    try {
-      const res = await fetch('/api/treatment-plans', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          patientId: session.patientId._id,
-          conditionName: session.aiAnalysis.temporalDiagnosis,
-          activity: planData,
-        }),
-      });
-
-      if (res.ok) {
-        showAlert('Plan Generated', 'Treatment plan updated successfully!', 'success');
-        setIsPlanOpen(false);
-      } else {
-        showAlert('Plan Failed', 'Failed to create treatment plan.', 'error');
-      }
-    } catch (err) {
-      showAlert('System Error', 'Internal server error.', 'error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const formatFileSize = (bytes) => {
-    if (!bytes) return '0 B';
-    const k = 1024;
-    const sizes = ['B', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
-  };
-
-  const calculateAge = (dob) => {
-    if (!dob) return 'N/A';
-    const birthDate = new Date(dob);
-    const today = new Date();
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const m = today.getMonth() - birthDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    return age;
+  const toggleSection = (section) => {
+    setExpandedSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
   if (isLoading) {
     return (
       <div className="flex min-h-[60vh] flex-col items-center justify-center gap-4">
-        <div className="border-primary h-12 w-12 animate-spin rounded-full border-b-2" />
-        <p className="text-muted-foreground font-bold">Synchronizing Case Data...</p>
+        <Loader2 className="text-primary h-12 w-12 animate-spin" />
+        <p className="text-muted-foreground font-bold">Loading Case File...</p>
       </div>
     );
   }
@@ -287,6 +227,9 @@ export default function CaseDetailsPage() {
 
   const patient = session.patientId;
   const analysis = session.aiAnalysis;
+  const biodata = session.biodata;
+  const symptomData = session.symptomData || [];
+  const guidedResults = session.guidedTestResults;
 
   return (
     <div className="animate-fade-in text-foreground mx-auto max-w-5xl space-y-8 pb-20">
@@ -322,317 +265,471 @@ export default function CaseDetailsPage() {
         </div>
       </div>
 
-      {/* Patient Header Card */}
-      <Card className="border-border bg-card flex items-center gap-8 rounded-[2.5rem] p-8 shadow-sm">
-        <div className="bg-primary/10 text-primary border-primary/20 relative flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full border text-2xl font-black shadow-inner">
-          {patient?.avatar ? (
-            <img
-              src={patient.avatar}
-              alt="Avatar"
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            patient?.firstName?.[0] || 'P'
-          )}
-        </div>
-        <div className="grid flex-1 grid-cols-2 gap-6 lg:grid-cols-4">
-          <div className="flex flex-col">
-            <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
-              Name
-            </span>
-            <span className="text-foreground truncate text-base font-black">
-              {patient?.firstName} {patient?.lastName}
-            </span>
+      {/* ============================================================
+          SECTION 1: PATIENT BIODATA (ASSESSMENT-SCOPED)
+          ==============================================================
+          This displays the biodata snapshot tied to this assessment.
+          NOT pulled from patient settings - only from assessment snapshot.
+       */}
+      <CollapsibleSection
+        title="Patient Biodata"
+        subtitle="Assessment-scoped snapshot"
+        icon={<User className="h-5 w-5" />}
+        isExpanded={expandedSections.biodata}
+        onToggle={() => toggleSection('biodata')}
+      >
+        {biodata ? (
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3">
+            <DataField label="Full Name" value={biodata.fullName} />
+            <DataField label="Sex" value={biodata.sex} />
+            <DataField label="Age Range" value={biodata.ageRange} />
+            <DataField label="Occupation / Working Class" value={biodata.occupation} />
+            <DataField label="Educational Background" value={biodata.education} />
+            {biodata.notes && (
+              <div className="col-span-full">
+                <DataField label="Notes" value={biodata.notes} />
+              </div>
+            )}
+            <div className="col-span-full">
+              <p className="text-muted-foreground text-xs">
+                Confirmed at: {new Date(biodata.confirmedAt).toLocaleString()}
+              </p>
+            </div>
           </div>
-          <div className="flex flex-col">
-            <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
-              Sex
-            </span>
-            <span className="text-foreground text-base font-black capitalize">
-              {patient?.gender || 'Not specified'}
-            </span>
+        ) : (
+          <div className="text-muted-foreground py-6 text-center">
+            <p className="text-sm italic">
+              No biodata snapshot available for this assessment.
+            </p>
+            <p className="mt-2 text-xs opacity-75">
+              This assessment was created before the biodata snapshot feature was added.
+            </p>
           </div>
-          <div className="flex flex-col">
-            <span className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
-              Age
-            </span>
-            <span className="text-foreground text-base font-black">
-              {calculateAge(patient?.dateOfBirth)} yrs
-            </span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-muted-foreground text-right text-xs font-bold tracking-wider uppercase">
-              Assigned
-            </span>
-            <span className="text-foreground text-right text-xs font-bold">
-              {new Date(session.createdAt).toLocaleDateString(undefined, {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric',
-              })}
-            </span>
-          </div>
-        </div>
-      </Card>
+        )}
+      </CollapsibleSection>
 
-      {/* Assessment Media Gallery */}
-      {session.mediaUrls && session.mediaUrls.length > 0 && (
-        <div className="space-y-4">
-          <h2 className="px-2 text-xl font-black tracking-wide uppercase">
-            Visual Assessment Findings
-          </h2>
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {session.mediaUrls.map((url, idx) => (
-              <div
-                key={idx}
-                className="group relative aspect-square cursor-zoom-in overflow-hidden rounded-[2rem] border-4 border-white bg-slate-100 shadow-sm transition-all hover:shadow-lg dark:border-slate-800 dark:bg-slate-900"
-                onClick={() =>
-                  setActiveImage({ src: url, alt: `Patient Assessment Image ${idx + 1}` })
-                }
+      {/* ============================================================
+          SECTION 2: ASSESSMENT HISTORY
+          ==============================================================
+          If patient has multiple assessments, display as chronological list.
+          Switching assessments updates all sections below.
+       */}
+      {patientAssessments.length > 1 && (
+        <CollapsibleSection
+          title="Assessment History"
+          subtitle={`${patientAssessments.length} assessments found`}
+          icon={<ClipboardList className="h-5 w-5" />}
+          isExpanded={expandedSections.history}
+          onToggle={() => toggleSection('history')}
+        >
+          <div className="space-y-2">
+            {patientAssessments.map((assessment) => (
+              <button
+                key={assessment._id}
+                onClick={() => setActiveAssessmentId(assessment._id)}
+                className={cn(
+                  'w-full rounded-xl border p-4 text-left transition-all',
+                  assessment._id === id
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border hover:border-primary/50'
+                )}
               >
-                <img
-                  src={url}
-                  alt={`Assessment ${idx}`}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 transition-opacity group-hover:opacity-100">
-                  <div className="bg-primary flex h-10 w-10 items-center justify-center rounded-full text-white shadow-xl">
-                    <Eye className="h-5 w-5" />
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-bold">{assessment.bodyRegion} Assessment</p>
+                    <p className="text-muted-foreground text-xs">
+                      {new Date(assessment.createdAt).toLocaleDateString()} -{' '}
+                      {assessment.aiAnalysis?.temporalDiagnosis || 'Pending analysis'}
+                    </p>
+                  </div>
+                  <Badge
+                    className={cn(
+                      assessment._id === id && 'bg-primary text-primary-foreground'
+                    )}
+                  >
+                    {assessment._id === id ? 'Viewing' : assessment.status}
+                  </Badge>
+                </div>
+              </button>
+            ))}
+          </div>
+        </CollapsibleSection>
+      )}
+
+      {/* ============================================================
+          SECTION 3: PATIENT QUESTION & ANSWER LOG
+          ==============================================================
+          Read-only display of every question asked and patient's response.
+          Grouped by region and reflects original flow order.
+       */}
+      <CollapsibleSection
+        title="Patient Question & Answer Log"
+        subtitle={`${symptomData.length} responses recorded`}
+        icon={<FileText className="h-5 w-5" />}
+        isExpanded={expandedSections.qa}
+        onToggle={() => toggleSection('qa')}
+      >
+        {symptomData.length > 0 ? (
+          <div className="space-y-4">
+            <div className="bg-muted/30 mb-4 rounded-lg p-3">
+              <p className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
+                Region: {session.bodyRegion}
+              </p>
+            </div>
+            {symptomData.map((item, index) => (
+              <div
+                key={index}
+                className={cn(
+                  'rounded-xl border p-4',
+                  item.effects?.red_flag
+                    ? 'border-destructive/30 bg-destructive/5'
+                    : 'border-border'
+                )}
+              >
+                <div className="flex items-start gap-3">
+                  <div className="bg-primary/10 text-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-semibold">{item.question}</p>
+                    <div className="mt-2 flex items-center gap-2">
+                      <span className="text-primary font-bold">{item.response}</span>
+                      {item.effects?.red_flag && (
+                        <Badge className="bg-destructive text-destructive-foreground text-xs">
+                          <AlertTriangle className="mr-1 h-3 w-3" />
+                          Red Flag
+                        </Badge>
+                      )}
+                    </div>
+                    {item.conditionContext && (
+                      <p className="text-muted-foreground mt-1 text-xs">
+                        Context: {item.conditionContext}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="text-muted-foreground py-6 text-center">
+            <p className="text-sm italic">No Q&A log available for this assessment.</p>
+          </div>
+        )}
+      </CollapsibleSection>
 
-      {/* AI Reasoning / Assessment Summary */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between px-2">
-          <h2 className="text-xl font-black">AI Assessment Summary</h2>
-          <span className="text-muted-foreground text-xs font-bold uppercase opacity-70">
-            {new Date(session.createdAt).toLocaleDateString(undefined, {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric',
-            })}
-          </span>
-        </div>
-        <Card className="border-border bg-card text-muted-foreground rounded-[2.5rem] p-10 text-sm leading-relaxed">
-          <div className="space-y-4">
-            <p className="text-foreground text-base font-medium">
-              Findings for {session.bodyRegion} Assessment:
-            </p>
-            <ul className="mt-2 ml-5 list-disc space-y-3">
-              {analysis?.reasoning?.map((point, idx) => (
-                <li key={idx} className="pl-2">
-                  {point}
-                </li>
-              ))}
-            </ul>
-            {!analysis?.reasoning?.length && (
-              <p className="italic">
-                AI reasoning details are currently unavailable for this session.
+      {/* ============================================================
+          SECTION 4: AI TEMPORAL DIAGNOSIS (PRELIMINARY)
+          ==============================================================
+          Clearly labeled as "Temporal (Preliminary) Diagnosis"
+          Includes disclaimer and cannot be edited.
+       */}
+      <CollapsibleSection
+        title="Temporal (Preliminary) Diagnosis"
+        subtitle="AI-Assisted • Requires Clinical Validation"
+        icon={<Stethoscope className="h-5 w-5" />}
+        isExpanded={expandedSections.temporal}
+        onToggle={() => toggleSection('temporal')}
+      >
+        {analysis ? (
+          <div className="space-y-6">
+            {/* Primary Suspected Condition */}
+            <div className="from-primary/10 to-primary/5 rounded-2xl bg-gradient-to-br p-6">
+              <p className="text-muted-foreground mb-2 text-xs font-bold tracking-wider uppercase">
+                Primary Suspected Condition
               </p>
+              <h3 className="text-3xl font-black">{analysis.temporalDiagnosis}</h3>
+              <div className="mt-4 flex items-center gap-4">
+                <div>
+                  <p className="text-muted-foreground text-xs">Confidence</p>
+                  <p className="text-xl font-bold">{analysis.confidenceScore}%</p>
+                </div>
+                <div>
+                  <p className="text-muted-foreground text-xs">Risk Level</p>
+                  <Badge
+                    className={cn(
+                      analysis.riskLevel === 'Urgent'
+                        ? 'bg-destructive'
+                        : analysis.riskLevel === 'Moderate'
+                          ? 'bg-warning'
+                          : 'bg-success'
+                    )}
+                  >
+                    {analysis.riskLevel}
+                  </Badge>
+                </div>
+              </div>
+            </div>
+
+            {/* Differential Diagnoses */}
+            {analysis.differentialDiagnoses?.length > 0 && (
+              <div>
+                <p className="text-muted-foreground mb-3 text-xs font-bold tracking-wider uppercase">
+                  Differential Diagnoses (Ranked)
+                </p>
+                <div className="space-y-2">
+                  {analysis.differentialDiagnoses.map((diff, index) => (
+                    <div
+                      key={index}
+                      className="border-border flex items-center gap-3 rounded-xl border p-3"
+                    >
+                      <span className="text-muted-foreground font-bold">
+                        #{index + 2}
+                      </span>
+                      <span className="font-medium">{diff}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             )}
 
-            <div className="border-border mt-6 border-t pt-4">
-              <strong className="text-foreground text-[10px] tracking-widest uppercase">
-                Diagnosis Reasoning
-              </strong>
-              <p className="mt-2 text-sm italic">
-                Based on machine learning models analyzing clinical heuristic MSK
-                patterns. This is a provisional diagnosis pending human physical
-                examination.
+            {/* Reasoning */}
+            {analysis.reasoning?.length > 0 && (
+              <div>
+                <p className="text-muted-foreground mb-3 text-xs font-bold tracking-wider uppercase">
+                  AI Reasoning
+                </p>
+                <ul className="space-y-2">
+                  {analysis.reasoning.map((point, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-sm">
+                      <CheckCircle2 className="text-primary mt-0.5 h-4 w-4 shrink-0" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Disclaimer */}
+            <div className="bg-warning/10 border-warning/30 rounded-xl border p-4">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="text-warning mt-0.5 h-5 w-5 shrink-0" />
+                <div>
+                  <p className="text-warning-foreground font-bold">
+                    Important Disclaimer
+                  </p>
+                  <p className="text-muted-foreground mt-1 text-sm">
+                    {analysis.disclaimer ||
+                      'This diagnosis is AI-assisted and requires clinical validation. It is a preliminary assessment and should not be used as a final diagnosis without physical examination.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="text-muted-foreground py-6 text-center">
+            <p className="text-sm italic">AI analysis pending or unavailable.</p>
+          </div>
+        )}
+      </CollapsibleSection>
+
+      {/* ============================================================
+          SECTION 5: RECOMMENDED TESTS
+          ==============================================================
+          Based on temporal diagnosis, shows suggested physical tests.
+          Includes "Begin Guided Diagnosis Test" button.
+       */}
+      <CollapsibleSection
+        title="Recommended Physical Tests"
+        subtitle={`${recommendedTests.length} tests suggested`}
+        icon={<Activity className="h-5 w-5" />}
+        isExpanded={expandedSections.tests}
+        onToggle={() => toggleSection('tests')}
+      >
+        {isLoadingTests ? (
+          <div className="flex items-center justify-center py-8">
+            <Loader2 className="text-primary h-6 w-6 animate-spin" />
+            <span className="text-muted-foreground ml-2">Loading tests...</span>
+          </div>
+        ) : recommendedTests.length > 0 ? (
+          <div className="space-y-4">
+            {recommendedTests.map((test, index) => (
+              <div key={index} className="border-border rounded-xl border p-4">
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <p className="font-bold">{test.name}</p>
+                    <p className="text-muted-foreground mt-1 text-sm">
+                      {test.instruction}
+                    </p>
+                    <div className="mt-3 grid grid-cols-2 gap-3 text-xs">
+                      <div className="bg-success/10 rounded-lg p-2">
+                        <p className="text-success font-bold">If Positive:</p>
+                        <p className="text-muted-foreground">
+                          {test.positiveImplication}
+                        </p>
+                      </div>
+                      <div className="bg-destructive/10 rounded-lg p-2">
+                        <p className="text-destructive font-bold">If Negative:</p>
+                        <p className="text-muted-foreground">
+                          {test.negativeImplication}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Begin Guided Diagnosis Test Button */}
+            {!guidedResults?.isLocked && (
+              <div className="pt-4">
+                <Button
+                  size="lg"
+                  className="h-14 w-full text-lg font-bold"
+                  onClick={() => router.push(`/clinician/cases/${id}/guided-test`)}
+                >
+                  <Stethoscope className="mr-2 h-5 w-5" />
+                  Begin Guided Diagnosis Test
+                </Button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="text-muted-foreground py-6 text-center">
+            <p className="text-sm italic">
+              No recommended tests found for this assessment.
+            </p>
+            <p className="mt-2 text-xs opacity-75">
+              Tests are extracted from region-specific clinical rules.
+            </p>
+          </div>
+        )}
+      </CollapsibleSection>
+
+      {/* ============================================================
+          SECTION 6: CLINICIAN-GUIDED DIAGNOSTIC OUTCOME
+          ==============================================================
+          Shows results if guided testing has been completed.
+          Coexists with AI temporal diagnosis - neither overwrites.
+       */}
+      {guidedResults && (
+        <CollapsibleSection
+          title="Clinician-Guided Diagnostic Outcome"
+          subtitle={guidedResults.isLocked ? 'Completed' : 'In Progress'}
+          icon={<CheckCircle2 className="h-5 w-5" />}
+          isExpanded={expandedSections.guided}
+          onToggle={() => toggleSection('guided')}
+        >
+          <div className="space-y-6">
+            {/* Tests Performed */}
+            <div>
+              <p className="text-muted-foreground mb-3 text-xs font-bold tracking-wider uppercase">
+                Tests Performed ({guidedResults.tests?.length || 0})
               </p>
+              <div className="space-y-2">
+                {guidedResults.tests?.map((test, index) => (
+                  <div
+                    key={index}
+                    className={cn(
+                      'flex items-center justify-between rounded-xl border p-3',
+                      test.result === 'positive'
+                        ? 'border-success/30 bg-success/5'
+                        : test.result === 'negative'
+                          ? 'border-destructive/30 bg-destructive/5'
+                          : 'border-border'
+                    )}
+                  >
+                    <div>
+                      <p className="font-medium">{test.testName}</p>
+                      {test.notes && (
+                        <p className="text-muted-foreground text-xs">{test.notes}</p>
+                      )}
+                    </div>
+                    <Badge
+                      className={cn(
+                        test.result === 'positive'
+                          ? 'bg-success'
+                          : test.result === 'negative'
+                            ? 'bg-destructive'
+                            : 'bg-muted'
+                      )}
+                    >
+                      {test.result}
+                    </Badge>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </Card>
-      </div>
 
-      {/* Metrics Row 1 */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <Card className="border-border bg-card flex min-h-[220px] flex-col justify-center rounded-[2.5rem] p-10">
-          <span className="text-muted-foreground decoration-border text-xs font-bold uppercase underline underline-offset-8">
-            Temporary Diagnosis
-          </span>
-          <h3 className="mt-8 text-4xl leading-tight font-black tracking-tight">
-            {analysis?.temporalDiagnosis || 'N/A'}
-          </h3>
-        </Card>
-        <Card className="border-border bg-card flex items-center justify-around gap-8 rounded-[2.5rem] p-10">
-          <div className="relative h-28 w-28">
-            <svg viewBox="0 0 36 36" className="h-full w-full">
-              <path
-                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                fill="none"
-                className="stroke-muted-foreground/10"
-                strokeWidth="3.5"
-              />
-              <path
-                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                fill="none"
-                className={cn(
-                  'stroke-current transition-all duration-1000 ease-out',
-                  (analysis?.confidenceScore || 0) > 80
-                    ? 'text-success'
-                    : (analysis?.confidenceScore || 0) > 50
-                      ? 'text-warning'
-                      : 'text-destructive'
+            {/* Refined Diagnosis */}
+            {guidedResults.refinedDiagnosis && (
+              <div className="from-success/10 to-success/5 rounded-2xl bg-gradient-to-br p-6">
+                <p className="text-muted-foreground mb-2 text-xs font-bold tracking-wider uppercase">
+                  Final Suspected Condition
+                </p>
+                <h3 className="text-3xl font-black">
+                  {guidedResults.refinedDiagnosis.finalSuspectedCondition ||
+                    'Undetermined'}
+                </h3>
+
+                {guidedResults.refinedDiagnosis.ruledOutConditions?.length > 0 && (
+                  <div className="mt-4">
+                    <p className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
+                      Ruled Out
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-2">
+                      {guidedResults.refinedDiagnosis.ruledOutConditions.map((c, i) => (
+                        <Badge key={i} className="bg-destructive/10 text-destructive">
+                          {c}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
                 )}
-                strokeWidth="3.5"
-                strokeDasharray={`${analysis?.confidenceScore || 0}, 100`}
-                strokeLinecap="round"
-              />
-            </svg>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-2xl font-black">
-                {analysis?.confidenceScore || 0}%
-              </span>
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-5xl font-black tracking-tighter italic">
-              {analysis?.confidenceScore || 0}%
-            </span>
-            <span className="text-muted-foreground mt-1 text-xs font-bold uppercase">
-              Confidence Rate
-            </span>
-          </div>
-        </Card>
-      </div>
 
-      {/* Metrics Row 2 */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-        <Card className="border-border bg-card flex flex-col items-center justify-center rounded-[2.5rem] p-10 text-center">
-          <div className="mb-2 flex items-center gap-3">
-            <div className="bg-primary h-2 w-2 rounded-full" />
-            <span className="text-xs font-bold tracking-widest uppercase opacity-60">
-              Status
-            </span>
+                <p className="text-muted-foreground mt-4 text-xs">
+                  Completed:{' '}
+                  {guidedResults.completedAt
+                    ? new Date(guidedResults.completedAt).toLocaleString()
+                    : 'N/A'}
+                </p>
+              </div>
+            )}
           </div>
-          <div className="border-border mt-2 w-full border-t pt-6">
-            <span className="text-5xl font-black tracking-tight uppercase">
-              {session.status === 'pending_review' ? 'NEW' : session.status}
-            </span>
-            <p className="text-muted-foreground mt-3 text-xs font-bold tracking-widest uppercase">
-              Session Priority
-            </p>
-          </div>
-        </Card>
-        <Card className="border-border bg-card flex flex-col items-center justify-center rounded-[2.5rem] p-10 text-center">
-          <div className="mb-2 flex items-center gap-3">
-            <div className="h-2 w-2 rounded-full bg-indigo-500" />
-            <span className="text-xs font-bold tracking-widest uppercase opacity-60">
-              Region
-            </span>
-          </div>
-          <div className="border-border mt-2 w-full border-t pt-6">
-            <span className="text-5xl font-black tracking-tight uppercase">
-              {session.bodyRegion?.slice(0, 3)}
-            </span>
-            <p className="text-muted-foreground mt-3 text-xs font-bold tracking-widest uppercase">
-              Target Area
-            </p>
-          </div>
-        </Card>
-      </div>
+        </CollapsibleSection>
+      )}
 
-      {/* Reports Section */}
-      <div className="space-y-6 pt-4">
-        <h2 className="px-2 text-xl font-black tracking-wide uppercase">
-          Reports & Actions
-        </h2>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <ReportCard
-            color="bg-primary shadow-primary/20"
-            icon={<ClipboardList />}
-            title="Schedules"
-            desc="Book the next clinical session for this patient."
-            onClick={() => setIsBookingOpen(true)}
-            actionText="Schedule Session"
-          />
-          <ReportCard
-            color="bg-indigo-500 shadow-indigo-500/20"
-            icon={<CheckCircle2 />}
-            title="Analysis"
-            desc="Review the granular heuristic patterns detected via MSK logic."
-            actionText="Review Patterns"
-            onClick={() => setIsAnalysisOpen(true)}
-          />
-          <ReportCard
-            color="bg-emerald-500 shadow-emerald-500/20"
-            icon={<FileText />}
-            title="Clinical Files"
-            desc="Access radiological images, lab results and previous prescriptions."
-            actionText="Browse Files"
-            onClick={() => setIsDocsOpen(true)}
-          />
-
-          <div className="bg-border col-span-full my-6 h-[1px] opacity-50" />
-
-          <ReportCard
-            color="bg-[#7c4d7c] shadow-[#7c4d7c]/20"
-            icon={<PlusCircle />}
-            title="Treatment Plan"
-            desc="Construct a personalized recovery roadmap and exercise regimen."
-            actionText="Generate Plan"
-            onClick={() => {
-              setPlanData({
-                ...planData,
-                goal: `Recovery for ${session.bodyRegion}`,
-              });
-              setIsPlanOpen(true);
-            }}
-          />
-          <ReportCard
-            color="bg-warning shadow-warning/20 bg-opacity-90"
-            icon={<Calendar />}
-            title="Clinical Notes"
-            desc="Add specific observational notes and clinician impressions."
-            actionText="Add Notes"
-            onClick={() => {
-              setNotesData(session.clinicianReview?.clinicianNotes || '');
-              setIsNotesOpen(true);
-            }}
-          />
-          <ReportCard
-            color="bg-foreground text-background shadow-foreground/20"
-            icon={<Info />}
-            title="Referral Plan"
-            desc="Authorize secondary referrals or medical investigations."
-            actionText="Refer Patient"
-            onClick={() => setIsReferralOpen(true)}
-          />
-        </div>
-      </div>
-
-      {/* Final Action */}
-      <div className="flex justify-center pt-10">
-        <Button className="h-16 rounded-2xl border-none bg-[#3da9f5] px-20 text-sm font-black tracking-widest text-white uppercase shadow-lg transition-transform hover:scale-105 hover:bg-[#2c91db] active:scale-95">
-          Complete Documentation
+      {/* Quick Actions */}
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
+        <Button variant="outline" className="h-14" onClick={() => setIsBookingOpen(true)}>
+          <Calendar className="mr-2 h-5 w-5" />
+          Schedule Session
+        </Button>
+        <Button
+          variant="outline"
+          className="h-14"
+          onClick={() => {
+            setNotesData(session.clinicianReview?.clinicianNotes || '');
+            setIsNotesOpen(true);
+          }}
+        >
+          <FileText className="mr-2 h-5 w-5" />
+          Add Notes
+        </Button>
+        <Button
+          variant="outline"
+          className="h-14"
+          onClick={() => router.push(`/clinician/treatment?patientId=${patient?._id}`)}
+        >
+          <PlusCircle className="mr-2 h-5 w-5" />
+          Treatment Plan
         </Button>
       </div>
 
       {/* Booking Modal */}
       {isBookingOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <Card className="animate-scale-up w-full max-w-md border-none p-6 shadow-2xl">
+        <ModalOverlay onClose={() => setIsBookingOpen(false)}>
+          <Card className="w-full max-w-md p-6">
             <h3 className="text-xl font-black">Schedule Appointment</h3>
-            <p className="text-muted-foreground mt-2 text-xs font-medium">
-              Select a date and time for{' '}
-              {patient ? `${patient.firstName} ${patient.lastName}` : 'this patient'}
-            </p>
-
             <form onSubmit={handleBook} className="mt-6 space-y-4">
               <div>
-                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                <label className="text-muted-foreground text-xs font-bold uppercase">
                   Date
                 </label>
                 <input
                   type="date"
                   required
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
+                  className="mt-1 w-full rounded-xl border p-3 text-sm"
                   value={bookingData.date}
                   onChange={(e) =>
                     setBookingData({ ...bookingData, date: e.target.value })
@@ -640,37 +737,19 @@ export default function CaseDetailsPage() {
                 />
               </div>
               <div>
-                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
+                <label className="text-muted-foreground text-xs font-bold uppercase">
                   Time
                 </label>
                 <input
                   type="time"
                   required
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
+                  className="mt-1 w-full rounded-xl border p-3 text-sm"
                   value={bookingData.time}
                   onChange={(e) =>
                     setBookingData({ ...bookingData, time: e.target.value })
                   }
                 />
               </div>
-              <div>
-                <label className="text-[10px] font-black tracking-widest text-slate-400 uppercase">
-                  Session Type
-                </label>
-                <select
-                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm font-bold dark:border-slate-800 dark:bg-slate-900"
-                  value={bookingData.type}
-                  onChange={(e) =>
-                    setBookingData({ ...bookingData, type: e.target.value })
-                  }
-                >
-                  <option>Physiotherapy Session</option>
-                  <option>Consultation</option>
-                  <option>Check-up</option>
-                  <option>Follow-up</option>
-                </select>
-              </div>
-
               <div className="flex gap-3 pt-4">
                 <Button
                   type="button"
@@ -686,68 +765,17 @@ export default function CaseDetailsPage() {
               </div>
             </form>
           </Card>
-        </div>
-      )}
-
-      {/* Analysis Modal */}
-      {isAnalysisOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <Card className="animate-scale-up w-full max-w-2xl border-none p-8 shadow-2xl">
-            <div className="mb-6 flex items-center justify-between">
-              <h3 className="text-2xl font-black">MSK Analysis Patterns</h3>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setIsAnalysisOpen(false)}
-              >
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-            <div className="max-h-[60vh] space-y-6 overflow-y-auto pr-4">
-              <div className="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-6">
-                <span className="text-[10px] font-black tracking-widest text-indigo-500 uppercase">
-                  Detected Patterns
-                </span>
-                <p className="text-foreground mt-2 text-sm font-bold">
-                  Granular heuristic patterns detected via MSK logic for{' '}
-                  {session.bodyRegion}.
-                </p>
-              </div>
-              <div className="grid gap-4">
-                {analysis?.reasoning?.map((point, idx) => (
-                  <div
-                    key={idx}
-                    className="flex gap-4 rounded-xl bg-slate-50 p-4 dark:bg-slate-900"
-                  >
-                    <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-500 text-xs font-black text-white">
-                      {idx + 1}
-                    </div>
-                    <p className="text-sm font-medium">{point}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <Button
-              className="mt-8 h-12 w-full rounded-xl"
-              onClick={() => setIsAnalysisOpen(false)}
-            >
-              Close Patterns
-            </Button>
-          </Card>
-        </div>
+        </ModalOverlay>
       )}
 
       {/* Notes Modal */}
       {isNotesOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <Card className="animate-scale-up w-full max-w-md border-none p-6 shadow-2xl">
+        <ModalOverlay onClose={() => setIsNotesOpen(false)}>
+          <Card className="w-full max-w-md p-6">
             <h3 className="text-xl font-black">Add Clinical Notes</h3>
-            <p className="text-muted-foreground mt-2 text-xs font-medium">
-              Add your clinical impressions and observations for this session.
-            </p>
             <form onSubmit={handleUpdateNotes} className="mt-6 space-y-4">
               <textarea
-                className="ring-primary/20 h-40 w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium transition-all outline-none focus:ring-2 dark:border-slate-800 dark:bg-slate-900"
+                className="h-40 w-full rounded-xl border p-4 text-sm"
                 placeholder="Type clinician notes here..."
                 value={notesData}
                 onChange={(e) => setNotesData(e.target.value)}
@@ -768,387 +796,77 @@ export default function CaseDetailsPage() {
               </div>
             </form>
           </Card>
-        </div>
+        </ModalOverlay>
       )}
 
-      {/* Referral Modal */}
-      {isReferralOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <Card className="animate-scale-up w-full max-w-md border-none p-8 shadow-2xl">
-            <h3 className="text-2xl font-black tracking-tight uppercase">
-              Refer Patient
-            </h3>
-            <p className="text-muted-foreground mt-2 text-xs font-medium tracking-widest uppercase">
-              Authorize outside medical investigation
-            </p>
-
-            <form onSubmit={handleReferral} className="mt-8 space-y-5">
-              <div className="space-y-2">
-                <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                  Target Specialty
-                </label>
-                <select
-                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                  value={referralData.specialty}
-                  onChange={(e) =>
-                    setReferralData({ ...referralData, specialty: e.target.value })
-                  }
-                >
-                  <option>Orthopedic Surgeon</option>
-                  <option>Radiology (MRI/X-Ray)</option>
-                  <option>Neurologist</option>
-                  <option>Sports Physician</option>
-                  <option>Rheumatologist</option>
-                </select>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                    Preferred Date
-                  </label>
-                  <input
-                    type="date"
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                    value={referralData.date || ''}
-                    onChange={(e) =>
-                      setReferralData({ ...referralData, date: e.target.value })
-                    }
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                    Time
-                  </label>
-                  <input
-                    type="time"
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                    value={referralData.time || ''}
-                    onChange={(e) =>
-                      setReferralData({ ...referralData, time: e.target.value })
-                    }
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                  Clinical Reasoning
-                </label>
-                <textarea
-                  className="ring-primary/10 h-32 w-full rounded-xl border border-slate-200 bg-slate-50 p-4 text-sm font-medium transition-all outline-none focus:ring-4 dark:border-slate-800 dark:bg-slate-900"
-                  placeholder="State the reason for referral..."
-                  value={referralData.reason}
-                  onChange={(e) =>
-                    setReferralData({ ...referralData, reason: e.target.value })
-                  }
-                  required
-                />
-              </div>
-
-              <div className="flex gap-3 pt-4">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-12 flex-1 rounded-xl text-[10px] font-black tracking-widest uppercase"
-                  onClick={() => setIsReferralOpen(false)}
-                >
-                  Dismiss
-                </Button>
-                <Button
-                  type="submit"
-                  className="h-12 flex-1 rounded-xl border-none bg-emerald-500 text-[10px] font-black tracking-widest text-white uppercase hover:bg-emerald-600"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Sending...' : 'Authorize Referral'}
-                </Button>
-              </div>
-            </form>
-          </Card>
-        </div>
-      )}
-
-      {/* Plan Modal */}
-      {isPlanOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <Card className="animate-scale-up w-full max-w-lg border-none p-8 shadow-2xl">
-            <h3 className="text-2xl font-black tracking-tight uppercase">
-              Generate Treatment Plan
-            </h3>
-            <p className="text-muted-foreground mt-2 text-xs font-medium tracking-widest uppercase">
-              Construct recovery roadmap for {patient?.firstName}
-            </p>
-
-            <form onSubmit={handleCreatePlan} className="mt-8 space-y-5">
-              <div className="space-y-2">
-                <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                  Treatment Goal
-                </label>
-                <input
-                  className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                  value={planData.goal}
-                  onChange={(e) => setPlanData({ ...planData, goal: e.target.value })}
-                  placeholder="e.g. Reduce inflammation and restore mobility"
-                  required
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                    Active Treatment
-                  </label>
-                  <input
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                    value={planData.activeTreatment}
-                    onChange={(e) =>
-                      setPlanData({ ...planData, activeTreatment: e.target.value })
-                    }
-                    placeholder="e.g. Manual Therapy"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                    Home Exercise
-                  </label>
-                  <input
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                    value={planData.homeExercise}
-                    onChange={(e) =>
-                      setPlanData({ ...planData, homeExercise: e.target.value })
-                    }
-                    placeholder="e.g. 3x10 Glute Bridges"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                    Date
-                  </label>
-                  <input
-                    type="date"
-                    required
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                    value={planData.date}
-                    onChange={(e) => setPlanData({ ...planData, date: e.target.value })}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black tracking-[0.2em] text-slate-400 uppercase">
-                    Time
-                  </label>
-                  <input
-                    type="time"
-                    required
-                    className="h-12 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 text-sm font-bold outline-none dark:border-slate-800 dark:bg-slate-900"
-                    value={planData.time}
-                    onChange={(e) => setPlanData({ ...planData, time: e.target.value })}
-                  />
-                </div>
-              </div>
-
-              <div className="flex gap-3 pt-6">
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="h-12 flex-1 rounded-xl text-[10px] font-black tracking-widest uppercase"
-                  onClick={() => setIsPlanOpen(false)}
-                >
-                  Cancel
-                </Button>
-                <Button
-                  type="submit"
-                  className="h-12 flex-1 rounded-xl border-none bg-[#7c4d7c] text-[10px] font-black tracking-widest text-white uppercase shadow-lg shadow-[#7c4d7c]/30 hover:bg-[#6a426a]"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? 'Generating...' : 'Confirm Plan'}
-                </Button>
-              </div>
-            </form>
-          </Card>
-        </div>
-      )}
-
-      {/* Documents Modal */}
-      {isDocsOpen && (
-        <div className="animate-in fade-in fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-          <Card className="animate-scale-up flex max-h-[80vh] w-full max-w-2xl flex-col overflow-hidden border-none shadow-2xl">
-            <div className="flex items-center justify-between border-b p-6">
-              <div>
-                <h3 className="text-xl font-black">Patient Documents</h3>
-                <p className="text-muted-foreground text-xs font-medium">
-                  Viewing clinical files for{' '}
-                  {patient ? `${patient.firstName} ${patient.lastName}` : 'this patient'}
-                </p>
-              </div>
-              <Button variant="ghost" size="icon" onClick={() => setIsDocsOpen(false)}>
-                <X className="h-5 w-5" />
-              </Button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto p-6">
-              {isLoadingDocs ? (
-                <div className="flex h-40 flex-col items-center justify-center gap-3">
-                  <div className="border-primary h-8 w-8 animate-spin rounded-full border-b-2" />
-                  <p className="text-muted-foreground text-sm font-bold">
-                    Fetching files...
-                  </p>
-                </div>
-              ) : documents.length > 0 ? (
-                <div className="space-y-3">
-                  {documents.map((doc) => (
-                    <div
-                      key={doc._id}
-                      onClick={() => {
-                        if (!doc.fileType?.includes('pdf')) {
-                          setActiveImage({ src: doc.fileUrl, alt: doc.fileName });
-                        }
-                      }}
-                      className={cn(
-                        'hover:border-primary/50 group flex items-center justify-between rounded-2xl border border-slate-100 bg-slate-50 p-4 transition-all dark:border-slate-800 dark:bg-slate-900/40',
-                        !doc.fileType?.includes('pdf') && 'cursor-zoom-in'
-                      )}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="text-primary flex h-12 w-12 items-center justify-center rounded-xl bg-white shadow-sm dark:bg-slate-800">
-                          <FileIcon className="h-6 w-6" />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="max-w-[200px] truncate text-sm font-black">
-                            {doc.fileName}
-                          </span>
-                          <div className="mt-0.5 flex items-center gap-2">
-                            <Badge
-                              variant="outline"
-                              className="h-4 px-1 text-[8px] font-black uppercase"
-                            >
-                              {doc.category}
-                            </Badge>
-                            <span className="text-muted-foreground text-[10px] font-bold">
-                              {formatFileSize(doc.fileSize)} •{' '}
-                              {new Date(doc.createdAt).toLocaleDateString()}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex gap-2">
-                        {doc.fileType?.includes('pdf') ? (
-                          <a
-                            href={doc.fileUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                          >
-                            <Button
-                              size="sm"
-                              variant="ghost"
-                              className="group-hover:bg-primary/10 group-hover:text-primary h-8 w-8 rounded-full p-0"
-                            >
-                              <Eye className="h-4 w-4" />
-                            </Button>
-                          </a>
-                        ) : (
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setActiveImage({ src: doc.fileUrl, alt: doc.fileName });
-                            }}
-                            className="group-hover:bg-primary/10 group-hover:text-primary h-8 w-8 rounded-full p-0"
-                          >
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                        )}
-                        <a
-                          href={doc.fileUrl}
-                          download={doc.fileName}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Button
-                            size="sm"
-                            variant="ghost"
-                            className="group-hover:bg-primary/10 group-hover:text-primary h-8 w-8 rounded-full p-0"
-                          >
-                            <Download className="h-4 w-4" />
-                          </Button>
-                        </a>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="flex h-40 flex-col items-center justify-center text-center">
-                  <FileText className="mb-2 h-10 w-10 text-slate-300" />
-                  <p className="text-sm font-bold text-slate-500">
-                    No documents found for this patient.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            <div className="border-t bg-slate-50/50 p-6 dark:bg-slate-900/20">
-              <Button
-                className="h-12 w-full rounded-xl font-black"
-                onClick={() => setIsDocsOpen(false)}
-              >
-                Close Viewer
-              </Button>
-            </div>
-          </Card>
-        </div>
-      )}
-
-      {activeImage && (
-        <Lightbox
-          src={activeImage.src}
-          alt={activeImage.alt}
-          onClose={() => setActiveImage(null)}
-        />
-      )}
-
+      {/* Status Modal */}
       <StatusModal
         isOpen={statusModal.isOpen}
-        onClose={() => setStatusModal({ ...statusModal, isOpen: false })}
+        type={statusModal.type}
         title={statusModal.title}
         message={statusModal.message}
-        type={statusModal.type}
-        onConfirm={() => {
-          if (statusModal.onConfirm) statusModal.onConfirm();
-          setStatusModal({ ...statusModal, isOpen: false });
-        }}
+        onClose={() => setStatusModal((s) => ({ ...s, isOpen: false }))}
+        onConfirm={statusModal.onConfirm}
       />
     </div>
   );
 }
 
-function ReportCard({ color, icon, title, desc, actionText = 'Book Now', onClick }) {
+/**
+ * COLLAPSIBLE SECTION COMPONENT
+ * ==============================
+ * Reusable expandable section for case file organization.
+ */
+function CollapsibleSection({ title, subtitle, icon, isExpanded, onToggle, children }) {
   return (
-    <div
-      className={cn(
-        'flex min-h-[190px] flex-col justify-between rounded-[2rem] p-7 text-white shadow-md transition-all hover:-translate-y-1 hover:brightness-110',
-        color
-      )}
-    >
-      <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          {React.cloneElement(icon, { className: 'h-5 w-5' })}
-          <span className="text-[12px] leading-none font-black tracking-widest uppercase opacity-80">
-            {title}
-          </span>
-        </div>
-        <p className="line-clamp-3 text-[11px] leading-relaxed font-bold opacity-90">
-          {desc}
-        </p>
-      </div>
+    <Card className="overflow-hidden">
       <button
-        onClick={onClick}
-        className="mt-4 rounded-xl bg-white py-2.5 text-[10px] font-black text-gray-900 uppercase shadow-sm transition-all hover:bg-gray-100 active:scale-95"
+        onClick={onToggle}
+        className="hover:bg-accent/50 flex w-full items-center justify-between p-6 text-left transition-colors"
       >
-        {actionText}
+        <div className="flex items-center gap-3">
+          <div className="bg-primary/10 text-primary rounded-full p-2">{icon}</div>
+          <div>
+            <h2 className="text-lg font-black">{title}</h2>
+            {subtitle && <p className="text-muted-foreground text-xs">{subtitle}</p>}
+          </div>
+        </div>
+        {isExpanded ? (
+          <ChevronDown className="text-muted-foreground h-5 w-5" />
+        ) : (
+          <ChevronRight className="text-muted-foreground h-5 w-5" />
+        )}
       </button>
+      {isExpanded && <div className="border-border border-t p-6">{children}</div>}
+    </Card>
+  );
+}
+
+/**
+ * DATA FIELD COMPONENT
+ * =====================
+ * Simple labeled data display.
+ */
+function DataField({ label, value }) {
+  return (
+    <div>
+      <p className="text-muted-foreground text-xs font-bold tracking-wider uppercase">
+        {label}
+      </p>
+      <p className="mt-1 font-semibold">{value || 'N/A'}</p>
+    </div>
+  );
+}
+
+/**
+ * MODAL OVERLAY COMPONENT
+ * ========================
+ * Reusable modal backdrop.
+ */
+function ModalOverlay({ children, onClose }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
+      <div className="animate-scale-up">{children}</div>
     </div>
   );
 }
