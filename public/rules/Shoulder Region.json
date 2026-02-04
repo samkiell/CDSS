@@ -2,7 +2,7 @@
   "region": "shoulder",
   "title": "Shoulder Region",
   "source_file": "Shoulder Region.docx",
-  "extracted_at": "2026-02-04T08:50:45.640Z",
+  "extracted_at": "2026-02-04T08:57:16.327Z",
   "conditions": [
     {
       "name": "Initial Assessment",
@@ -485,10 +485,13 @@
           "inputType": "select"
         }
       ],
-      "recommended_tests": [],
-      "confirmation_methods": [],
-      "observations": [],
-      "is_general": true
+      "is_general": true,
+      "tests": [
+        {
+          "name": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms"
+        }
+      ]
     },
     {
       "name": "Shoulder Impingement Syndrome",
@@ -866,10 +869,13 @@
           "inputType": "select"
         }
       ],
-      "recommended_tests": [],
-      "confirmation_methods": [],
-      "observations": [],
-      "source_line": 55
+      "source_line": 55,
+      "tests": [
+        {
+          "name": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms"
+        }
+      ]
     },
     {
       "name": "Subacute tendinitis OR Painfularc syndrome",
@@ -942,10 +948,13 @@
           "inputType": "select"
         }
       ],
-      "recommended_tests": [],
-      "confirmation_methods": [],
-      "observations": [],
-      "source_line": 90
+      "source_line": 90,
+      "tests": [
+        {
+          "name": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms"
+        }
+      ]
     },
     {
       "name": "Chronic Tendinitis",
@@ -1051,10 +1060,13 @@
           "inputType": "select"
         }
       ],
-      "recommended_tests": [],
-      "confirmation_methods": [],
-      "observations": [],
-      "source_line": 101
+      "source_line": 101,
+      "tests": [
+        {
+          "name": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms"
+        }
+      ]
     },
     {
       "name": "Cuff Disruption",
@@ -1283,10 +1295,13 @@
           "inputType": "select"
         }
       ],
-      "recommended_tests": [],
-      "confirmation_methods": [],
-      "observations": [],
-      "source_line": 111
+      "source_line": 111,
+      "tests": [
+        {
+          "name": "Clinical Assessment",
+          "procedure": "Physical examination and clinical assessment based on presenting symptoms"
+        }
+      ]
     },
     {
       "name": "CALCIFIC TENDINITIS",
@@ -1482,59 +1497,201 @@
           "inputType": "select"
         }
       ],
-      "recommended_tests": [
-        "Check X-ray to rule asymptomatic calcification",
-        "Lesions of the Biceps Tendon (Confirmation)",
-        "Biccipital Tendinitis as above:",
-        "Special Test for Biccipital Tendinitis",
-        "Speed Test: Place pt’s arm in shoulder flexion, forearm supination and elbow extension. The examiner then applies pressure to the arm as downward action.",
-        "A positive sign, pain in the bicipital grove is replicable",
-        "Yergasom’s test:  Pt places the forearm in the supine position, and the examiner applies resistance against supination.",
-        "A positive sign, this replicates the pain in the bicipital group tenderness.",
-        "Rupture of the Biceps Tendon (Confirmation)",
-        "Age (over 50yrs)",
-        "Ask pt to lift or offer resistance to biceps contraction",
-        "Is a prominent lump is seen in lower arm",
-        "The upper arm becomes painful and bruised",
-        "Hypertrophy and intra-articular entrapment (the hourglass biceps) -(Confirmation)",
-        "Ask patient to elevate the shoulder",
-        "Is buckling of tendon present?",
-        "Do you feel pain on shoulder elevation?",
-        "Can the patient elevate the arm up till the end of the range?",
-        "SLAP LESION (Confirmation)",
-        "Did you have any history of fall or trauma with hand stretched out?",
-        "Did you have any history of loading the shoulder region with weight?",
-        "Do you feel a ‘painful click’ when you lift your arm above shoulder height?",
-        "Do you feel weakness in your arm when doing activities above shoulder height?",
-        "Ask the patient to throw to reach a far distance where above shoulder movement is indicated.",
-        "Patient is unable to",
-        "Patient is able to",
-        "Patient is able to (with pain involvement)",
-        "Special Test for SLAP (O’Brien’s test)",
-        "Instruct the patient to flex the arm up to 90 deg with the elbow in full extension.Then ask pt to adduct arm 10-15 deg medial to sagittal plane. Arm is maximally internally rotated and examiner applies downward pressure while patient is asked to resist.  Procedure is then repeated in supination",
-        "Positive: Pain is elicited by the first manoeuvre, and is reduced or eliminated by the second.",
-        "ADHESIVE CAPSULITIS (Frozen Shoulder Syndrome)",
-        "Age (40-60)",
-        "At the early phase of this pain, did you find it difficult to turn your shoulder out (External rotation) and/or take your arm away from your body (abduction)?",
-        "Yes \t(Check for adhesive capsulitis– early phase. Carry out active and passive movements)",
-        "Currently, do you find it difficult to turn your shoulder in (Internal rotation) or move your arms towards your body/chest (Adduction)",
-        "Yes\t(Check for adhesive capsulitis – freezing phase)",
-        "Do you find it easier to move your shoulder backwards (extension)?",
-        "Do you experience progressive stiffness in your shoulder?",
-        "Is the pain worse at night?",
-        "Have you had any of the following conditions before: Diabetes, Dupuytren’s, hyperlipidemia, hyperthyroidism, cardiac disease, hemiplegia?",
-        "Have you undergone a neurosurgical procedure before?",
-        "Previous history of fall or trauma to affected side?",
-        "Yes \t(Traumatic Adhesive Capsulitis)",
-        "No\t(Non-traumatic Adhesive Capsulitis)",
-        "Test for Adhesive Capsulitis",
-        "Check if the Active range of motion and passive range of motion is full across shoulder joints",
-        "Active and Passive range of motion is limited in Adhesive Capsulitis",
-        "Rule out other causes of stiffness with imaging"
-      ],
-      "confirmation_methods": [],
-      "observations": [],
-      "source_line": 155
+      "source_line": 155,
+      "tests": [
+        {
+          "name": "Check X-ray to rule asymptomatic calcification",
+          "procedure": ""
+        },
+        {
+          "name": "Lesions of the Biceps Tendon (Confirmation)",
+          "procedure": ""
+        },
+        {
+          "name": "Biccipital Tendinitis as above",
+          "procedure": ""
+        },
+        {
+          "name": "Speed Test",
+          "procedure": "Place pt’s arm in shoulder flexion, forearm supination and elbow extension. The examiner then applies pressure to the arm as downward action."
+        },
+        {
+          "name": "A positive sign, pain in the bicipital grove is replicable",
+          "procedure": ""
+        },
+        {
+          "name": "Yergasom’s test",
+          "procedure": "Pt places the forearm in the supine position, and the examiner applies resistance against supination."
+        },
+        {
+          "name": "A positive sign, this replicates the pain in the bicipital group tenderness.",
+          "procedure": ""
+        },
+        {
+          "name": "Rupture of the Biceps Tendon (Confirmation)",
+          "procedure": ""
+        },
+        {
+          "name": "Age (over 50yrs)",
+          "procedure": ""
+        },
+        {
+          "name": "Ask pt to lift or offer resistance to biceps contraction",
+          "procedure": ""
+        },
+        {
+          "name": "Is a prominent lump is seen in lower arm",
+          "procedure": ""
+        },
+        {
+          "name": "The upper arm becomes painful and bruised",
+          "procedure": ""
+        },
+        {
+          "name": "Hypertrophy and intra-articular entrapment (the hourglass biceps)",
+          "procedure": "-(Confirmation)"
+        },
+        {
+          "name": "Ask patient to elevate the shoulder",
+          "procedure": ""
+        },
+        {
+          "name": "SLAP LESION (Confirmation)",
+          "procedure": ""
+        },
+        {
+          "name": "Ask the patient to throw to reach a far distance where above shoulder movement is indicated.",
+          "procedure": ""
+        },
+        {
+          "name": "Patient is unable to",
+          "procedure": ""
+        },
+        {
+          "name": "Patient is able to",
+          "procedure": ""
+        },
+        {
+          "name": "Patient is able to (with pain involvement)",
+          "procedure": ""
+        },
+        {
+          "name": "Instruct the patient to flex the arm up to 90 deg with the elbow in full extension.Then ask pt to adduct arm 10-15 deg medial to sagittal plane. Arm is maximally internally rotated and examiner applies downward pressure while patient is asked to resist.  Procedure is then repeated in supination",
+          "procedure": ""
+        },
+        {
+          "name": "Positive",
+          "procedure": "Pain is elicited by the first manoeuvre, and is reduced or eliminated by the second."
+        },
+        {
+          "name": "ADHESIVE CAPSULITIS (Frozen Shoulder Syndrome)",
+          "procedure": ""
+        },
+        {
+          "name": "Age (40-60)",
+          "procedure": ""
+        },
+        {
+          "name": "Yes (Check for adhesive capsulitis– early phase. Carry out active and passive movements)",
+          "procedure": ""
+        },
+        {
+          "name": "Currently, do you find it difficult to turn your shoulder in (Internal rotation)",
+          "procedure": "or move your arms towards your body/chest (Adduction)"
+        },
+        {
+          "name": "Yes (Check for adhesive capsulitis – freezing phase)",
+          "procedure": ""
+        },
+        {
+          "name": "Yes (Traumatic Adhesive Capsulitis)",
+          "procedure": ""
+        },
+        {
+          "name": "No (Non-traumatic Adhesive Capsulitis)",
+          "procedure": ""
+        },
+        {
+          "name": "Test for Adhesive Capsulitis",
+          "procedure": ""
+        },
+        {
+          "name": "Clinical Observation",
+          "procedure": "Check if the Active range of motion and passive range of motion is full across shoulder joints"
+        },
+        {
+          "name": "Active and Passive range of motion is limited in Adhesive Capsulitis",
+          "procedure": ""
+        },
+        {
+          "name": "Rule out other causes of stiffness with imaging",
+          "procedure": ""
+        },
+        {
+          "name": "Special Test for Biccipital Tendinitis",
+          "procedure": ""
+        },
+        {
+          "name": "Is buckling of tendon present?",
+          "procedure": ""
+        },
+        {
+          "name": "Do you feel pain on shoulder elevation?",
+          "procedure": ""
+        },
+        {
+          "name": "Can the patient elevate the arm up till the end of the range?",
+          "procedure": ""
+        },
+        {
+          "name": "Did you have any history of fall or trauma with hand stretched out?",
+          "procedure": ""
+        },
+        {
+          "name": "Did you have any history of loading the shoulder region with weight?",
+          "procedure": ""
+        },
+        {
+          "name": "Do you feel a ‘painful click’ when you lift your arm above shoulder height?",
+          "procedure": ""
+        },
+        {
+          "name": "Do you feel weakness in your arm when doing activities above shoulder height?",
+          "procedure": ""
+        },
+        {
+          "name": "Special Test for SLAP (O’Brien’s test)",
+          "procedure": ""
+        },
+        {
+          "name": "At the early phase of this pain, did you find it difficult to turn your shoulder out (External rotation)",
+          "procedure": "and/or take your arm away from your body (abduction)?"
+        },
+        {
+          "name": "Do you find it easier to move your shoulder backwards (extension)",
+          "procedure": "?"
+        },
+        {
+          "name": "Do you experience progressive stiffness in your shoulder?",
+          "procedure": ""
+        },
+        {
+          "name": "Is the pain worse at night?",
+          "procedure": ""
+        },
+        {
+          "name": "Have you had any of the following conditions before",
+          "procedure": "Diabetes, Dupuytren’s, hyperlipidemia, hyperthyroidism, cardiac disease, hemiplegia?"
+        },
+        {
+          "name": "Have you undergone a neurosurgical procedure before?",
+          "procedure": ""
+        },
+        {
+          "name": "Previous history of fall or trauma to affected side?",
+          "procedure": ""
+        }
+      ]
     },
     {
       "name": "RECURRENT SHOULDER SUBLUXATION",
@@ -1695,10 +1852,37 @@
           "inputType": "select"
         }
       ],
-      "recommended_tests": [],
-      "confirmation_methods": [],
-      "observations": [],
-      "source_line": 255
+      "source_line": 255,
+      "tests": [
+        {
+          "name": "Apprehension Test",
+          "procedure": ""
+        },
+        {
+          "name": "Patient is in sitting or lying position, the examiner lifts the arn gently into ABduction, external rotation and then extension. Test is positive if Pt senses that humeral head is about to slip out anteriorly and body stiffens in apprehension.",
+          "procedure": ""
+        },
+        {
+          "name": "The test is repeated with the anterior part of shoulder protected.",
+          "procedure": ""
+        },
+        {
+          "name": "Fulcrum’s Test",
+          "procedure": ""
+        },
+        {
+          "name": "Pt lies supine, arm ABducted up to 90 deg. The examiner places their hands over the shoulder to set the fulcrum base. The humeral head is levered forward by extending and externally rotating arm. The patient immediately becomes apprehensive.",
+          "procedure": ""
+        },
+        {
+          "name": "Drawer’s Test",
+          "procedure": ""
+        },
+        {
+          "name": "Patient lies supine , scapula is stabilised with one hand while the upper arm is grasped firmly with the other, and manoeuvring is done forward and backward (like a drawer)",
+          "procedure": ". The drawer’s test is positive if instability is marked."
+        }
+      ]
     },
     {
       "name": "RHEUMATOID ARTHRITIS",
@@ -1936,12 +2120,13 @@
           "inputType": "select"
         }
       ],
-      "recommended_tests": [],
-      "confirmation_methods": [
-        "Radiographic confirmation – check for periarticular erosions, subchondral sclerosis, and resorption."
-      ],
-      "observations": [],
-      "source_line": 274
+      "source_line": 274,
+      "tests": [
+        {
+          "name": "Radiographic confirmation – check for periarticular erosions, subchondral sclerosis, and resorption.",
+          "procedure": ""
+        }
+      ]
     },
     {
       "name": "OSTEOARTHRITIS",
@@ -2122,14 +2307,14 @@
           "inputType": "select"
         }
       ],
-      "recommended_tests": [],
-      "confirmation_methods": [
-        "Radiographic confirmation – check for distortion of the joint, subchondral sclerosis, osteophyte formation, and narrowing of articular space."
-      ],
-      "observations": [],
-      "source_line": 300
+      "source_line": 300,
+      "tests": [
+        {
+          "name": "Radiographic confirmation – check for distortion of the joint, subchondral sclerosis, osteophyte formation, and narrowing of articular space.",
+          "procedure": ""
+        }
+      ]
     }
   ],
-  "raw_text": "FRACTURES\n\n\n\nOf Clavicle:\n\nAge\n\nWhat region is pain present in?\n\nShoulder\n\nClavicular region\n\nDo you have a recent history of fall or trauma in the affected region?\n\nYes\n\nNo\n\nThe fracture could be pathological (Ask for blood work-up, calcium level, and Vit D intake)\n\nConcerning Pain Features:\n\nHow did the pain begin?\n\nSudden\n\nGradual\n\nDo you experience tingling or abnormal sensations?\n\nYes (Rule out  nerve involvement)\n\nNo\n\nDo you have swelling in the area of complaint?\n\nYes\n\nNo\n\nDid you notice any unusual movement in the area of complaint?\n\nYes\n\nNo\n\nWhat aggravates this pain?\n\nOverhead movement\n\nElevation above shoulder height\n\nABducion of the shoulder\n\nDo you feel pain when you try to raise your arm?\n\nYes\n\nNo\n\nIs there tenderness around the shoulder region or on palpating root of the neck?\n\nYes\n\nNo\n\nIs your sleep affected by pain?\n\nYes\n\nNo\n\nObjective\n\nObservation\t\t\t\t\t\n\nIs shoulder alignment proper?\n\nIf sagging (clavicular #)\n\nIs bruising and swelling present?\n\nYes\n\nNo\n\nIs patient adopting a pain avoidance posture by clasping hands together?\n\nYes\n\nNo\n\nIs there a bump or obvious deformity around the clavicle?\n\nYes\n\nNo\n\n\n\nTEST\n\nRadiographic confirmation. What to expect:\n\nFracture is seen in the middle of the clavicle\n\nCheck for how far out of place the broken fragments are (displacement)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nROTATOR CUFF PATHOLOGIES\n\nFor Shoulder Impingement Syndrome:\n\nWhat region is pain present in?\n\nNeck\n\nNeck and shoulder region\n\nShoulder\n\nDo you experience tingling or abnormal sensations? – \n\nYes\t\t\t (Branch for cervical radiculitis confirmation,)\n\nNo\n\nWhat is the nature of the pain you experience?\n\nSharp or pinching\n\nDull and aching\n\nHow did the pain begin?\n\nSudden\n\nGradual\n\nIf sudden, was it following any of these movements: Abduction ( movement of the arm away from the body sideways), Elevation or External rotation (Rotating shoulder away from the body).\n\nYes\n\nNo\n\nWhat currently aggravates the pain?\n\nArm flexion (Movement of the arm forward)\n\nInternal rotation (Rotating the arm inward)\n\nAbduction\n\nSleeping on the affected side\n\nIf Pain is felt on Abduction and internal rotation, is pain present in the front or lateral part of the shoulder?\n\nYes\n\nNo\n\nDoes your job or daily tasks involve repetitive shoulder movement?\n\nYes\n\nno\n\nOn what movement is the pain felt?\n\nActive\n\nPassive \t\t(Bursitis)\n\nBoth\n\nDo you experience weakness on moving your shoulder?\n\nYes\n\nNo\n\n\n\nFor Subacute tendinitis OR Painfularc syndrome\n\nFor how long have you felt this present pain?\n\nLess than 6 weeks \t\t(Acute)\n\n6 -  less than 12 weeks\t\t(Subacute)\n\n12 weeks or more\t\t(Chronic)\n\nDoes the pain resolve significantly after the precipitating activity is avoided?\n\nYes \t\t  \n\nNo \n\nPalpate the anterior edge of the acromion with the arm in extension and flexion. (Subacute Tendinitis). Is pain present?\n\nYes\n\nNo\n\nFor Chronic Tendinitis (Age: 40-50)\n\nHave you had a previous history of shoulder pain after repetitive use? (Link to question 11, maybe redundant)\n\nYes\n\nNo\n\nDoes pain reduce with rest OR anti-inflammatory use?\n\nYes\n\nNo\n\nIs there tenderness along the bicipital groove or on moving the biceps tendon?\n\nYes (Biccipital tendinitis can co-exist with other rotator cuff pathologies)\n\nNo\n\nFor Cuff Disruption\n\nAre you above 45yrs of age?\n\nYes\n\nNo\n\nDo you have a previous history of sprain or a jerking movement at the shoulder?\n\nYes\n\nNo\n\nCheck if the patient can complete a full abduction of the arm.\n\nIf pt, cannot initiate arm ABduction – full tear\n\nIf active ABduction is possible – partial tear.\n\n\n\n\n\nSPECIAL CONFIRMATORY TESTS\n\nTest for Cervical Radiculitis: \n\nSpurling’s Test\n\nWhile pt is seated, the examiner applies side flexion of the neck towards the affected side while applying axial compression.Sign is positive if the pain sensation felt in the shoulder-neck region is replicated.\n\n\n\nTests for SIS\n\nThe painful arc: Ask pt to Abduct arm across range of motion actively\n\nScapular rhythm is disturbed\n\nPain is aggraavated between the range of 60 - 120 deg\n\nPain is alleviated IF shoulder is laterally rotated on ABduction\n\nIf positive, SIS is indicated\n\nNeer Impingement Sign: Stabilise the scapula with one hand and raise the unaffected side to full flexion with Abduction and internal rotation passively.\n\nThe test is positive when there is pain at the subacromial space.\n\nRule out acromioclavicular osteoarthritis, glenohumeral instability and SLAP lesions.\n\nHawkins-Kennedy Test: Pt arm is placed in 90 deg of elevation at the scapular level and 90 deg flexion; Stabilise the upper arm with one hand and internally rotate with the other hand.\n\nThe test is positive when pain is felt in the anterolateral aspect of the shoulder\n\nJobe’s test: Elevate arm in scapular plane, extend elbow and thumb points towards floor with arm internally rotated. Pt is asked to hold the position with downward pressure from examiner\n\nPositve sign = Pain on examiner restriction indicating supraspinatus irritation.\n\n\n\nTests for Isolated Muscle Weakness\n\nThe ‘Empty Can Test’ for Supraspinatus: Patient is asked to ABduct up to 90 deg, 30 deg flexion and internal rotation. Examiner stands behind patient and applies downward pressure\n\nPositive sign, Affected side is weaker than the unaffected side.\n\nPositive sign suggests tear in the supraspinatus\n\nInfraspinatus Test: Pt holds arms close to body, elbow is flexed up to 90 deg of forward elevation in scapular plane. External rotation is instructed while examiner applies resistance.\n\nLack of power on one side indicates weakness of the infraspinatus muscle\n\n\tIf test is done with arm in 90 deg elevation\n\n\t\ti. Inability to resist external rotation suggests a tear of the infraspinatus\n\n\t\tii. Movement with feelings of pain indicates an irritation to the infraspinatus\n\nSubscapularis (Belly Press Test): Pt is asked to place their hand on their abdomen and move elbow forward. Pt is then asked to press hand on the abdomen.\n\nIf subscapularis is torn, Pt will be unable to perform movement and elbow will move backwards.\n\nLag SignFor External Rotation: Pt lifts arm slightly from body and is asked to hold in external rotation.\n\nPositive when hand recoils to neutral position and suggests tear of infraspinatus or supraspinatus\n\nDrop Sign. The examiner places the arm at 90 deg ABduction, elbow at Rt angle and arm maximally rotated.\n\nPositive sign, arm drops from position. Suggests a tear of the infraspinatus OR the posterior part of the rotator cuff\n\nThe Lift-Off Test (Subscapularis): Pt is asked to place hand on the back at the mid-lumbar spine.The therapist then lifts hand from the back and pt is asked to hold it there\n\nPositive sign, inability to maintain hand while removed suggests subscapularis weakness.\n\n\n\n\n\nFor CALCIFIC TENDINITIS\n\nAcute Calcific Tendinits:\n\nAge \n\n30-35 years \n\nWhat is the pain type?\n\nSharp or pinching\n\nDull and aching\n\nHow did the pain begin?\n\nSudden\n\nGradual\n\nDid the pain increase drastically within a few hours?\n\nYes\n\nNo\n\nDo you experience pain more at night\n\nYes\n\nNo\n\nCan you perform the movements around the shoulder joint?\n\nYes\n\nNo \n\nDoes the pain subside after a few days and the shoulder is restored to normal functioning?\n\nIf Yes ( Acute Calcific Tendinitis)\n\nTest\n\nCheck X-ray to rule asymptomatic calcification\n\nLesions of the Biceps Tendon (Confirmation)\n\nBiccipital Tendinitis as above:\n\nSpecial Test for Biccipital Tendinitis\n\nSpeed Test: Place pt’s arm in shoulder flexion, forearm supination and elbow extension. The examiner then applies pressure to the arm as downward action. \n\nA positive sign, pain in the bicipital grove is replicable\n\nYergasom’s test:  Pt places the forearm in the supine position, and the examiner applies resistance against supination.\n\nA positive sign, this replicates the pain in the bicipital group tenderness.\n\n\n\nRupture of the Biceps Tendon (Confirmation)\n\nAge (over 50yrs)\n\nAsk pt to lift or offer resistance to biceps contraction\n\nIs a prominent lump is seen in lower arm\n\nYes\n\nNo\n\nThe upper arm becomes painful and bruised\t\t\n\nYes\n\nNo\n\nHypertrophy and intra-articular entrapment (the hourglass biceps) -(Confirmation)\n\nAsk patient to elevate the shoulder\n\nIs buckling of tendon present?\n\nYes\n\nNo\n\nDo you feel pain on shoulder elevation?\n\nYes\n\nNo\n\nCan the patient elevate the arm up till the end of the range?\n\nYes\n\nNo\n\nSLAP LESION (Confirmation)\n\nDid you have any history of fall or trauma with hand stretched out?\n\nYes\n\nNo\n\n Did you have any history of loading the shoulder region with weight?\n\nYes\n\nNo\n\nDo you feel a ‘painful click’ when you lift your arm above shoulder height?\n\nYes\n\nNo\n\nDo you feel weakness in your arm when doing activities above shoulder height?\n\nYes\n\nNo\n\nAsk the patient to throw to reach a far distance where above shoulder movement is indicated.\n\nPatient is unable to\n\nPatient is able to\n\nPatient is able to (with pain involvement)\n\n\n\nSpecial Test for SLAP (O’Brien’s test)\n\nInstruct the patient to flex the arm up to 90 deg with the elbow in full extension.Then ask pt to adduct arm 10-15 deg medial to sagittal plane. Arm is maximally internally rotated and examiner applies downward pressure while patient is asked to resist.  Procedure is then repeated in supination\n\nPositive: Pain is elicited by the first manoeuvre, and is reduced or eliminated by the second.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nADHESIVE CAPSULITIS (Frozen Shoulder Syndrome)\n\nAge (40-60)\n\nAt the early phase of this pain, did you find it difficult to turn your shoulder out (External rotation) and/or take your arm away from your body (abduction)?\n\nYes \t(Check for adhesive capsulitis– early phase. Carry out active and passive movements)\n\nNo\n\nCurrently, do you find it difficult to turn your shoulder in (Internal rotation) or move your arms towards your body/chest (Adduction)\n\nYes\t(Check for adhesive capsulitis – freezing phase)\n\nNo\n\nDo you find it easier to move your shoulder backwards (extension)?\n\nYes\n\nNo\n\nDo you experience progressive stiffness in your shoulder?\n\nYes\n\nNo\n\nIs the pain worse at night?\n\nYes\n\nNo\n\nHave you had any of the following conditions before: Diabetes, Dupuytren’s, hyperlipidemia, hyperthyroidism, cardiac disease, hemiplegia?\n\nYes\n\nNo\n\nHave you undergone a neurosurgical procedure before?\n\nYes\n\nNo\n\nPrevious history of fall or trauma to affected side?\n\nYes \t(Traumatic Adhesive Capsulitis)\n\nNo\t(Non-traumatic Adhesive Capsulitis)\n\n\n\nTest for Adhesive Capsulitis\n\nCheck if the Active range of motion and passive range of motion is full across shoulder joints\n\nActive and Passive range of motion is limited in Adhesive Capsulitis\n\nRule out other causes of stiffness with imaging\n\n\n\n\n\nFOR RECURRENT SHOULDER SUBLUXATION\n\nAge (Young adult: 18-25)\n\nHave you had a previous history of a shoulder dislocation?\n\nYes\n\nNo\n\nDid the first episode occur with a pull on an abducted, laterally rotated-extended arm?\n\nYes\n\nNo\n\nDo you experience a catching sensation followed by numbness or weakness (Dead-arm syndrome) when making overhead arm movements?\n\nYes\t(Rule out rotator cuff disorder and cervical radiculitis)\n\nNo\n\n\n\nSpecial Tests for Recurrent Subluxation\n\nApprehension Test:\n\nPatient is in sitting or lying position, the examiner lifts the arn gently into ABduction, external rotation and then extension. Test is positive if Pt senses that humeral head is about to slip out anteriorly and body stiffens in apprehension.\n\nThe test is repeated with the anterior part of shoulder protected.\n\n\n\nFulcrum’s Test:\n\n\tPt lies supine, arm ABducted up to 90 deg. The examiner places their hands over the shoulder to set the fulcrum base. The humeral head is levered forward by extending and externally rotating arm. The patient immediately becomes apprehensive.\n\nDrawer’s Test:\n\nPatient lies supine , scapula is stabilised with one hand while the upper arm is grasped firmly with the other, and manoeuvring is done forward and backward (like a drawer). The drawer’s test is positive if instability is marked.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFOR RHEUMATOID ARTHRITIS\n\nGender\n\nCommon in women\n\nDo you have a history of generalised Rheumatoid Arthritis?\n\nYes\n\nNo\n\nDo you experience pain and swelling in both shoulder joints?\n\nYes\n\nNo\n\nDo you smoke?\n\nYes\n\nNo\n\nDo you have episodes of fever that resolve spontaneously?\n\nYes\n\nNo\n\nIs swelling present anteriorly and superiorly to the shoulder?\n\nYes\n\nNo\n\nIs swelling present in the axilla?\n\nYes\n\nNo\n\nDo you experience increasing limitations in performing self-care (styling hair, dressing, shaving)?\n\nYes\n\nNo\n\nTEST \n\nRadiographic confirmation – check for periarticular erosions, subchondral sclerosis, and resorption.\n\n\n\nFOR OSTEOARTHRITIS\n\nAge (50-60 years)\n\nHave you had a previous history of injury, shoulder dislocation, or painful arc syndrome?\n\nYes\n\nNo\n\nDo you feel the pain more at night?\n\nYes\t(Rule out adhesive capsulitis)\n\nNo\n\nIs your shoulder movement restricted across ALL joint motions?\n\nYes\t\n\nNo\t (Rule out Adhesive Capsulitis. Extension is free in Adhesive Capsulitis)\n\nDo you experience early morning stiffness?\n\nYes\n\nNo\n\nIf yes, does the stiffness wane within 30 minutes of waking?\n\nYes\n\nNo \n\nTEST\n\nRadiographic confirmation – check for distortion of the joint, subchondral sclerosis, osteophyte formation, and narrowing of articular space.\n\n\n\n",
-  "extraction_messages": []
+  "version": "2.0.0"
 }
