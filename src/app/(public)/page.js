@@ -20,6 +20,7 @@ import {
   AlertTriangle,
   ClipboardList,
   ListChecks,
+  Mail,
 } from 'lucide-react';
 
 /**
@@ -576,39 +577,119 @@ export default function LandingPage() {
       {/* ============================================
           FOOTER
           ============================================ */}
-      <footer className="border-border bg-card border-t py-12">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-            <div className="flex items-center gap-3">
+      <footer className="border-border bg-card relative border-t">
+        {/* thin accent hairline at top of footer */}
+        <div className="bg-primary/60 absolute inset-x-0 top-0 h-px" />
+
+        <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8 lg:py-16">
+          {/* Top: brand + link columns
+              mobile  → brand stacked, then link columns 2-up
+              desktop → brand wide, then 3 link columns inline */}
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-[1.6fr_1fr_1fr_1fr] lg:gap-12">
+            {/* Brand column — spans the full 2-col width on mobile */}
+            <div className="col-span-2 lg:col-span-1 lg:max-w-sm">
               <Image
                 src="/logo.png"
                 alt="CDSS - Clinical Decision Support System"
-                width={100}
-                height={36}
-                className="object-contain"
+                width={112}
+                height={40}
+                className="object-contain object-left"
               />
-              <span className="text-muted-foreground text-sm">
-                Clinical Decision Support System
-              </span>
+              <p className="text-muted-foreground mt-4 max-w-sm text-sm leading-relaxed">
+                Structured clinical reasoning for musculoskeletal diagnosis — built
+                by African clinicians, for African healthcare realities.
+              </p>
+              <a
+                href="mailto:cdssoau@gmail.com"
+                className="border-border text-muted-foreground hover:border-primary/40 hover:text-foreground mt-5 inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors"
+              >
+                <Mail className="h-4 w-4" />
+                cdssoau@gmail.com
+              </a>
             </div>
-            <div className="text-muted-foreground flex items-center gap-8 text-sm">
-              <Link href="/login" className="hover:text-primary transition-colors">
-                Sign in
-              </Link>
-              <Link href="/register" className="hover:text-primary transition-colors">
-                Register
-              </Link>
-            </div>
+
+            {/* Link columns */}
+            {[
+              {
+                heading: 'Product',
+                links: [
+                  { label: 'The challenge', href: '/#problem', id: 'problem' },
+                  { label: 'Our approach', href: '/#solution', id: 'solution' },
+                  { label: 'How it works', href: '/#how-it-works', id: 'how-it-works' },
+                ],
+              },
+              {
+                heading: 'About',
+                links: [
+                  { label: 'Why Africa', href: '/#africa', id: 'africa' },
+                  { label: 'Evidence base', href: '/#africa', id: 'africa' },
+                ],
+              },
+              {
+                heading: 'Account',
+                links: [
+                  { label: 'Sign in', href: '/login' },
+                  { label: 'Create account', href: '/register' },
+                ],
+              },
+            ].map((col) => (
+              <div key={col.heading}>
+                <h4 className="text-foreground text-xs font-semibold tracking-[0.16em] uppercase">
+                  {col.heading}
+                </h4>
+                <ul className="mt-4 space-y-3">
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      {link.id ? (
+                        <a
+                          href={link.href}
+                          onClick={(e) => handleSmoothScroll(e, link.id)}
+                          className="text-muted-foreground hover:text-primary text-sm transition-colors"
+                        >
+                          {link.label}
+                        </a>
+                      ) : (
+                        <Link
+                          href={link.href}
+                          className="text-muted-foreground hover:text-primary text-sm transition-colors"
+                        >
+                          {link.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-          <div className="border-border text-muted-foreground mt-8 border-t pt-8 text-center text-sm">
-            <p>
-              © {new Date().getFullYear()} Clinical Decision Support System. Designed
-              for African healthcare professionals.
+
+          {/* Clinical disclaimer — set apart in its own bordered note */}
+          <div className="border-border bg-muted/40 mt-12 flex items-start gap-3 rounded-xl border p-4">
+            <ShieldCheck className="text-muted-foreground mt-0.5 h-4 w-4 shrink-0" />
+            <p className="text-muted-foreground text-xs leading-relaxed">
+              <span className="text-foreground font-medium">
+                For clinical support only.
+              </span>{' '}
+              This system provides decision support and does not replace professional
+              medical judgment. All assessments should be reviewed by a qualified
+              healthcare provider.
             </p>
-            <p className="mt-2 text-xs opacity-70">
-              This system provides decision support only and does not replace
-              professional medical judgment.
+          </div>
+
+          {/* Bottom bar — copyright left, meta right; wraps cleanly on mobile */}
+          <div className="border-border mt-10 flex flex-col gap-4 border-t pt-7 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-muted-foreground text-xs">
+              © {new Date().getFullYear()} Clinical Decision Support System. All rights
+              reserved.
             </p>
+            <div className="text-muted-foreground flex flex-wrap items-center gap-x-5 gap-y-2 text-xs">
+              <span className="inline-flex items-center gap-1.5">
+                <span className="bg-success h-1.5 w-1.5 rounded-full" />
+                All systems operational
+              </span>
+              <span className="text-border hidden sm:inline">|</span>
+              <span>Designed for African healthcare professionals</span>
+            </div>
           </div>
         </div>
       </footer>
