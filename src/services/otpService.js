@@ -1,4 +1,5 @@
 import crypto from 'crypto';
+import dns from 'dns';
 import nodemailer from 'nodemailer';
 import EmailOtp from '@/models/EmailOtp';
 import User from '@/models/User';
@@ -6,13 +7,57 @@ import connectDB from '@/lib/db/connect';
 
 const OTP_EXPIRATION_MINUTES = parseInt(process.env.OTP_EXPIRATION_TIME || '5', 10);
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL,
-    pass: process.env.EMAIL_APP_PWD,
-  },
-});
+const SMTP_HOST = 'smtp.gmail.com';
+const SMTP_PORT = 465;
+
+// Gmail App Passwords are shown with spaces (e.g. "abcd efgh ijkl mnop") but
+// must be supplied without them.
+const SMTP_PASS = (process.env.EMAIL_APP_PWD || '').replace(/\s+/g, '');
+
+// Prefer IPv4 across the process (harmless even when we pin the IP below).
+try {
+  dns.setDefaultResultOrder('ipv4first');
+} catch {
+  // older Node — ignore
+}
+
+/**
+ * Build a transporter that connects to Gmail's SMTP by IP.
+ *
+ * WHY: on some networks Node's internal c-ares resolver (dns.resolve4, which
+ * nodemailer uses under the hood) fails with `EDNS queryA ETIMEOUT`, hanging
+ * the request ~75s — even though the OS resolver (dns.lookup) and raw TCP work
+ * fine. We resolve the host once via dns.lookup and connect to the IP, setting
+ * tls.servername so the certificate still validates against smtp.gmail.com.
+ * The resolved IP is cached for the process lifetime.
+ */
+let cachedTransporter = null;
+
+const resolveIpv4 = (hostname) =>
+  new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('DNS lookup timed out')), 8000);
+    dns.lookup(hostname, { family: 4 }, (err, address) => {
+      clearTimeout(timer);
+      if (err) reject(err);
+      else resolve(address);
+    });
+  });
+
+const getTransporter = async () => {
+  if (cachedTransporter) return cachedTransporter;
+  const ip = await resolveIpv4(SMTP_HOST);
+  cachedTransporter = nodemailer.createTransport({
+    host: ip, // connect by IP to bypass the broken in-process resolver
+    port: SMTP_PORT,
+    secure: true,
+    tls: { servername: SMTP_HOST }, // keep cert validation against the real host
+    auth: { user: process.env.EMAIL, pass: SMTP_PASS },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
+    socketTimeout: 15000,
+  });
+  return cachedTransporter;
+};
 
 const generateOtp = () => {
   return crypto.randomInt(1000, 10000).toString();
@@ -54,6 +99,7 @@ const sendOtpEmail = async (email, otp) => {
     `,
   };
 
+  const transporter = await getTransporter();
   await transporter.sendMail(mailOptions);
 };
 
@@ -78,6 +124,7 @@ const sendPasswordResetEmail = async (email, otp) => {
     `,
   };
 
+  const transporter = await getTransporter();
   await transporter.sendMail(mailOptions);
 };
 
