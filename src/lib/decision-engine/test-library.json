@@ -1252,5 +1252,19 @@
       "Positive: The affected knee is significantly warmer."
     ],
     "image": null
+  },
+  {
+    "id": "slump_test",
+    "name": "Slump Test",
+    "type": "Clinical Test",
+    "purpose": "To assess for lumbar nerve root irritation / neural tension (dural mobility).",
+    "instructions": [
+      "Patient sits upright on the edge of the couch with hands behind the back.",
+      "Patient slumps the spine into thoracic and lumbar flexion; examiner overpresses the shoulders.",
+      "Patient flexes the neck (chin to chest); examiner maintains overpressure.",
+      "Examiner extends the symptomatic knee, then dorsiflexes the ankle.",
+      "Positive: reproduction of the patient’s radicular leg pain, relieved by releasing neck flexion."
+    ],
+    "image": "/images/clinical/slump-test.jpg"
   }
 ]

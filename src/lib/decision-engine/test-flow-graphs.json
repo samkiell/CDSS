@@ -51,7 +51,7 @@
         "name": "Refined Diagnosis: L2-L4 Compression",
         "instruction": "Anterior neural tension points to upper lumbar segment involvement.",
         "isTerminal": true,
-        "diagnosisMapping": "L2-L4 Compression"
+        "diagnosisMapping": "Lumbar Disc Herniation"
       },
       "diag_non_specific_lbp": {
         "id": "diag_non_specific_lbp",
@@ -65,7 +65,7 @@
         "name": "Refined Diagnosis: Facet Joint Syndrome",
         "instruction": "Mechanical pattern without neural involvement suggests facetogenic origin.",
         "isTerminal": true,
-        "diagnosisMapping": "Facet Joint Syndrome"
+        "diagnosisMapping": "Non-specific low-back pain"
       }
     }
   },
@@ -107,28 +107,28 @@
         "name": "Refined Diagnosis: Rotator Cuff Tear",
         "instruction": "Positive impingement and weakness strongly support cuff pathology.",
         "isTerminal": true,
-        "diagnosisMapping": "Rotator Cuff Tear"
+        "diagnosisMapping": "Cuff Disruption"
       },
       "diag_subacromial_impingement": {
         "id": "diag_subacromial_impingement",
         "name": "Refined Diagnosis: Subacromial Impingement",
         "instruction": "Positive Hawkins/Neer without significant weakness indicates impingement.",
         "isTerminal": true,
-        "diagnosisMapping": "Subacromial Impingement Syndrome"
+        "diagnosisMapping": "Shoulder Impingement Syndrome"
       },
       "diag_shoulder_instability": {
         "id": "diag_shoulder_instability",
         "name": "Refined Diagnosis: Anterior Shoulder Instability",
         "instruction": "Positive apprehension suggests instability, potentially labral involvement.",
         "isTerminal": true,
-        "diagnosisMapping": "Shoulder Instability"
+        "diagnosisMapping": "RECURRENT SHOULDER SUBLUXATION"
       },
       "diag_bicipital_tendinitis": {
         "id": "diag_bicipital_tendinitis",
         "name": "Refined Diagnosis: Bicipital Tendinitis",
         "instruction": "Clinical patterns suggests localized biceps tendon inflammation.",
         "isTerminal": true,
-        "diagnosisMapping": "Bicipital Tendinitis"
+        "diagnosisMapping": "Chronic Tendinitis"
       }
     }
   },
@@ -150,19 +150,19 @@
         "name": "Refined Diagnosis: Cervical Radiculopathy",
         "instruction": "Relief with distraction confirms nerve root irritiation.",
         "isTerminal": true,
-        "diagnosisMapping": "Cervical Radiculopathy"
+        "diagnosisMapping": "Cervical Disc Herniation"
       },
       "diag_nerve_root_compression": {
         "id": "diag_nerve_root_compression",
         "name": "Refined Diagnosis: Foraminal Compression",
         "isTerminal": true,
-        "diagnosisMapping": "Nerve Root Compression"
+        "diagnosisMapping": "Cervical Disc Herniation"
       },
       "diag_mechanical_neck_pain": {
         "id": "diag_mechanical_neck_pain",
         "name": "Refined Diagnosis: Mechanical Neck Pain",
         "isTerminal": true,
-        "diagnosisMapping": "Mechanical Neck Pain"
+        "diagnosisMapping": "Cervical Spondylosis"
       }
     }
   },
@@ -199,25 +199,25 @@
         "id": "diag_atfl_tear",
         "name": "Refined Diagnosis: ATFL Tear (Grade II)",
         "isTerminal": true,
-        "diagnosisMapping": "Isolated ATFL Tear"
+        "diagnosisMapping": "Acute Injury of Lateral Ligaments"
       },
       "diag_cfl_rupture": {
         "id": "diag_cfl_rupture",
         "name": "Refined Diagnosis: Combined ATFL/CFL Tear",
         "isTerminal": true,
-        "diagnosisMapping": "Multi-ligamentous Ankle Sprain"
+        "diagnosisMapping": "ANKLE LIGAMENT INJURIES"
       },
       "diag_syndesmosis_injury": {
         "id": "diag_syndesmosis_injury",
         "name": "Refined Diagnosis: High Ankle Sprain",
         "isTerminal": true,
-        "diagnosisMapping": "Syndesmosis Injury"
+        "diagnosisMapping": "Tears of Inferior Tibiofibular Ligaments"
       },
       "diag_minor_ankle_sprain": {
         "id": "diag_minor_ankle_sprain",
         "name": "Refined Diagnosis: Grade I Sprain",
         "isTerminal": true,
-        "diagnosisMapping": "Minor Lateral Ankle Sprain"
+        "diagnosisMapping": "Acute Injury of Lateral Ligaments"
       }
     }
   },
