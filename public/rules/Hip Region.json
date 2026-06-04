@@ -1178,14 +1178,7 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "Hip Osteoarthritis",
-                  "Greater Trochanteric Pain Syndrome",
-                  "Femoroacetabular Impingement",
-                  "Hip Labral Tear",
-                  "Avascular Necrosis",
-                  "Snapping Hip Syndrome"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [
                   "Hip Osteoarthritis",
@@ -1198,7 +1191,7 @@
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": "Radiation below the knee suggests lumbar spine origin — redirect to lumbar pathway."
+                "notes": "Radiation below the knee suggests lumbar spine origin — also assess the lumbar spine."
               }
             },
             {
@@ -1224,14 +1217,7 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "Hip Osteoarthritis",
-                  "Greater Trochanteric Pain Syndrome",
-                  "Femoroacetabular Impingement",
-                  "Hip Labral Tear",
-                  "Avascular Necrosis",
-                  "Snapping Hip Syndrome"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [
                   "Hip Osteoarthritis",
@@ -1244,7 +1230,7 @@
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": "Radiation below the knee suggests lumbar spine origin — redirect to lumbar pathway."
+                "notes": "Radiation below the knee suggests lumbar spine origin — also assess the lumbar spine."
               }
             },
             {
@@ -1489,6 +1475,386 @@
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "hip_q13",
+          "questionText": "Are you unable to bear weight on the affected leg?",
+          "question": "Are you unable to bear weight on the affected leg?",
+          "condition": "General Assessment",
+          "category": "redFlag",
+          "inputType": "select",
+          "source_line": 0,
+          "isGating": false,
+          "requiredConditions": [],
+          "excludedIfConditions": [],
+          "options": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Inability to bear weight — possible fracture or serious pathology; urgent assessment.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ],
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Inability to bear weight — possible fracture or serious pathology; urgent assessment.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "hip_q14",
+          "questionText": "Have you had any unexplained weight loss recently?",
+          "question": "Have you had any unexplained weight loss recently?",
+          "condition": "General Assessment",
+          "category": "redFlag",
+          "inputType": "select",
+          "source_line": 0,
+          "isGating": false,
+          "requiredConditions": [],
+          "excludedIfConditions": [],
+          "options": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Unexplained weight loss — possible malignancy; urgent medical referral.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ],
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Unexplained weight loss — possible malignancy; urgent medical referral.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "hip_q15",
+          "questionText": "Do you have a fever or feel systemically unwell?",
+          "question": "Do you have a fever or feel systemically unwell?",
+          "condition": "General Assessment",
+          "category": "redFlag",
+          "inputType": "select",
+          "source_line": 0,
+          "isGating": false,
+          "requiredConditions": [],
+          "excludedIfConditions": [],
+          "options": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Fever / systemic illness — possible infection; urgent medical referral.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ],
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Fever / systemic illness — possible infection; urgent medical referral.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "hip_q16",
+          "questionText": "Do you have a history of cancer?",
+          "question": "Do you have a history of cancer?",
+          "condition": "General Assessment",
+          "category": "redFlag",
+          "inputType": "select",
+          "source_line": 0,
+          "isGating": false,
+          "requiredConditions": [],
+          "excludedIfConditions": [],
+          "options": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "History of cancer — metastasis risk; urgent medical referral.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ],
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "History of cancer — metastasis risk; urgent medical referral.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "hip_q17",
+          "questionText": "Is the pain rapidly worsening without a clear cause?",
+          "question": "Is the pain rapidly worsening without a clear cause?",
+          "condition": "General Assessment",
+          "category": "redFlag",
+          "inputType": "select",
+          "source_line": 0,
+          "isGating": false,
+          "requiredConditions": [],
+          "excludedIfConditions": [],
+          "options": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Rapidly worsening pain without clear cause — red flag; urgent assessment.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ],
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Rapidly worsening pain without clear cause — red flag; urgent assessment.",
                 "terminateAssessment": false,
                 "notes": null
               }

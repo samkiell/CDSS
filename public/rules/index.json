@@ -39,7 +39,7 @@
       "source_file": "Hip region.docx",
       "json_file": "Hip Region.json",
       "condition_count": 7,
-      "question_count": 36
+      "question_count": 41
     },
     {
       "region": "knee",
@@ -47,7 +47,7 @@
       "source_file": "Knee Region.docx",
       "json_file": "Knee Region.json",
       "condition_count": 17,
-      "question_count": 60
+      "question_count": 61
     },
     {
       "region": "lumbar",

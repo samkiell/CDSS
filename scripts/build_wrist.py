@@ -84,6 +84,10 @@ general_qs = [
             notes="Proximal radiation / whole-arm symptoms — consider cervical or proximal nerve origin."),
         opt("No", increase=[CTS]),
     ]),
+    # NOTE: No general red-flag screening block added — the Wrist DOCX contains no
+    # fever/cancer/systemic red-flag section. The red flags it DOES specify are already
+    # covered: deformity/unable-to-move (wrist_spr_q4), rest/night pain (wrist_q6),
+    # scaphoid fracture (wrist_scaph_*), and rapid ganglion growth (wrist_gang_q2).
 ]
 
 # ----------------------------------------------------------------------------

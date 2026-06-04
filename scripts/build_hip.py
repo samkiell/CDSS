@@ -80,8 +80,11 @@ general_qs = [
             red_flag_text="Pain NOT relieved by rest — strongly suggests AVN; urgent imaging advised."),
     ]),
     question("hip_q8", "Does the pain radiate below the knee?", GEN, "radiation", [
-        opt("Yes", excluded=ALL_HIP,
-            notes="Radiation below the knee suggests lumbar spine origin — redirect to lumbar pathway."),
+        # NOTE: down-weight (not hard-exclude) is applied by docs/branching_hip.json —
+        # a patient can have BOTH lumbar radiculopathy and a coexisting hip pathology
+        # (e.g. AVN), so we must not hide the hip red-flag questions. Keep only the note here.
+        opt("Yes",
+            notes="Radiation below the knee suggests lumbar spine origin — also assess the lumbar spine."),
         opt("No"),
     ]),
     question("hip_q9", "Do you have night pain that is NOT relieved by rest?", GEN, "redFlag", [
@@ -100,6 +103,33 @@ general_qs = [
              "Do you experience clicking, locking, or catching in the hip?",
              GEN, "mechanical", [
         opt("Yes", increase=[LAB, OA, FAI]),
+        opt("No"),
+    ]),
+    # --- RED-FLAG SCREENING (from the DOCX "Red Flag" section, lines 75-94) ---
+    # Non-diagnostic safety screens answered by everyone. Each "Yes" raises a red flag.
+    question("hip_q13", "Are you unable to bear weight on the affected leg?", GEN, "redFlag", [
+        opt("Yes", red_flag=True,
+            red_flag_text="Inability to bear weight — possible fracture or serious pathology; urgent assessment."),
+        opt("No"),
+    ]),
+    question("hip_q14", "Have you had any unexplained weight loss recently?", GEN, "redFlag", [
+        opt("Yes", red_flag=True,
+            red_flag_text="Unexplained weight loss — possible malignancy; urgent medical referral."),
+        opt("No"),
+    ]),
+    question("hip_q15", "Do you have a fever or feel systemically unwell?", GEN, "redFlag", [
+        opt("Yes", red_flag=True,
+            red_flag_text="Fever / systemic illness — possible infection; urgent medical referral."),
+        opt("No"),
+    ]),
+    question("hip_q16", "Do you have a history of cancer?", GEN, "redFlag", [
+        opt("Yes", red_flag=True,
+            red_flag_text="History of cancer — metastasis risk; urgent medical referral."),
+        opt("No"),
+    ]),
+    question("hip_q17", "Is the pain rapidly worsening without a clear cause?", GEN, "redFlag", [
+        opt("Yes", red_flag=True,
+            red_flag_text="Rapidly worsening pain without clear cause — red flag; urgent assessment."),
         opt("No"),
     ]),
 ]
