@@ -612,15 +612,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "cervical myelopathy"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Pain increasing with cough/sneeze/strain raises disc/radicular involvement; consider myelopathy work-up if neuro signs."
               }
             },
             {
@@ -646,15 +644,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "cervical myelopathy"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Pain increasing with cough/sneeze/strain raises disc/radicular involvement; consider myelopathy work-up if neuro signs."
               }
             },
             {
@@ -692,15 +688,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "cervical stenosis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Movement restriction noted; consider cervical stenosis if accompanied by myelopathic signs."
               }
             },
             {
@@ -726,15 +720,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "cervical stenosis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Movement restriction noted; consider cervical stenosis if accompanied by myelopathic signs."
               }
             },
             {
@@ -1875,15 +1867,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "cervical stenosis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Movement restriction noted; consider cervical stenosis if accompanied by myelopathic signs."
               }
             },
             {
@@ -1909,15 +1899,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "cervical stenosis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Movement restriction noted; consider cervical stenosis if accompanied by myelopathic signs."
               }
             },
             {
