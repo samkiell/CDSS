@@ -35,7 +35,11 @@
                   "Osteochondritis Dissecans",
                   "Patellar Dislocation"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Knee Osteoarthritis",
+                  "Pes Anserine Bursitis",
+                  "Baker's Cyst"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -90,7 +94,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst"],
+                "increaseLikelihood": [
+                  "Baker's Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -105,7 +111,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -120,8 +128,14 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis", "Septic Arthritis"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis",
+                  "Septic Arthritis"
+                ],
+                "decreaseLikelihood": [
+                  "Osteochondritis Dissecans",
+                  "Patellar Dislocation"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -141,7 +155,11 @@
                   "Osteochondritis Dissecans",
                   "Patellar Dislocation"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Knee Osteoarthritis",
+                  "Pes Anserine Bursitis",
+                  "Baker's Cyst"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -196,7 +214,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst"],
+                "increaseLikelihood": [
+                  "Baker's Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -211,7 +231,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -226,8 +248,14 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis", "Septic Arthritis"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis",
+                  "Septic Arthritis"
+                ],
+                "decreaseLikelihood": [
+                  "Osteochondritis Dissecans",
+                  "Patellar Dislocation"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -260,7 +288,14 @@
                   "Patellar Dislocation",
                   "Patellar Tendinopathy"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Pes Anserine Bursitis",
+                  "Baker's Cyst",
+                  "Meniscus Tear",
+                  "MCL Injury",
+                  "LCL Injury",
+                  "Iliotibial Band Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -279,7 +314,14 @@
                   "MCL Injury",
                   "Knee Osteoarthritis"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Baker's Cyst",
+                  "LCL Injury",
+                  "Pes Anserine Bursitis",
+                  "Patellofemoral Pain Syndrome",
+                  "Patellar Tendinopathy",
+                  "Iliotibial Band Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -293,8 +335,19 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis", "Pes Anserine Bursitis"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis",
+                  "Pes Anserine Bursitis"
+                ],
+                "decreaseLikelihood": [
+                  "Baker's Cyst",
+                  "LCL Injury",
+                  "Iliotibial Band Syndrome",
+                  "Patellofemoral Pain Syndrome",
+                  "Patellar Tendinopathy",
+                  "Meniscus Tear",
+                  "MCL Injury"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -308,8 +361,19 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["LCL Injury", "Iliotibial Band Syndrome"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "LCL Injury",
+                  "Iliotibial Band Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "MCL Injury",
+                  "Pes Anserine Bursitis",
+                  "Baker's Cyst",
+                  "Patellofemoral Pain Syndrome",
+                  "Patellar Tendinopathy",
+                  "Patellar Dislocation",
+                  "Meniscus Tear"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -323,8 +387,19 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst", "Baker's Cyst"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Baker's Cyst",
+                  "Baker's Cyst"
+                ],
+                "decreaseLikelihood": [
+                  "Patellofemoral Pain Syndrome",
+                  "Patellar Tendinopathy",
+                  "Patellar Dislocation",
+                  "Pes Anserine Bursitis",
+                  "Iliotibial Band Syndrome",
+                  "MCL Injury",
+                  "LCL Injury"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -338,8 +413,16 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Osteochondritis Dissecans"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Osteochondritis Dissecans"
+                ],
+                "decreaseLikelihood": [
+                  "Pes Anserine Bursitis",
+                  "Baker's Cyst",
+                  "Patellar Tendinopathy",
+                  "MCL Injury",
+                  "LCL Injury"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -353,8 +436,18 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis", "Septic Arthritis"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis",
+                  "Septic Arthritis"
+                ],
+                "decreaseLikelihood": [
+                  "Pes Anserine Bursitis",
+                  "Patellar Tendinopathy",
+                  "Iliotibial Band Syndrome",
+                  "MCL Injury",
+                  "LCL Injury",
+                  "Baker's Cyst"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -375,7 +468,14 @@
                   "Patellar Dislocation",
                   "Patellar Tendinopathy"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Pes Anserine Bursitis",
+                  "Baker's Cyst",
+                  "Meniscus Tear",
+                  "MCL Injury",
+                  "LCL Injury",
+                  "Iliotibial Band Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -394,7 +494,14 @@
                   "MCL Injury",
                   "Knee Osteoarthritis"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Baker's Cyst",
+                  "LCL Injury",
+                  "Pes Anserine Bursitis",
+                  "Patellofemoral Pain Syndrome",
+                  "Patellar Tendinopathy",
+                  "Iliotibial Band Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -408,8 +515,19 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis", "Pes Anserine Bursitis"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis",
+                  "Pes Anserine Bursitis"
+                ],
+                "decreaseLikelihood": [
+                  "Baker's Cyst",
+                  "LCL Injury",
+                  "Iliotibial Band Syndrome",
+                  "Patellofemoral Pain Syndrome",
+                  "Patellar Tendinopathy",
+                  "Meniscus Tear",
+                  "MCL Injury"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -423,8 +541,19 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["LCL Injury", "Iliotibial Band Syndrome"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "LCL Injury",
+                  "Iliotibial Band Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "MCL Injury",
+                  "Pes Anserine Bursitis",
+                  "Baker's Cyst",
+                  "Patellofemoral Pain Syndrome",
+                  "Patellar Tendinopathy",
+                  "Patellar Dislocation",
+                  "Meniscus Tear"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -438,8 +567,19 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst", "Baker's Cyst"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Baker's Cyst",
+                  "Baker's Cyst"
+                ],
+                "decreaseLikelihood": [
+                  "Patellofemoral Pain Syndrome",
+                  "Patellar Tendinopathy",
+                  "Patellar Dislocation",
+                  "Pes Anserine Bursitis",
+                  "Iliotibial Band Syndrome",
+                  "MCL Injury",
+                  "LCL Injury"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -453,8 +593,16 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Osteochondritis Dissecans"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Osteochondritis Dissecans"
+                ],
+                "decreaseLikelihood": [
+                  "Pes Anserine Bursitis",
+                  "Baker's Cyst",
+                  "Patellar Tendinopathy",
+                  "MCL Injury",
+                  "LCL Injury"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -468,8 +616,18 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis", "Septic Arthritis"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis",
+                  "Septic Arthritis"
+                ],
+                "decreaseLikelihood": [
+                  "Pes Anserine Bursitis",
+                  "Patellar Tendinopathy",
+                  "Iliotibial Band Syndrome",
+                  "MCL Injury",
+                  "LCL Injury",
+                  "Baker's Cyst"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -520,7 +678,14 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Knee Fracture"],
+                "decreaseLikelihood": [
+                  "Knee Fracture",
+                  "ACL Injury",
+                  "MCL Injury",
+                  "LCL Injury",
+                  "PCL Injury",
+                  "Patellar Dislocation"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -559,7 +724,14 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Knee Fracture"],
+                "decreaseLikelihood": [
+                  "Knee Fracture",
+                  "ACL Injury",
+                  "MCL Injury",
+                  "LCL Injury",
+                  "PCL Injury",
+                  "Patellar Dislocation"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -595,7 +767,13 @@
                   "Knee Fracture",
                   "Patellar Dislocation"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Iliotibial Band Syndrome",
+                  "Patellar Tendinopathy",
+                  "Knee Osteoarthritis",
+                  "Osteochondritis Dissecans",
+                  "Pes Anserine Bursitis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -609,8 +787,17 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Muscle Strain", "Meniscus Tear"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Muscle Strain",
+                  "Meniscus Tear"
+                ],
+                "decreaseLikelihood": [
+                  "Knee Osteoarthritis",
+                  "Iliotibial Band Syndrome",
+                  "Patellar Tendinopathy",
+                  "Osteochondritis Dissecans",
+                  "Pes Anserine Bursitis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -632,7 +819,14 @@
                   "Osteochondritis Dissecans",
                   "Pes Anserine Bursitis"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "ACL Injury",
+                  "MCL Injury",
+                  "LCL Injury",
+                  "PCL Injury",
+                  "Knee Fracture",
+                  "Patellar Dislocation"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -656,7 +850,13 @@
                   "Knee Fracture",
                   "Patellar Dislocation"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Iliotibial Band Syndrome",
+                  "Patellar Tendinopathy",
+                  "Knee Osteoarthritis",
+                  "Osteochondritis Dissecans",
+                  "Pes Anserine Bursitis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -670,8 +870,17 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Muscle Strain", "Meniscus Tear"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Muscle Strain",
+                  "Meniscus Tear"
+                ],
+                "decreaseLikelihood": [
+                  "Knee Osteoarthritis",
+                  "Iliotibial Band Syndrome",
+                  "Patellar Tendinopathy",
+                  "Osteochondritis Dissecans",
+                  "Pes Anserine Bursitis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -693,7 +902,14 @@
                   "Osteochondritis Dissecans",
                   "Pes Anserine Bursitis"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "ACL Injury",
+                  "MCL Injury",
+                  "LCL Injury",
+                  "PCL Injury",
+                  "Knee Fracture",
+                  "Patellar Dislocation"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -807,7 +1023,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear", "Osteochondritis Dissecans"],
+                "increaseLikelihood": [
+                  "Meniscus Tear",
+                  "Osteochondritis Dissecans"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -839,7 +1058,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear", "Osteochondritis Dissecans"],
+                "increaseLikelihood": [
+                  "Meniscus Tear",
+                  "Osteochondritis Dissecans"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -902,7 +1124,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -972,7 +1196,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1035,7 +1261,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1050,7 +1278,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1083,7 +1313,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1098,7 +1330,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1113,7 +1347,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1130,7 +1366,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1145,7 +1383,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1178,7 +1418,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1193,7 +1435,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1208,7 +1452,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1321,7 +1567,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Septic Arthritis", "Septic Arthritis"],
+                "increaseLikelihood": [
+                  "Septic Arthritis",
+                  "Septic Arthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "MEDICAL EMERGENCY: features suggest septic arthritis. Seek immediate emergency care — joint aspiration is required.",
@@ -1353,7 +1602,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Septic Arthritis", "Septic Arthritis"],
+                "increaseLikelihood": [
+                  "Septic Arthritis",
+                  "Septic Arthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "MEDICAL EMERGENCY: features suggest septic arthritis. Seek immediate emergency care — joint aspiration is required.",
@@ -1397,7 +1649,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Septic Arthritis"],
+                "increaseLikelihood": [
+                  "Septic Arthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1429,7 +1683,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Septic Arthritis"],
+                "increaseLikelihood": [
+                  "Septic Arthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1473,7 +1729,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Septic Arthritis"],
+                "increaseLikelihood": [
+                  "Septic Arthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1505,7 +1763,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Septic Arthritis"],
+                "increaseLikelihood": [
+                  "Septic Arthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1549,7 +1809,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Septic Arthritis"],
+                "increaseLikelihood": [
+                  "Septic Arthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1581,7 +1843,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Septic Arthritis"],
+                "increaseLikelihood": [
+                  "Septic Arthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1607,7 +1871,10 @@
           ]
         }
       ],
-      "tests": ["passive_joint_motion_knee", "knee_temp_assessment"],
+      "tests": [
+        "passive_joint_motion_knee",
+        "knee_temp_assessment"
+      ],
       "clinical_note": "MEDICAL EMERGENCY. Diagnosis is clinical + laboratory; joint aspiration is the gold standard. AVOID aggressive manual testing."
     },
     {
@@ -1799,7 +2066,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1814,8 +2083,12 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy"],
-                "decreaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy"
+                ],
+                "decreaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1831,7 +2104,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1846,8 +2121,12 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy"],
-                "decreaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy"
+                ],
+                "decreaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1875,7 +2154,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1907,7 +2188,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1951,8 +2234,12 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Dislocation"],
-                "decreaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellar Dislocation"
+                ],
+                "decreaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1983,8 +2270,12 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Dislocation"],
-                "decreaseLikelihood": ["Patellofemoral Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Patellar Dislocation"
+                ],
+                "decreaseLikelihood": [
+                  "Patellofemoral Pain Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -2042,7 +2333,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear", "Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear",
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2074,7 +2368,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear", "Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear",
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2118,7 +2415,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2150,7 +2449,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2194,7 +2495,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2226,7 +2529,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Meniscus Tear"],
+                "increaseLikelihood": [
+                  "Meniscus Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2285,7 +2590,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Muscle Strain", "Muscle Strain"],
+                "increaseLikelihood": [
+                  "Muscle Strain",
+                  "Muscle Strain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2317,7 +2625,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Muscle Strain", "Muscle Strain"],
+                "increaseLikelihood": [
+                  "Muscle Strain",
+                  "Muscle Strain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2361,7 +2672,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Muscle Strain"],
+                "increaseLikelihood": [
+                  "Muscle Strain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2393,7 +2706,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Muscle Strain"],
+                "increaseLikelihood": [
+                  "Muscle Strain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2419,7 +2734,10 @@
           ]
         }
       ],
-      "tests": ["resisted_contraction_test", "passive_stretch_test"]
+      "tests": [
+        "resisted_contraction_test",
+        "passive_stretch_test"
+      ]
     },
     {
       "name": "ACL Injury",
@@ -2446,7 +2764,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["ACL Injury", "ACL Injury"],
+                "increaseLikelihood": [
+                  "ACL Injury",
+                  "ACL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2478,7 +2799,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["ACL Injury", "ACL Injury"],
+                "increaseLikelihood": [
+                  "ACL Injury",
+                  "ACL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2522,7 +2846,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["ACL Injury", "ACL Injury"],
+                "increaseLikelihood": [
+                  "ACL Injury",
+                  "ACL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2554,7 +2881,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["ACL Injury", "ACL Injury"],
+                "increaseLikelihood": [
+                  "ACL Injury",
+                  "ACL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2580,7 +2910,10 @@
           ]
         }
       ],
-      "tests": ["lachman_test", "anterior_drawer_knee"]
+      "tests": [
+        "lachman_test",
+        "anterior_drawer_knee"
+      ]
     },
     {
       "name": "MCL Injury",
@@ -2607,7 +2940,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["MCL Injury", "MCL Injury"],
+                "increaseLikelihood": [
+                  "MCL Injury",
+                  "MCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2639,7 +2975,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["MCL Injury", "MCL Injury"],
+                "increaseLikelihood": [
+                  "MCL Injury",
+                  "MCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2683,7 +3022,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["MCL Injury"],
+                "increaseLikelihood": [
+                  "MCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2715,7 +3056,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["MCL Injury"],
+                "increaseLikelihood": [
+                  "MCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2741,7 +3084,9 @@
           ]
         }
       ],
-      "tests": ["valgus_stress_test_knee"]
+      "tests": [
+        "valgus_stress_test_knee"
+      ]
     },
     {
       "name": "LCL Injury",
@@ -2768,7 +3113,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["LCL Injury", "LCL Injury"],
+                "increaseLikelihood": [
+                  "LCL Injury",
+                  "LCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2800,7 +3148,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["LCL Injury", "LCL Injury"],
+                "increaseLikelihood": [
+                  "LCL Injury",
+                  "LCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2844,7 +3195,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["LCL Injury"],
+                "increaseLikelihood": [
+                  "LCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2876,7 +3229,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["LCL Injury"],
+                "increaseLikelihood": [
+                  "LCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2902,7 +3257,9 @@
           ]
         }
       ],
-      "tests": ["varus_stress_test_knee"]
+      "tests": [
+        "varus_stress_test_knee"
+      ]
     },
     {
       "name": "PCL Injury",
@@ -2929,7 +3286,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["PCL Injury", "PCL Injury"],
+                "increaseLikelihood": [
+                  "PCL Injury",
+                  "PCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2961,7 +3321,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["PCL Injury", "PCL Injury"],
+                "increaseLikelihood": [
+                  "PCL Injury",
+                  "PCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3005,7 +3368,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["PCL Injury"],
+                "increaseLikelihood": [
+                  "PCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3037,7 +3402,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["PCL Injury"],
+                "increaseLikelihood": [
+                  "PCL Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3063,7 +3430,10 @@
           ]
         }
       ],
-      "tests": ["posterior_drawer_test", "godfrey_test"]
+      "tests": [
+        "posterior_drawer_test",
+        "godfrey_test"
+      ]
     },
     {
       "name": "Knee Osteoarthritis",
@@ -3090,7 +3460,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3122,7 +3494,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3166,7 +3540,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3198,7 +3574,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3242,7 +3620,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3274,7 +3654,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3394,7 +3776,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3426,7 +3810,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Knee Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3484,7 +3870,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Dislocation", "Patellar Dislocation"],
+                "increaseLikelihood": [
+                  "Patellar Dislocation",
+                  "Patellar Dislocation"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3516,7 +3905,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Dislocation", "Patellar Dislocation"],
+                "increaseLikelihood": [
+                  "Patellar Dislocation",
+                  "Patellar Dislocation"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3560,7 +3952,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Dislocation"],
+                "increaseLikelihood": [
+                  "Patellar Dislocation"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3592,7 +3986,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Dislocation"],
+                "increaseLikelihood": [
+                  "Patellar Dislocation"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3636,7 +4032,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Dislocation"],
+                "increaseLikelihood": [
+                  "Patellar Dislocation"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3668,7 +4066,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Dislocation"],
+                "increaseLikelihood": [
+                  "Patellar Dislocation"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3727,7 +4127,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Fracture", "Knee Fracture"],
+                "increaseLikelihood": [
+                  "Knee Fracture",
+                  "Knee Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Inability to bear weight after trauma — strong fracture indicator; urgent X-ray.",
@@ -3759,7 +4162,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Fracture", "Knee Fracture"],
+                "increaseLikelihood": [
+                  "Knee Fracture",
+                  "Knee Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Inability to bear weight after trauma — strong fracture indicator; urgent X-ray.",
@@ -3803,7 +4209,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Fracture", "Knee Fracture"],
+                "increaseLikelihood": [
+                  "Knee Fracture",
+                  "Knee Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Inability to straight-leg-raise — strong indicator of patella fracture / extensor disruption.",
@@ -3835,7 +4244,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Fracture", "Knee Fracture"],
+                "increaseLikelihood": [
+                  "Knee Fracture",
+                  "Knee Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Inability to straight-leg-raise — strong indicator of patella fracture / extensor disruption.",
@@ -3879,7 +4291,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Fracture"],
+                "increaseLikelihood": [
+                  "Knee Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3911,7 +4325,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Knee Fracture"],
+                "increaseLikelihood": [
+                  "Knee Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4052,7 +4468,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Iliotibial Band Syndrome"],
+                "increaseLikelihood": [
+                  "Iliotibial Band Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4084,7 +4502,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Iliotibial Band Syndrome"],
+                "increaseLikelihood": [
+                  "Iliotibial Band Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4128,7 +4548,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Iliotibial Band Syndrome"],
+                "increaseLikelihood": [
+                  "Iliotibial Band Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4160,7 +4582,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Iliotibial Band Syndrome"],
+                "increaseLikelihood": [
+                  "Iliotibial Band Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4204,7 +4628,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Iliotibial Band Syndrome"],
+                "increaseLikelihood": [
+                  "Iliotibial Band Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4236,7 +4662,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Iliotibial Band Syndrome"],
+                "increaseLikelihood": [
+                  "Iliotibial Band Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4262,7 +4690,11 @@
           ]
         }
       ],
-      "tests": ["noble_compression", "knee_obers_test", "renne_test"]
+      "tests": [
+        "noble_compression",
+        "knee_obers_test",
+        "renne_test"
+      ]
     },
     {
       "name": "Patellar Tendinopathy",
@@ -4289,7 +4721,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy", "Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy",
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4321,7 +4756,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy", "Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy",
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4365,7 +4803,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy", "Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy",
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4397,7 +4838,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy", "Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy",
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4441,7 +4885,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4473,7 +4919,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4517,7 +4965,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4549,7 +4999,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Patellar Tendinopathy"],
+                "increaseLikelihood": [
+                  "Patellar Tendinopathy"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4607,7 +5059,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4639,7 +5093,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4683,7 +5139,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4715,7 +5173,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4759,7 +5219,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4791,7 +5253,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Pes Anserine Bursitis"],
+                "increaseLikelihood": [
+                  "Pes Anserine Bursitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4930,7 +5394,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Osteochondritis Dissecans"],
+                "increaseLikelihood": [
+                  "Osteochondritis Dissecans"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4962,7 +5428,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Osteochondritis Dissecans"],
+                "increaseLikelihood": [
+                  "Osteochondritis Dissecans"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5006,7 +5474,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Osteochondritis Dissecans"],
+                "increaseLikelihood": [
+                  "Osteochondritis Dissecans"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5038,7 +5508,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Osteochondritis Dissecans"],
+                "increaseLikelihood": [
+                  "Osteochondritis Dissecans"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5064,7 +5536,11 @@
           ]
         }
       ],
-      "tests": ["wilsons_test", "condylar_palpation", "joint_effusion_stroke_test"],
+      "tests": [
+        "wilsons_test",
+        "condylar_palpation",
+        "joint_effusion_stroke_test"
+      ],
       "clinical_note": "Imaging REQUIRED: X-ray (AP/lateral/tunnel view); MRI for staging."
     },
     {
@@ -5092,7 +5568,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst", "Baker's Cyst"],
+                "increaseLikelihood": [
+                  "Baker's Cyst",
+                  "Baker's Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5124,7 +5603,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst", "Baker's Cyst"],
+                "increaseLikelihood": [
+                  "Baker's Cyst",
+                  "Baker's Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5168,7 +5650,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst"],
+                "increaseLikelihood": [
+                  "Baker's Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5200,7 +5684,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst"],
+                "increaseLikelihood": [
+                  "Baker's Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5320,7 +5806,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst"],
+                "increaseLikelihood": [
+                  "Baker's Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5352,7 +5840,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Baker's Cyst"],
+                "increaseLikelihood": [
+                  "Baker's Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -5378,7 +5868,11 @@
           ]
         }
       ],
-      "tests": ["foucher_sign", "popliteal_palpation", "knee_effusion_test"],
+      "tests": [
+        "foucher_sign",
+        "popliteal_palpation",
+        "knee_effusion_test"
+      ],
       "clinical_note": "Usually secondary to OA or meniscus pathology — treat the underlying cause."
     }
   ]

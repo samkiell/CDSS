@@ -1,0 +1,180 @@
+{
+  "region": "knee",
+  "rules": [
+    {
+      "questionId": "knee_q1",
+      "answerValue": "Over 50",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Osteochondritis Dissecans",
+        "Patellar Dislocation"
+      ],
+      "rationale": "DOCX/JSON ties OCD to the 10-20 band and Patellar Dislocation to youth onset (q1 increaseLikelihood), so age over 50 down-weights these without ruling them out; kept as soft down-weight only since age ranges overlap and adults can present atypically."
+    },
+    {
+      "questionId": "knee_q1",
+      "answerValue": "10 to 20",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Knee Osteoarthritis",
+        "Pes Anserine Bursitis",
+        "Baker's Cyst"
+      ],
+      "rationale": "JSON age effects raise OA at Over 50, Pes Anserine at 40-70, and Baker's Cyst at 35-70, so a 10-20 yr patient makes these age-driven diagnoses unlikely; left as down-weight because age alone should never hide a question branch."
+    },
+    {
+      "questionId": "knee_q2",
+      "answerValue": "Anterior knee (front / kneecap)",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Pes Anserine Bursitis",
+        "Baker's Cyst",
+        "Meniscus Tear",
+        "MCL Injury",
+        "LCL Injury",
+        "Iliotibial Band Syndrome"
+      ],
+      "rationale": "Demoted the Pes Anserine and Baker's Cyst HARD excludes to down-weights: the JSON Baker's Cyst clinical_note says it is 'usually secondary to OA or meniscus pathology', so a patient may report the primary anterior/medial pain rather than the posterior cyst, and pain-location is a single primary-complaint answer that must not hide an entire question branch."
+    },
+    {
+      "questionId": "knee_q2",
+      "answerValue": "Medial joint line (inner)",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Baker's Cyst",
+        "LCL Injury",
+        "Pes Anserine Bursitis",
+        "Patellofemoral Pain Syndrome",
+        "Patellar Tendinopathy",
+        "Iliotibial Band Syndrome"
+      ],
+      "rationale": "Demoted Baker's Cyst and LCL HARD excludes to down-weights: Baker's Cyst per the JSON clinical_note is usually secondary to medial OA/meniscus pathology and may present with medial joint-line pain, and a single self-reported location is too unreliable to hard-rule-out a lateral ligament; uncertain exclusions moved to decreaseLikelihood per policy."
+    },
+    {
+      "questionId": "knee_q2",
+      "answerValue": "Medial knee, 5-7 cm below the joint line",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Baker's Cyst",
+        "LCL Injury",
+        "Iliotibial Band Syndrome",
+        "Patellofemoral Pain Syndrome",
+        "Patellar Tendinopathy",
+        "Meniscus Tear",
+        "MCL Injury"
+      ],
+      "rationale": "This site is the classic Pes Anserine location (JSON q2 increaseLikelihood), but the HARD excludes for Baker's Cyst (secondary-to-medial-pathology per clinical_note), LCL, and ITBS are demoted to down-weights because a single imprecisely localized pain report should down-weight, not hide, lateral/posterior question branches."
+    },
+    {
+      "questionId": "knee_q2",
+      "answerValue": "Lateral knee (outer)",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "MCL Injury",
+        "Pes Anserine Bursitis",
+        "Baker's Cyst",
+        "Patellofemoral Pain Syndrome",
+        "Patellar Tendinopathy",
+        "Patellar Dislocation",
+        "Meniscus Tear"
+      ],
+      "rationale": "JSON assigns MCL and Pes Anserine to the medial side and ITBS/LCL as the lateral diagnoses, so lateral pain strongly down-weights the medial conditions; however the MCL/Pes Anserine/Baker's HARD excludes are demoted to down-weights since combined medial+lateral injury (e.g., multi-ligament trauma) and secondary Baker's Cyst remain possible and must not be branch-hidden."
+    },
+    {
+      "questionId": "knee_q2",
+      "answerValue": "Posterior knee (back)",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Patellofemoral Pain Syndrome",
+        "Patellar Tendinopathy",
+        "Patellar Dislocation",
+        "Pes Anserine Bursitis",
+        "Iliotibial Band Syndrome",
+        "MCL Injury",
+        "LCL Injury"
+      ],
+      "rationale": "Posterior pain is the classic Baker's Cyst location (JSON q2 increaseLikelihood), making anterior PFPS/patellar tendinopathy/dislocation, medial Pes Anserine, and lateral ITBS less likely; all demoted to down-weights rather than hard excludes because posterior pain can coexist with anterior/medial/lateral pathology and a single location answer should not skip those question branches."
+    },
+    {
+      "questionId": "knee_q2",
+      "answerValue": "Deep, poorly localized",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Pes Anserine Bursitis",
+        "Baker's Cyst",
+        "Patellar Tendinopathy",
+        "MCL Injury",
+        "LCL Injury"
+      ],
+      "rationale": "JSON ties deep/poorly-localized pain to OCD (q2 increaseLikelihood), arguing against the focal Pes Anserine (point tenderness 5-7 cm below joint line) and discrete posterior Baker's Cyst; demoted the Pes Anserine/Baker's HARD excludes to down-weights because 'poorly localized' explicitly signals the patient cannot pinpoint the site, so it is unsafe to hard-exclude any focal diagnosis."
+    },
+    {
+      "questionId": "knee_q2",
+      "answerValue": "Diffuse / whole joint",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Pes Anserine Bursitis",
+        "Patellar Tendinopathy",
+        "Iliotibial Band Syndrome",
+        "MCL Injury",
+        "LCL Injury",
+        "Baker's Cyst"
+      ],
+      "rationale": "JSON ties diffuse/whole-joint pain to Knee OA and Septic Arthritis, making focal conditions (Pes Anserine inferomedial point, patellar inferior-pole tendinopathy) less likely; demoted to down-weights because diffuse pain commonly overlies a focal primary lesion and an effusion can make a focal condition feel whole-joint, so hard exclusion would dangerously hide those branches."
+    },
+    {
+      "questionId": "knee_q3",
+      "answerValue": "No",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Knee Fracture",
+        "ACL Injury",
+        "MCL Injury",
+        "LCL Injury",
+        "PCL Injury",
+        "Patellar Dislocation"
+      ],
+      "rationale": "JSON q3 'Yes' raises the traumatic injuries and 'No' already down-weights Knee Fracture; absence of trauma down-weights the acute traumatic diagnoses but is kept as soft down-weight only, never a hard exclude, because Knee Fracture is a red-flag and patients under-report low-energy or insidious fractures."
+    },
+    {
+      "questionId": "knee_q4",
+      "answerValue": "Gradual and insidious",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "ACL Injury",
+        "MCL Injury",
+        "LCL Injury",
+        "PCL Injury",
+        "Knee Fracture",
+        "Patellar Dislocation"
+      ],
+      "rationale": "JSON q4 maps these to 'Sudden during trauma/injury' onset, so gradual onset down-weights the acute traumatic diagnoses; kept as soft down-weight (no hard exclude) because Knee Fracture is a red-flag (e.g., stress/insufficiency fractures present insidiously) and must never be branch-hidden by onset alone."
+    },
+    {
+      "questionId": "knee_q4",
+      "answerValue": "Sudden during trauma/injury",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Iliotibial Band Syndrome",
+        "Patellar Tendinopathy",
+        "Knee Osteoarthritis",
+        "Osteochondritis Dissecans",
+        "Pes Anserine Bursitis"
+      ],
+      "rationale": "JSON q4 'Gradual and insidious' raises ITBS, patellar tendinopathy, OA, OCD, and Pes Anserine as overuse conditions, so a sudden traumatic onset down-weights these chronic diagnoses; left as down-weight only since trauma can acutely flare pre-existing chronic conditions."
+    },
+    {
+      "questionId": "knee_q4",
+      "answerValue": "Sudden during activity (no impact)",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Knee Osteoarthritis",
+        "Iliotibial Band Syndrome",
+        "Patellar Tendinopathy",
+        "Osteochondritis Dissecans",
+        "Pes Anserine Bursitis"
+      ],
+      "rationale": "JSON q4 assigns gradual/insidious onset to OA, ITBS, tendinopathy, OCD, and Pes Anserine, whereas sudden non-impact onset raises Muscle Strain/Meniscus Tear, so the chronic overuse diagnoses are down-weighted; kept as soft down-weight because an acute event can unmask chronic degenerative pathology."
+    }
+  ]
+}
