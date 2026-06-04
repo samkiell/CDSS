@@ -18,9 +18,26 @@ const UserSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
+      // Required only for local (email/password) accounts. OAuth users
+      // (e.g. Google) have no password.
+      required: [
+        function () {
+          return this.authProvider === 'local';
+        },
+        'Password is required',
+      ],
       minlength: [8, 'Password must be at least 8 characters'],
       select: false, // Don't include password in queries by default
+    },
+    // Authentication provider for this account.
+    authProvider: {
+      type: String,
+      enum: ['local', 'google'],
+      default: 'local',
+    },
+    googleId: {
+      type: String,
+      default: null,
     },
     firstName: {
       type: String,
