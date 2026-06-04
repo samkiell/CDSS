@@ -34,6 +34,22 @@
       "question_count": 0
     },
     {
+      "region": "hip",
+      "title": "Hip Region",
+      "source_file": "Hip region.docx",
+      "json_file": "Hip Region.json",
+      "condition_count": 7,
+      "question_count": 36
+    },
+    {
+      "region": "knee",
+      "title": "Knee Region",
+      "source_file": "Knee Region.docx",
+      "json_file": "Knee Region.json",
+      "condition_count": 17,
+      "question_count": 60
+    },
+    {
       "region": "lumbar",
       "title": "Lumbar Region",
       "source_file": "Lumbar Region.docx",
@@ -48,6 +64,14 @@
       "json_file": "Shoulder Region.json",
       "condition_count": 9,
       "question_count": 50
+    },
+    {
+      "region": "wrist",
+      "title": "Wrist Region",
+      "source_file": "Wrist Region.docx",
+      "json_file": "Wrist Region.json",
+      "condition_count": 9,
+      "question_count": 36
     }
   ]
 }

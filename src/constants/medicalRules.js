@@ -263,6 +263,28 @@ export const MEDICAL_RULES = {
       },
     },
   },
+  // Hip / Knee / Wrist are V2-branching regions: the live question flow is loaded
+  // from /rules/<Region> Region.json by the branching engine. These stubs exist so
+  // legacy consumers (e.g. BodyMapPicker) can read a startQuestionId without error.
+  // The startQuestionId matches questionOrder[0] of each region's JSON.
+  hip: {
+    title: 'Hip Region',
+    startQuestionId: 'hip_q1',
+    engineVersion: 'v2-branching',
+    questions: {},
+  },
+  knee: {
+    title: 'Knee Region',
+    startQuestionId: 'knee_q1',
+    engineVersion: 'v2-branching',
+    questions: {},
+  },
+  wrist: {
+    title: 'Wrist Region',
+    startQuestionId: 'wrist_q1',
+    engineVersion: 'v2-branching',
+    questions: {},
+  },
 };
 
 export const BODY_REGIONS = [
@@ -271,4 +293,7 @@ export const BODY_REGIONS = [
   { id: 'cervical', name: 'Neck (Cervical)', icon: 'UserRound' },
   { id: 'shoulder', name: 'Shoulder', icon: 'Armchair' },
   { id: 'elbow', name: 'Elbow', icon: 'Activity' },
+  { id: 'hip', name: 'Hip', icon: 'PersonStanding' },
+  { id: 'knee', name: 'Knee', icon: 'Accessibility' },
+  { id: 'wrist', name: 'Wrist', icon: 'Hand' },
 ];

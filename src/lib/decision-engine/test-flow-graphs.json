@@ -253,5 +253,363 @@
         "diagnosisMapping": "Meniscal Injury"
       }
     }
+  },
+  "hip-pain-screener": {
+    "startNode": "hip_scour_test",
+    "nodes": {
+      "hip_scour_test": {
+        "id": "hip_scour_test",
+        "onPositive": "fadir_test",
+        "onNegative": "single_leg_stance_hip",
+        "isTerminal": false
+      },
+      "fadir_test": {
+        "id": "fadir_test",
+        "onPositive": "int_rotation_overpressure",
+        "onNegative": "hip_log_roll_test",
+        "isTerminal": false
+      },
+      "int_rotation_overpressure": {
+        "id": "int_rotation_overpressure",
+        "onPositive": "diag_hip_fai",
+        "onNegative": "diag_hip_labral_tear",
+        "isTerminal": false
+      },
+      "hip_log_roll_test": {
+        "id": "hip_log_roll_test",
+        "onPositive": "faber_test",
+        "onNegative": "diag_hip_oa",
+        "isTerminal": false
+      },
+      "faber_test": {
+        "id": "faber_test",
+        "onPositive": "diag_hip_avn",
+        "onNegative": "diag_hip_oa",
+        "isTerminal": false
+      },
+      "single_leg_stance_hip": {
+        "id": "single_leg_stance_hip",
+        "onPositive": "obers_test_hip",
+        "onNegative": "dynamic_hip_movement",
+        "isTerminal": false
+      },
+      "obers_test_hip": {
+        "id": "obers_test_hip",
+        "onPositive": "diag_hip_gtps",
+        "onNegative": "diag_hip_gtps",
+        "isTerminal": false
+      },
+      "dynamic_hip_movement": {
+        "id": "dynamic_hip_movement",
+        "onPositive": "diag_hip_snapping",
+        "onNegative": "diag_hip_gtps",
+        "isTerminal": false
+      },
+      "diag_hip_fai": {
+        "id": "diag_hip_fai",
+        "name": "Refined Diagnosis: Femoroacetabular Impingement",
+        "instruction": "Positive impingement provocation with limited internal rotation indicates FAI. Consider imaging to assess cam/pincer morphology and associated labral involvement.",
+        "isTerminal": true,
+        "diagnosisMapping": "Femoroacetabular Impingement"
+      },
+      "diag_hip_labral_tear": {
+        "id": "diag_hip_labral_tear",
+        "name": "Refined Diagnosis: Hip Labral Tear",
+        "instruction": "Positive impingement provocation without rotation restriction points to labral pathology. MRI arthrogram recommended for confirmation.",
+        "isTerminal": true,
+        "diagnosisMapping": "Hip Labral Tear"
+      },
+      "diag_hip_avn": {
+        "id": "diag_hip_avn",
+        "name": "Refined Diagnosis: Avascular Necrosis",
+        "instruction": "Multi-directional provocation with red-flag history (rest pain, steroids/alcohol/sickle cell) raises AVN suspicion. URGENT MRI is required — AVN is imaging-dependent.",
+        "isTerminal": true,
+        "diagnosisMapping": "Avascular Necrosis"
+      },
+      "diag_hip_oa": {
+        "id": "diag_hip_oa",
+        "name": "Refined Diagnosis: Hip Osteoarthritis",
+        "instruction": "Intra-articular pattern with mechanical features is consistent with hip OA. Confirm with weight-bearing X-ray.",
+        "isTerminal": true,
+        "diagnosisMapping": "Hip Osteoarthritis"
+      },
+      "diag_hip_gtps": {
+        "id": "diag_hip_gtps",
+        "name": "Refined Diagnosis: Greater Trochanteric Pain Syndrome",
+        "instruction": "Lateral hip pain with positive single-leg stance / ITB findings indicates GTPS (gluteal tendinopathy).",
+        "isTerminal": true,
+        "diagnosisMapping": "Greater Trochanteric Pain Syndrome"
+      },
+      "diag_hip_snapping": {
+        "id": "diag_hip_snapping",
+        "name": "Refined Diagnosis: Snapping Hip Syndrome",
+        "instruction": "Reproducible snapping on dynamic movement confirms snapping hip syndrome. Identify iliopsoas (anterior) vs ITB (lateral) subtype.",
+        "isTerminal": true,
+        "diagnosisMapping": "Snapping Hip Syndrome"
+      }
+    }
+  },
+  "wrist-pain-screener": {
+    "startNode": "snuffbox_tenderness",
+    "nodes": {
+      "snuffbox_tenderness": {
+        "id": "snuffbox_tenderness",
+        "onPositive": "scaphoid_compression",
+        "onNegative": "tinels_sign_wrist",
+        "isTerminal": false
+      },
+      "scaphoid_compression": {
+        "id": "scaphoid_compression",
+        "onPositive": "diag_wrist_scaphoid",
+        "onNegative": "diag_wrist_scaphoid",
+        "isTerminal": false
+      },
+      "tinels_sign_wrist": {
+        "id": "tinels_sign_wrist",
+        "onPositive": "phalens_test",
+        "onNegative": "finkelsteins_test",
+        "isTerminal": false
+      },
+      "phalens_test": {
+        "id": "phalens_test",
+        "onPositive": "diag_wrist_cts",
+        "onNegative": "diag_wrist_cts",
+        "isTerminal": false
+      },
+      "finkelsteins_test": {
+        "id": "finkelsteins_test",
+        "onPositive": "diag_wrist_dequervains",
+        "onNegative": "tfcc_load_test",
+        "isTerminal": false
+      },
+      "tfcc_load_test": {
+        "id": "tfcc_load_test",
+        "onPositive": "diag_wrist_tfcc",
+        "onNegative": "resisted_wrist_extension",
+        "isTerminal": false
+      },
+      "resisted_wrist_extension": {
+        "id": "resisted_wrist_extension",
+        "onPositive": "diag_wrist_intersection",
+        "onNegative": "transillumination_wrist",
+        "isTerminal": false
+      },
+      "transillumination_wrist": {
+        "id": "transillumination_wrist",
+        "onPositive": "diag_wrist_ganglion",
+        "onNegative": "axial_load_wrist",
+        "isTerminal": false
+      },
+      "axial_load_wrist": {
+        "id": "axial_load_wrist",
+        "onPositive": "diag_wrist_kienbock",
+        "onNegative": "diag_wrist_sprain",
+        "isTerminal": false
+      },
+      "diag_wrist_scaphoid": {
+        "id": "diag_wrist_scaphoid",
+        "name": "Refined Diagnosis: Scaphoid Fracture",
+        "instruction": "Snuffbox tenderness after FOOSH indicates probable scaphoid fracture. IMAGING IS MANDATORY (X-ray; MRI/CT if X-ray normal). Immobilize and treat as fracture pending imaging.",
+        "isTerminal": true,
+        "diagnosisMapping": "Scaphoid Fracture"
+      },
+      "diag_wrist_cts": {
+        "id": "diag_wrist_cts",
+        "name": "Refined Diagnosis: Carpal Tunnel Syndrome",
+        "instruction": "Positive median-nerve provocation confirms CTS. Consider nerve conduction studies if surgery is contemplated.",
+        "isTerminal": true,
+        "diagnosisMapping": "Carpal Tunnel Syndrome"
+      },
+      "diag_wrist_dequervains": {
+        "id": "diag_wrist_dequervains",
+        "name": "Refined Diagnosis: De Quervain's Tenosynovitis",
+        "instruction": "Positive Finkelstein's confirms De Quervain's tenosynovitis of the first dorsal compartment.",
+        "isTerminal": true,
+        "diagnosisMapping": "De Quervain's Tenosynovitis"
+      },
+      "diag_wrist_tfcc": {
+        "id": "diag_wrist_tfcc",
+        "name": "Refined Diagnosis: TFCC Injury",
+        "instruction": "Positive ulnar load test indicates TFCC injury. MRI arthrogram confirms.",
+        "isTerminal": true,
+        "diagnosisMapping": "TFCC Injury"
+      },
+      "diag_wrist_intersection": {
+        "id": "diag_wrist_intersection",
+        "name": "Refined Diagnosis: Intersection Syndrome",
+        "instruction": "Dorsal radial forearm pain/crepitus on resisted extension indicates intersection syndrome.",
+        "isTerminal": true,
+        "diagnosisMapping": "Intersection Syndrome"
+      },
+      "diag_wrist_ganglion": {
+        "id": "diag_wrist_ganglion",
+        "name": "Refined Diagnosis: Ganglion Cyst",
+        "instruction": "Transillumination-positive fluid-filled mass confirms ganglion cyst.",
+        "isTerminal": true,
+        "diagnosisMapping": "Ganglion Cyst"
+      },
+      "diag_wrist_kienbock": {
+        "id": "diag_wrist_kienbock",
+        "name": "Refined Diagnosis: Kienbock's Disease",
+        "instruction": "Central dorsal wrist pain on axial load with relevant history raises Kienbock's suspicion. Imaging (X-ray staging, MRI for early AVN) is required.",
+        "isTerminal": true,
+        "diagnosisMapping": "Kienbock's Disease"
+      },
+      "diag_wrist_sprain": {
+        "id": "diag_wrist_sprain",
+        "name": "Refined Diagnosis: Wrist Sprain",
+        "instruction": "No provocative test positive and fracture excluded — consistent with a ligamentous wrist sprain.",
+        "isTerminal": true,
+        "diagnosisMapping": "Wrist Sprain"
+      }
+    }
+  },
+  "knee-pain-screener": {
+    "startNode": "joint_line_tenderness",
+    "nodes": {
+      "joint_line_tenderness": {
+        "id": "joint_line_tenderness",
+        "onPositive": "mcmurray_test",
+        "onNegative": "lachman_test",
+        "isTerminal": false
+      },
+      "mcmurray_test": {
+        "id": "mcmurray_test",
+        "onPositive": "diag_knee_meniscus",
+        "onNegative": "crepitus_test",
+        "isTerminal": false
+      },
+      "crepitus_test": {
+        "id": "crepitus_test",
+        "onPositive": "diag_knee_oa",
+        "onNegative": "diag_knee_meniscus",
+        "isTerminal": false
+      },
+      "lachman_test": {
+        "id": "lachman_test",
+        "onPositive": "diag_knee_acl",
+        "onNegative": "valgus_stress_test_knee",
+        "isTerminal": false
+      },
+      "valgus_stress_test_knee": {
+        "id": "valgus_stress_test_knee",
+        "onPositive": "diag_knee_mcl",
+        "onNegative": "varus_stress_test_knee",
+        "isTerminal": false
+      },
+      "varus_stress_test_knee": {
+        "id": "varus_stress_test_knee",
+        "onPositive": "diag_knee_lcl",
+        "onNegative": "posterior_drawer_test",
+        "isTerminal": false
+      },
+      "posterior_drawer_test": {
+        "id": "posterior_drawer_test",
+        "onPositive": "diag_knee_pcl",
+        "onNegative": "clarkes_test",
+        "isTerminal": false
+      },
+      "clarkes_test": {
+        "id": "clarkes_test",
+        "onPositive": "diag_knee_pfps",
+        "onNegative": "noble_compression",
+        "isTerminal": false
+      },
+      "noble_compression": {
+        "id": "noble_compression",
+        "onPositive": "diag_knee_itbs",
+        "onNegative": "decline_squat_test",
+        "isTerminal": false
+      },
+      "decline_squat_test": {
+        "id": "decline_squat_test",
+        "onPositive": "diag_knee_tendinopathy",
+        "onNegative": "foucher_sign",
+        "isTerminal": false
+      },
+      "foucher_sign": {
+        "id": "foucher_sign",
+        "onPositive": "diag_knee_bakers",
+        "onNegative": "diag_knee_undetermined",
+        "isTerminal": false
+      },
+      "diag_knee_meniscus": {
+        "id": "diag_knee_meniscus",
+        "name": "Refined Diagnosis: Meniscus Tear",
+        "instruction": "Positive meniscal provocation with joint-line tenderness indicates a meniscus tear. Confirm with MRI.",
+        "isTerminal": true,
+        "diagnosisMapping": "Meniscus Tear"
+      },
+      "diag_knee_oa": {
+        "id": "diag_knee_oa",
+        "name": "Refined Diagnosis: Knee Osteoarthritis",
+        "instruction": "Crepitus and joint changes indicate knee OA. Confirm with weight-bearing X-ray.",
+        "isTerminal": true,
+        "diagnosisMapping": "Knee Osteoarthritis"
+      },
+      "diag_knee_acl": {
+        "id": "diag_knee_acl",
+        "name": "Refined Diagnosis: ACL Injury",
+        "instruction": "Positive Lachman indicates an ACL tear. MRI confirms and assesses associated injuries.",
+        "isTerminal": true,
+        "diagnosisMapping": "ACL Injury"
+      },
+      "diag_knee_mcl": {
+        "id": "diag_knee_mcl",
+        "name": "Refined Diagnosis: MCL Injury",
+        "instruction": "Medial gapping/pain on valgus stress indicates an MCL injury; grade by laxity.",
+        "isTerminal": true,
+        "diagnosisMapping": "MCL Injury"
+      },
+      "diag_knee_lcl": {
+        "id": "diag_knee_lcl",
+        "name": "Refined Diagnosis: LCL Injury",
+        "instruction": "Lateral gapping/pain on varus stress indicates an LCL injury; grade by laxity.",
+        "isTerminal": true,
+        "diagnosisMapping": "LCL Injury"
+      },
+      "diag_knee_pcl": {
+        "id": "diag_knee_pcl",
+        "name": "Refined Diagnosis: PCL Injury",
+        "instruction": "Posterior translation indicates a PCL injury. MRI confirms.",
+        "isTerminal": true,
+        "diagnosisMapping": "PCL Injury"
+      },
+      "diag_knee_pfps": {
+        "id": "diag_knee_pfps",
+        "name": "Refined Diagnosis: Patellofemoral Pain Syndrome",
+        "instruction": "Positive patellofemoral provocation with anterior knee pain indicates PFPS.",
+        "isTerminal": true,
+        "diagnosisMapping": "Patellofemoral Pain Syndrome"
+      },
+      "diag_knee_itbs": {
+        "id": "diag_knee_itbs",
+        "name": "Refined Diagnosis: Iliotibial Band Syndrome",
+        "instruction": "Lateral pain at ~30 degrees on Noble compression indicates ITBS.",
+        "isTerminal": true,
+        "diagnosisMapping": "Iliotibial Band Syndrome"
+      },
+      "diag_knee_tendinopathy": {
+        "id": "diag_knee_tendinopathy",
+        "name": "Refined Diagnosis: Patellar Tendinopathy",
+        "instruction": "Load-dependent inferior-pole pain on decline squat indicates patellar tendinopathy.",
+        "isTerminal": true,
+        "diagnosisMapping": "Patellar Tendinopathy"
+      },
+      "diag_knee_bakers": {
+        "id": "diag_knee_bakers",
+        "name": "Refined Diagnosis: Baker's Cyst",
+        "instruction": "Foucher's sign positive confirms a Baker's cyst (popliteal). Treat the underlying cause.",
+        "isTerminal": true,
+        "diagnosisMapping": "Baker's Cyst"
+      },
+      "diag_knee_undetermined": {
+        "id": "diag_knee_undetermined",
+        "name": "Refined Diagnosis: Meniscus Tear",
+        "instruction": "No single provocative test was definitive. Re-evaluate, consider imaging, and correlate clinically.",
+        "isTerminal": true,
+        "diagnosisMapping": "Meniscus Tear"
+      }
+    }
   }
 }

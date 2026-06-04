@@ -28,7 +28,7 @@ export default function BodyMapPicker() {
               key={region.id}
               className="hover:border-primary group cursor-pointer transition-all"
               onClick={() =>
-                selectRegion(region.id, MEDICAL_RULES[region.id].startQuestionId)
+                selectRegion(region.id, MEDICAL_RULES[region.id]?.startQuestionId)
               }
             >
               <CardContent className="flex flex-col items-center justify-center space-y-4 py-10">

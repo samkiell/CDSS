@@ -27,8 +27,12 @@ export function initializeGuidedTestEngine({
           : region?.toLowerCase().includes('ankle')
             ? 'ankle-stability-test'
             : region?.toLowerCase().includes('knee')
-              ? 'knee-pain-assessment'
-              : null);
+              ? 'knee-pain-screener'
+              : region?.toLowerCase().includes('hip')
+                ? 'hip-pain-screener'
+                : region?.toLowerCase().includes('wrist')
+                  ? 'wrist-pain-screener'
+                  : null);
 
   const graph = testFlowGraphs[regionKey] || null;
   const startNodeId = graph?.startNode || null;

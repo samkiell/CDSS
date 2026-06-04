@@ -472,5 +472,785 @@
       "Positive: Excessive translation of the tibia."
     ],
     "image": "/images/clinical/drawer-test-knee.jpg"
+  },
+  {
+    "id": "faber_test",
+    "name": "FABER Test (Patrick's Test)",
+    "type": "Clinical Test",
+    "purpose": "To detect intra-articular hip pathology such as osteoarthritis or FAI, and to screen the SIJ.",
+    "instructions": [
+      "Patient supine; place the affected leg in the figure-4 position (flexion, abduction, external rotation).",
+      "Apply gentle downward pressure on the flexed knee while stabilizing the opposite ASIS.",
+      "Positive: Pain reproduced in the groin or restricted movement compared to the other side."
+    ],
+    "image": null
+  },
+  {
+    "id": "fadir_test",
+    "name": "FADIR Test (Flexion, Adduction, Internal Rotation)",
+    "type": "Clinical Test",
+    "purpose": "To detect femoroacetabular impingement and intra-articular/labral pathology.",
+    "instructions": [
+      "Patient supine; flex the hip to 90 degrees.",
+      "Adduct and internally rotate the hip.",
+      "Positive: Groin pain (or clicking) reproduced."
+    ],
+    "image": null
+  },
+  {
+    "id": "hip_scour_test",
+    "name": "Scour Test (Hip Quadrant)",
+    "type": "Clinical Test",
+    "purpose": "To assess hip joint degeneration and intra-articular pathology (OA, FAI, labral).",
+    "instructions": [
+      "Patient supine; flex and adduct the hip.",
+      "Apply axial compression through the femur while moving the hip in an arc.",
+      "Positive: Pain, grinding, clicking, or crepitus felt."
+    ],
+    "image": null
+  },
+  {
+    "id": "hip_log_roll_test",
+    "name": "Log Roll Test",
+    "type": "Clinical Test",
+    "purpose": "To detect intra-articular hip pathology (the most specific test for the hip joint).",
+    "instructions": [
+      "Patient supine with legs extended and relaxed.",
+      "Gently roll the leg internally and externally.",
+      "Positive: Pain reproduced, or increased external rotation compared to the other side."
+    ],
+    "image": null
+  },
+  {
+    "id": "trendelenburg_test",
+    "name": "Trendelenburg Test",
+    "type": "Clinical Test",
+    "purpose": "To assess gluteus medius strength and detect gluteal weakness (OA, GTPS).",
+    "instructions": [
+      "Patient stands on the affected leg only; examiner observes the pelvis from behind.",
+      "Positive: The pelvis drops on the opposite (contralateral) side."
+    ],
+    "image": null
+  },
+  {
+    "id": "single_leg_stance_hip",
+    "name": "Single-Leg Stance Test (Hip)",
+    "type": "Clinical Test",
+    "purpose": "Highly sensitive screen for gluteal tendinopathy / GTPS.",
+    "instructions": [
+      "Patient stands on the affected leg for up to 30 seconds.",
+      "Positive: Lateral hip pain reproduced within 30 seconds."
+    ],
+    "image": null
+  },
+  {
+    "id": "resisted_ext_derotation",
+    "name": "Resisted External Derotation Test",
+    "type": "Clinical Test",
+    "purpose": "To detect gluteus medius/minimus tendinopathy (GTPS).",
+    "instructions": [
+      "Patient supine, hip flexed to 90 degrees; examiner passively externally rotates the hip.",
+      "Ask the patient to return the leg to neutral against resistance.",
+      "Positive: Pain reproduced over the lateral hip."
+    ],
+    "image": null
+  },
+  {
+    "id": "obers_test_hip",
+    "name": "Ober's Test",
+    "type": "Clinical Test",
+    "purpose": "To detect iliotibial band tightness contributing to GTPS or lateral snapping hip.",
+    "instructions": [
+      "Patient side-lying with the unaffected leg down.",
+      "Extend and abduct the affected hip, then allow it to drop into adduction.",
+      "Positive: The leg remains abducted and does not drop."
+    ],
+    "image": null
+  },
+  {
+    "id": "dynamic_hip_movement",
+    "name": "Dynamic Hip Movement Test",
+    "type": "Clinical Test",
+    "purpose": "To confirm snapping hip syndrome.",
+    "instructions": [
+      "Patient actively flexes and extends the hip while the examiner palpates over the anterior (iliopsoas) or lateral (ITB) hip.",
+      "Positive: Snapping is reproduced (visible, palpable, or audible)."
+    ],
+    "image": null
+  },
+  {
+    "id": "thomas_test_hip",
+    "name": "Thomas Test (Modified, Hip)",
+    "type": "Clinical Test",
+    "purpose": "To detect hip flexor tightness, iliopsoas involvement, or labral irritation.",
+    "instructions": [
+      "Patient supine at the edge of the table; pull one knee to the chest while the other leg hangs off the table.",
+      "Positive: The hanging leg produces hip pain, clicking, or fails to extend fully."
+    ],
+    "image": null
+  },
+  {
+    "id": "int_rotation_overpressure",
+    "name": "Internal Rotation Overpressure Test",
+    "type": "Clinical Test",
+    "purpose": "To detect FAI due to limited internal rotation.",
+    "instructions": [
+      "Patient supine, hip flexed to 90 degrees; apply internal rotation with overpressure.",
+      "Positive: Groin pain or restriction noted."
+    ],
+    "image": null
+  },
+  {
+    "id": "phalens_test",
+    "name": "Phalen's Test",
+    "type": "Clinical Test",
+    "purpose": "To provoke median nerve symptoms in carpal tunnel syndrome.",
+    "instructions": [
+      "Patient fully flexes both wrists and holds the backs of the hands together.",
+      "Hold the position for up to 60 seconds.",
+      "Positive: Numbness or tingling in the median nerve distribution (thumb, index, middle, radial ring)."
+    ],
+    "image": null
+  },
+  {
+    "id": "tinels_sign_wrist",
+    "name": "Tinel's Sign (Wrist)",
+    "type": "Clinical Test",
+    "purpose": "To detect median nerve irritation at the carpal tunnel.",
+    "instructions": [
+      "Examiner taps lightly over the carpal tunnel on the palmar wrist.",
+      "Positive: Tingling or 'pins and needles' in the median nerve distribution."
+    ],
+    "image": null
+  },
+  {
+    "id": "carpal_compression_test",
+    "name": "Carpal Compression Test (Durkan's)",
+    "type": "Clinical Test",
+    "purpose": "To reproduce CTS symptoms via direct carpal tunnel pressure.",
+    "instructions": [
+      "Examiner applies firm, direct pressure over the carpal tunnel with both thumbs for 30 seconds.",
+      "Positive: Reproduction of numbness/tingling in the median nerve distribution."
+    ],
+    "image": null
+  },
+  {
+    "id": "finkelsteins_test",
+    "name": "Finkelstein's Test",
+    "type": "Clinical Test",
+    "purpose": "To detect De Quervain's tenosynovitis.",
+    "instructions": [
+      "Patient makes a fist with the thumb tucked inside the fingers.",
+      "Examiner passively ulnar-deviates the wrist.",
+      "Positive: Sharp pain over the radial styloid (thumb side of the wrist)."
+    ],
+    "image": null
+  },
+  {
+    "id": "what_test",
+    "name": "WHAT Test (Wrist Hyperflexion & Abduction of Thumb)",
+    "type": "Clinical Test",
+    "purpose": "To detect De Quervain's tenosynovitis.",
+    "instructions": [
+      "Patient hyperflexes the wrist and abducts the thumb against examiner resistance.",
+      "Positive: Pain reproduced over the radial wrist."
+    ],
+    "image": null
+  },
+  {
+    "id": "ligament_stress_wrist",
+    "name": "Wrist Ligament Stress Tests",
+    "type": "Clinical Test",
+    "purpose": "To detect ligamentous injury (wrist sprain).",
+    "instructions": [
+      "Examiner applies directed stress to specific wrist ligaments (e.g., scapholunate, lunotriquetral).",
+      "Positive: Pain or laxity at the stressed ligament."
+    ],
+    "image": null
+  },
+  {
+    "id": "tfcc_load_test",
+    "name": "TFCC Load Test (Ulnar Grind)",
+    "type": "Clinical Test",
+    "purpose": "To detect triangular fibrocartilage complex injury.",
+    "instructions": [
+      "Hold the wrist in ulnar deviation, apply axial load, and rotate the forearm.",
+      "Positive: Pain or clicking on the ulnar side of the wrist."
+    ],
+    "image": null
+  },
+  {
+    "id": "press_test_wrist",
+    "name": "Press Test",
+    "type": "Clinical Test",
+    "purpose": "Highly sensitive functional screen for a TFCC tear.",
+    "instructions": [
+      "Patient pushes up from a chair using the affected hand to bear weight.",
+      "Positive: Ulnar-sided wrist pain reproduced."
+    ],
+    "image": null
+  },
+  {
+    "id": "transillumination_wrist",
+    "name": "Transillumination Test (Wrist)",
+    "type": "Clinical Test",
+    "purpose": "To confirm that a wrist mass is fluid-filled (ganglion cyst).",
+    "instructions": [
+      "Apply a light source through the swelling in a darkened room.",
+      "Positive: Light passes through, indicating a fluid-filled cyst rather than a solid mass."
+    ],
+    "image": null
+  },
+  {
+    "id": "resisted_wrist_extension",
+    "name": "Resisted Wrist Extension Test",
+    "type": "Clinical Test",
+    "purpose": "To detect intersection syndrome.",
+    "instructions": [
+      "Patient extends the wrist against examiner resistance.",
+      "Positive: Pain or crepitus over the dorsal radial forearm (4-6 cm proximal to the wrist)."
+    ],
+    "image": null
+  },
+  {
+    "id": "snuffbox_tenderness",
+    "name": "Anatomical Snuffbox Tenderness Test",
+    "type": "Clinical Test",
+    "purpose": "Most important clinical sign of a scaphoid fracture.",
+    "instructions": [
+      "Palpate the anatomical snuffbox at the base of the thumb.",
+      "Positive: Localized tenderness — treat as scaphoid fracture until imaging excludes it."
+    ],
+    "image": null
+  },
+  {
+    "id": "scaphoid_compression",
+    "name": "Scaphoid Compression Test",
+    "type": "Clinical Test",
+    "purpose": "To support suspicion of a scaphoid fracture.",
+    "instructions": [
+      "Apply axial load (compression) along the line of the thumb metacarpal toward the scaphoid.",
+      "Positive: Pain reproduced in the scaphoid region."
+    ],
+    "image": null
+  },
+  {
+    "id": "axial_load_wrist",
+    "name": "Axial Load Test (Wrist / Lunate)",
+    "type": "Clinical Test",
+    "purpose": "Non-specific provocation suggesting intra-articular pathology (e.g., Kienbock's). No single definitive test exists.",
+    "instructions": [
+      "Apply axial compression through the wrist.",
+      "Positive: Central dorsal wrist pain — correlate with imaging; Kienbock's is imaging-dependent."
+    ],
+    "image": null
+  },
+  {
+    "id": "clarkes_test",
+    "name": "Clarke's Test (Patellar Grind)",
+    "type": "Clinical Test",
+    "purpose": "To detect patellofemoral joint dysfunction (PFPS).",
+    "instructions": [
+      "Patient supine, knee extended. Apply gentle downward pressure on the superior pole of the patella.",
+      "Ask the patient to contract the quadriceps.",
+      "Positive: Anterior knee pain reproduced."
+    ],
+    "image": null
+  },
+  {
+    "id": "step_down_test",
+    "name": "Step-Down Test",
+    "type": "Clinical Test",
+    "purpose": "To detect PFPS and poor lower-limb control.",
+    "instructions": [
+      "Patient stands on a 20 cm step and slowly lowers the opposite heel to the ground.",
+      "Observe knee alignment.",
+      "Positive: Anterior knee pain or medial collapse (dynamic valgus)."
+    ],
+    "image": null
+  },
+  {
+    "id": "patellar_tilt_test",
+    "name": "Patellar Tilt Test",
+    "type": "Clinical Test",
+    "purpose": "To detect tight lateral structures contributing to PFPS / OA.",
+    "instructions": [
+      "Patient supine, knee extended. Lift the lateral edge of the patella.",
+      "Positive: The lateral edge cannot reach the horizontal."
+    ],
+    "image": null
+  },
+  {
+    "id": "waldron_test",
+    "name": "Waldron Test",
+    "type": "Clinical Test",
+    "purpose": "To detect patellofemoral joint irritation (PFPS).",
+    "instructions": [
+      "Patient actively flexes and extends the knee while the examiner palpates the patellofemoral joint.",
+      "Positive: Grinding, crepitus, or anterior knee pain."
+    ],
+    "image": null
+  },
+  {
+    "id": "patellar_glide_test",
+    "name": "Patellar Glide Test",
+    "type": "Clinical Test",
+    "purpose": "To detect patellar maltracking (PFPS).",
+    "instructions": [
+      "Patient supine, knee extended. Glide the patella medially and laterally.",
+      "Positive: Pain or abnormal patellar mobility."
+    ],
+    "image": null
+  },
+  {
+    "id": "mcmurray_test",
+    "name": "McMurray Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a meniscal tear.",
+    "instructions": [
+      "Patient supine. Fully flex the hip and knee, then rotate the tibia and extend the knee.",
+      "Positive: Palpable click/snap or joint-line pain (internal rotation = lateral meniscus; external = medial)."
+    ],
+    "image": null
+  },
+  {
+    "id": "apley_compression",
+    "name": "Apley's Compression Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a meniscal injury.",
+    "instructions": [
+      "Patient prone, knee flexed 90 degrees. Apply downward compression while rotating the tibia.",
+      "Positive: Joint-line pain on compression."
+    ],
+    "image": null
+  },
+  {
+    "id": "thessaly_test",
+    "name": "Thessaly Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a meniscal tear (weight-bearing).",
+    "instructions": [
+      "Patient stands on one leg, knee flexed ~20 degrees, and rotates the body/knee three times.",
+      "Positive: Joint-line pain or a sense of locking/catching."
+    ],
+    "image": null
+  },
+  {
+    "id": "joint_line_tenderness",
+    "name": "Joint Line Tenderness",
+    "type": "Clinical Test",
+    "purpose": "To detect meniscal or tibiofemoral pathology.",
+    "instructions": [
+      "Palpate along the medial and lateral joint lines.",
+      "Positive: Localized joint-line tenderness."
+    ],
+    "image": null
+  },
+  {
+    "id": "bounce_home_test",
+    "name": "Bounce Home Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a displaced meniscal fragment (e.g., bucket-handle tear).",
+    "instructions": [
+      "Patient supine. Fully flex the knee, then allow it to passively extend.",
+      "Positive: Knee does not fully extend (block) or has a springy end-feel."
+    ],
+    "image": null
+  },
+  {
+    "id": "resisted_contraction_test",
+    "name": "Resisted Contraction Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a muscle strain.",
+    "instructions": [
+      "Patient contracts the affected muscle against resistance at mid-range.",
+      "Positive: Pain at the muscle site."
+    ],
+    "image": null
+  },
+  {
+    "id": "passive_stretch_test",
+    "name": "Passive Stretch Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a muscle strain.",
+    "instructions": [
+      "Examiner slowly stretches the affected muscle.",
+      "Positive: Pain at the muscle site."
+    ],
+    "image": null
+  },
+  {
+    "id": "lachman_test",
+    "name": "Lachman Test",
+    "type": "Clinical Test",
+    "purpose": "To detect an ACL tear (most sensitive ACL test).",
+    "instructions": [
+      "Knee flexed ~30 degrees. Stabilize the femur and pull the tibia anteriorly.",
+      "Positive: Soft endpoint or increased anterior tibial translation."
+    ],
+    "image": null
+  },
+  {
+    "id": "anterior_drawer_knee",
+    "name": "Anterior Drawer Test (Knee)",
+    "type": "Clinical Test",
+    "purpose": "To detect an ACL injury.",
+    "instructions": [
+      "Knee flexed 90 degrees, foot stabilized. Pull the tibia anteriorly.",
+      "Positive: Increased anterior translation versus the other side."
+    ],
+    "image": null
+  },
+  {
+    "id": "varus_stress_test_knee",
+    "name": "Varus Stress Test",
+    "type": "Clinical Test",
+    "purpose": "To detect an LCL injury.",
+    "instructions": [
+      "Knee flexed 30 degrees. Stabilize the femur and apply a varus (outward) force.",
+      "Positive: Pain or gapping at the lateral joint line (Grade I/II/III by laxity)."
+    ],
+    "image": null
+  },
+  {
+    "id": "posterior_drawer_test",
+    "name": "Posterior Drawer Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a PCL tear.",
+    "instructions": [
+      "Knee flexed 90 degrees. Push the tibia posteriorly.",
+      "Positive: Increased posterior translation."
+    ],
+    "image": null
+  },
+  {
+    "id": "godfrey_test",
+    "name": "Godfrey (Posterior Sag) Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a PCL injury.",
+    "instructions": [
+      "Hip and knee flexed 90 degrees, examiner supports the leg. Observe the tibial plateau.",
+      "Positive: The tibia sags posteriorly versus the other side."
+    ],
+    "image": null
+  },
+  {
+    "id": "patellofemoral_compression",
+    "name": "Patellofemoral Compression Test (Grind)",
+    "type": "Clinical Test",
+    "purpose": "To detect patellofemoral OA.",
+    "instructions": [
+      "Patient supine, knee extended. Apply downward pressure on the patella while the patient contracts the quadriceps.",
+      "Positive: Pain or crepitus at the patellofemoral joint."
+    ],
+    "image": null
+  },
+  {
+    "id": "crepitus_test",
+    "name": "Crepitus Test",
+    "type": "Clinical Test",
+    "purpose": "To detect articular cartilage degeneration (OA).",
+    "instructions": [
+      "Move the knee through full flexion and extension while palpating.",
+      "Positive: Audible or palpable crepitus/grinding."
+    ],
+    "image": null
+  },
+  {
+    "id": "knee_rom_assessment",
+    "name": "Range of Motion Assessment (Knee)",
+    "type": "Clinical Test",
+    "purpose": "To detect joint degeneration (OA).",
+    "instructions": [
+      "Passively flex and extend the knee, noting pain, stiffness, and limited ROM.",
+      "Positive: Reduced flexion or extension."
+    ],
+    "image": null
+  },
+  {
+    "id": "patellar_apprehension",
+    "name": "Patellar Apprehension Test",
+    "type": "Clinical Test",
+    "purpose": "To detect lateral patellar instability / prior dislocation.",
+    "instructions": [
+      "Patient supine, knee extended and relaxed. Gently push the patella laterally.",
+      "Positive: Apprehension or quadriceps contraction to resist displacement."
+    ],
+    "image": null
+  },
+  {
+    "id": "patella_tracking_assess",
+    "name": "Patella Tracking Assessment",
+    "type": "Clinical Test",
+    "purpose": "To detect abnormal patellar motion / prior dislocation.",
+    "instructions": [
+      "Observe the patella during active knee flexion and extension.",
+      "Positive: The patella deviates laterally or fails to track smoothly."
+    ],
+    "image": null
+  },
+  {
+    "id": "patella_hypermobility",
+    "name": "Patellar Hypermobility Test",
+    "type": "Clinical Test",
+    "purpose": "To detect generalized patellar laxity.",
+    "instructions": [
+      "Patient supine, knee extended. Displace the patella medially and laterally.",
+      "Positive: Excessive movement (>50% of patellar width)."
+    ],
+    "image": null
+  },
+  {
+    "id": "q_angle_measurement",
+    "name": "Q-Angle Measurement",
+    "type": "Clinical Test",
+    "purpose": "To detect malalignment predisposing to lateral patellar dislocation.",
+    "instructions": [
+      "Measure the angle between the ASIS-patella line and the patella-tibial tuberosity line with the knee extended.",
+      "Positive: Q-angle >15 degrees (men) or >20 degrees (women)."
+    ],
+    "image": null
+  },
+  {
+    "id": "knee_slr_test",
+    "name": "Straight Leg Raise Test (Knee)",
+    "type": "Clinical Test",
+    "purpose": "To detect extensor mechanism disruption / patella fracture.",
+    "instructions": [
+      "Patient supine, legs extended. Ask the patient to lift the affected leg straight without bending the knee.",
+      "Positive: Inability to actively lift the leg."
+    ],
+    "image": null
+  },
+  {
+    "id": "patellar_integrity_palpation",
+    "name": "Patellar Integrity Palpation",
+    "type": "Clinical Test",
+    "purpose": "To detect a patella fracture.",
+    "instructions": [
+      "Palpate the patella gently for tenderness, irregularity, or a gap.",
+      "Positive: Severe localized tenderness, palpable gap, or irregularity."
+    ],
+    "image": null
+  },
+  {
+    "id": "active_knee_extension",
+    "name": "Active Knee Extension Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a patella fracture / extensor disruption.",
+    "instructions": [
+      "Ask the patient to actively straighten the knee from a flexed position.",
+      "Positive: Inability or severe pain during active extension."
+    ],
+    "image": null
+  },
+  {
+    "id": "axial_loading_test",
+    "name": "Axial Loading Test (Tibia)",
+    "type": "Clinical Test",
+    "purpose": "To detect a tibial plateau fracture.",
+    "instructions": [
+      "Apply gentle axial compression through the heel toward the tibia.",
+      "Positive: Severe pain at the tibial plateau region."
+    ],
+    "image": null
+  },
+  {
+    "id": "noble_compression",
+    "name": "Noble Compression Test",
+    "type": "Clinical Test",
+    "purpose": "To detect iliotibial band syndrome.",
+    "instructions": [
+      "Patient supine, knee flexed 90 degrees. Apply pressure over the lateral femoral epicondyle while slowly extending the knee.",
+      "Positive: Pain at approximately 30 degrees of knee flexion."
+    ],
+    "image": null
+  },
+  {
+    "id": "knee_obers_test",
+    "name": "Ober's Test (Knee / ITBS)",
+    "type": "Clinical Test",
+    "purpose": "To detect iliotibial band tightness contributing to ITBS.",
+    "instructions": [
+      "Patient side-lying on the unaffected side. Extend and abduct the hip, then slowly lower the leg.",
+      "Positive: The leg remains elevated and does not drop."
+    ],
+    "image": null
+  },
+  {
+    "id": "renne_test",
+    "name": "Renne Test",
+    "type": "Clinical Test",
+    "purpose": "To detect iliotibial band syndrome (weight-bearing).",
+    "instructions": [
+      "Patient stands and performs a squat while the examiner presses over the lateral femoral epicondyle.",
+      "Positive: Pain at approximately 30 degrees of knee flexion."
+    ],
+    "image": null
+  },
+  {
+    "id": "decline_squat_test",
+    "name": "Decline Squat Test",
+    "type": "Clinical Test",
+    "purpose": "To detect patellar tendinopathy.",
+    "instructions": [
+      "Patient stands on a 25-degree decline board and performs a squat.",
+      "Positive: Localized pain at the inferior pole of the patella."
+    ],
+    "image": null
+  },
+  {
+    "id": "resisted_knee_extension",
+    "name": "Resisted Knee Extension Test",
+    "type": "Clinical Test",
+    "purpose": "To detect patellar/quadriceps tendinopathy.",
+    "instructions": [
+      "Patient seated, knee flexed. Resist knee extension.",
+      "Positive: Localized tendon pain."
+    ],
+    "image": null
+  },
+  {
+    "id": "single_leg_decline_squat",
+    "name": "Single-Leg Decline Squat Test",
+    "type": "Clinical Test",
+    "purpose": "To detect patellar tendinopathy.",
+    "instructions": [
+      "Patient performs a single-leg squat on a decline surface.",
+      "Positive: Reproduction of localized tendon pain."
+    ],
+    "image": null
+  },
+  {
+    "id": "hop_test_knee",
+    "name": "Hop Test (Knee)",
+    "type": "Clinical Test",
+    "purpose": "Functional indicator of patellar/quadriceps tendinopathy.",
+    "instructions": [
+      "Patient performs repeated hopping on the affected leg.",
+      "Positive: Pain localized to the patellar or quadriceps tendon."
+    ],
+    "image": null
+  },
+  {
+    "id": "pes_anserine_palpation",
+    "name": "Pes Anserine Palpation Test",
+    "type": "Clinical Test",
+    "purpose": "To detect pes anserine bursitis.",
+    "instructions": [
+      "Patient supine, knee extended. Palpate 5-7 cm below the medial joint line.",
+      "Positive: Localized tenderness (below, not at, the joint line)."
+    ],
+    "image": null
+  },
+  {
+    "id": "resisted_knee_flexion",
+    "name": "Resisted Knee Flexion Test",
+    "type": "Clinical Test",
+    "purpose": "To detect pes anserine bursitis.",
+    "instructions": [
+      "Patient flexes the knee against resistance.",
+      "Positive: Pain at the pes anserine region."
+    ],
+    "image": null
+  },
+  {
+    "id": "resisted_hip_adduction",
+    "name": "Resisted Hip Adduction Test",
+    "type": "Clinical Test",
+    "purpose": "To detect pes anserine bursitis (sartorius/gracilis/semitendinosus).",
+    "instructions": [
+      "Patient performs hip adduction against resistance.",
+      "Positive: Pain at the pes anserine insertion."
+    ],
+    "image": null
+  },
+  {
+    "id": "wilsons_test",
+    "name": "Wilson's Test",
+    "type": "Clinical Test",
+    "purpose": "To detect osteochondritis dissecans of the medial femoral condyle.",
+    "instructions": [
+      "Patient supine, knee flexed 90 degrees. Patient actively extends the knee while the examiner internally rotates the tibia.",
+      "Positive: Pain at 30-40 degrees relieved by external rotation of the tibia."
+    ],
+    "image": null
+  },
+  {
+    "id": "condylar_palpation",
+    "name": "Passive Condylar Palpation Test",
+    "type": "Clinical Test",
+    "purpose": "To detect an OCD lesion.",
+    "instructions": [
+      "Knee flexed 90 degrees. Palpate the femoral condyles.",
+      "Positive: Localized pain over a femoral condyle."
+    ],
+    "image": null
+  },
+  {
+    "id": "joint_effusion_stroke_test",
+    "name": "Joint Effusion (Stroke) Test",
+    "type": "Clinical Test",
+    "purpose": "To detect joint effusion associated with intra-articular pathology.",
+    "instructions": [
+      "Stroke the medial knee upward, then the lateral knee downward.",
+      "Positive: A fluid wave or bulge appears."
+    ],
+    "image": null
+  },
+  {
+    "id": "foucher_sign",
+    "name": "Foucher's Sign",
+    "type": "Clinical Test",
+    "purpose": "To confirm a Baker's cyst.",
+    "instructions": [
+      "Palpate the popliteal mass with the knee extended, then flexed.",
+      "Positive: The mass is firm in extension and softens/disappears in flexion."
+    ],
+    "image": null
+  },
+  {
+    "id": "popliteal_palpation",
+    "name": "Popliteal Palpation Test",
+    "type": "Clinical Test",
+    "purpose": "To detect a Baker's cyst.",
+    "instructions": [
+      "Patient prone or supine. Palpate the popliteal fossa.",
+      "Positive: A palpable fluid-filled mass."
+    ],
+    "image": null
+  },
+  {
+    "id": "knee_effusion_test",
+    "name": "Knee Effusion Test (Bulge / Stroke)",
+    "type": "Clinical Test",
+    "purpose": "To detect intra-articular effusion.",
+    "instructions": [
+      "Perform the bulge or stroke test over the knee.",
+      "Positive: Fluid accumulation present."
+    ],
+    "image": null
+  },
+  {
+    "id": "passive_joint_motion_knee",
+    "name": "Passive Joint Motion Test (Knee)",
+    "type": "Clinical Test",
+    "purpose": "To screen for septic arthritis. AVOID aggressive testing.",
+    "instructions": [
+      "Gently move the knee through a small range of passive flexion/extension.",
+      "Positive: Severe pain even with minimal passive movement."
+    ],
+    "image": null
+  },
+  {
+    "id": "knee_temp_assessment",
+    "name": "Temperature Assessment (Knee)",
+    "type": "Clinical Test",
+    "purpose": "To detect joint infection.",
+    "instructions": [
+      "Compare the temperature of the affected and unaffected knee with the back of the hand.",
+      "Positive: The affected knee is significantly warmer."
+    ],
+    "image": null
   }
 ]

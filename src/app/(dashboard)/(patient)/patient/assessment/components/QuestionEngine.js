@@ -57,6 +57,8 @@ export default function QuestionEngine() {
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
+  // Set when an answer triggers an emergency termination (e.g. suspected septic arthritis).
+  const [emergencyState, setEmergencyState] = useState(null);
 
   /**
    * LOAD REGION RULES & INITIALIZE ENGINE
@@ -143,6 +145,23 @@ export default function QuestionEngine() {
             });
           }
 
+          // Emergency termination: an answer set terminateAssessment (e.g. suspected
+          // septic arthritis). Surface a dedicated emergency screen rather than the
+          // normal completion flow. The state is still saved/completed in the store.
+          if (
+            newState.isComplete &&
+            newState.completionReason === 'terminated_by_answer'
+          ) {
+            const flag = newState.redFlags[newState.redFlags.length - 1];
+            setEmergencyState({
+              message:
+                flag?.redFlagText ||
+                'An urgent clinical concern has been detected. Please seek immediate medical care.',
+            });
+            completeQuestions();
+            return;
+          }
+
           // Get next valid question (with branching logic)
           const nextQuestion = getCurrentQuestion(newState);
 
@@ -224,6 +243,30 @@ export default function QuestionEngine() {
       }
     }, 150);
   }, [isProcessing, currentQuestion, engineState, updateEngineState, completeQuestions]);
+
+  // Emergency state — takes precedence over everything else.
+  if (emergencyState) {
+    return (
+      <div className="mx-auto flex min-h-[400px] max-w-2xl items-center justify-center">
+        <Card className="w-full border-2 border-red-300 bg-red-50 dark:border-red-800 dark:bg-red-950/30">
+          <CardContent className="p-8 text-center">
+            <AlertTriangle className="mx-auto h-14 w-14 text-red-600 dark:text-red-400" />
+            <h2 className="mt-4 text-2xl font-black text-red-700 dark:text-red-300">
+              Urgent: Seek Medical Care Now
+            </h2>
+            <p className="mt-3 text-base leading-relaxed font-medium text-red-800 dark:text-red-200">
+              {emergencyState.message}
+            </p>
+            <p className="text-muted-foreground mt-6 text-sm">
+              Your responses have been recorded and flagged as urgent for clinical review.
+              Do not wait — contact emergency services or go to the nearest emergency
+              department.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   // Loading state
   if (isLoading) {
