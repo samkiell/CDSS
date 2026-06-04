@@ -32,7 +32,12 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Sciatica",
+                  "Lumbar Disc Herniation",
+                  "Lumbar spinal stenosis",
+                  "Cauda Equina Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -83,7 +88,12 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Sciatica",
+                  "Lumbar Disc Herniation",
+                  "Lumbar spinal stenosis",
+                  "Cauda Equina Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -163,7 +173,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Lumbar Disc Herniation"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -197,7 +209,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Lumbar Disc Herniation"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -375,15 +389,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "facet joint syndrome"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Pain aggravated by standing/extension can indicate facet joint syndrome (not modeled here)."
               }
             },
             {
@@ -439,15 +451,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "facet joint syndrome"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Pain aggravated by standing/extension can indicate facet joint syndrome (not modeled here)."
               }
             },
             {
@@ -655,7 +665,11 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Sciatica",
+                  "Lumbar Disc Herniation",
+                  "Lumbar spinal stenosis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -689,7 +703,11 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Sciatica",
+                  "Lumbar Disc Herniation",
+                  "Lumbar spinal stenosis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1028,15 +1046,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "ankylosing spondylitis or bone tumours and infection"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "RED FLAG: fever/chills — consider infection, inflammatory (ankylosing spondylitis) or tumour; urgent work-up."
               }
             },
             {
@@ -1062,15 +1078,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "ankylosing spondylitis or bone tumours and infection"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "RED FLAG: fever/chills — consider infection, inflammatory (ankylosing spondylitis) or tumour; urgent work-up."
               }
             },
             {
@@ -1108,15 +1122,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "cancers/infection"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "RED FLAG: unexplained weight loss — consider malignancy or infection; urgent work-up."
               }
             },
             {
@@ -1142,15 +1154,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "cancers/infection"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "RED FLAG: unexplained weight loss — consider malignancy or infection; urgent work-up."
               }
             },
             {

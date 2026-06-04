@@ -1,0 +1,37 @@
+{
+  "region": "lumbar",
+  "rules": [
+    {
+      "questionId": "lumbar_q1",
+      "answerValue": "Lower back only",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Sciatica",
+        "Lumbar Disc Herniation",
+        "Lumbar spinal stenosis",
+        "Cauda Equina Syndrome"
+      ],
+      "rationale": "VERIFIED. questionId lumbar_q1 ('Where is your pain located?') exists in the Non-specific low-back pain shared block; 'Lower back only' is an exact option (the others are 'Radiates down one leg' and 'Radiates down both legs'). Legacy DOCX confirms the radiation annotations: 'Radiates down one leg (Rule out sciatica)' and 'Radiates down both legs (Rule out cauda equina syndrome)', while the Lumbar spinal stenosis block asks about pain 'radiating to the buttocks, thigh and legs' (q20) and the Lumbar Disc Herniation block asks about pain 'radiating to buttock and leg' (q29). Pain confined to the lower back with no radiation therefore makes all four leg-radiating diagnoses less likely. All four condition names are EXACT matches. Kept as decreaseLikelihood (not exclude): lower-back-predominant pain can occur early in these conditions, and crucially Cauda Equina Syndrome is a red-flag emergency that must NEVER be hard-ruled-out without explicit DOCX support. This does not touch 'Non-specific low-back pain' and does not contradict the existing JSON (which hard-excludes Sciatica on 'Radiates down one leg' and Cauda Equina Syndrome on 'Radiates down both legs' - the complementary answers)."
+    },
+    {
+      "questionId": "lumbar_q2",
+      "answerValue": "Gradual",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Lumbar Disc Herniation"
+      ],
+      "rationale": "VERIFIED. questionId lumbar_q2 ('How did the pain begin?') exists in the Non-specific low-back pain shared block; 'Gradual' is an exact option (the other is 'Sudden'). Legacy DOCX annotates 'Sudden (Rule out lumbar disc herniation)', and the Lumbar Disc Herniation block is characterised by acute mechanical onset (q26 'Was the pain onset immediately after a heavy lifting?'). A gradual onset is the opposite presentation, so it makes Lumbar Disc Herniation less likely. Condition name is an EXACT match. Correctly a soft down-weight, not an exclusion, since gradual onset does not make disc herniation clinically impossible. No contradiction: the existing JSON hard-excludes Lumbar Disc Herniation on the complementary answer 'Sudden'. Does not touch 'Non-specific low-back pain' and rules out no red-flag/emergency condition."
+    },
+    {
+      "questionId": "lumbar_q6",
+      "answerValue": "No",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Sciatica",
+        "Lumbar Disc Herniation",
+        "Lumbar spinal stenosis"
+      ],
+      "rationale": "VERIFIED. questionId lumbar_q6 ('Do you experience any numbness or tingling sensation in your legs or feet?') exists in the Non-specific low-back pain shared block; 'No' is an exact option (the other is 'Yes'). Legacy DOCX annotates 'Yes (Rule out lumbar disc herniation or cauda equina syndrome)'; the Sciatica block opens with paraesthesia (q13 'Do you experience paraesthesia or abnormal sensation in the affected leg?'); and the Lumbar spinal stenosis block asks about leg numbness (q21 'Is the numbness you feel over the entire leg?'). Absence of any numbness/tingling therefore makes these sensory radicular diagnoses less likely. All three condition names are EXACT matches. Soft down-weight only. Cauda Equina Syndrome is deliberately and correctly EXCLUDED from this rule: it is a red-flag emergency and absence of paraesthesia is not stated by the DOCX to rule it out, so it must not be down-weighted here. No contradiction: the existing JSON hard-excludes Lumbar Disc Herniation on the complementary answer 'Yes'. Does not touch 'Non-specific low-back pain'."
+    }
+  ]
+}
