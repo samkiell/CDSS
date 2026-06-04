@@ -1,0 +1,89 @@
+{
+  "region": "hip",
+  "rules": [
+    {
+      "questionId": "hip_q2",
+      "answerValue": "Lateral (side) of the hip",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Hip Osteoarthritis",
+        "Femoroacetabular Impingement",
+        "Hip Labral Tear",
+        "Avascular Necrosis"
+      ],
+      "rationale": "DOCX tags lateral hip as classic GTPS while deep intra-articular conditions are groin/deep-groin, but pain location is unreliable and these conditions (especially the emergency Avascular Necrosis, whose risk-factor and night/rest-pain red flags would be hidden) can present atypically laterally, so down-weight rather than hard-exclude."
+    },
+    {
+      "questionId": "hip_q2",
+      "answerValue": "Buttock",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Hip Osteoarthritis",
+        "Greater Trochanteric Pain Syndrome",
+        "Femoroacetabular Impingement",
+        "Hip Labral Tear",
+        "Avascular Necrosis",
+        "Snapping Hip Syndrome"
+      ],
+      "rationale": "DOCX annotates buttock pain as non-hip origin (lumbar/SIJ/deep gluteal) and the JSON hip_q2 Buttock option carries a 'Consider lumbar spine / SIJ referral' note, so all hip conditions are down-weighted pending lumbar/SIJ assessment rather than excluded."
+    },
+    {
+      "questionId": "hip_q2",
+      "answerValue": "Deep groin",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Greater Trochanteric Pain Syndrome",
+        "Snapping Hip Syndrome"
+      ],
+      "rationale": "DOCX marks deep groin as classic for Labral Tear and AVN while GTPS is lateral and snapping is anterior/lateral, so GTPS and Snapping Hip are down-weighted (not excluded) for a deep-groin location."
+    },
+    {
+      "questionId": "hip_q2",
+      "answerValue": "Anterior hip with snapping",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Greater Trochanteric Pain Syndrome"
+      ],
+      "rationale": "DOCX attributes anterior snapping to iliopsoas (internal snapping hip) and locates GTPS at the lateral hip, so the lateral-tendon condition GTPS is down-weighted with an anterior snapping presentation."
+    },
+    {
+      "questionId": "hip_q8",
+      "answerValue": "Yes",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Hip Osteoarthritis",
+        "Greater Trochanteric Pain Syndrome",
+        "Femoroacetabular Impingement",
+        "Hip Labral Tear",
+        "Avascular Necrosis",
+        "Snapping Hip Syndrome"
+      ],
+      "rationale": "DOCX flags radiation below the knee as lumbar origin, but it does not make a coexisting hip pathology impossible (a patient can have both lumbar radiculopathy and hip AVN/OA); hard-excluding would hide the AVN emergency red-flag questions, so down-weight all hip conditions instead of excluding."
+    },
+    {
+      "questionId": "hip_q5",
+      "answerValue": "Painless snapping",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Hip Osteoarthritis",
+        "Greater Trochanteric Pain Syndrome",
+        "Femoroacetabular Impingement",
+        "Hip Labral Tear",
+        "Avascular Necrosis"
+      ],
+      "rationale": "DOCX names the snapping sensation the defining feature of Snapping Hip Syndrome and describes painless snapping as the benign form, making the other five (non-snapping) conditions less likely but not impossible."
+    },
+    {
+      "questionId": "hip_q4",
+      "answerValue": "Sudden with a twisting injury",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Hip Osteoarthritis",
+        "Femoroacetabular Impingement",
+        "Avascular Necrosis",
+        "Snapping Hip Syndrome"
+      ],
+      "rationale": "DOCX ties sudden/twisting onset to Labral Tear and lists gradual/insidious onset as typical for OA, FAI, AVN and Snapping Hip, so those gradual-onset conditions are down-weighted (not excluded) with a sudden twisting onset."
+    }
+  ]
+}

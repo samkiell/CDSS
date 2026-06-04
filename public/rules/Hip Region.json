@@ -85,7 +85,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -100,7 +102,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -171,7 +176,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -186,7 +193,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -239,7 +249,12 @@
                   "Greater Trochanteric Pain Syndrome",
                   "Snapping Hip Syndrome"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear",
+                  "Avascular Necrosis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -254,7 +269,14 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Greater Trochanteric Pain Syndrome",
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear",
+                  "Avascular Necrosis",
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -268,8 +290,12 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -283,8 +309,14 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Avascular Necrosis"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Avascular Necrosis"
+                ],
+                "decreaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome",
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -324,7 +356,12 @@
                   "Greater Trochanteric Pain Syndrome",
                   "Snapping Hip Syndrome"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear",
+                  "Avascular Necrosis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -339,7 +376,14 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Greater Trochanteric Pain Syndrome",
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear",
+                  "Avascular Necrosis",
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -353,8 +397,12 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -368,8 +416,14 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Avascular Necrosis"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Avascular Necrosis"
+                ],
+                "decreaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome",
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -493,7 +547,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -508,8 +564,16 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Hip Labral Tear"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Hip Labral Tear"
+                ],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Femoroacetabular Impingement",
+                  "Avascular Necrosis",
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -545,7 +609,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -560,8 +626,16 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Hip Labral Tear"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Hip Labral Tear"
+                ],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Femoroacetabular Impingement",
+                  "Avascular Necrosis",
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -589,7 +663,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -604,7 +681,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement", "Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -619,7 +699,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Greater Trochanteric Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -634,8 +716,16 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Greater Trochanteric Pain Syndrome",
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear",
+                  "Avascular Necrosis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -649,7 +739,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -666,7 +758,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -681,7 +776,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement", "Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -696,7 +794,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Greater Trochanteric Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -711,8 +811,16 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Greater Trochanteric Pain Syndrome",
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear",
+                  "Avascular Necrosis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -726,7 +834,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -755,7 +865,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -806,7 +918,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -821,7 +936,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -836,7 +953,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Pain at rest — possible avascular necrosis or serious pathology.",
@@ -853,7 +973,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -904,7 +1026,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -919,7 +1044,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -934,7 +1061,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Pain at rest — possible avascular necrosis or serious pathology.",
@@ -963,7 +1093,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -978,7 +1110,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Pain NOT relieved by rest — strongly suggests AVN; urgent imaging advised.",
@@ -995,7 +1130,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1010,7 +1147,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Pain NOT relieved by rest — strongly suggests AVN; urgent imaging advised.",
@@ -1047,7 +1187,14 @@
                   "Snapping Hip Syndrome"
                 ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Greater Trochanteric Pain Syndrome",
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear",
+                  "Avascular Necrosis",
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1086,7 +1233,14 @@
                   "Snapping Hip Syndrome"
                 ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis",
+                  "Greater Trochanteric Pain Syndrome",
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear",
+                  "Avascular Necrosis",
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1129,7 +1283,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Night pain unrelieved by rest — rule out malignancy, infection, or AVN.",
@@ -1161,7 +1317,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Night pain unrelieved by rest — rule out malignancy, infection, or AVN.",
@@ -1205,7 +1363,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "AVN risk factors present (steroids/alcohol/sickle cell) — urgent MRI advised.",
@@ -1237,7 +1398,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "AVN risk factors present (steroids/alcohol/sickle cell) — urgent MRI advised.",
@@ -1373,7 +1537,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1389,7 +1555,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Hip Osteoarthritis"],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1420,7 +1588,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1436,7 +1606,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Hip Osteoarthritis"],
+                "decreaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1479,7 +1651,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1511,7 +1685,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1555,7 +1731,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1587,7 +1765,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1631,7 +1811,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1663,7 +1845,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1707,7 +1891,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1739,7 +1925,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1783,7 +1971,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1815,7 +2005,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1874,7 +2066,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Greater Trochanteric Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1906,7 +2100,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Greater Trochanteric Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1969,7 +2165,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Greater Trochanteric Pain Syndrome"],
+                "decreaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -2004,7 +2202,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Greater Trochanteric Pain Syndrome"],
+                "decreaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -2032,7 +2232,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Greater Trochanteric Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2064,7 +2266,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Greater Trochanteric Pain Syndrome"],
+                "increaseLikelihood": [
+                  "Greater Trochanteric Pain Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2198,7 +2402,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2230,7 +2436,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2356,7 +2564,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement", "Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2388,7 +2599,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement", "Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement",
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2432,7 +2646,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2464,7 +2680,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2508,7 +2726,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2540,7 +2760,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Femoroacetabular Impingement"],
+                "increaseLikelihood": [
+                  "Femoroacetabular Impingement"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2566,7 +2788,12 @@
           ]
         }
       ],
-      "tests": ["fadir_test", "faber_test", "hip_scour_test", "int_rotation_overpressure"]
+      "tests": [
+        "fadir_test",
+        "faber_test",
+        "hip_scour_test",
+        "int_rotation_overpressure"
+      ]
     },
     {
       "name": "Hip Labral Tear",
@@ -2593,7 +2820,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2625,7 +2855,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear", "Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear",
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2669,7 +2902,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2701,7 +2936,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2745,7 +2982,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2777,7 +3016,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2803,7 +3044,12 @@
           ]
         }
       ],
-      "tests": ["fadir_test", "hip_scour_test", "hip_log_roll_test", "thomas_test_hip"]
+      "tests": [
+        "fadir_test",
+        "hip_scour_test",
+        "hip_log_roll_test",
+        "thomas_test_hip"
+      ]
     },
     {
       "name": "Avascular Necrosis",
@@ -2830,7 +3076,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Rest pain — strong AVN indicator; urgent imaging advised.",
@@ -2862,7 +3111,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Rest pain — strong AVN indicator; urgent imaging advised.",
@@ -2906,7 +3158,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2921,7 +3176,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2938,7 +3195,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis", "Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis",
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2953,7 +3213,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Osteoarthritis"],
+                "increaseLikelihood": [
+                  "Hip Osteoarthritis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2982,7 +3244,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3014,7 +3278,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Avascular Necrosis"],
+                "increaseLikelihood": [
+                  "Avascular Necrosis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3040,7 +3306,11 @@
           ]
         }
       ],
-      "tests": ["hip_log_roll_test", "fadir_test", "faber_test"],
+      "tests": [
+        "hip_log_roll_test",
+        "fadir_test",
+        "faber_test"
+      ],
       "clinical_note": "AVN is imaging-dependent: MRI is definitive for early disease. Use red flags (rest pain, risk factors) to prioritize urgent imaging."
     },
     {
@@ -3068,7 +3338,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome", "Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome",
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3100,7 +3373,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome", "Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome",
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3144,7 +3420,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3159,7 +3437,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3174,8 +3454,12 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear"],
-                "decreaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear"
+                ],
+                "decreaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -3191,7 +3475,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3206,7 +3492,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3221,8 +3509,12 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Hip Labral Tear"],
-                "decreaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Hip Labral Tear"
+                ],
+                "decreaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -3250,7 +3542,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3282,7 +3576,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3326,7 +3622,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3358,7 +3656,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Snapping Hip Syndrome"],
+                "increaseLikelihood": [
+                  "Snapping Hip Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3384,7 +3684,11 @@
           ]
         }
       ],
-      "tests": ["dynamic_hip_movement", "obers_test_hip", "thomas_test_hip"]
+      "tests": [
+        "dynamic_hip_movement",
+        "obers_test_hip",
+        "thomas_test_hip"
+      ]
     }
   ]
 }
