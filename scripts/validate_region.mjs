@@ -70,6 +70,16 @@ for (const cond of rules.conditions) {
               `${q.id} option "${o.value}" ${field} -> "${ref}" is NOT an exact condition name`
             );
           }
+          // Host-condition self-EXCLUSION guard: a question must not HARD rule out
+          // the condition block it lives in (the engine derives a question's
+          // condition from its block, so excluding it hides the host's remaining
+          // questions). Self-decreaseLikelihood is allowed — it's a legitimate
+          // within-condition refinement ("this answer makes my own dx less likely").
+          if (field === 'excludedConditions' && ref === cond.name && !cond.is_general) {
+            errors.push(
+              `${q.id} (in "${cond.name}") excludedConditions -> "${ref}" HARD-excludes its OWN host condition`
+            );
+          }
         }
       }
       // 4. jump targets exist

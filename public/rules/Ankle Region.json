@@ -30,9 +30,21 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "RHEUMATOID ARTHRITIS"
+                ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "MALLEOLAR FRACTURES OF THE ANKLE",
+                  "ANKLE LIGAMENT INJURIES",
+                  "Acute Injury of Lateral Ligaments",
+                  "Recurrent Lateral Instability",
+                  "Deltoid Ligament Tear",
+                  "Tears of Inferior Tibiofibular Ligaments",
+                  "RA of Ankle and Hindfoot",
+                  "OSTEOARTHRITIS",
+                  "Tarsal Tunnel Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -45,9 +57,20 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "RHEUMATOID ARTHRITIS"
+                ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "MALLEOLAR FRACTURES OF THE ANKLE",
+                  "ANKLE LIGAMENT INJURIES",
+                  "Acute Injury of Lateral Ligaments",
+                  "Recurrent Lateral Instability",
+                  "Deltoid Ligament Tear",
+                  "Tears of Inferior Tibiofibular Ligaments",
+                  "RA of Ankle and Hindfoot",
+                  "OSTEOARTHRITIS"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -60,9 +83,18 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "RHEUMATOID ARTHRITIS"
+                ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Plantar Fasciitis",
+                  "Calcaneal Bursitis",
+                  "Traction Apophysitis (Sever’s Disease)",
+                  "CALCANEAL FRACTURES",
+                  "Achilles Tendinopathy",
+                  "Achilles Tendon Rupture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -75,9 +107,18 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "RHEUMATOID ARTHRITIS",
+                  "Plantar Fasciitis"
+                ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Calcaneal Bursitis",
+                  "CALCANEAL FRACTURES",
+                  "Achilles Tendinopathy",
+                  "Achilles Tendon Rupture",
+                  "Traction Apophysitis (Sever’s Disease)"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -92,9 +133,21 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "RHEUMATOID ARTHRITIS"
+                ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "MALLEOLAR FRACTURES OF THE ANKLE",
+                  "ANKLE LIGAMENT INJURIES",
+                  "Acute Injury of Lateral Ligaments",
+                  "Recurrent Lateral Instability",
+                  "Deltoid Ligament Tear",
+                  "Tears of Inferior Tibiofibular Ligaments",
+                  "RA of Ankle and Hindfoot",
+                  "OSTEOARTHRITIS",
+                  "Tarsal Tunnel Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -107,9 +160,20 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "RHEUMATOID ARTHRITIS"
+                ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "MALLEOLAR FRACTURES OF THE ANKLE",
+                  "ANKLE LIGAMENT INJURIES",
+                  "Acute Injury of Lateral Ligaments",
+                  "Recurrent Lateral Instability",
+                  "Deltoid Ligament Tear",
+                  "Tears of Inferior Tibiofibular Ligaments",
+                  "RA of Ankle and Hindfoot",
+                  "OSTEOARTHRITIS"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -122,9 +186,18 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "RHEUMATOID ARTHRITIS"
+                ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Plantar Fasciitis",
+                  "Calcaneal Bursitis",
+                  "Traction Apophysitis (Sever’s Disease)",
+                  "CALCANEAL FRACTURES",
+                  "Achilles Tendinopathy",
+                  "Achilles Tendon Rupture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -137,9 +210,18 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "RHEUMATOID ARTHRITIS",
+                  "Plantar Fasciitis"
+                ],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Calcaneal Bursitis",
+                  "CALCANEAL FRACTURES",
+                  "Achilles Tendinopathy",
+                  "Achilles Tendon Rupture",
+                  "Traction Apophysitis (Sever’s Disease)"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -4668,9 +4750,7 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": [
-                  "ation"
-                ],
+                "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -4702,9 +4782,7 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": [
-                  "ation"
-                ],
+                "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -6009,9 +6087,7 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "OSTEOARTHRITIS"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
@@ -6047,9 +6123,7 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "OSTEOARTHRITIS"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,

@@ -1,0 +1,74 @@
+{
+  "region": "ankle",
+  "rules": [
+    {
+      "questionId": "ankle_q1",
+      "answerValue": "Heel",
+      "excludedConditions": [
+        "RHEUMATOID ARTHRITIS"
+      ],
+      "decreaseLikelihood": [
+        "MALLEOLAR FRACTURES OF THE ANKLE",
+        "ANKLE LIGAMENT INJURIES",
+        "Acute Injury of Lateral Ligaments",
+        "Recurrent Lateral Instability",
+        "Deltoid Ligament Tear",
+        "Tears of Inferior Tibiofibular Ligaments",
+        "RA of Ankle and Hindfoot",
+        "OSTEOARTHRITIS",
+        "Tarsal Tunnel Syndrome"
+      ],
+      "rationale": "VERIFIED & KEPT. DOCX defines RHEUMATOID ARTHRITIS solely as a FOREFOOT presentation ('At Forefoot'; 'Do you feel pain at your metatarsophalangeal joint (forefoot)?'). q1 offers no Forefoot option, so isolated Heel pain makes that forefoot-defined diagnosis impossible; RA is a chronic non-emergency condition so a hard exclude is permissible. The ankle/malleolar/syndesmotic/lateral-ligament/OA/Tarsal-Tunnel conditions are anatomically centred on the ankle joint or malleoli in the DOCX ('pain around your ankle','tenderness behind the medial malleolus','swelling over the inferior tibiofibular joint'), so isolated heel pain only down-weights them (soft) rather than hiding them. MALLEOLAR FRACTURE is a fracture/red-flag, correctly down-weighted not excluded. All 9 names are exact matches; answerValue 'Heel' matches option exactly; no contradiction with existing q1 effects (all empty)."
+    },
+    {
+      "questionId": "ankle_q1",
+      "answerValue": "Heel/sole of foot",
+      "excludedConditions": [
+        "RHEUMATOID ARTHRITIS"
+      ],
+      "decreaseLikelihood": [
+        "MALLEOLAR FRACTURES OF THE ANKLE",
+        "ANKLE LIGAMENT INJURIES",
+        "Acute Injury of Lateral Ligaments",
+        "Recurrent Lateral Instability",
+        "Deltoid Ligament Tear",
+        "Tears of Inferior Tibiofibular Ligaments",
+        "RA of Ankle and Hindfoot",
+        "OSTEOARTHRITIS"
+      ],
+      "rationale": "VERIFIED & KEPT. Heel/sole is the defining presentation of Plantar Fasciitis in the DOCX ('pain on heel or sole with standing and/or walking'; 'tenderness at the medial aspect beneath the heel / mid-foot') so PF is left untouched. It is incompatible with the FOREFOOT-only RHEUMATOID ARTHRITIS, which is hard-excluded (non-emergency, location can never be selected at q1). Ankle/malleolar conditions are anatomically distinct from the sole and are soft-down-weighted only. Tarsal Tunnel is correctly NOT down-weighted here because the DOCX lists a sole symptom for it ('stabbing pain in the medial sole of your foot while walking'). MALLEOLAR FRACTURE (red-flag) is down-weighted not excluded. All 9 names exact; answerValue 'Heel/sole of foot' matches option exactly."
+    },
+    {
+      "questionId": "ankle_q1",
+      "answerValue": "Malleolus",
+      "excludedConditions": [
+        "RHEUMATOID ARTHRITIS",
+        "Plantar Fasciitis"
+      ],
+      "decreaseLikelihood": [
+        "Calcaneal Bursitis",
+        "CALCANEAL FRACTURES",
+        "Achilles Tendinopathy",
+        "Achilles Tendon Rupture",
+        "Traction Apophysitis (Sever’s Disease)"
+      ],
+      "rationale": "CORRECTED: Calcaneal Bursitis DEMOTED from excludedConditions to decreaseLikelihood. The DOCX's own Calcaneal Bursitis location question (q17) lists 'Heel' AND 'Ankle' as pain sites, and the malleolus is anatomically within the ankle region, so a HARD rule-out on 'Malleolus' is not clinically airtight (posterior/retrocalcaneal bursitis can be perceived around the ankle/malleolar area); down-weighting is the safe, defensible action. KEPT exclusions: RHEUMATOID ARTHRITIS (forefoot-only, impossible at malleolus, non-emergency) and Plantar Fasciitis (a strictly heel/sole condition in the DOCX with no malleolar symptom). KEPT down-weights: posterior-heel Achilles conditions (pain '4 cm'/'5cm above the heel', Achilles-insertion tenderness) and CALCANEAL FRACTURES (heel-based: 'heel look broad and wide'). CALCANEAL FRACTURES correctly NOT excluded (fracture/red-flag). The malleolus-centred conditions (MALLEOLAR FRACTURES, lateral/deltoid/syndesmotic ligament tears, ANKLE LIGAMENT INJURIES, RA of Ankle and Hindfoot, OSTEOARTHRITIS, Tarsal Tunnel) are correctly left untouched. All names exact; answerValue 'Malleolus' matches option exactly."
+    },
+    {
+      "questionId": "ankle_q1",
+      "answerValue": "Ankle",
+      "excludedConditions": [
+        "RHEUMATOID ARTHRITIS"
+      ],
+      "decreaseLikelihood": [
+        "Plantar Fasciitis",
+        "Calcaneal Bursitis",
+        "Traction Apophysitis (Sever’s Disease)",
+        "CALCANEAL FRACTURES",
+        "Achilles Tendinopathy",
+        "Achilles Tendon Rupture"
+      ],
+      "rationale": "VERIFIED & KEPT. Ankle pain is consistent with the ankle-joint conditions (ligament/syndesmotic injuries, instability, RA of Ankle and Hindfoot 'pain around your ankle', OSTEOARTHRITIS 'pain and stiffness at the ankle joint', Tarsal Tunnel 'medial portion of your ankle') so none of those are touched. It is incompatible with the FOREFOOT-only RHEUMATOID ARTHRITIS, which is hard-excluded (non-emergency, distinct from the separate 'RA of Ankle and Hindfoot' which remains available). Heel/sole and posterior-heel conditions — Plantar Fasciitis, Calcaneal Bursitis, Sever's traction apophysitis (Achilles insertion at the heel), and the Achilles conditions (pain '4 cm'/'5cm above the heel') — are soft-down-weighted. CALCANEAL FRACTURES (heel-based fracture/red-flag) is down-weighted not excluded. All 7 names exact; answerValue 'Ankle' matches option exactly."
+    }
+  ]
+}
