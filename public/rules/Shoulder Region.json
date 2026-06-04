@@ -46,7 +46,14 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Shoulder Impingement Syndrome",
+                  "Subacute tendinitis OR Painfularc syndrome",
+                  "Chronic Tendinitis",
+                  "Cuff Disruption",
+                  "CALCIFIC TENDINITIS",
+                  "RECURRENT SHOULDER SUBLUXATION"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -78,7 +85,14 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Shoulder Impingement Syndrome",
+                  "Subacute tendinitis OR Painfularc syndrome",
+                  "Chronic Tendinitis",
+                  "Cuff Disruption",
+                  "CALCIFIC TENDINITIS",
+                  "RECURRENT SHOULDER SUBLUXATION"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -183,7 +197,11 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Chronic Tendinitis",
+                  "OSTEOARTHRITIS",
+                  "RHEUMATOID ARTHRITIS"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -198,7 +216,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "RECURRENT SHOULDER SUBLUXATION"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -215,7 +235,11 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Chronic Tendinitis",
+                  "OSTEOARTHRITIS",
+                  "RHEUMATOID ARTHRITIS"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -230,7 +254,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "RECURRENT SHOULDER SUBLUXATION"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -257,15 +283,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "nerve involvement"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Tingling/abnormal sensation suggests neural involvement (cervical radiculopathy / brachial plexus) — assess accordingly."
               }
             },
             {
@@ -291,15 +315,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "nerve involvement"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Tingling/abnormal sensation suggests neural involvement (cervical radiculopathy / brachial plexus) — assess accordingly."
               }
             },
             {
@@ -1243,9 +1265,7 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": [
-                  "ation,"
-                ],
+                "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1277,9 +1297,7 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": [
-                  "ation,"
-                ],
+                "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3568,15 +3586,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "rotator cuff disorder and cervical radiculitis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Catching + numbness can also reflect rotator cuff disorder or cervical radiculitis — differentiate clinically."
               }
             },
             {
@@ -3662,15 +3678,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "rotator cuff disorder and cervical radiculitis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Catching + numbness can also reflect rotator cuff disorder or cervical radiculitis — differentiate clinically."
               }
             },
             {
@@ -4399,15 +4413,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "adhesive capsulitis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Night pain is common in adhesive capsulitis (not modeled here) as well as OA."
               }
             },
             {
@@ -4433,15 +4445,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "adhesive capsulitis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Night pain is common in adhesive capsulitis (not modeled here) as well as OA."
               }
             },
             {
@@ -4494,15 +4504,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "Adhesive Capsulitis. Extension is free in Adhesive Capsulitis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Global motion restriction favours adhesive capsulitis; in OA, extension is typically freer."
               }
             }
           ],
@@ -4528,15 +4536,13 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "Adhesive Capsulitis. Extension is free in Adhesive Capsulitis"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
-                "notes": null
+                "notes": "Global motion restriction favours adhesive capsulitis; in OA, extension is typically freer."
               }
             }
           ]
@@ -4578,9 +4584,7 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "OSTEOARTHRITIS"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
@@ -4616,9 +4620,7 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "OSTEOARTHRITIS"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
@@ -4637,7 +4639,7 @@
           "category": "stiffness",
           "inputType": "select",
           "source_line": 314,
-          "isGating": false,
+          "isGating": true,
           "requiredConditions": [],
           "excludedIfConditions": [],
           "options": [
@@ -4662,9 +4664,7 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "OSTEOARTHRITIS"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,
@@ -4696,9 +4696,7 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [
-                  "OSTEOARTHRITIS"
-                ],
+                "excludedConditions": [],
                 "increaseLikelihood": [],
                 "decreaseLikelihood": [],
                 "redFlag": false,

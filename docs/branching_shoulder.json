@@ -1,0 +1,39 @@
+{
+  "region": "shoulder",
+  "rules": [
+    {
+      "questionId": "shoulder_q1",
+      "answerValue": "Clavicular region",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Shoulder Impingement Syndrome",
+        "Subacute tendinitis OR Painfularc syndrome",
+        "Chronic Tendinitis",
+        "Cuff Disruption",
+        "CALCIFIC TENDINITIS",
+        "RECURRENT SHOULDER SUBLUXATION"
+      ],
+      "rationale": "VERIFIED/KEPT. questionId shoulder_q1 exists in the Initial Assessment shared block; answerValue 'Clavicular region' is an exact option match. All six condition names are exact matches to the valid list. No hard excludes (empty), only soft down-weights, so it cannot wrongly rule out the clavicle-fracture red flag that this shared block (legacy heading 'FRACTURES / Of Clavicle', lines 0-5) is actually screening for. Legacy notes anchor every rotator-cuff/glenohumeral diagnosis and recurrent subluxation to the shoulder joint, while 'Clavicular region' appears only under clavicle fractures, so isolated clavicular pain reasonably down-weights these shoulder-joint conditions. RA and OA correctly left untouched (AC-joint involvement near the clavicle). No contradiction with existing JSON exclusions (which sit on shoulder_q49/q50 'No' for OSTEOARTHRITIS)."
+    },
+    {
+      "questionId": "shoulder_q3",
+      "answerValue": "Sudden",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Chronic Tendinitis",
+        "OSTEOARTHRITIS",
+        "RHEUMATOID ARTHRITIS"
+      ],
+      "rationale": "VERIFIED/KEPT. questionId shoulder_q3 exists; answerValue 'Sudden' is an exact option match. All three condition names are exact matches. No hard excludes, only soft down-weights. Legacy notes support insidious/chronic courses: Chronic Tendinitis (overuse, age 40-50, relief with rest, lines 99-108), OSTEOARTHRITIS (degenerative, early-morning stiffness, lines 298-314), RHEUMATOID ARTHRITIS (chronic inflammatory, bilateral, self-resolving fevers, lines 272-295). Down-weight (not exclude) correctly preserves the possibility of an acute flare of a chronic condition. Impingement (line 67) and calcific tendinitis (line 163) explicitly allow sudden onset and are correctly left untouched. No contradiction with existing JSON exclusions."
+    },
+    {
+      "questionId": "shoulder_q3",
+      "answerValue": "Gradual",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "RECURRENT SHOULDER SUBLUXATION"
+      ],
+      "rationale": "VERIFIED/KEPT. questionId shoulder_q3 exists; answerValue 'Gradual' is an exact option match. 'RECURRENT SHOULDER SUBLUXATION' is an exact condition-name match. No hard excludes, only a soft down-weight. Legacy notes describe subluxation as traumatic in origin ('first episode occur with a pull on an abducted, laterally rotated-extended arm', line 258) with a catching/dead-arm sensation on overhead movement (line 261), i.e. an acute mechanical event, so gradual onset reasonably down-weights it. Down-weight (not exclude) is appropriate since later episodes may feel less distinctly sudden. No contradiction with existing JSON exclusions."
+    }
+  ]
+}
