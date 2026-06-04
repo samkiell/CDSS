@@ -114,6 +114,16 @@ general_qs = [
         opt("Yes", notes="Consider nerve involvement / lumbar referral."),
         opt("No"),
     ]),
+    # --- RED-FLAG SCREENING (from the DOCX, "Observation for Swelling and Deformity"
+    #     / patella-fracture deformity sign) — patient-facing safety screen.
+    #     (Note: "rapid onset" in the DOCX refers to septic-arthritis onset, already
+    #     handled by the septic gate knee_sep_q0, so no separate rapid-worsening flag.)
+    question("knee_q10", "Is there a visible deformity, or are you unable to move the knee?",
+             GEN, "redFlag", [
+        opt("Yes", increase=[FX], red_flag=True,
+            red_flag_text="Visible deformity / inability to move — possible fracture or dislocation; urgent assessment."),
+        opt("No"),
+    ]),
 ]
 
 # ----------------------------------------------------------------------------

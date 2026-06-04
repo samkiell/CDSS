@@ -1539,6 +1539,86 @@
               }
             }
           ]
+        },
+        {
+          "id": "knee_q10",
+          "questionText": "Is there a visible deformity, or are you unable to move the knee?",
+          "question": "Is there a visible deformity, or are you unable to move the knee?",
+          "condition": "General Assessment",
+          "category": "redFlag",
+          "inputType": "select",
+          "source_line": 0,
+          "isGating": false,
+          "requiredConditions": [],
+          "excludedIfConditions": [],
+          "options": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [
+                  "Knee Fracture"
+                ],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Visible deformity / inability to move — possible fracture or dislocation; urgent assessment.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ],
+          "answers": [
+            {
+              "value": "Yes",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [
+                  "Knee Fracture"
+                ],
+                "decreaseLikelihood": [],
+                "redFlag": true,
+                "redFlagText": "Visible deformity / inability to move — possible fracture or dislocation; urgent assessment.",
+                "terminateAssessment": false,
+                "notes": null
+              }
+            },
+            {
+              "value": "No",
+              "effects": {
+                "nextQuestionId": null,
+                "skipToQuestionId": null,
+                "triggeredConditions": [],
+                "excludedConditions": [],
+                "increaseLikelihood": [],
+                "decreaseLikelihood": [],
+                "redFlag": false,
+                "redFlagText": null,
+                "terminateAssessment": false,
+                "notes": null
+              }
+            }
+          ]
         }
       ]
     },
