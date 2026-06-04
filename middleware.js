@@ -18,9 +18,14 @@ export const middleware = auth((req) => {
   }
 
   const isApiAuthRoute = nextUrl.pathname.startsWith('/api/auth');
-  const isPublicRoute = ['/', '/login', '/register', '/verify', '/admin'].includes(
-    nextUrl.pathname
-  );
+  const isPublicRoute = [
+    '/',
+    '/login',
+    '/register',
+    '/verify',
+    '/forgot-password',
+    '/admin',
+  ].includes(nextUrl.pathname);
   const isAuthRoute = ['/login', '/register', '/admin'].includes(nextUrl.pathname);
 
   if (isApiAuthRoute) {

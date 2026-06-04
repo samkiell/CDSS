@@ -57,6 +57,30 @@ const sendOtpEmail = async (email, otp) => {
   await transporter.sendMail(mailOptions);
 };
 
+const sendPasswordResetEmail = async (email, otp) => {
+  const mailOptions = {
+    from: `"CDSS Security" <${process.env.EMAIL}>`,
+    to: email,
+    subject: 'Reset your CDSS password',
+    text: `Your password reset code is ${otp}. It expires in ${OTP_EXPIRATION_MINUTES} minutes. If you did not request this, ignore this email.`,
+    html: `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
+        <h2 style="color: #333; text-align: center;">Password Reset</h2>
+        <p style="font-size: 16px; color: #555;">Hello,</p>
+        <p style="font-size: 16px; color: #555;">We received a request to reset your password. Use the code below to continue:</p>
+        <div style="text-align: center; margin: 30px 0;">
+          <span style="font-size: 32px; font-weight: bold; letter-spacing: 5px; color: #007bff; background: #f0f7ff; padding: 10px 20px; border-radius: 5px;">${otp}</span>
+        </div>
+        <p style="font-size: 14px; color: #777;">This code will expire in <strong>${OTP_EXPIRATION_MINUTES} minutes</strong>. Please do not share it with anyone.</p>
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+        <p style="font-size: 12px; color: #999; text-align: center;">If you didn't request a password reset, you can safely ignore this email — your password will not change.</p>
+      </div>
+    `,
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
 export const otpService = {
   async sendOtp(email, registrationData = null) {
     await connectDB();
@@ -127,6 +151,58 @@ export const otpService = {
       await User.findOneAndUpdate({ email }, { isVerified: true });
     }
 
+    return { success: true };
+  },
+
+  /**
+   * Send a password-reset OTP. Stores an OTP record with no registration data
+   * so it can never create an account on verification.
+   */
+  async sendPasswordResetOtp(email) {
+    await connectDB();
+
+    const otp = generateOtp();
+    const otpHash = hashOtp(otp);
+    const expiresAt = new Date(Date.now() + OTP_EXPIRATION_MINUTES * 60 * 1000);
+
+    // Clear any previous unverified OTPs for this email.
+    await EmailOtp.deleteMany({ email, verified: false });
+
+    await EmailOtp.create({
+      email,
+      otp_hash: otpHash,
+      expires_at: expiresAt,
+      registration_data: null,
+    });
+
+    await sendPasswordResetEmail(email, otp);
+  },
+
+  /**
+   * Verify a password-reset OTP and consume it. Unlike verifyOtp(), this has NO
+   * user-creation / isVerified side effects — it only confirms the code and
+   * deletes the record so it cannot be reused.
+   */
+  async verifyPasswordResetOtp(email, otp) {
+    await connectDB();
+
+    const record = await EmailOtp.findOne({ email, verified: false }).sort({
+      created_at: -1,
+    });
+
+    if (!record) {
+      return { success: false, message: 'Invalid or expired code.' };
+    }
+    if (new Date() > record.expires_at) {
+      await EmailOtp.deleteOne({ _id: record._id });
+      return { success: false, message: 'This code has expired.' };
+    }
+    if (!compareHashes(otp, record.otp_hash)) {
+      return { success: false, message: 'Invalid code.' };
+    }
+
+    // Consume the code so it cannot be replayed.
+    await EmailOtp.deleteOne({ _id: record._id });
     return { success: true };
   },
 };
