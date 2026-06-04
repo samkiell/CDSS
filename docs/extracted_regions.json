@@ -1,0 +1,5916 @@
+{
+  "knee": {
+    "paragraphs": [
+      {
+        "style": "Normal",
+        "text": "KNEE REGION"
+      },
+      {
+        "style": "Normal",
+        "text": "PATELLOFEMORAL PAIN SYNDROME (PFPS – “Runner’s Knee”)"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Age"
+      },
+      {
+        "style": "Normal",
+        "text": "a. 15–40 years"
+      },
+      {
+        "style": "Normal",
+        "text": "b. >40 years"
+      },
+      {
+        "style": "Normal",
+        "text": "2. What region is pain present in?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Anterior knee"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Medial/lateral knee"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Do you have a recent history of fall or trauma in the affected region?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out ligament/meniscus)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "4. How did the pain begin?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Gradual, insidious"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sudden"
+      },
+      {
+        "style": "Normal",
+        "text": "5. What is the type of your pain?"
+      },
+      {
+        "style": "Normal",
+        "text": "Dull, aching"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sharp"
+      },
+      {
+        "style": "Normal",
+        "text": "6. What aggravates your Pain?"
+      },
+      {
+        "style": "Normal",
+        "text": "Running, squatting, stairs, prolonged sitting"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Rest"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Your pain is relieved by rest?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Do you have swelling after any activity?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Mild, transient)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "9. Is there tenderness at patellar facets?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "10. Is there crepitation with knee movement?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "11.Is your sleep affected by pain??"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "12. Does the pain radiate down the leg?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out nerve involvement)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "13. Is there any previous history of knee injury or instability?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out prior ligament/meniscus injury)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "14. Do you experience pain when descending stairs more than ascending stairs?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes (Strong PFPS indicator due to high patellofemoral joint compression)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "15. Do you experience pain when kneeling?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "17. Do you experience pain when sitting for prolonged periods with the knee bent (Cinema sign)?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes (Classic PFPS feature)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "18. Do you experience pain when standing up after prolonged sitting?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Patellofemoral loading intolerance)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "19. Is the pain poorly localized or difficult to pinpoint with one finger?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Diffuse anterior knee pain typical of PFPS)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No (Localized pain suggests tendinopathy, bursitis, or meniscus pathology)"
+      },
+      {
+        "style": "Normal",
+        "text": "20. Did the symptoms begin after increased activity, overuse, or training intensity?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Common overload mechanism in PFPS)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "21. Do you experience locking or catching of the knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out meniscus tear or loose body)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "22. Do you feel instability or giving way of the knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out ligament injury or patellar instability)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "23. Do you feel like your kneecap moves out of place or dislocates?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out patellar instability or subluxation)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "24. Is the pain localized specifically to the inferior pole of the patella?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests patellar tendinopathy)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No (Supports PFPS diagnosis)"
+      },
+      {
+        "style": "Normal",
+        "text": "25. Do you experience hip pain along with knee pain?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out referred pain from hip pathology such as FAI or slipped epiphysis)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "26. Do symptoms worsen with prolonged knee flexion such as driving, studying, or sitting in meetings?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes (Patellofemoral compression intolerance)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "27. Do symptoms improve with activity modification or reduced loading?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Typical mechanical PFPS pattern)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Is the Patellar alignment abnormal (lateral tracking)?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is there Quadriceps atrophy?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes – not required for PFPS"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No (Normal is typical for PFPS; atrophy suggests chronicity or other pathology)"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Is Mild effusion present?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (may occur after activity)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "Normal",
+        "text": "Tests for PATELLOFEMORAL PAIN SYNDROME"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Resisted Quadriceps Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient is seated with knee slightly flexed. Examiner applies resistance as the patient extends the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if pain is felt over the anterior patella."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, indicates patellofemoral joint irritation associated with PFPS."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Step-Down Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient stands on a 20 cm step and slowly lowers the contralateral heel to the ground while examiner observes knee alignment."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if there is pain over the anterior knee or if the knee collapses medially (dynamic valgus)."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, suggests PFPS and poor lower limb control."
+      },
+      {
+        "style": "Normal",
+        "text": "3. Clarke’s Test (Patellar Grind Test)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient is supine with knee extended. Examiner applies gentle downward pressure on the superior pole (base) of the patella while patient contracts the quadriceps."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if anterior knee pain is reproduced."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, indicates patellofemoral joint dysfunction and PFPS."
+      },
+      {
+        "style": "Normal",
+        "text": "4. Patellar Apprehension Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient is supine and relaxed. Examiner pushes the patella laterally."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if patient shows apprehension or contracts the quadriceps."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, suggests lateral patellar instability, which may co-exist with PFPS."
+      },
+      {
+        "style": "Normal",
+        "text": "5. Patellar Tilt Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient is supine with knee extended. Examiner lifts the lateral edge of the patella."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if lateral patellar edge cannot reach horizontal."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, suggests tight lateral structures contributing to PFPS."
+      },
+      {
+        "style": "Normal",
+        "text": "6. Waldron Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient is seated and actively flexes and extends the knee while examiner palpates the patellofemoral joint."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if grinding, crepitus, or anterior knee pain is felt."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, indicates PFPS or patellofemoral joint irritation."
+      },
+      {
+        "style": "Normal",
+        "text": "7. Patellar Glide Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient is supine with knee extended. Examiner glides the patella medially and laterally."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if there is pain or abnormal patellar mobility."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, suggests patellar maltracking and PFPS."
+      },
+      {
+        "style": "Normal",
+        "text": "MENISCUS TEARS"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Age"
+      },
+      {
+        "style": "Normal",
+        "text": "a. 15–50 years (traumatic)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. >50 years (degenerative possible)"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Do you have recent twisting injury?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. What region is pain present in?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Medial/lateral joint line"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Diffuse"
+      },
+      {
+        "style": "Normal",
+        "text": "4. How did the pain begin?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Sudden (traumatic)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Gradual (degenerative)"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Do you experience locking or catching around the knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Do you hear audible sounds during activity"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Popping, clicking, snapping"
+      },
+      {
+        "style": "Normal",
+        "text": "b. None"
+      },
+      {
+        "style": "Normal",
+        "text": "7. What aggravates the pain?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Twisting, squatting, kneeling, stairs"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Rest"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Pain is relieved by"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Rest"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Nothing relieves"
+      },
+      {
+        "style": "Normal",
+        "text": "9. Do you experience swelling within 24 hours?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (acute traumatic)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "10. Is there instability or giving way at the knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (check ligaments)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "11. Do you have previous knee injury or surgery?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No  (unless re-injury)"
+      },
+      {
+        "style": "Normal",
+        "text": "12. What is the duration of your pain"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Acute (<6 weeks) (traumatic)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Chronic (>6 weeks)"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Is there Joint line tenderness"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is there effusion present?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (acute tear)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Is there Range of motion limitation?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Flexion or extension block"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Full range"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is there catching / clicking on ROM"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is there alignment / gait abnormalities"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Varus/valgus deformity, limping"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Normal"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Is there quadriceps atrophy / asymmetry"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (chronic inhibition)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "Normal",
+        "text": "Tests for Meniscal Tears"
+      },
+      {
+        "style": "Normal",
+        "text": "1. McMurray Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient is supine. Examiner flexes the hip and knee fully, then rotates the tibia internally and externally while extending the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if there is a palpable click, snap, or pain along the joint line."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, suggests a medial or lateral meniscus tear, depending on rotation (internal = lateral meniscus, external = medial meniscus)."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Apley’s Compression Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies prone with knee flexed to 90°. Examiner applies downward pressure along the tibia while rotating it internally and externally."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if pain is elicited along the joint line during compression."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, indicates meniscal injury."
+      },
+      {
+        "style": "Normal",
+        "text": "3. Thessaly Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient stands on one leg with knee slightly flexed (~20°). Patient rotates the body and knee internally and externally three times."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if pain or a sense of locking/catching occurs along the joint line."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, suggests a meniscal tear."
+      },
+      {
+        "style": "Normal",
+        "text": "4. Joint Line Tenderness"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Examiner palpates along the medial and lateral joint lines of the knee while patient is relaxed."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if localized tenderness is felt."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, indicates possible meniscal pathology."
+      },
+      {
+        "style": "Normal",
+        "text": "5. Bounce Home Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient is supine. Examiner fully flexes the knee and then allows it to passively extend."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if the knee does not fully extend (blocked) or produces a springy end-feel."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, suggests a displaced meniscal fragment (e.g., bucket-handle tear)."
+      },
+      {
+        "style": "Normal",
+        "text": "6. Ege’s Test (Weight-Bearing Variant)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient stands with knees flexed and externally rotates both feet to test the medial meniscus; internally rotates both feet to test the lateral meniscus."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if pain or clicking occurs along the joint line."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, suggests meniscal tear."
+      },
+      {
+        "style": "Normal",
+        "text": "MUSCLE STRAINS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "Normal",
+        "text": "15–50 years"
+      },
+      {
+        "style": "Normal",
+        "text": "b. >50 years"
+      },
+      {
+        "style": "Normal",
+        "text": "2. How did the pain begin?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Sudden during activity"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Gradual"
+      },
+      {
+        "style": "Normal",
+        "text": "3. What is the nature of the pain you experience?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Sharp, stabbing (Acute strain)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Dull, aching"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is your pain aggravated by stretching/contraction?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is your pain relieved by rest?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Does tenderness at affect the muscle?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Do you have swelling/bruising?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Is there palpable muscle gap or spasm"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "Normal",
+        "text": "Tests for Muscle Strain"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Resisted Contraction Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. How to perform: Patient contracts the affected muscle against resistance at mid-range."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive: Pain at the site"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Passive Stretch Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. How to perform: Examiner stretches the affected muscle slowly."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive: Pain at the site"
+      },
+      {
+        "style": "Normal",
+        "text": "LIGAMENT SPRAINS (ACL, MCL, LCL, PCL)"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Age"
+      },
+      {
+        "style": "Normal",
+        "text": "a. 15–50 years (common sports age)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. >50 years"
+      },
+      {
+        "style": "Normal",
+        "text": "2. What is the Mechanism of your injury?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Non-contact: cutting, pivoting, decelerating (ACL)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Direct blow / contact"
+      },
+      {
+        "style": "Normal",
+        "text": "c. Hyperextension or rotational stress (PCL/ACL/LCL)"
+      },
+      {
+        "style": "Normal",
+        "text": "3. How did your pain begin?"
+      },
+      {
+        "style": "Normal",
+        "text": "Sudden during injury"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Gradual"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is there audible pop at time of injury?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (ACL often)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. What region is your pain present in?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Medial side  (MCL)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Lateral side  (LCL)"
+      },
+      {
+        "style": "Normal",
+        "text": "c. Anterior / central (ACL/PCL)"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Is swelling / effusion present?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Immediate and extensive (ACL)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Mild or delayed"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Is there any Instability / giving way?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (ACL/PCL/LCL grade II-III)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Your Pain is aggravated by"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Pivoting, twisting, landing, cutting (ACL)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Flexion with weight-bearing (PCL)"
+      },
+      {
+        "style": "Normal",
+        "text": "e. Rest"
+      },
+      {
+        "style": "Normal",
+        "text": "9. Your Pain is relieved by"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Rest"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Nothing"
+      },
+      {
+        "style": "Normal",
+        "text": "10. Is tenderness present on palpation"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (ligament site)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "11. Is swelling/bruising present ?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Is ROM limited"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Limited flexion/extension (all grade II-III)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Full range"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is there Palpable laxity"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (grade II-III)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Gait abnormalities"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Limping / antalgic gait"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Normal"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is Varus / valgus stress observation"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Increased gapping (LCL / MCL)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Normal"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is there tenderness at ligament insertion"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – KNEE LIGAMENTS"
+      },
+      {
+        "style": "Normal",
+        "text": "Tests for MCL Injury"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Valgus Stress Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. With pt supine, knee flexed to 30°, examiner stabilizes the femur and applies a valgus force to the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Pain or gapping at the medial knee joint line indicates MCL injury."
+      },
+      {
+        "style": "Normal",
+        "text": "2.Grade Assessment via Valgus Stress"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Grade I: Pain without laxity (<5 mm)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Grade II: Pain + moderate laxity (5–10 mm)"
+      },
+      {
+        "style": "Normal",
+        "text": "c. Grade III: Pain + marked laxity (>10 mm)"
+      },
+      {
+        "style": "Normal",
+        "text": "Tests for LCL Injury"
+      },
+      {
+        "style": "Normal",
+        "text": "1.Varus Stress Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. With pt supine, knee flexed to 30°, examiner stabilizes the femur and applies a varus force to the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Pain or gapping at the lateral knee joint line indicates LCL injury."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Grade Assessment via Varus Stress"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Grade I: Pain without laxity (<5 mm)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Grade II: Pain + moderate laxity (5–10 mm)"
+      },
+      {
+        "style": "Normal",
+        "text": "c. Grade III: Pain + marked laxity (>10 mm)"
+      },
+      {
+        "style": "Normal",
+        "text": "Tests for ACL Injury"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Lachman Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Knee flexed ~30°, examiner stabilizes femur and pulls tibia anteriorly at the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Soft endpoint or increased anterior tibial translation indicates ACL tear."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Anterior Drawer Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Knee flexed 90°, examiner pulls tibia anteriorly at the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Increased anterior translation indicates ACL injury."
+      },
+      {
+        "style": "Normal",
+        "text": "Tests for PCL Injury"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Posterior Drawer Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Knee flexed 90°, examiner pushes tibia posteriorly at the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Posterior translation indicates PCL tear."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Godfrey (Posterior Sag) Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Hip and knee flexed 90°, examiner observes tibial plateau at the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Sagging tibia compared to contralateral knee indicates PCL injury."
+      },
+      {
+        "style": "Normal",
+        "text": "Tests for Posterolateral Corner (PLC) Injury"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Dial Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Knee flexed 30° and 90°, examiner externally rotates tibia at the knee bilaterally."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = ≥10° external rotation difference indicates PLC injury."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Reverse Pivot Shift Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Examiner slowly extends knee while applying valgus + external rotation forces at the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Clunk at ~30° flexion indicates PLC injury."
+      },
+      {
+        "style": "Normal",
+        "text": "OSTEOARTHRITIS (Knee OA)"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Age"
+      },
+      {
+        "style": "Normal",
+        "text": "50+"
+      },
+      {
+        "style": "Normal",
+        "text": "b. <50 years"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is your pain aggravated by activity?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3.Do you have morning stiffness <30 min?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is your pain relieved by rest?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Do you hear crepitus sound during movement?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Do you experience night pain?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out inflammatory arthritis)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Is there swelling or bony enlargement?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Is there any instability / giving way?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out ligament injury)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "9. Is your pain prolonged with sitting or after rest?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "10. Do you have difficulty climbing stairs or squatting?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "11. Is there any previous knee injury or surgery?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (risk for secondary OA)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "12. Where is your pain located?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Medial tibiofemoral joint"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Lateral tibiofemoral joint"
+      },
+      {
+        "style": "Normal",
+        "text": "c. Patellofemoral / anterior knee"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Is mild effusion present?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is the ligament stability intact?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3.Is there joint line tenderness?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is there limited range of motion (flexion/extension)?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is there bony enlargement / osteophytes palpated?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – KNEE OSTEOARTHRITIS"
+      },
+      {
+        "style": "Normal",
+        "text": "Tests for Knee OA"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Patellofemoral Compression Test (Grind Test)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient supine with knee extended. Examiner applies downward pressure on the patella while asking the patient to contract the quadriceps."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Pain or crepitus at the patellofemoral joint, suggesting patellofemoral OA."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Patellar Tilt Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Examiner lifts the lateral edge of the patella while stabilizing the medial edge."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Limited tilt or pain indicates tight lateral structures or OA changes."
+      },
+      {
+        "style": "Normal",
+        "text": "3. Crepitus Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Examiner moves the knee through full flexion and extension, palpating and listening for audible or palpable crepitus."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Crepitus or grinding indicates articular cartilage degeneration."
+      },
+      {
+        "style": "Normal",
+        "text": "4. Range of Motion Assessment"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Examiner passively flexes and extends the knee while noting pain, stiffness, or limited ROM."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Reduced flexion or extension suggests joint degeneration."
+      },
+      {
+        "style": "Normal",
+        "text": "5. Joint Line Tenderness"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Examiner palpates medial and lateral tibiofemoral joint lines."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Pain at joint line indicates tibiofemoral OA involvement."
+      },
+      {
+        "style": "Normal",
+        "text": "6. Functional Pain Assessment"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Ask patient to perform activities such as squatting, stair climbing, or prolonged sitting."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Pain reproduction during these activities supports OA diagnosis."
+      },
+      {
+        "style": "Normal",
+        "text": "PATELLAR DISLOCATION / SUBLUXATION"
+      },
+      {
+        "style": "Normal",
+        "text": "1.Age"
+      },
+      {
+        "style": "Normal",
+        "text": "10–25 years"
+      },
+      {
+        "style": "Normal",
+        "text": "b. >40 years"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Do you recently have twisting injury or direct blow to your knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Did you feel the kneecap move out of place?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Did it reduce (go back in) on its own?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Common in subluxation)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Do you have swelling within 2 hours of injury?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Hemarthrosis likely)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Where is your pain located"
+      },
+      {
+        "style": "Normal",
+        "text": "Anterior knee"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Medial joint line (Rule out meniscus)"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Is there instability or repeated episodes?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Is your sleep affected due to knee pain?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "9. Does your pain radiate down to the leg?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out nerve injury)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "10. Any previous knee injury / dislocation"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "11. Is your pain aggravated by activity / knee motion?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "12. Do you experience locking of the knee after trauma?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Is there visible lateral displacement (acute)?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is there apprehension when knee extended?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Is effusion present?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is there patella alta?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is there genu recurvatum?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Is there increased Q angle?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Is there patellar hypermobility?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Is there patella tracking abnormality on flexion/extension?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – PATELLA DISLOCATION"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Patella Apprehension Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine with the knee extended. Examiner gently pushes the patella laterally."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Patient shows apprehension or contracts quadriceps to prevent lateral displacement, indicating patellar instability."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Patella Tracking Assessment"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Observe the patella during active knee flexion and extension."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Patella deviates laterally or fails to track smoothly within the trochlear groove, suggesting abnormal motion or previous dislocation."
+      },
+      {
+        "style": "Normal",
+        "text": "3. Patellar Hyper-mobility Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine, knee extended. Examiner gently displaces patella medially and laterally."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Patella moves excessively beyond normal range (>50% of patella width), indicating generalized patellar laxity."
+      },
+      {
+        "style": "Normal",
+        "text": "4. Q-Angle Measurement"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Measure the angle between the ASIS–patella line and patella–tibial tuberosity line with knee extended."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Q-angle increased (>15° in men, >20° in women), suggesting malalignment predisposing to lateral patellar dislocation."
+      },
+      {
+        "style": "Normal",
+        "text": "NOTE:"
+      },
+      {
+        "style": "Normal",
+        "text": "Observation for Patella Alta / Genu Recurvatum"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Inspect patella position in full extension and assess knee hyperextension."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = High-riding patella (patella alta) or excessive hyperextension, indicating structural risk factors for dislocation."
+      },
+      {
+        "style": "Normal",
+        "text": "Imaging (X-ray / MRI)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Lateral and axial X-rays; MRI if soft tissue assessment needed."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Subluxation/dislocation, osteochondral fractures, or medial patellofemoral ligament tear."
+      },
+      {
+        "style": "Normal",
+        "text": "KNEE FRACTURES (Tibial Plateau / Patella)"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Do you have recent fall, RTA, or high-impact trauma?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests tibial plateau fracture / patella fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is there direct blow to front of knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests patella fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Is there immediate inability to bear weight?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests tibial plateau fracture or severe patella fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is there severe immediate swelling?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests intra-articular fracture / hemarthrosis)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. What is your pain type?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Severe sharp pain (Suggests acute fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Dull ache"
+      },
+      {
+        "style": "Normal",
+        "text": "6. What is the onset of pain"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Sudden after trauma (Suggests fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Gradual, insidious"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Do you have difficulty straightening the knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests patella fracture / extensor mechanism injury)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Unable to perform straight leg raise?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Strong indicator of patella fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "9. Do your pain prevent walking?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "10. Do you have feeling of knee instability after trauma?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests tibial plateau fracture with ligament involvement)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "11. Any history of snapping or cracking sound at injury?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Is there localized bony tenderness?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is the tenderness directly over your patella?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests patella fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Is the tenderness over upper tibia (tibial plateau)?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is there visible deformity?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests displaced fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is there bruising around knee or upper leg?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests tibial plateau fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Do you experience severely restricted knee ROM due to pain?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Do you feel gap over patella on palpation?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests displaced patella fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "Observation for Swelling and Deformity"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Examiner observes the anterior knee in resting position."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Visible swelling, bruising, or deformity, suggesting patella fracture."
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – PATELLA FRACTURE"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Straight Leg Raise Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine with both legs extended. Examiner asks the patient to lift the affected leg straight up without bending the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Inability to lift the leg actively, indicating disruption of the extensor mechanism due to patella fracture."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Palpation Test for Patella Integrity"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine with knee relaxed. Examiner palpates the patella gently using fingers to feel for tenderness, irregularity, or gap."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Localized severe tenderness, palpable gap, or irregularity, indicating patella fracture."
+      },
+      {
+        "style": "Normal",
+        "text": "3. Active Knee Extension Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient sits or lies supine. Examiner asks patient to actively straighten the knee from a flexed position."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Inability or severe pain during active extension, indicating patella fracture or extensor mechanism disruption."
+      },
+      {
+        "style": "Normal",
+        "text": "4. Patellar Compression Test (Modified for fracture screening)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine with knee extended. Examiner gently presses patella posteriorly toward femur."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Severe localized pain, suggesting patella fracture (avoid excessive force)."
+      },
+      {
+        "style": "Normal",
+        "text": "Radiographic Confirmation"
+      },
+      {
+        "style": "Normal",
+        "text": "Imaging (X-ray – AP, Lateral, Skyline view)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Radiographic imaging of the knee joint."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Visible fracture line, displacement, or comminution of patella."
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – TIBIAL PLATEAU FRACTURE"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Axial Loading Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine. Examiner applies gentle axial compression through the heel toward the tibia."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Severe pain at tibial plateau region, indicating possible fracture."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Palpation of Tibial Plateau"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine or sits comfortably. Examiner palpates medial and lateral tibial plateau."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Localized severe tenderness, indicating tibial plateau fracture."
+      },
+      {
+        "style": "Normal",
+        "text": "3. Weight-Bearing Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient attempts to stand or bear weight on affected limb."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Inability or severe pain during weight-bearing, indicating tibial plateau fracture."
+      },
+      {
+        "style": "Normal",
+        "text": "4. Varus and Valgus Stress Test (performed cautiously)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine. Examiner applies gentle inward (varus) and outward (valgus) forces at knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Severe pain or instability, suggesting tibial plateau fracture or associated ligament injury."
+      },
+      {
+        "style": "Normal",
+        "text": "Imaging (X-ray, CT scan, MRI)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Radiological imaging performed. CT scan provides best fracture detail; MRI assesses soft tissue injury."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Visible fracture line, depression, or displacement of tibial plateau."
+      },
+      {
+        "style": "Normal",
+        "text": "ILIOTIBIAL BAND SYNDROME (ITBS)"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Age"
+      },
+      {
+        "style": "Normal",
+        "text": "a. 15–45 years (Common in runners, athletes)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. >45 years"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Does your activity involve repetitive knee bending (running, cycling)?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Strong indicator of ITBS)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Where is the pain located?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Lateral (outer) side of knee (Classic ITBS location)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Anterior / medial knee"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Pain onset"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Gradual onset during training"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sudden onset after trauma"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is the pain aggravated by running?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes, especially long-distance running (Classic ITBS symptom)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Is the pain worse when running downhill or descending stairs?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Is the pain relieved by rest?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Does the pain occur after specific distance/time of running?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "9. Is there burning or sharp pain on outer knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "10. Does the pain radiate up thigh or down lateral leg?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "11. Is there snapping sensation on outer knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "12. Is there history of recent increase in training intensity or distance?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "13. Is the pain absent at rest but appears during activity?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Overuse syndrome pattern)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Is there tenderness over the lateral femoral epicondyle?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Most important objective sign of ITBS)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is the pain reproduced at 30° knee flexion?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Classic ITBS compression point)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Is there swelling over the lateral knee?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (May be present in ITBS)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is there pain during repeated knee flexion and extension?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Suggests ITBS friction)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is there tight iliotibial band on palpation?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Major contributing factor)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Are the hip abductors weak?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Major biomechanical cause of ITBS)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Is there pain during single-leg squat?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Indicates ITB overload)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Is the knee joint stable?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Helps rule out ligament injury, supports ITBS diagnosis)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – ILIOTIBIAL BAND SYNDROME"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Noble Compression Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine. Examiner flexes knee to 90° and applies pressure over lateral femoral epicondyle while slowly extending the knee."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Pain at approximately 30° knee flexion, indicating ITBS."
+      },
+      {
+        "style": "Normal",
+        "text": "2. Ober’s Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies on unaffected side. Examiner extends and abducts the hip, then slowly lowers the leg."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Leg remains elevated and does not drop, indicating tight iliotibial band."
+      },
+      {
+        "style": "Normal",
+        "text": "3. Renne Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient stands and performs squat while examiner applies pressure over lateral femoral epicondyle."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Pain at approximately 30° knee flexion, indicating ITBS."
+      },
+      {
+        "style": "Normal",
+        "text": "4. Modified Thomas Test (for associated tightness)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient lies supine at edge of table. Examiner observes hip and thigh position."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Tight lateral thigh indicating IT band tightness."
+      },
+      {
+        "style": "Normal",
+        "text": "5. Palpation Test of Lateral Femoral Epicondyle"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Examiner palpates lateral femoral epicondyle with knee flexed and extended."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Localized tenderness, indicating ITBS."
+      },
+      {
+        "style": "Normal",
+        "text": "NOTE:"
+      },
+      {
+        "style": "Normal",
+        "text": "Imaging (MRI / Ultrasound)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Used if diagnosis unclear or to rule out other pathology."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = IT band thickening or inflammation."
+      },
+      {
+        "style": "Normal",
+        "text": "PATELLAR / QUADRICEPS TENDINOPATHY"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Age"
+      },
+      {
+        "style": "Normal",
+        "text": "a. 15–40 years (Common in jumping athletes – jumper’s knee)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. >40 years (More common in quadriceps tendinopathy)"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Does your activity involves jumping, sprinting, or frequent knee loading?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Strong indicator of tendinopathy)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Where is the pain located ?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Inferior pole of patella (Classic patellar tendinopathy)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Superior pole of patella (Suggests quadriceps tendinopathy)"
+      },
+      {
+        "style": "Normal",
+        "text": "c. Diffuse or other location"
+      },
+      {
+        "style": "Normal",
+        "text": "4. How did the pain begin?"
+      },
+      {
+        "style": "Normal",
+        "text": "Gradual onset"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sudden onset"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is there pain during loading activities (jumping, squatting, running)?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Does the pain increases with higher load (deep squat, higher jump)?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Dose-dependent pain – key diagnostic feature)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Is the pain relieved immediately after stopping activity?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "8. Do you experience pain at rest"
+      },
+      {
+        "style": "Normal",
+        "text": "a. No pain at rest (Typical early tendinopathy)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Pain at rest (suggests severe or other pathology)"
+      },
+      {
+        "style": "Normal",
+        "text": "9. Do you experience pain during decline walking or descending stairs?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Increased patellar tendon loading)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "10. Do you experience pain during prolonged sitting?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "11 Is there history of repetitive sports (basketball, volleyball, running)?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "12. Does the pain improves after warm-up activity?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Is there pain during resisted knee extension?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Confirms extensor mechanism involvement)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "2. Is there pain during squatting?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Load-related tendon pain)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "3. Does the pain increases with deeper squat?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Dose-dependent tendon pain)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "4. Is there quadriceps muscle weakness?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Common in tendinopathy)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "5. Is there pain during hopping test?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Strong functional indicator)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "6. Is there reduced flexibility of quadriceps or hamstrings?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "7. Is there normal passive knee ROM?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Helps differentiate from joint pathology)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – PATELLAR / QUADRICEPS TENDINOPATHY"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Decline Squat Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient stands on 25° decline board and performs squat."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Localized pain at inferior pole of patella, indicating patellar tendinopathy."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Resisted Knee Extension Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient sits with knee flexed. Examiner resists knee extension."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Localized tendon pain, indicating patellar or quadriceps tendinopathy."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Single-Leg Decline Squat Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient performs single-leg squat on decline surface."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Reproduction of localized tendon pain."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Palpation Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner palpates inferior and superior poles of patella."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Localized tenderness at tendon insertion."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Hop Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient performs repeated hopping on affected leg."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Pain localized to patellar or quadriceps tendon."
+      },
+      {
+        "style": "Normal",
+        "text": "NOTE:"
+      },
+      {
+        "style": "Normal",
+        "text": "Imaging (Ultrasound / MRI)"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Used to confirm tendon pathology if needed."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive sign = Tendon thickening, degeneration, or structural abnormality."
+      },
+      {
+        "style": "Normal",
+        "text": "PES ANSERINE BURSITIS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "40–70 years (Common in middle-aged and older adults)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "<40 years"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sex"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Female (Higher prevalence, especially with knee valgus and OA)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Male"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located ?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Medial knee, 5–7 cm below joint line (Classic location of pes anserinus bursitis)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Medial joint line"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Anterior knee"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the pain begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual onset (Typical bursitis pattern)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden onset after trauma"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain aggravated by stair climbing?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Common aggravating activity)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain aggravated by sit-to-stand movement?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Typical pes anserinus bursitis)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain aggravated by running or walking?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain aggravated by pivoting or side-to-side movement?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain relieved by rest?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of repetitive knee bending activity?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Major risk factor)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of knee osteoarthritis?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Strong associated condition)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of obesity?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Major risk factor)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of flat feet?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Contributes to medial knee stress)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of hamstring tightness?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Contributing factor)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of direct trauma to medial knee?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Can cause bursitis)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain present at night when lying on affected side?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Suggests bursitis)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there localized tenderness 5–7 cm below medial joint line?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Most important diagnostic sign)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there swelling over pes anserinus region?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Suggests inflamed bursa)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain present on palpation of pes anserinus region?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience pain with resisted knee flexion?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience pain with resisted hip adduction?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Involves sartorius, gracilis, semitendinosus)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is hamstring tightness present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Major contributing factor)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience pain during knee extension?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Bursa compression during extension)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is medial joint line tenderness absent?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Helps differentiate from meniscus injury)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Normal ligament stability tests?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Helps rule out MCL injury)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there altered gait pattern?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – PES ANSERINUS BURSITIS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Pes Anserinus Palpation Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient lies supine with knee extended. Examiner palpates 5–7 cm below medial joint line."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Localized tenderness, indicating pes anserinus bursitis."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Resisted Knee Flexion Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient flexes knee while examiner applies resistance."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Pain at pes anserinus region, indicating bursitis."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Resisted Hip Adduction Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient performs hip adduction while examiner applies resistance."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Pain at pes anserinus insertion."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Hamstring Stretch Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner passively stretches hamstrings."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Pain at pes anserinus region, indicating involvement."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Differentiation Test from Medial Meniscus Injury"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner palpates medial joint line and pes anserinus separately."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Pain localized below joint line (pes anserinus), not at joint line."
+      },
+      {
+        "style": "Normal",
+        "text": "OSTEOCHONDRITIS DISSECANS (OCD)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "10–20 years (Most common in juvenile OCD)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": ">20 years"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sex"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Male (Higher prevalence in males)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Female"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Deep knee pain, poorly localized (Typical OCD presentation)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Superficial anterior knee pain"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the pain begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual, insidious onset (Typical OCD)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden onset"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there history of repetitive sports activity (running, jumping, football)?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Major risk factor due to repetitive microtrauma)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there history of knee trauma?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain aggravated by activity?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain relieved by rest?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Early OCD responds to rest)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there knee swelling after activity?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience knee locking?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Indicates loose body – advanced OCD)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience knee clicking?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Suggests loose osteochondral fragment)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience knee catching sensation?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Mechanical symptom typical of OCD)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience knee giving way?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience stiffness in the knee?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Common OCD feature)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do symptoms persist for months or years?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Chronic condition)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is joint effusion present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there localized tenderness over femoral condyle?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Key diagnostic feature)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is quadriceps muscle atrophy present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there reduced knee range of motion?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Mechanical obstruction or joint irritation)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there pain during passive knee extension?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Suggests intra-articular pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is joint warmth present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Indicates inflammation)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is locking during knee movement observed?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Loose body present)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is gait abnormality present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Compensation due to pain or instability)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is palpable effusion present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Suggests joint pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – OSTEOCHONDRITIS DISSECANS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Wilson’s Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient lies supine. Examiner flexes knee to 90°. Patient actively extends knee while examiner internally rotates tibia."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Pain between 30°–40° knee extension that is relieved with external rotation of tibia, indicating OCD of medial femoral condyle."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Passive Condylar Palpation Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient knee flexed to 90°. Examiner palpates femoral condyles."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Localized pain over femoral condyle, indicating OCD lesion."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Joint Effusion Test (Stroke Test)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner strokes medial knee upward and lateral knee downward."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Fluid movement or bulge, indicating joint effusion associated with OCD."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Functional Loading Test (Single-leg squat)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient performs single-leg squat."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Deep knee pain, indicating articular surface pathology."
+      },
+      {
+        "style": "Normal",
+        "text": "BAKER’S CYST"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "35–70 years"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "<35 years"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located ?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Posterior knee (popliteal region) (Classic Baker’s cyst location)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Anterior knee"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Medial joint line"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you notice swelling behind the knee?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Most characteristic symptom)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you feel a lump or mass behind the knee?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the pain begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual onset"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden onset"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain aggravated by activity (walking, running, standing)?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Increased intra-articular fluid enlarges cyst)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you feel tightness behind the knee?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Classic symptom)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience stiffness behind the knee?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Common complaint)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience pain during full knee extension?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience difficulty bending your knee fully?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Mechanical obstruction due to cyst)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do symptoms worsen with prolonged standing?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Increased fluid accumulation)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience calf swelling?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Suggests large or ruptured cyst)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience calf pain without injury?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Possible ruptured cyst)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there history of knee osteoarthritis or inflammatory arthritis?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Strong association)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there history of meniscus injury?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Common underlying cause)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there visible swelling in popliteal region?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there palpable mass in popliteal fossa?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Diagnostic sign)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the mass more prominent with knee extension?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Characteristic Baker’s cyst behavior)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Does the mass reduce or disappears with knee flexion?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Foucher’s sign positive)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is joint effusion present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Indicates intra-articular pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there tenderness in the popliteal region?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Suggests cyst inflammation)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Normal ligament stability tests?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Helps rule out ligament injury)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – BAKER’S CYST"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Foucher’s Sign"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient lies supine. Examiner palpates popliteal mass while knee is extended and then flexed."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Mass becomes firm in extension and softens or disappears in flexion, confirming Baker’s cyst."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Popliteal Palpation Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient prone or supine. Examiner palpates popliteal fossa."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Palpable fluid-filled mass, indicating cyst."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Transillumination Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Light source applied behind swelling."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Transillumination suggests fluid-filled cyst."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Knee Effusion Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner performs stroke test or bulge test."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Fluid accumulation present, indicating intra-articular pathology associated with cyst."
+      },
+      {
+        "style": "Normal",
+        "text": "INFLAMMATORY / SEPTIC ARTHRITIS"
+      },
+      {
+        "style": "Normal",
+        "text": "It is a medical emmergency"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": ">50 years (Higher risk population)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "<50 years"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the pain begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden, rapid onset"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual onset"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How severe is the pain?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Severe, constant pain (Hallmark feature)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Mild or moderate pain"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain at rest"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Infection causes constant inflammatory pain)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you have the ability to bear weight?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Unable to bear weight (Strong indicator of septic arthritis)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Able to bear weight"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of recent infection (skin, urinary, respiratory)?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Major risk factor)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of fever?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Systemic infection sign)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of joint swelling?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of recent joint surgery, injection, or prosthesis?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of diabetes, HIV, or immunosuppression?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of rheumatoid arthritis or osteoarthritis?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of recent trauma or open wound near joint?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Possible infection entry)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is chills or malaise?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Systemic infection indicator)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is night pain present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is joint swelling present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is joint warmth present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Strong indicator of infection)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is joint redness present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes, Inflammatory response)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there severe pain during passive joint movement?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is active and passive ROM severely restricted?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is joint effusion present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Does the patient appear systemically ill?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Suggests systemic infection)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is fever present (>38°C)?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Critical red flag)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there tenderness on palpation of entire joint?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Diffuse joint inflammation)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the patient unable to tolerate minimal joint movement?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Highly suggestive of septic arthritis)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS – SEPTIC (INFECTIOUS) ARTHRITIS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Passive Joint Motion Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner gently moves the patient’s knee through passive flexion and extension."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Severe pain even with minimal passive movement, indicating joint infection."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Temperature Assessment"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner compares temperature of affected and unaffected knee."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Affected knee significantly warmer, indicating infection."
+      },
+      {
+        "style": "Normal",
+        "text": "NOTE: Imaging and Laboratory Confirmation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Joint Aspiration (Arthrocentesis) – GOLD STANDARD"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sterile needle inserted into joint space to withdraw synovial fluid."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign ="
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Purulent (pus-like) fluid"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Elevated WBC count (>50,000 cells/mm³)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive bacterial culture"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Joint Effusion Test (Bulge / Stroke Test)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner strokes medial and lateral knee."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive sign = Significant fluid accumulation, suggesting infection."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Blood Tests"
+      },
+      {
+        "style": "Normal",
+        "text": "Elevated ESR, CRP, WBC count"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Blood Culture"
+      },
+      {
+        "style": "Normal",
+        "text": "Identifies causative organism"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "X-ray"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "May show joint swelling (early), joint destruction (late)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "MRI"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Detects early joint infection and soft tissue involvement"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Manual Testing"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "⚠ Avoid aggressive testing. Severe pain with passive movement is positive"
+      }
+    ],
+    "tables": []
+  },
+  "wrist": {
+    "paragraphs": [
+      {
+        "style": "Normal",
+        "text": "CARPAL TUNNEL SYNDROME (CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "30–60 years (Common CTS group)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "<30 years (Consider overuse or other neuropathy)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located ?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Palmar wrist/hand (Median nerve distribution → CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Dorsal wrist (Suggests other pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Symptoms distribution"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Thumb, index, middle, and radial half of ring finger (CLASSIC CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Whole hand (Consider proximal nerve or systemic issue)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the symptoms begin ?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual (Typical CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden (Consider trauma)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "What is the pain type?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Tingling, numbness, burning (Neuropathic → CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sharp localized pain (Musculoskeletal)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience night symptoms?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (VERY STRONG CTS INDICATOR)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do symptoms wake you from sleep?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Classic CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you shake your hand to relieve symptoms?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (“Flick sign” → HIGHLY SPECIFIC CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "What aggravates the pain"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Repetitive wrist use (Typing, gripping) (CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Impact/trauma (Consider injury)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there weakness (grip or thumb)?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Thenar involvement → advanced CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Does pain radiate above the wrist?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Possible proximal nerve involvement)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No (Supports CTS)"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there thenar muscle wasting?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Chronic CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there reduced sensation in median nerve distribution?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (CTS)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there weak thumb opposition?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Median nerve motor deficit)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Red Flag"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Severe progressive weakness?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Urgent referral)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Symptoms involving entire arm?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Cervical pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Phalen’s Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient flexes wrists fully and holds position."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sign is positive if numbness/tingling occurs."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "If positive, indicates CTS."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Tinel’s Sign"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner taps over carpal tunnel."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sign is positive if tingling in median nerve distribution."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "If positive, indicates CTS."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Carpal Compression Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Examiner applies direct pressure over carpal tunnel."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sign is positive if symptoms are reproduced."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "If positive, indicates CTS."
+      },
+      {
+        "style": "Normal",
+        "text": "DE QUERVAIN’S TENOSYNOVITIS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "30–50 years (Common group)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Any age (With repetitive use)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Radial wrist (Thumb side) (KEY SIGN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Ulnar wrist (Other pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the pain begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual (Overuse)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden (Less common)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "What aggravates the pain?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Thumb movement/gripping (CLASSIC)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Wrist extension (Less specific)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there pain with lifting objects (e.g., child, kettle)?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Very typical)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there swelling near thumb base?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Inflammation of tendon sheath)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you feel creaking sensation?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Tenosynovitis)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there ttenderness over radial styloid?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (PRIMARY FINDING)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there pain with resisted thumb extension/abduction?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Abductor Pollicis Longus (APL) and Extensor Pollicis Brevis (EPB) involvement)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Red Flag"
+      },
+      {
+        "style": "Normal",
+        "text": "History of trauma?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Finkelstein’s Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient makes a fist with thumb inside fingers. Examiner ulnar deviates wrist."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sign is positive if sharp pain at radial wrist."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "If positive, indicates De Quervain’s."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "WHAT Test (Wrist Hyperflexion Abduction of Thumb)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient hyperflexes wrist and abducts thumb against resistance."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sign is positive if pain is reproduced."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "If positive, indicates De Quervain’s."
+      },
+      {
+        "style": "Normal",
+        "text": "WRIST SPRAIN (LIGAMENTOUS INJURY)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located ?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Localized to wrist (Depends on ligament)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Diffuse (Less specific)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of trauma?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (PRIMARY DIAGNOSTIC DRIVER)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "What is the mechanism of injury"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Fall on outstretched hand (FOOSH) (Classic)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No trauma (Consider other conditions)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the pain begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden (Injury)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual (Not sprain)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Pain type"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sharp initially, then aching"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Burning/tingling (Neurological)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is swelling present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Acute injury)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the pain aggravated by movement?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Ligament involvement)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there swelling/bruising?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Acute sprain)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Does the patient experience pain with ligament stress?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Confirms sprain)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is ROM reduced?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Protective limitation)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Red Flag"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there severe pain with deformity?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Fracture/dislocation)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the patient unable to move the wrist?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Serious injury)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "Normal",
+        "text": "1. Ligament Stress Tests"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Examiner applies stress to specific ligaments."
+      },
+      {
+        "style": "Normal",
+        "text": "b. Sign is positive if pain/laxity occurs."
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, indicates ligament injury."
+      },
+      {
+        "style": "Normal",
+        "text": "TFCC INJURY (Triangular Fibrocartilage Complex)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "20–50 years (Common group)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Older (Degenerative tears possible)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located ?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Ulnar side of wrist (KEY SIGN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Radial side (Other pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of trauma?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (FOOSH or twisting)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No (Degenerative)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "What aggravates the pain?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Ulnar deviation or rotation (CLASSIC)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Grip only (Less specific)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience pain when clicking or catching?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Mechanical → TFCC)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there weak grip strength?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Common finding)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there tenderness over ulnar wrist?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Primary finding)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there pain with pronation/supination?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (TFCC involvement)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Red Flag"
+      },
+      {
+        "style": "Normal",
+        "text": "Severe instability?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Serious ligament injury)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "TFCC Load Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Wrist in ulnar deviation + axial load + rotation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive if pain/clicking occurs"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "If positive, indicates TFCC injury."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Press Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Patient pushes up from chair using hands"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive if ulnar wrist pain"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "If positive, suggests TFCC tear."
+      },
+      {
+        "style": "Normal",
+        "text": "GANGLION CYST"
+      },
+      {
+        "style": "Normal",
+        "text": "1.         Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "15–40 years (Common group)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Any age"
+      },
+      {
+        "style": "Normal",
+        "text": "2.\tWhere is the pain located?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Dorsal wrist (Most common site)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Volar wrist (Also possible)"
+      },
+      {
+        "style": "Normal",
+        "text": "3.\tDo you notice a swelling/lump?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (DEFINING FEATURE → ganglion cyst)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "4.\tHow did the swelling begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual (Typical)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden (Less common)"
+      },
+      {
+        "style": "Normal",
+        "text": "5.\tPain type"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Mild ache or painless (Common)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Severe pain (Consider other pathology)"
+      },
+      {
+        "style": "Normal",
+        "text": "6.\tDoes the size of the lump change?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes (Characteristic of ganglion cyst)"
+      },
+      {
+        "style": "Normal",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "7.\tWhat aggravates the pain ?"
+      },
+      {
+        "style": "Normal",
+        "text": "Wrist movement or loading (Supports cyst)"
+      },
+      {
+        "style": "Normal",
+        "text": "No change"
+      },
+      {
+        "style": "Normal",
+        "text": "8.\tIs there any history of trauma?"
+      },
+      {
+        "style": "Normal",
+        "text": "Yes (May contribute)"
+      },
+      {
+        "style": "Normal",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there visible or palpable cystic swelling?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (PRIMARY SIGN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is transillumination positive?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Fluid-filled → ganglion)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there tenderness over cyst?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Red Flag"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Hard, immobile mass?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Possible tumor → refer)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Rapid unexplained growth?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Investigate)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "Normal",
+        "text": "Transillumination Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Light is applied through the swelling"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive if light passes through"
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, indicates fluid-filled cyst (ganglion)."
+      },
+      {
+        "style": "Normal",
+        "text": "INTERSECTION SYNDROME"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "20–50 years (Active individuals)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Any age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Dorsal radial forearm (4–6 cm proximal to wrist) (KEY SIGN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Radial styloid (Suggests De Quervain’s)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the pain begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual (Overuse)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden (Less common)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "What aggravates the pain?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Repetitive wrist extension (Rowing, lifting) (CLASSIC)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Thumb movement only (De Quervain’s)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you feel creaking or squeaking?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Characteristic crepitus → intersection syndrome)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there swelling?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Inflammatory)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there tenderness proximal to radial styloid?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Differentiates from De Quervain’s)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there crepitus with wrist movement?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (KEY FINDING)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there pain with resisted wrist extension?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Red Flag"
+      },
+      {
+        "style": "Normal",
+        "text": "History of trauma?"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Yes (Rule out fracture)"
+      },
+      {
+        "style": "Normal",
+        "text": "b. No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "Normal",
+        "text": "Resisted Wrist Extension Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Patient extends wrist against resistance"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive if pain/crepitus occurs"
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, indicates intersection syndrome."
+      },
+      {
+        "style": "Normal",
+        "text": "SCAPHOID FRACTURE (CRITICAL RED FLAG)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "15–40 years (Common group)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Any age (With trauma)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Radial wrist/anatomical snuffbox (KEY SIGN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Diffuse wrist pain"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of trauma?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (FOOSH) (PRIMARY DIAGNOSTIC DRIVER)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the pain begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Immediate after fall (Fracture)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual (Not fracture)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "What aggravates the pan ?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Wrist movement/gripping"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No change"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is swelling present?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (May be mild)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Did you ignore the injury initially?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Common in scaphoid fractures)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there tenderness in the anatomical snuffbox?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (MOST IMPORTANT SIGN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there pain with axial thumb compression?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Scaphoid injury)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the grip strength reduced?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Red Flag (CRITICAL)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience persistent pain after fall despite normal X-ray?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Treat as fracture)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Delayed presentation?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Risk of non-union/AVN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Snuffbox Tenderness Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Palpation of anatomical snuffbox"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive if pain present"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "If positive, indicates scaphoid fracture."
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Scaphoid Compression Test"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Axial load applied through thumb"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Positive if pain occurs"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "If positive, suggests scaphoid fracture."
+      },
+      {
+        "style": "Normal",
+        "text": "KIENBÖCK’S DISEASE (AVN OF LUNATE)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Age"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "20–40 years (Common group)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": ">50 years (Less common)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Where is the pain located?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Dorsal central wrist (KEY SIGN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Radial/ulnar wrist (Other pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How did the pain begin?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Gradual (AVN pattern)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sudden (Consider trauma)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "How will you describe the pain?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Deep, aching (AVN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Sharp (Other pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "What aggravates the pain"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Wrist loading/activity"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Rest"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience pain at rest or night?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Red flag → AVN)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there any history of repetitive trauma or loading?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Risk factor)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Objective / Observation"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is there tenderness over lunate (central dorsal wrist)?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (PRIMARY FINDING)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the wrist ROM reduced?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Progressive stiffness)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Is the grip strength weak?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "Red Flag"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience progressive stiffness and pain?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (AVN progression)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Do you experience night pain not relieved by rest?"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "Yes (Serious pathology)"
+      },
+      {
+        "style": "List Paragraph",
+        "text": "No"
+      },
+      {
+        "style": "Normal",
+        "text": "SPECIAL CONFIRMATORY TESTS"
+      },
+      {
+        "style": "Normal",
+        "text": "No single definitive clinical test"
+      },
+      {
+        "style": "Normal",
+        "text": "Axial Load Test"
+      },
+      {
+        "style": "Normal",
+        "text": "a. Apply compression through wrist"
+      },
+      {
+        "style": "Normal",
+        "text": "b. Positive if central wrist pain"
+      },
+      {
+        "style": "Normal",
+        "text": "If positive, suggests intra-articular pathology (Kienböck’s possible)"
+      }
+    ],
+    "tables": []
+  }
+}

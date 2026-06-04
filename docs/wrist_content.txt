@@ -1,0 +1,369 @@
+=== WRIST REGION ===
+CARPAL TUNNEL SYNDROME (CTS)
+[List Paragraph] Age
+[List Paragraph] 30–60 years (Common CTS group)
+[List Paragraph] <30 years (Consider overuse or other neuropathy)
+[List Paragraph] Where is the pain located ?
+[List Paragraph] Palmar wrist/hand (Median nerve distribution → CTS)
+[List Paragraph] Dorsal wrist (Suggests other pathology)
+[List Paragraph] Symptoms distribution
+[List Paragraph] Thumb, index, middle, and radial half of ring finger (CLASSIC CTS)
+[List Paragraph] Whole hand (Consider proximal nerve or systemic issue)
+[List Paragraph] How did the symptoms begin ?
+[List Paragraph] Gradual (Typical CTS)
+[List Paragraph] Sudden (Consider trauma)
+[List Paragraph] What is the pain type?
+[List Paragraph] Tingling, numbness, burning (Neuropathic → CTS)
+[List Paragraph] Sharp localized pain (Musculoskeletal)
+[List Paragraph] Do you experience night symptoms?
+[List Paragraph] Yes (VERY STRONG CTS INDICATOR)
+[List Paragraph] No
+[List Paragraph] Do symptoms wake you from sleep?
+[List Paragraph] Yes (Classic CTS)
+[List Paragraph] No
+[List Paragraph] Do you shake your hand to relieve symptoms?
+[List Paragraph] Yes (“Flick sign” → HIGHLY SPECIFIC CTS)
+[List Paragraph] No
+[List Paragraph] What aggravates the pain
+[List Paragraph] Repetitive wrist use (Typing, gripping) (CTS)
+[List Paragraph] Impact/trauma (Consider injury)
+[List Paragraph] Is there weakness (grip or thumb)?
+[List Paragraph] Yes (Thenar involvement → advanced CTS)
+[List Paragraph] No
+[List Paragraph] Does pain radiate above the wrist?
+[List Paragraph] Yes (Possible proximal nerve involvement)
+[List Paragraph] No (Supports CTS)
+Objective / Observation
+[List Paragraph] Is there thenar muscle wasting?
+[List Paragraph] Yes (Chronic CTS)
+[List Paragraph] No
+[List Paragraph] Is there reduced sensation in median nerve distribution?
+[List Paragraph] Yes (CTS)
+[List Paragraph] No
+[List Paragraph] Is there weak thumb opposition?
+[List Paragraph] Yes (Median nerve motor deficit)
+[List Paragraph] No
+Red Flag
+[List Paragraph] Severe progressive weakness?
+[List Paragraph] Yes (Urgent referral)
+[List Paragraph] No
+[List Paragraph] Symptoms involving entire arm?
+[List Paragraph] Yes (Cervical pathology)
+[List Paragraph] No
+SPECIAL CONFIRMATORY TESTS
+[List Paragraph] Phalen’s Test
+[List Paragraph] Patient flexes wrists fully and holds position.
+[List Paragraph] Sign is positive if numbness/tingling occurs.
+[List Paragraph] If positive, indicates CTS.
+[List Paragraph] Tinel’s Sign
+[List Paragraph] Examiner taps over carpal tunnel.
+[List Paragraph] Sign is positive if tingling in median nerve distribution.
+[List Paragraph] If positive, indicates CTS.
+[List Paragraph] Carpal Compression Test
+[List Paragraph] Examiner applies direct pressure over carpal tunnel.
+[List Paragraph] Sign is positive if symptoms are reproduced.
+[List Paragraph] If positive, indicates CTS.
+DE QUERVAIN’S TENOSYNOVITIS
+[List Paragraph] Age
+[List Paragraph] 30–50 years (Common group)
+[List Paragraph] Any age (With repetitive use)
+[List Paragraph] Where is the pain located?
+[List Paragraph] Radial wrist (Thumb side) (KEY SIGN)
+[List Paragraph] Ulnar wrist (Other pathology)
+[List Paragraph] How did the pain begin?
+[List Paragraph] Gradual (Overuse)
+[List Paragraph] Sudden (Less common)
+[List Paragraph] What aggravates the pain?
+[List Paragraph] Thumb movement/gripping (CLASSIC)
+[List Paragraph] Wrist extension (Less specific)
+[List Paragraph] Is there pain with lifting objects (e.g., child, kettle)?
+[List Paragraph] Yes (Very typical)
+[List Paragraph] No
+[List Paragraph] Is there swelling near thumb base?
+[List Paragraph] Yes (Inflammation of tendon sheath)
+[List Paragraph] No
+[List Paragraph] Do you feel creaking sensation?
+[List Paragraph] Yes (Tenosynovitis)
+[List Paragraph] No
+Objective / Observation
+[List Paragraph] Is there ttenderness over radial styloid?
+[List Paragraph] Yes (PRIMARY FINDING)
+[List Paragraph] No
+[List Paragraph] Is there pain with resisted thumb extension/abduction?
+[List Paragraph] Yes (Abductor Pollicis Longus (APL) and Extensor Pollicis Brevis (EPB) involvement)
+[List Paragraph] No
+Red Flag
+History of trauma?
+a. Yes (Rule out fracture)
+b. No
+SPECIAL CONFIRMATORY TESTS
+[List Paragraph] Finkelstein’s Test
+[List Paragraph] Patient makes a fist with thumb inside fingers. Examiner ulnar deviates wrist.
+[List Paragraph] Sign is positive if sharp pain at radial wrist.
+[List Paragraph] If positive, indicates De Quervain’s.
+[List Paragraph] WHAT Test (Wrist Hyperflexion Abduction of Thumb)
+[List Paragraph] Patient hyperflexes wrist and abducts thumb against resistance.
+[List Paragraph] Sign is positive if pain is reproduced.
+[List Paragraph] If positive, indicates De Quervain’s.
+WRIST SPRAIN (LIGAMENTOUS INJURY)
+[List Paragraph] Age
+[List Paragraph] Where is the pain located ?
+[List Paragraph] Localized to wrist (Depends on ligament)
+[List Paragraph] Diffuse (Less specific)
+[List Paragraph] Is there any history of trauma?
+[List Paragraph] Yes (PRIMARY DIAGNOSTIC DRIVER)
+[List Paragraph] No
+[List Paragraph] What is the mechanism of injury
+[List Paragraph] Fall on outstretched hand (FOOSH) (Classic)
+[List Paragraph] No trauma (Consider other conditions)
+[List Paragraph] How did the pain begin?
+[List Paragraph] Sudden (Injury)
+[List Paragraph] Gradual (Not sprain)
+[List Paragraph] Pain type
+[List Paragraph] Sharp initially, then aching
+[List Paragraph] Burning/tingling (Neurological)
+[List Paragraph] Is swelling present?
+[List Paragraph] Yes (Acute injury)
+[List Paragraph] No
+[List Paragraph] Is the pain aggravated by movement?
+[List Paragraph] Yes (Ligament involvement)
+[List Paragraph] No
+Objective / Observation
+[List Paragraph] Is there swelling/bruising?
+[List Paragraph] Yes (Acute sprain)
+[List Paragraph] No
+[List Paragraph] Does the patient experience pain with ligament stress?
+[List Paragraph] Yes (Confirms sprain)
+[List Paragraph] No
+[List Paragraph] Is ROM reduced?
+[List Paragraph] Yes (Protective limitation)
+[List Paragraph] No
+Red Flag
+[List Paragraph] Is there severe pain with deformity?
+[List Paragraph] Yes (Fracture/dislocation)
+[List Paragraph] No
+[List Paragraph] Is the patient unable to move the wrist?
+[List Paragraph] Yes (Serious injury)
+[List Paragraph] No
+SPECIAL CONFIRMATORY TESTS
+1. Ligament Stress Tests
+a. Examiner applies stress to specific ligaments.
+b. Sign is positive if pain/laxity occurs.
+If positive, indicates ligament injury.
+TFCC INJURY (Triangular Fibrocartilage Complex)
+[List Paragraph] Age
+[List Paragraph] 20–50 years (Common group)
+[List Paragraph] Older (Degenerative tears possible)
+[List Paragraph] Where is the pain located ?
+[List Paragraph] Ulnar side of wrist (KEY SIGN)
+[List Paragraph] Radial side (Other pathology)
+[List Paragraph] Is there any history of trauma?
+[List Paragraph] Yes (FOOSH or twisting)
+[List Paragraph] No (Degenerative)
+[List Paragraph] What aggravates the pain?
+[List Paragraph] Ulnar deviation or rotation (CLASSIC)
+[List Paragraph] Grip only (Less specific)
+[List Paragraph] Do you experience pain when clicking or catching?
+[List Paragraph] Yes (Mechanical → TFCC)
+[List Paragraph] No
+[List Paragraph] Is there weak grip strength?
+[List Paragraph] Yes (Common finding)
+[List Paragraph] No
+Objective / Observation
+[List Paragraph] Is there tenderness over ulnar wrist?
+[List Paragraph] Yes (Primary finding)
+[List Paragraph] No
+[List Paragraph] Is there pain with pronation/supination?
+[List Paragraph] Yes (TFCC involvement)
+[List Paragraph] No
+Red Flag
+Severe instability?
+a. Yes (Serious ligament injury)
+b. No
+SPECIAL CONFIRMATORY TESTS
+[List Paragraph] TFCC Load Test
+[List Paragraph] Wrist in ulnar deviation + axial load + rotation
+[List Paragraph] Positive if pain/clicking occurs
+[List Paragraph] If positive, indicates TFCC injury.
+[List Paragraph] Press Test
+[List Paragraph] Patient pushes up from chair using hands
+[List Paragraph] Positive if ulnar wrist pain
+[List Paragraph] If positive, suggests TFCC tear.
+GANGLION CYST
+1.         Age
+[List Paragraph] 15–40 years (Common group)
+[List Paragraph] Any age
+2.	Where is the pain located?
+[List Paragraph] Dorsal wrist (Most common site)
+[List Paragraph] Volar wrist (Also possible)
+3.	Do you notice a swelling/lump?
+[List Paragraph] Yes (DEFINING FEATURE → ganglion cyst)
+[List Paragraph] No
+4.	How did the swelling begin?
+[List Paragraph] Gradual (Typical)
+[List Paragraph] Sudden (Less common)
+5.	Pain type
+[List Paragraph] Mild ache or painless (Common)
+[List Paragraph] Severe pain (Consider other pathology)
+6.	Does the size of the lump change?
+Yes (Characteristic of ganglion cyst)
+No
+7.	What aggravates the pain ?
+Wrist movement or loading (Supports cyst)
+No change
+8.	Is there any history of trauma?
+Yes (May contribute)
+No
+Objective / Observation
+[List Paragraph] Is there visible or palpable cystic swelling?
+[List Paragraph] Yes (PRIMARY SIGN)
+[List Paragraph] No
+[List Paragraph] Is transillumination positive?
+[List Paragraph] Yes (Fluid-filled → ganglion)
+[List Paragraph] No
+[List Paragraph] Is there tenderness over cyst?
+[List Paragraph] Yes
+[List Paragraph] No
+Red Flag
+[List Paragraph] Hard, immobile mass?
+[List Paragraph] Yes (Possible tumor → refer)
+[List Paragraph] No
+[List Paragraph] Rapid unexplained growth?
+[List Paragraph] Yes (Investigate)
+[List Paragraph] No
+SPECIAL CONFIRMATORY TESTS
+Transillumination Test
+a. Light is applied through the swelling
+b. Positive if light passes through
+If positive, indicates fluid-filled cyst (ganglion).
+INTERSECTION SYNDROME
+[List Paragraph] Age
+[List Paragraph] 20–50 years (Active individuals)
+[List Paragraph] Any age
+[List Paragraph] Where is the pain located?
+[List Paragraph] Dorsal radial forearm (4–6 cm proximal to wrist) (KEY SIGN)
+[List Paragraph] Radial styloid (Suggests De Quervain’s)
+[List Paragraph] How did the pain begin?
+[List Paragraph] Gradual (Overuse)
+[List Paragraph] Sudden (Less common)
+[List Paragraph] What aggravates the pain?
+[List Paragraph] Repetitive wrist extension (Rowing, lifting) (CLASSIC)
+[List Paragraph] Thumb movement only (De Quervain’s)
+[List Paragraph] Do you feel creaking or squeaking?
+[List Paragraph] Yes (Characteristic crepitus → intersection syndrome)
+[List Paragraph] No
+[List Paragraph] Is there swelling?
+[List Paragraph] Yes (Inflammatory)
+[List Paragraph] No
+Objective / Observation
+[List Paragraph] Is there tenderness proximal to radial styloid?
+[List Paragraph] Yes (Differentiates from De Quervain’s)
+[List Paragraph] No
+[List Paragraph] Is there crepitus with wrist movement?
+[List Paragraph] Yes (KEY FINDING)
+[List Paragraph] No
+[List Paragraph] Is there pain with resisted wrist extension?
+[List Paragraph] Yes
+[List Paragraph] No
+Red Flag
+History of trauma?
+a. Yes (Rule out fracture)
+b. No
+SPECIAL CONFIRMATORY TESTS
+Resisted Wrist Extension Test
+a. Patient extends wrist against resistance
+b. Positive if pain/crepitus occurs
+If positive, indicates intersection syndrome.
+SCAPHOID FRACTURE (CRITICAL RED FLAG)
+[List Paragraph] Age
+[List Paragraph] 15–40 years (Common group)
+[List Paragraph] Any age (With trauma)
+[List Paragraph] Where is the pain located?
+[List Paragraph] Radial wrist/anatomical snuffbox (KEY SIGN)
+[List Paragraph] Diffuse wrist pain
+[List Paragraph] Is there any history of trauma?
+[List Paragraph] Yes (FOOSH) (PRIMARY DIAGNOSTIC DRIVER)
+[List Paragraph] No
+[List Paragraph] How did the pain begin?
+[List Paragraph] Immediate after fall (Fracture)
+[List Paragraph] Gradual (Not fracture)
+[List Paragraph] What aggravates the pan ?
+[List Paragraph] Wrist movement/gripping
+[List Paragraph] No change
+[List Paragraph] Is swelling present?
+[List Paragraph] Yes (May be mild)
+[List Paragraph] No
+[List Paragraph] Did you ignore the injury initially?
+[List Paragraph] Yes (Common in scaphoid fractures)
+[List Paragraph] No
+Objective / Observation
+[List Paragraph] Is there tenderness in the anatomical snuffbox?
+[List Paragraph] Yes (MOST IMPORTANT SIGN)
+[List Paragraph] No
+[List Paragraph] Is there pain with axial thumb compression?
+[List Paragraph] Yes (Scaphoid injury)
+[List Paragraph] No
+[List Paragraph] Is the grip strength reduced?
+[List Paragraph] Yes
+[List Paragraph] No
+Red Flag (CRITICAL)
+[List Paragraph] Do you experience persistent pain after fall despite normal X-ray?
+[List Paragraph] Yes (Treat as fracture)
+[List Paragraph] No
+[List Paragraph] Delayed presentation?
+[List Paragraph] Yes (Risk of non-union/AVN)
+[List Paragraph] No
+SPECIAL CONFIRMATORY TESTS
+[List Paragraph] Snuffbox Tenderness Test
+[List Paragraph] Palpation of anatomical snuffbox
+[List Paragraph] Positive if pain present
+[List Paragraph] If positive, indicates scaphoid fracture.
+[List Paragraph] Scaphoid Compression Test
+[List Paragraph] Axial load applied through thumb
+[List Paragraph] Positive if pain occurs
+[List Paragraph] If positive, suggests scaphoid fracture.
+KIENBÖCK’S DISEASE (AVN OF LUNATE)
+[List Paragraph] Age
+[List Paragraph] 20–40 years (Common group)
+[List Paragraph] >50 years (Less common)
+[List Paragraph] Where is the pain located?
+[List Paragraph] Dorsal central wrist (KEY SIGN)
+[List Paragraph] Radial/ulnar wrist (Other pathology)
+[List Paragraph] How did the pain begin?
+[List Paragraph] Gradual (AVN pattern)
+[List Paragraph] Sudden (Consider trauma)
+[List Paragraph] How will you describe the pain?
+[List Paragraph] Deep, aching (AVN)
+[List Paragraph] Sharp (Other pathology)
+[List Paragraph] What aggravates the pain
+[List Paragraph] Wrist loading/activity
+[List Paragraph] Rest
+[List Paragraph] Do you experience pain at rest or night?
+[List Paragraph] Yes (Red flag → AVN)
+[List Paragraph] No
+[List Paragraph] Is there any history of repetitive trauma or loading?
+[List Paragraph] Yes (Risk factor)
+[List Paragraph] No
+Objective / Observation
+[List Paragraph] Is there tenderness over lunate (central dorsal wrist)?
+[List Paragraph] Yes (PRIMARY FINDING)
+[List Paragraph] No
+[List Paragraph] Is the wrist ROM reduced?
+[List Paragraph] Yes (Progressive stiffness)
+[List Paragraph] No
+[List Paragraph] Is the grip strength weak?
+[List Paragraph] Yes
+[List Paragraph] No
+Red Flag
+[List Paragraph] Do you experience progressive stiffness and pain?
+[List Paragraph] Yes (AVN progression)
+[List Paragraph] No
+[List Paragraph] Do you experience night pain not relieved by rest?
+[List Paragraph] Yes (Serious pathology)
+[List Paragraph] No
+SPECIAL CONFIRMATORY TESTS
+No single definitive clinical test
+Axial Load Test
+a. Apply compression through wrist
+b. Positive if central wrist pain
+If positive, suggests intra-articular pathology (Kienböck’s possible)
