@@ -1,0 +1,38 @@
+{
+  "region": "elbow",
+  "rules": [
+    {
+      "questionId": "elbow_q1",
+      "answerValue": "Shoulder",
+      "excludedConditions": [
+        "Ulnar Nerve Entrapment",
+        "Medial Ligament Injury",
+        "RHEUMATOID ARTHRITIS",
+        "OSTEOARTHRITIS"
+      ],
+      "decreaseLikelihood": [],
+      "rationale": "VERIFIED & KEPT. elbow_q1 'What region is pain present in?' offers exactly Shoulder / Clavicular region / Elbow (JSON lines 26-71; DOCX lines 463-466) - answerValue 'Shoulder' is an exact option match. All four candidates are confirmed elbow-localized in the JSON: Ulnar Nerve Entrapment (elbow_q11 forearm/4th-5th finger, line 952), Medial Ligament Injury (Valgus Stress Test at MCL/elbow, DOCX line 548), RHEUMATOID ARTHRITIS (radio-humeral joint elbow_q17 line 1462, nodule back of elbow line 1233), OSTEOARTHRITIS (elbow flexion/extension limitation line 1779, lateral elbow pain line 1931). If pain is in the shoulder, none of these elbow-specific diagnoses is anatomically possible, so hard exclude is justified. Red-flag safety: none of the four is an emergency/fracture - elbow fractures/biceps avulsion are handled on other questions (elbow_q3 'Sudden') and shoulder/clavicular fractures live in the separate 'shoulder' region flow, so this exclusion does not hide any red-flag condition. No contradiction with existing JSON exclude rules (elbow_q3=Sudden excludes a different 'rupture/avulsion' entry; elbow_q8 OSTEOARTHRITIS logic is on a later branch reached only after the elbow region is selected)."
+    },
+    {
+      "questionId": "elbow_q1",
+      "answerValue": "Clavicular region",
+      "excludedConditions": [
+        "Ulnar Nerve Entrapment",
+        "Medial Ligament Injury",
+        "RHEUMATOID ARTHRITIS",
+        "OSTEOARTHRITIS"
+      ],
+      "decreaseLikelihood": [],
+      "rationale": "VERIFIED & KEPT. 'Clavicular region' is an exact option of elbow_q1 (JSON line 43; DOCX line 465). Same anatomical reasoning as the Shoulder branch: all four candidates are elbow-region diagnoses per the JSON, so pain confined to the clavicular region cannot be explained by any of them - hard exclude justified. Red-flag safety confirmed: the excluded set contains no fracture/emergency condition; clavicular fractures are covered in the separate shoulder/clavicle flow, not by these four elbow diagnoses. No contradiction with existing in-JSON excludedConditions rules."
+    },
+    {
+      "questionId": "elbow_q4",
+      "answerValue": "No",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Ulnar Nerve Entrapment"
+      ],
+      "rationale": "VERIFIED & KEPT as a SOFT down-weight (correctly NOT a hard exclude). elbow_q4 'Do you experience tingling or abnormal sensations?' has exact options Yes/No (JSON lines 288-318; DOCX lines 473-475). Ulnar Nerve Entrapment is defined by 'pain, numbness or abnormal sensation in the forearm, fourth and ring finger' (DOCX line 540 / JSON elbow_q11 line 952), so absence of any abnormal sensation lowers its likelihood. A hard exclude would be unsafe because the DOCX explicitly allows a purely motor presentation - 'Do you experience weakness of the hand muscles? ... No (Could be both)' (DOCX line 545; JSON elbow_q12 note 'Could be both', line 1065) - so a sensation-negative patient can still have ulnar nerve entrapment with motor-only/weakness or atrophy features. decreaseLikelihood is therefore the right, conservative call; it removes no question and rules out nothing."
+    }
+  ]
+}
