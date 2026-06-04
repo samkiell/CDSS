@@ -31,7 +31,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Ganglion Cyst", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -46,7 +49,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -61,7 +66,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury", "Intersection Syndrome"],
+                "increaseLikelihood": [
+                  "TFCC Injury",
+                  "Intersection Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -76,7 +84,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["De Quervain's Tenosynovitis"],
+                "increaseLikelihood": [
+                  "De Quervain's Tenosynovitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -91,7 +101,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -123,7 +135,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Ganglion Cyst", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -138,7 +153,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -153,7 +170,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury", "Intersection Syndrome"],
+                "increaseLikelihood": [
+                  "TFCC Injury",
+                  "Intersection Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -168,7 +188,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["De Quervain's Tenosynovitis"],
+                "increaseLikelihood": [
+                  "De Quervain's Tenosynovitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -183,7 +205,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -226,9 +250,19 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Kienbock's Disease",
+                  "TFCC Injury"
+                ],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -241,12 +275,18 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "TFCC Injury"
+                ],
                 "increaseLikelihood": [
                   "De Quervain's Tenosynovitis",
                   "Scaphoid Fracture"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome",
+                  "Intersection Syndrome",
+                  "Kienbock's Disease"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -259,9 +299,18 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Carpal Tunnel Syndrome"
+                ],
+                "increaseLikelihood": [
+                  "TFCC Injury"
+                ],
+                "decreaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Kienbock's Disease"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -274,9 +323,19 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease", "Ganglion Cyst"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Carpal Tunnel Syndrome",
+                  "TFCC Injury"
+                ],
+                "increaseLikelihood": [
+                  "Kienbock's Disease",
+                  "Ganglion Cyst"
+                ],
+                "decreaseLikelihood": [
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -289,9 +348,20 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["Intersection Syndrome", "Intersection Syndrome"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "Carpal Tunnel Syndrome",
+                  "TFCC Injury",
+                  "Kienbock's Disease"
+                ],
+                "increaseLikelihood": [
+                  "Intersection Syndrome",
+                  "Intersection Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "De Quervain's Tenosynovitis",
+                  "Scaphoid Fracture",
+                  "Ganglion Cyst"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -304,9 +374,19 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["Scaphoid Fracture", "Scaphoid Fracture"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "Carpal Tunnel Syndrome",
+                  "TFCC Injury",
+                  "Intersection Syndrome"
+                ],
+                "increaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Scaphoid Fracture"
+                ],
+                "decreaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Kienbock's Disease"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -321,9 +401,19 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Kienbock's Disease",
+                  "TFCC Injury"
+                ],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -336,12 +426,18 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
+                "excludedConditions": [
+                  "TFCC Injury"
+                ],
                 "increaseLikelihood": [
                   "De Quervain's Tenosynovitis",
                   "Scaphoid Fracture"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome",
+                  "Intersection Syndrome",
+                  "Kienbock's Disease"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -354,9 +450,18 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Carpal Tunnel Syndrome"
+                ],
+                "increaseLikelihood": [
+                  "TFCC Injury"
+                ],
+                "decreaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Kienbock's Disease"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -369,9 +474,19 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease", "Ganglion Cyst"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Carpal Tunnel Syndrome",
+                  "TFCC Injury"
+                ],
+                "increaseLikelihood": [
+                  "Kienbock's Disease",
+                  "Ganglion Cyst"
+                ],
+                "decreaseLikelihood": [
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -384,9 +499,20 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["Intersection Syndrome", "Intersection Syndrome"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "Carpal Tunnel Syndrome",
+                  "TFCC Injury",
+                  "Kienbock's Disease"
+                ],
+                "increaseLikelihood": [
+                  "Intersection Syndrome",
+                  "Intersection Syndrome"
+                ],
+                "decreaseLikelihood": [
+                  "De Quervain's Tenosynovitis",
+                  "Scaphoid Fracture",
+                  "Ganglion Cyst"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -399,9 +525,19 @@
                 "nextQuestionId": null,
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
-                "excludedConditions": [],
-                "increaseLikelihood": ["Scaphoid Fracture", "Scaphoid Fracture"],
-                "decreaseLikelihood": [],
+                "excludedConditions": [
+                  "Carpal Tunnel Syndrome",
+                  "TFCC Injury",
+                  "Intersection Syndrome"
+                ],
+                "increaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Scaphoid Fracture"
+                ],
+                "decreaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Kienbock's Disease"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -429,7 +565,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Scaphoid Fracture", "Wrist Sprain"],
+                "increaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Wrist Sprain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "FOOSH mechanism — rule out scaphoid fracture; imaging advised.",
@@ -445,7 +584,10 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Wrist Sprain"],
+                "decreaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -461,7 +603,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Scaphoid Fracture", "Wrist Sprain"],
+                "increaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Wrist Sprain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "FOOSH mechanism — rule out scaphoid fracture; imaging advised.",
@@ -477,7 +622,10 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Wrist Sprain"],
+                "decreaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -511,7 +659,10 @@
                   "Intersection Syndrome",
                   "Kienbock's Disease"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -525,8 +676,17 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain", "Scaphoid Fracture"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome",
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Kienbock's Disease",
+                  "Ganglion Cyst"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -548,7 +708,10 @@
                   "Intersection Syndrome",
                   "Kienbock's Disease"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -562,8 +725,17 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain", "Scaphoid Fracture"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome",
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Kienbock's Disease",
+                  "Ganglion Cyst"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -595,7 +767,15 @@
                   "Carpal Tunnel Syndrome",
                   "Carpal Tunnel Syndrome"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture",
+                  "Kienbock's Disease",
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Ganglion Cyst",
+                  "TFCC Injury"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -609,7 +789,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -624,8 +807,14 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Kienbock's Disease"
+                ],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome",
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -639,8 +828,15 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Ganglion Cyst"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Ganglion Cyst"
+                ],
+                "decreaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Wrist Sprain",
+                  "Carpal Tunnel Syndrome",
+                  "Kienbock's Disease"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -660,7 +856,15 @@
                   "Carpal Tunnel Syndrome",
                   "Carpal Tunnel Syndrome"
                 ],
-                "decreaseLikelihood": [],
+                "decreaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture",
+                  "Kienbock's Disease",
+                  "De Quervain's Tenosynovitis",
+                  "Intersection Syndrome",
+                  "Ganglion Cyst",
+                  "TFCC Injury"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -674,7 +878,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -689,8 +896,14 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Kienbock's Disease"
+                ],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome",
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -704,8 +917,15 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Ganglion Cyst"],
-                "decreaseLikelihood": [],
+                "increaseLikelihood": [
+                  "Ganglion Cyst"
+                ],
+                "decreaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Wrist Sprain",
+                  "Carpal Tunnel Syndrome",
+                  "Kienbock's Disease"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -733,7 +953,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease", "Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease",
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Rest/night pain — consider Kienbock's disease (AVN of lunate) or advanced CTS.",
@@ -765,7 +988,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease", "Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease",
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Rest/night pain — consider Kienbock's disease (AVN of lunate) or advanced CTS.",
@@ -810,7 +1036,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -824,7 +1052,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -842,7 +1072,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -856,7 +1088,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -912,7 +1146,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -947,7 +1183,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "decreaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1139,7 +1377,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1171,7 +1411,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1215,7 +1457,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Thenar weakness indicates advanced CTS — consider expedited referral.",
@@ -1247,7 +1491,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Carpal Tunnel Syndrome"],
+                "increaseLikelihood": [
+                  "Carpal Tunnel Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Thenar weakness indicates advanced CTS — consider expedited referral.",
@@ -1273,7 +1519,11 @@
           ]
         }
       ],
-      "tests": ["phalens_test", "tinels_sign_wrist", "carpal_compression_test"]
+      "tests": [
+        "phalens_test",
+        "tinels_sign_wrist",
+        "carpal_compression_test"
+      ]
     },
     {
       "name": "De Quervain's Tenosynovitis",
@@ -1382,7 +1632,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["De Quervain's Tenosynovitis"],
+                "increaseLikelihood": [
+                  "De Quervain's Tenosynovitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1414,7 +1666,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["De Quervain's Tenosynovitis"],
+                "increaseLikelihood": [
+                  "De Quervain's Tenosynovitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1458,7 +1712,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["De Quervain's Tenosynovitis"],
+                "increaseLikelihood": [
+                  "De Quervain's Tenosynovitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1490,7 +1746,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["De Quervain's Tenosynovitis"],
+                "increaseLikelihood": [
+                  "De Quervain's Tenosynovitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1534,7 +1792,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["De Quervain's Tenosynovitis"],
+                "increaseLikelihood": [
+                  "De Quervain's Tenosynovitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1566,7 +1826,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["De Quervain's Tenosynovitis"],
+                "increaseLikelihood": [
+                  "De Quervain's Tenosynovitis"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1592,7 +1854,10 @@
           ]
         }
       ],
-      "tests": ["finkelsteins_test", "what_test"]
+      "tests": [
+        "finkelsteins_test",
+        "what_test"
+      ]
     },
     {
       "name": "Wrist Sprain",
@@ -1619,7 +1884,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1635,7 +1903,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Wrist Sprain"],
+                "decreaseLikelihood": [
+                  "Wrist Sprain"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1651,7 +1921,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Wrist Sprain",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1667,7 +1940,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Wrist Sprain"],
+                "decreaseLikelihood": [
+                  "Wrist Sprain"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -1695,7 +1970,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain"],
+                "increaseLikelihood": [
+                  "Wrist Sprain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1727,7 +2004,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain"],
+                "increaseLikelihood": [
+                  "Wrist Sprain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1771,7 +2050,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain"],
+                "increaseLikelihood": [
+                  "Wrist Sprain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1803,7 +2084,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Wrist Sprain"],
+                "increaseLikelihood": [
+                  "Wrist Sprain"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1905,7 +2188,9 @@
           ]
         }
       ],
-      "tests": ["ligament_stress_wrist"]
+      "tests": [
+        "ligament_stress_wrist"
+      ]
     },
     {
       "name": "TFCC Injury",
@@ -1932,7 +2217,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury", "TFCC Injury"],
+                "increaseLikelihood": [
+                  "TFCC Injury",
+                  "TFCC Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -1964,7 +2252,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury", "TFCC Injury"],
+                "increaseLikelihood": [
+                  "TFCC Injury",
+                  "TFCC Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2008,7 +2299,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury"],
+                "increaseLikelihood": [
+                  "TFCC Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2040,7 +2333,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury"],
+                "increaseLikelihood": [
+                  "TFCC Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2084,7 +2379,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury"],
+                "increaseLikelihood": [
+                  "TFCC Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2116,7 +2413,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["TFCC Injury"],
+                "increaseLikelihood": [
+                  "TFCC Injury"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2218,7 +2517,10 @@
           ]
         }
       ],
-      "tests": ["tfcc_load_test", "press_test_wrist"]
+      "tests": [
+        "tfcc_load_test",
+        "press_test_wrist"
+      ]
     },
     {
       "name": "Ganglion Cyst",
@@ -2245,7 +2547,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Ganglion Cyst", "Ganglion Cyst"],
+                "increaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Ganglion Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2277,7 +2582,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Ganglion Cyst", "Ganglion Cyst"],
+                "increaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Ganglion Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2321,7 +2629,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Ganglion Cyst", "Ganglion Cyst"],
+                "increaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Ganglion Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2353,7 +2664,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Ganglion Cyst", "Ganglion Cyst"],
+                "increaseLikelihood": [
+                  "Ganglion Cyst",
+                  "Ganglion Cyst"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2398,7 +2712,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Ganglion Cyst"],
+                "decreaseLikelihood": [
+                  "Ganglion Cyst"
+                ],
                 "redFlag": true,
                 "redFlagText": "Hard/immobile or rapidly-growing mass — refer to exclude tumour.",
                 "terminateAssessment": false,
@@ -2430,7 +2746,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Ganglion Cyst"],
+                "decreaseLikelihood": [
+                  "Ganglion Cyst"
+                ],
                 "redFlag": true,
                 "redFlagText": "Hard/immobile or rapidly-growing mass — refer to exclude tumour.",
                 "terminateAssessment": false,
@@ -2455,7 +2773,9 @@
           ]
         }
       ],
-      "tests": ["transillumination_wrist"]
+      "tests": [
+        "transillumination_wrist"
+      ]
     },
     {
       "name": "Intersection Syndrome",
@@ -2482,7 +2802,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Intersection Syndrome", "Intersection Syndrome"],
+                "increaseLikelihood": [
+                  "Intersection Syndrome",
+                  "Intersection Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2514,7 +2837,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Intersection Syndrome", "Intersection Syndrome"],
+                "increaseLikelihood": [
+                  "Intersection Syndrome",
+                  "Intersection Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2558,7 +2884,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Intersection Syndrome", "Intersection Syndrome"],
+                "increaseLikelihood": [
+                  "Intersection Syndrome",
+                  "Intersection Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2590,7 +2919,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Intersection Syndrome", "Intersection Syndrome"],
+                "increaseLikelihood": [
+                  "Intersection Syndrome",
+                  "Intersection Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2634,7 +2966,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Intersection Syndrome"],
+                "increaseLikelihood": [
+                  "Intersection Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2666,7 +3000,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Intersection Syndrome"],
+                "increaseLikelihood": [
+                  "Intersection Syndrome"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2692,7 +3028,9 @@
           ]
         }
       ],
-      "tests": ["resisted_wrist_extension"]
+      "tests": [
+        "resisted_wrist_extension"
+      ]
     },
     {
       "name": "Scaphoid Fracture",
@@ -2719,7 +3057,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Scaphoid Fracture", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2735,7 +3076,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Scaphoid Fracture"],
+                "decreaseLikelihood": [
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -2751,7 +3094,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Scaphoid Fracture", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2767,7 +3113,9 @@
                 "triggeredConditions": [],
                 "excludedConditions": [],
                 "increaseLikelihood": [],
-                "decreaseLikelihood": ["Scaphoid Fracture"],
+                "decreaseLikelihood": [
+                  "Scaphoid Fracture"
+                ],
                 "redFlag": false,
                 "redFlagText": null,
                 "terminateAssessment": false,
@@ -2795,7 +3143,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Scaphoid Fracture", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "CRITICAL: Persistent snuffbox pain after FOOSH must be treated as a scaphoid fracture despite a normal initial X-ray. Repeat imaging (MRI/CT) required.",
@@ -2827,7 +3178,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Scaphoid Fracture", "Scaphoid Fracture"],
+                "increaseLikelihood": [
+                  "Scaphoid Fracture",
+                  "Scaphoid Fracture"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "CRITICAL: Persistent snuffbox pain after FOOSH must be treated as a scaphoid fracture despite a normal initial X-ray. Repeat imaging (MRI/CT) required.",
@@ -2929,7 +3283,10 @@
           ]
         }
       ],
-      "tests": ["snuffbox_tenderness", "scaphoid_compression"],
+      "tests": [
+        "snuffbox_tenderness",
+        "scaphoid_compression"
+      ],
       "clinical_note": "Scaphoid fracture is the highest-risk wrist red flag. Persistent snuffbox tenderness after FOOSH must be treated as a fracture and imaged (MRI/CT) even if the initial X-ray is normal, due to non-union/AVN risk."
     },
     {
@@ -2957,7 +3314,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -2989,7 +3348,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3033,7 +3394,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease", "Kienbock's Disease"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease",
+                  "Kienbock's Disease"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Progressive stiffness with pain — consistent with Kienbock's (AVN) progression.",
@@ -3065,7 +3429,10 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease", "Kienbock's Disease"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease",
+                  "Kienbock's Disease"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": true,
                 "redFlagText": "Progressive stiffness with pain — consistent with Kienbock's (AVN) progression.",
@@ -3109,7 +3476,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3141,7 +3510,9 @@
                 "skipToQuestionId": null,
                 "triggeredConditions": [],
                 "excludedConditions": [],
-                "increaseLikelihood": ["Kienbock's Disease"],
+                "increaseLikelihood": [
+                  "Kienbock's Disease"
+                ],
                 "decreaseLikelihood": [],
                 "redFlag": false,
                 "redFlagText": null,
@@ -3167,7 +3538,9 @@
           ]
         }
       ],
-      "tests": ["axial_load_wrist"],
+      "tests": [
+        "axial_load_wrist"
+      ],
       "clinical_note": "No single definitive clinical test exists for Kienbock's disease. Diagnosis is imaging-dependent: X-ray for staging, MRI for early AVN detection."
     }
   ]

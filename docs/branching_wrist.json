@@ -1,0 +1,170 @@
+{
+  "region": "wrist",
+  "rules": [
+    {
+      "questionId": "wrist_q2",
+      "answerValue": "Palmar (front) wrist / hand",
+      "excludedConditions": [
+        "De Quervain's Tenosynovitis",
+        "Intersection Syndrome",
+        "Kienbock's Disease",
+        "TFCC Injury"
+      ],
+      "decreaseLikelihood": [
+        "Ganglion Cyst",
+        "Scaphoid Fracture"
+      ],
+      "rationale": "DOCX gives each excluded condition a fixed non-palmar KEY SIGN: De Quervain's radial (thumb side), Intersection dorsal-radial forearm 4-6cm proximal, Kienbock's dorsal central, TFCC ulnar; CTS is the palmar/median diagnosis. Volar ganglion and the radial red-flag scaphoid are only down-weighted."
+    },
+    {
+      "questionId": "wrist_q2",
+      "answerValue": "Radial wrist (thumb side)",
+      "excludedConditions": [
+        "TFCC Injury"
+      ],
+      "decreaseLikelihood": [
+        "Carpal Tunnel Syndrome",
+        "Intersection Syndrome",
+        "Kienbock's Disease"
+      ],
+      "rationale": "TFCC is strictly ulnar so radial pain rules it out. Kienbock's was DEMOTED from exclude: the DOCX itself lists Kienbock's as 'Radial/ulnar wrist (Other pathology)', so radial pain is a recognised atypical presentation and hard-excluding it would dangerously hide its AVN questions. CTS (palmar) and Intersection (proximal forearm; DOCX flags radial styloid pain as De Quervain's not intersection) are down-weighted."
+    },
+    {
+      "questionId": "wrist_q2",
+      "answerValue": "Ulnar wrist (little-finger side)",
+      "excludedConditions": [
+        "De Quervain's Tenosynovitis",
+        "Intersection Syndrome",
+        "Carpal Tunnel Syndrome"
+      ],
+      "decreaseLikelihood": [
+        "Scaphoid Fracture",
+        "Kienbock's Disease"
+      ],
+      "rationale": "TFCC is the ulnar KEY SIGN; DOCX marks ulnar pain as 'Other pathology' for De Quervain's (radial KEY SIGN), Intersection KEY SIGN is dorsal-radial forearm, and CTS is palmar/median, all incompatible. Scaphoid Fracture was DEMOTED from exclude to decreaseLikelihood: it is an emergency red-flag (FOOSH, missed fracture risks AVN/non-union) and hard-excluding it on a patient's subjective pain-location report would hide all scaphoid screening. Kienbock's (dorsal central, borders central wrist) stays down-weighted."
+    },
+    {
+      "questionId": "wrist_q2",
+      "answerValue": "Dorsal central wrist",
+      "excludedConditions": [
+        "De Quervain's Tenosynovitis",
+        "Intersection Syndrome",
+        "Carpal Tunnel Syndrome",
+        "TFCC Injury"
+      ],
+      "decreaseLikelihood": [
+        "Scaphoid Fracture"
+      ],
+      "rationale": "Kienbock's KEY SIGN is 'Dorsal central wrist' and Ganglion's commonest site is the dorsal wrist, so both stay active. De Quervain's (radial), Intersection (dorsal-radial forearm), TFCC (ulnar) and CTS (palmar) have incompatible fixed KEY SIGNs. Red-flag scaphoid (snuffbox) is only down-weighted, never excluded."
+    },
+    {
+      "questionId": "wrist_q2",
+      "answerValue": "Dorsal radial forearm, 4-6 cm above the wrist",
+      "excludedConditions": [
+        "Carpal Tunnel Syndrome",
+        "TFCC Injury",
+        "Kienbock's Disease"
+      ],
+      "decreaseLikelihood": [
+        "De Quervain's Tenosynovitis",
+        "Scaphoid Fracture",
+        "Ganglion Cyst"
+      ],
+      "rationale": "DOCX Intersection KEY SIGN is 'Dorsal radial forearm (4-6 cm proximal to wrist)', explicitly differentiated from De Quervain's by tenderness proximal to the radial styloid. CTS (palmar), TFCC (ulnar) and Kienbock's (dorsal central lunate, at the wrist) are anatomically at the wrist not the proximal forearm, so excluded. Ganglion was DEMOTED from exclude to decreaseLikelihood because ganglia can occasionally track along tendon sheaths; De Quervain's and red-flag scaphoid stay down-weighted."
+    },
+    {
+      "questionId": "wrist_q2",
+      "answerValue": "Anatomical snuffbox (base of thumb)",
+      "excludedConditions": [
+        "Carpal Tunnel Syndrome",
+        "TFCC Injury",
+        "Intersection Syndrome"
+      ],
+      "decreaseLikelihood": [
+        "Ganglion Cyst",
+        "Kienbock's Disease"
+      ],
+      "rationale": "DOCX lists Scaphoid Fracture 'Radial wrist/anatomical snuffbox (KEY SIGN)' as the MOST IMPORTANT SIGN, so scaphoid and the also-radial De Quervain's stay fully active. CTS (palmar), TFCC (ulnar) and Intersection (dorsal-radial forearm) are anatomically incompatible. Kienbock's was DEMOTED from exclude: the DOCX notes Kienbock's 'Radial/ulnar wrist (Other pathology)' and the snuffbox is radial, so hard-excluding it would contradict the source and hide AVN questions. Ganglion down-weighted."
+    },
+    {
+      "questionId": "wrist_q3",
+      "answerValue": "No",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Wrist Sprain",
+        "Scaphoid Fracture"
+      ],
+      "rationale": "DOCX lists trauma as the PRIMARY DIAGNOSTIC DRIVER for Wrist Sprain ('No trauma (Consider other conditions)') and Scaphoid Fracture ('Yes (FOOSH)'); absence of trauma down-weights both, but scaphoid is NOT hard-excluded because the DOCX warns of delayed/ignored presentations."
+    },
+    {
+      "questionId": "wrist_q4",
+      "answerValue": "Gradually (overuse)",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Wrist Sprain",
+        "Scaphoid Fracture"
+      ],
+      "rationale": "DOCX labels gradual onset 'Gradual (Not sprain)' for Wrist Sprain and 'Gradual (Not fracture)' for Scaphoid Fracture; both down-weighted rather than excluded since scaphoid is a red-flag with possible delayed presentation."
+    },
+    {
+      "questionId": "wrist_q4",
+      "answerValue": "Suddenly after an injury",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Carpal Tunnel Syndrome",
+        "De Quervain's Tenosynovitis",
+        "Intersection Syndrome",
+        "Kienbock's Disease",
+        "Ganglion Cyst"
+      ],
+      "rationale": "DOCX marks sudden onset atypical for the overuse/degenerative conditions: CTS 'Sudden (Consider trauma)', De Quervain's and Intersection 'Sudden (Less common)', Kienbock's 'Sudden (Consider trauma)' against its gradual AVN pattern, Ganglion 'Sudden (Less common)'. All down-weighted, none excluded since 'less common' is not impossible."
+    },
+    {
+      "questionId": "wrist_q5",
+      "answerValue": "Tingling, numbness, or burning",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Wrist Sprain",
+        "Scaphoid Fracture",
+        "Kienbock's Disease",
+        "De Quervain's Tenosynovitis",
+        "Intersection Syndrome",
+        "Ganglion Cyst",
+        "TFCC Injury"
+      ],
+      "rationale": "DOCX frames neuropathic 'Tingling, numbness, burning' as the CTS pattern while the mechanical conditions are non-neuropathic (Wrist Sprain labels 'Burning/tingling (Neurological)' as the non-sprain branch, Kienbock's is 'Deep, aching'); all are down-weighted, not excluded."
+    },
+    {
+      "questionId": "wrist_q5",
+      "answerValue": "Deep, aching pain",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Carpal Tunnel Syndrome",
+        "Wrist Sprain",
+        "Scaphoid Fracture"
+      ],
+      "rationale": "DOCX maps 'Deep, aching' to Kienbock's AVN; CTS is neuropathic (tingling), Wrist Sprain 'Sharp initially' and Scaphoid sharp post-trauma, so these are down-weighted for a deep aching presentation."
+    },
+    {
+      "questionId": "wrist_q5",
+      "answerValue": "Mild ache or painless",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Scaphoid Fracture",
+        "Wrist Sprain",
+        "Carpal Tunnel Syndrome",
+        "Kienbock's Disease"
+      ],
+      "rationale": "DOCX ties 'Mild ache or painless' to Ganglion Cyst ('Severe pain (Consider other pathology)'); acutely painful/neuropathic/AVN conditions are down-weighted. Scaphoid is kept only as decreaseLikelihood (not excluded) because a painless/occult scaphoid is exactly the delayed-presentation red-flag the DOCX warns about."
+    },
+    {
+      "questionId": "wrist_q7",
+      "answerValue": "Yes",
+      "excludedConditions": [],
+      "decreaseLikelihood": [
+        "Carpal Tunnel Syndrome"
+      ],
+      "rationale": "DOCX CTS notes proximal radiation as 'Possible proximal nerve involvement' versus 'No (Supports CTS)', and flags whole-arm symptoms as cervical pathology, so proximal radiation down-weights CTS in favour of a proximal/cervical source."
+    }
+  ]
+}
