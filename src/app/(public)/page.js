@@ -619,10 +619,11 @@ export default function LandingPage() {
                 ],
               },
               {
-                heading: 'About',
+                heading: 'Company',
                 links: [
                   { label: 'Why Africa', href: '/#africa', id: 'africa' },
-                  { label: 'Evidence base', href: '/#africa', id: 'africa' },
+                  { label: 'Privacy Policy', href: '/privacy' },
+                  { label: 'Terms of Service', href: '/terms' },
                 ],
               },
               {
