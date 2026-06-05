@@ -7,6 +7,10 @@ import connectDB from '@/lib/db/connect';
 
 const OTP_EXPIRATION_MINUTES = parseInt(process.env.OTP_EXPIRATION_TIME || '5', 10);
 
+// Max wrong guesses allowed per issued code before it is invalidated. A 4-digit
+// code has 9000 possibilities; capping attempts makes brute force infeasible.
+const MAX_OTP_ATTEMPTS = 5;
+
 const SMTP_HOST = 'smtp.gmail.com';
 const SMTP_PORT = 465;
 
@@ -161,13 +165,36 @@ export const otpService = {
     }
 
     if (new Date() > record.expires_at) {
+      await EmailOtp.deleteOne({ _id: record._id });
       return { success: false, message: 'OTP has expired.' };
+    }
+
+    if (record.attempts >= MAX_OTP_ATTEMPTS) {
+      await EmailOtp.deleteOne({ _id: record._id });
+      return {
+        success: false,
+        message: 'Too many incorrect attempts. Please request a new code.',
+      };
     }
 
     const isMatch = compareHashes(otp, record.otp_hash);
 
     if (!isMatch) {
-      return { success: false, message: 'Invalid OTP Code.' };
+      record.attempts += 1;
+      // Invalidate the code once the limit is reached on this very attempt.
+      if (record.attempts >= MAX_OTP_ATTEMPTS) {
+        await EmailOtp.deleteOne({ _id: record._id });
+        return {
+          success: false,
+          message: 'Too many incorrect attempts. Please request a new code.',
+        };
+      }
+      await record.save();
+      const left = MAX_OTP_ATTEMPTS - record.attempts;
+      return {
+        success: false,
+        message: `Invalid OTP Code. ${left} attempt${left === 1 ? '' : 's'} remaining.`,
+      };
     }
 
     // Mark current OTP as verified
@@ -244,8 +271,28 @@ export const otpService = {
       await EmailOtp.deleteOne({ _id: record._id });
       return { success: false, message: 'This code has expired.' };
     }
+    if (record.attempts >= MAX_OTP_ATTEMPTS) {
+      await EmailOtp.deleteOne({ _id: record._id });
+      return {
+        success: false,
+        message: 'Too many incorrect attempts. Please request a new code.',
+      };
+    }
     if (!compareHashes(otp, record.otp_hash)) {
-      return { success: false, message: 'Invalid code.' };
+      record.attempts += 1;
+      if (record.attempts >= MAX_OTP_ATTEMPTS) {
+        await EmailOtp.deleteOne({ _id: record._id });
+        return {
+          success: false,
+          message: 'Too many incorrect attempts. Please request a new code.',
+        };
+      }
+      await record.save();
+      const left = MAX_OTP_ATTEMPTS - record.attempts;
+      return {
+        success: false,
+        message: `Invalid code. ${left} attempt${left === 1 ? '' : 's'} remaining.`,
+      };
     }
 
     // Consume the code so it cannot be replayed.

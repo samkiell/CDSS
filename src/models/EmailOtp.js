@@ -20,6 +20,11 @@ const EmailOtpSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    // Number of failed verification attempts against this code (brute-force guard).
+    attempts: {
+      type: Number,
+      default: 0,
+    },
     // Registration data (stored until verification)
     registration_data: {
       firstName: String,
