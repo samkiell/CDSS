@@ -563,29 +563,29 @@ export function processAnswer(state, questionId, answerValue) {
 }
 
 /**
- * Find a matching condition name with fuzzy matching
+ * Resolve a condition reference (from a rule effect) to a real condition name.
+ *
+ * Matching is EXACT (then case-insensitive-exact) only. The previous
+ * `includes()` partial-match fallback was unsafe for medical taxonomy: e.g.
+ * searching "CL" would match "ACL Injury", and with 4 knee ligaments
+ * (ACL/MCL/LCL/PCL) a substring could resolve to the wrong condition and
+ * cross-contaminate the assessment. Effect references are validated to match
+ * condition names exactly (scripts/validate_region.mjs), so a non-match here
+ * means a bad reference — and returning null (no rule-out / no change) is the
+ * safe outcome rather than guessing.
  */
 function findMatchingCondition(state, searchName) {
   if (!searchName) return null;
 
-  const searchLower = searchName.toLowerCase().trim();
-
-  // Exact match first
+  // Exact match first.
   if (state.suspectedConditions.has(searchName)) {
     return searchName;
   }
 
-  // Case-insensitive match
+  // Case-insensitive exact match (tolerates casing differences only).
+  const searchLower = searchName.toLowerCase().trim();
   for (const [condName] of state.suspectedConditions) {
-    if (condName.toLowerCase() === searchLower) {
-      return condName;
-    }
-  }
-
-  // Partial match (condition name contains search term or vice versa)
-  for (const [condName] of state.suspectedConditions) {
-    const condLower = condName.toLowerCase();
-    if (condLower.includes(searchLower) || searchLower.includes(condLower)) {
+    if (condName.toLowerCase().trim() === searchLower) {
       return condName;
     }
   }
