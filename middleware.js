@@ -26,6 +26,7 @@ export const middleware = auth((req) => {
     '/forgot-password',
     '/privacy',
     '/terms',
+    '/guide',
     '/admin',
   ].includes(nextUrl.pathname);
   const isAuthRoute = ['/login', '/register', '/admin'].includes(nextUrl.pathname);

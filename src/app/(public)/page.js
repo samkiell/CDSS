@@ -616,6 +616,7 @@ export default function LandingPage() {
                   { label: 'The challenge', href: '/#problem', id: 'problem' },
                   { label: 'Our approach', href: '/#solution', id: 'solution' },
                   { label: 'How it works', href: '/#how-it-works', id: 'how-it-works' },
+                  { label: 'User guide', href: '/guide' },
                 ],
               },
               {

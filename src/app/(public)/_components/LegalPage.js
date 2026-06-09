@@ -46,6 +46,9 @@ export function LegalPage({ eyebrow, title, lastUpdated, children }) {
             <Link href="/terms" className="hover:text-primary transition-colors">
               Terms of Service
             </Link>
+            <Link href="/guide" className="hover:text-primary transition-colors">
+              User Guide
+            </Link>
             <Link href="/login" className="hover:text-primary transition-colors">
               Sign in
             </Link>

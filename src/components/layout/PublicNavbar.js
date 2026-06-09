@@ -31,6 +31,7 @@ export function PublicNavbar() {
     { name: 'Our Approach', href: '/#solution', id: 'solution' },
     { name: 'How It Works', href: '/#how-it-works', id: 'how-it-works' },
     { name: 'Why Africa', href: '/#africa', id: 'africa' },
+    { name: 'Guide', href: '/guide' },
   ];
 
   const handleLinkClick = (e, href, id) => {
@@ -71,7 +72,7 @@ export function PublicNavbar() {
             </Link>
             {navLinks.map((link) => (
               <a
-                key={link.id}
+                key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href, link.id)}
                 className="text-muted-foreground hover:text-primary text-sm font-medium transition-colors"
@@ -154,7 +155,7 @@ export function PublicNavbar() {
 
             {navLinks.map((link) => (
               <a
-                key={link.id}
+                key={link.name}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link.href, link.id)}
                 className="text-foreground hover:bg-accent hover:text-primary rounded-xl px-4 py-3 text-lg font-bold transition-all"
