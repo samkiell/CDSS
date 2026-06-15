@@ -18,6 +18,7 @@ import {
 } from '@/components/ui';
 import { toast } from 'sonner';
 import { ArrowLeft } from 'lucide-react';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 
 export default function ForgotPasswordPage() {
   const router = useRouter();
@@ -29,6 +30,9 @@ export default function ForgotPasswordPage() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  // The step swaps content in place, so reset scroll when moving between steps.
+  useScrollToTop(step);
 
   // Resend countdown
   const [countdown, setCountdown] = useState(0);

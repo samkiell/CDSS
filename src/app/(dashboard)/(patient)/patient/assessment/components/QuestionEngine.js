@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import useAssessmentStore from '@/store/assessmentStore';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 import { Card, CardContent, Button } from '@/components/ui';
 import {
   Loader2,
@@ -59,6 +60,10 @@ export default function QuestionEngine() {
   const [isProcessing, setIsProcessing] = useState(false);
   // Set when an answer triggers an emergency termination (e.g. suspected septic arthritis).
   const [emergencyState, setEmergencyState] = useState(null);
+
+  // One question is shown at a time; advancing swaps the card content in place.
+  // Scroll back to the top so each question starts at the top of the viewport.
+  useScrollToTop(currentQuestion?.id ?? emergencyState);
 
   /**
    * LOAD REGION RULES & INITIALIZE ENGINE

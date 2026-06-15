@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import useAssessmentStore from '@/store/assessmentStore';
+import { useScrollToTop } from '@/hooks/useScrollToTop';
 import BiodataConfirmation from './components/BiodataConfirmation';
 import BodyMapPicker from './components/BodyMapPicker';
 import QuestionEngine from './components/QuestionEngine';
@@ -71,6 +72,10 @@ export default function PatientAssessmentPage() {
   useEffect(() => {
     setIsHydrated(true);
   }, []);
+
+  // Each step swaps content in place (no route change), so the window keeps its
+  // previous scroll position. Reset to the top whenever the step changes.
+  useScrollToTop(currentStep);
 
   useEffect(() => {
     if (!isHydrated) return;
