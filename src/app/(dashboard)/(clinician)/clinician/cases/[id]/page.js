@@ -503,22 +503,6 @@ export default function CaseDetailsPage() {
                 </ul>
               </div>
             )}
-
-            {/* Disclaimer */}
-            <div className="bg-warning/10 border-warning/30 rounded-xl border p-4">
-              <div className="flex items-start gap-3">
-                <AlertTriangle className="text-warning mt-0.5 h-5 w-5 shrink-0" />
-                <div>
-                  <p className="text-warning-foreground font-bold">
-                    Important Disclaimer
-                  </p>
-                  <p className="text-muted-foreground mt-1 text-sm">
-                    {analysis.disclaimer ||
-                      'This diagnosis is AI-assisted and requires clinical validation. It is a preliminary assessment and should not be used as a final diagnosis without physical examination.'}
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         ) : (
           <div className="text-muted-foreground py-6 text-center">

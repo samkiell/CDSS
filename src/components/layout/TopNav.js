@@ -6,21 +6,25 @@ import { useSession } from 'next-auth/react';
 import { ThemeToggle, Button } from '@/components/ui';
 import { Logo } from '@/components/ui/Logo';
 import { cn } from '@/lib/cn';
-import { useUIStore } from '@/store';
+import { useUIStore, useAuthStore } from '@/store';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 function TopNav({ title, className, showSidebarTrigger = true, showUser = true }) {
   const { toggleSidebar } = useUIStore();
   const { data: session } = useSession();
+  const { user: storeUser } = useAuthStore();
   const router = useRouter();
 
-  const role = session?.user?.role?.toUpperCase();
+  // Prefer the full profile from the store (loaded from /me); the JWT session
+  // only carries id/role/sessionId, so firstName/lastName live in the store.
+  const user = storeUser || session?.user;
+  const role = user?.role?.toUpperCase();
   const isClinician = role === 'CLINICIAN';
-  const userName = session?.user?.firstName
+  const userName = user?.firstName
     ? isClinician
-      ? `Dr. ${session.user.lastName || session.user.firstName}`
-      : session.user.firstName
+      ? `Dr. ${user.lastName || user.firstName}`
+      : user.firstName
     : isClinician
       ? 'Doctor'
       : 'User';
@@ -91,9 +95,9 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
               else router.push('/patient/settings');
             }}
           >
-            {session?.user?.avatar || session?.user?.image ? (
+            {user?.avatar || user?.image ? (
               <Image
-                src={session.user.avatar || session.user.image}
+                src={user.avatar || user.image}
                 alt="Profile"
                 width={48}
                 height={48}
@@ -101,7 +105,7 @@ function TopNav({ title, className, showSidebarTrigger = true, showUser = true }
               />
             ) : (
               <div className="bg-primary/10 text-primary flex h-full w-full items-center justify-center text-sm font-bold sm:text-lg">
-                {session?.user?.firstName?.[0] || session?.user?.email?.[0] || 'U'}
+                {user?.firstName?.[0] || user?.email?.[0] || 'U'}
               </div>
             )}
           </button>
