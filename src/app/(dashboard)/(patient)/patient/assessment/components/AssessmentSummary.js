@@ -35,7 +35,7 @@ import {
  *
  * TRACEABILITY:
  * This component generates the assessment trace that will be stored
- * for therapist review.
+ * for clinician review.
  */
 export default function AssessmentSummary({ onSubmit, onEdit }) {
   const { selectedRegion, engineState, biodata, redFlags, setStep, setAssessmentTrace } =
@@ -51,7 +51,7 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
    * HANDLE SUBMIT FOR ANALYSIS
    * ===========================
    * Prepares the assessment data and sends for AI temporal diagnosis.
-   * Creates an assessment trace for therapist review.
+   * Creates an assessment trace for clinician review.
    */
   const handleSubmitForAnalysis = async () => {
     if (!engineState || !biodata) {
@@ -69,7 +69,7 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
       /**
        * ASSESSMENT TRACE
        * =================
-       * Store the full trace for therapist review.
+       * Store the full trace for clinician review.
        * This includes:
        * - All questions and answers
        * - Condition likelihood analysis
@@ -178,7 +178,7 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
                   Assessment Notes Recorded
                 </p>
                 <p className="text-muted-foreground mt-1 text-sm">
-                  The following details have been highlighted for the reviewing therapist
+                  The following details have been highlighted for the reviewing clinician
                   to prioritize.
                 </p>
                 <ul className="mt-3 space-y-2">
@@ -260,7 +260,7 @@ export default function AssessmentSummary({ onSubmit, onEdit }) {
       {/* Disclaimer */}
       <p className="text-muted-foreground text-center text-xs">
         By submitting, you confirm that the information provided is accurate to the best
-        of your knowledge. Your assessment will be reviewed by a qualified therapist.
+        of your knowledge. Your assessment will be reviewed by a qualified clinician.
       </p>
     </div>
   );

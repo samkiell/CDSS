@@ -458,7 +458,7 @@ export default function QuestionEngine() {
                 </p>
                 <p className="text-muted-foreground mt-1 text-xs">
                   Your notes and responses have been flagged for clinical review by the
-                  therapist.
+                  clinician.
                 </p>
               </div>
             </div>
