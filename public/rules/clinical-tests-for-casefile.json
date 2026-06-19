@@ -478,7 +478,7 @@
         "Maudsley’s test",
         "Cozen’s test",
         "Mill’s Sign",
-        "Patient resists wrist flexion with the forearm in extension and supination (i.e. therapist resists wrist extension with the forearm in extension and supination)",
+        "Patient resists wrist flexion with the forearm in extension and supination (i.e. clinician resists wrist extension with the forearm in extension and supination)",
         "The test is positive if pain is elicited."
       ],
       "procedures": [
@@ -503,7 +503,7 @@
           "positiveSign": ""
         },
         {
-          "testName": "Patient resists wrist flexion with the forearm in extension and supination (i.e. therapist resists wrist extension with the forearm in extension and supination)",
+          "testName": "Patient resists wrist flexion with the forearm in extension and supination (i.e. clinician resists wrist extension with the forearm in extension and supination)",
           "procedure": "Perform clinical test as described in standard protocols.",
           "positiveSign": ""
         },
