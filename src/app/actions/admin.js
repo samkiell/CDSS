@@ -89,7 +89,7 @@ export async function verifyClinician(clinicianId) {
       throw new Error('Clinician not found');
     }
 
-    revalidatePath('/admin/therapists');
+    revalidatePath('/admin/clinicians');
 
     return { success: true };
   } catch (error) {

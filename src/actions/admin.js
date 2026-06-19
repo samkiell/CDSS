@@ -28,7 +28,7 @@ export async function upgradeUserRole(userId) {
       userId: user._id,
       title: 'Role Upgraded',
       description:
-        'Your account has been upgraded to Clinician (Therapist). You can now manage patient cases.',
+        'Your account has been upgraded to Clinician. You can now manage patient cases.',
       type: 'SYSTEM',
       link: '/clinician/dashboard',
     });
@@ -157,7 +157,7 @@ export async function verifyClinician(clinicianId) {
       link: '/clinician/dashboard',
     });
 
-    revalidatePath('/admin/therapists');
+    revalidatePath('/admin/clinicians');
     revalidatePath('/admin/dashboard');
     return { success: true };
   } catch (error) {
