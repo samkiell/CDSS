@@ -42,7 +42,7 @@ const KNOWLEDGE_BASE = [
       },
       {
         id: 'guided-testing',
-        title: 'Therapist-Guided Testing',
+        title: 'Clinician-Guided Testing',
         content:
           'How to perform and record physical tests within the CDSS to refine preliminary AI diagnoses into definitive clinical outcomes.',
         readTime: '6 min read',
@@ -125,7 +125,7 @@ const KNOWLEDGE_BASE = [
 ];
 
 const RESOURCES = [
-  { name: 'Therapist User Manual', type: 'PDF', size: '2.4 MB', url: '#' },
+  { name: 'Clinician User Manual', type: 'PDF', size: '2.4 MB', url: '#' },
   { name: 'MSK Rule Book (V4)', type: 'DOCX', size: '1.8 MB', url: '#' },
   { name: 'Patient Integration Guide', type: 'PDF', size: '920 KB', url: '#' },
 ];
@@ -139,7 +139,7 @@ const FAQS = [
   {
     question: 'Are my clinical notes shared with the patient?',
     answer:
-      'By default, clinical impressions are kept for therapist review. You can choose to share summary highlights in the patient-facing plan.',
+      'By default, clinical impressions are kept for clinician review. You can choose to share summary highlights in the patient-facing plan.',
   },
   {
     question: 'How often are the medical rules updated?',
@@ -434,7 +434,7 @@ export default function HelpCenterClient() {
                 ))}
               </div>
               <span className="text-xs font-bold tracking-widest text-slate-400 uppercase">
-                4 Therapists Online
+                4 Clinicians Online
               </span>
             </div>
           </div>

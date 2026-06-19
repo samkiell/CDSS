@@ -246,7 +246,7 @@ export default function Sidebar({
               </span>
               <span className="text-[12px] font-medium capitalize opacity-70">
                 {user?.role === 'CLINICIAN'
-                  ? 'Therapist'
+                  ? 'Clinician'
                   : user?.role?.toLowerCase() || ''}
               </span>
             </div>
