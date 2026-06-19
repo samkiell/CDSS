@@ -34,7 +34,7 @@ import { toast } from 'sonner';
  * 3. questions → Dynamic branching questions based on JSON rules
  * 4. summary   → Review all answers before AI analysis
  * 5. analyzing → AI temporal diagnosis in progress
- * 6. complete  → Confirmation and therapist handoff
+ * 6. complete  → Confirmation and clinician handoff
  *
  * BRANCHING ENGINE:
  * This page now uses the QuestionEngine component which loads
@@ -119,11 +119,11 @@ export default function PatientAssessmentPage() {
       setAiAnalysis(data.aiAnalysis);
       setSubmissionResult(data);
 
-      // Mark as submitted to therapist
+      // Mark as submitted to clinician
       submitToTherapist();
 
       toast.success('Assessment submitted successfully!', {
-        description: 'A therapist will review your case shortly.',
+        description: 'A clinician will review your case shortly.',
       });
     } catch (error) {
       console.error('Submission Error:', error);
@@ -193,7 +193,7 @@ export default function PatientAssessmentPage() {
          * 3. questions → Branching engine with JSON rules
          * 4. summary   → Review all answers before submission
          * 5. analyzing → AI temporal diagnosis in progress
-         * 6. complete  → Confirmation and therapist handoff
+         * 6. complete  → Confirmation and clinician handoff
          */}
 
         {/* STEP 1: BIODATA CONFIRMATION (MANDATORY) */}
@@ -239,7 +239,7 @@ export default function PatientAssessmentPage() {
           </div>
         )}
 
-        {/* STEP 6: COMPLETE - Therapist Handoff */}
+        {/* STEP 6: COMPLETE - Clinician Handoff */}
         {currentStep === 'complete' && (
           <div className="animate-in fade-in py-16 text-center duration-1000">
             <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-green-50 dark:bg-green-900/20">
@@ -247,7 +247,7 @@ export default function PatientAssessmentPage() {
             </div>
             <h1 className="text-3xl font-bold">Assessment Submitted</h1>
             <p className="mx-auto mt-4 max-w-lg text-slate-500">
-              Your assessment has been submitted for therapist review. A qualified
+              Your assessment has been submitted for clinician review. A qualified
               professional will analyze your case and provide clinical confirmation.
             </p>
 
@@ -262,7 +262,7 @@ export default function PatientAssessmentPage() {
                     <div>
                       <p className="font-bold">Preliminary Analysis</p>
                       <p className="text-xs text-slate-500">
-                        AI-Generated (Pending Therapist Review)
+                        AI-Generated (Pending Clinician Review)
                       </p>
                     </div>
                   </div>
@@ -320,7 +320,7 @@ export default function PatientAssessmentPage() {
                         {submissionResult.redFlagsCount > 1 ? 's' : ''} Detected
                       </p>
                       <p className="text-sm text-red-600 dark:text-red-300">
-                        These have been flagged for priority review by your therapist.
+                        These have been flagged for priority review by your clinician.
                       </p>
                     </div>
                   </div>
@@ -337,7 +337,7 @@ export default function PatientAssessmentPage() {
                     1
                   </div>
                   <p className="text-sm text-slate-600 dark:text-slate-400">
-                    A qualified therapist will review your assessment and AI analysis
+                    A qualified clinician will review your assessment and AI analysis
                   </p>
                 </div>
                 <div className="flex items-start gap-3">

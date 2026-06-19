@@ -29,9 +29,9 @@ import { cn } from '@/lib/cn';
 import { Button, Card, Badge, Lightbox, StatusModal } from '@/components/ui';
 
 /**
- * THERAPIST CASE FILE - REDESIGNED
+ * CLINICIAN CASE FILE - REDESIGNED
  * ==================================
- * Implements TASK 1-6 for therapist-facing functionality.
+ * Implements TASK 1-6 for clinician-facing functionality.
  *
  * STRUCTURE (in order):
  * 1. Patient Biodata (Assessment-Scoped)
@@ -517,7 +517,7 @@ export default function CaseDetailsPage() {
           Based on temporal diagnosis, shows suggested physical tests.
           Each test displays: name, associated region, purpose/trigger.
           Test recommendations are immutable - determined by assessment logic.
-          Includes prominent "Start Test" button for therapist action.
+          Includes prominent "Start Test" button for clinician action.
        */}
       <CollapsibleSection
         title="Recommended Clinical Tests"
