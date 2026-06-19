@@ -166,7 +166,7 @@ export function processAnswer(state, questionId, answerValue) {
   /**
    * TRACEABILITY:
    * Each answered question is recorded with full context for later review.
-   * This data will be stored with the assessment for therapist review.
+   * This data will be stored with the assessment for clinician review.
    */
   const answeredQuestion = {
     questionId: rawQuestion.id,

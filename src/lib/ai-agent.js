@@ -52,7 +52,7 @@ function validateAndNormalizeAiOutput(raw) {
   out.temporalDiagnosis =
     typeof raw?.temporalDiagnosis === 'string' && raw.temporalDiagnosis.trim()
       ? raw.temporalDiagnosis.trim().slice(0, 200)
-      : 'Assessment inconclusive — therapist review required';
+      : 'Assessment inconclusive — clinician review required';
 
   // confidenceScore: clamp to 0–100 integer; default 0 if unparseable.
   let score = Number(raw?.confidenceScore);
@@ -244,7 +244,7 @@ export async function getAiPreliminaryAnalysis({
 export const getWeightedAiAnalysis = getAiPreliminaryAnalysis;
 
 /**
- * Converts a patient-facing analysis (second person) into a therapist-facing clinical narrative (third person).
+ * Converts a patient-facing analysis (second person) into a clinician-facing clinical narrative (third person).
  * @param {Object} analysis - The patient-facing analysis object
  * @returns {Promise<Object>} The transformed analysis in third person
  */
