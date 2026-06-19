@@ -39,7 +39,7 @@ export default function AdminHeader({ user }) {
           <Search className="absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-gray-400" />
           <input
             type="text"
-            placeholder="Search Therapists/Patients Name..."
+            placeholder="Search Clinicians/Patients Name..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={handleSearch}

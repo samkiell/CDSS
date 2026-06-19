@@ -23,7 +23,7 @@ import { useUIStore } from '@/store';
 const navItems = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/users', label: 'Users', icon: Users },
-  { href: '/admin/therapists', label: 'Therapists', icon: UserRound },
+  { href: '/admin/clinicians', label: 'Clinicians', icon: UserRound },
   { href: '/admin/sessions', label: 'Sessions', icon: ClipboardList },
   { href: '/admin/diagnostics', label: 'Guided Diagnostics', icon: Stethoscope },
   { href: '/admin/reports', label: 'Reports', icon: BarChart3 },
