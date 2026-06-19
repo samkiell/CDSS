@@ -419,7 +419,7 @@ export default function MessagingClient({ currentUser, initialConversations = []
                   <p className="mt-3 max-w-md text-sm leading-relaxed font-medium">
                     {currentUser.role === 'CLINICIAN'
                       ? 'You have not been assigned to a patient yet. Once a patient is assigned to your care, they will appear here.'
-                      : 'You have not been assigned to a therapist yet. Please wait while we process your clinical assessment.'}
+                      : 'You have not been assigned to a clinician yet. Please wait while we process your clinical assessment.'}
                   </p>
                 </div>
               )}

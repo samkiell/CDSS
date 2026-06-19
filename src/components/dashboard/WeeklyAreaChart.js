@@ -92,7 +92,7 @@ export default function WeeklyAreaChart() {
             <Area
               type="monotone"
               dataKey="therapists"
-              name="Therapists"
+              name="Clinicians"
               stroke="#f97316"
               strokeWidth={3}
               fillOpacity={1}
