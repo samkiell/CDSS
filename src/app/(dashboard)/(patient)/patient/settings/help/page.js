@@ -27,7 +27,7 @@ const faqs = [
   {
     question: 'How accurate is the AI temporal diagnosis?',
     answer:
-      'Our AI provides preliminary assessments based on clinical weighted rules. It is a powerful screening tool designed to support professional diagnosis. Your therapist will refine these outcomes during your clinical session.',
+      'Our AI provides preliminary assessments based on clinical weighted rules. It is a powerful screening tool designed to support professional diagnosis. Your clinician will refine these outcomes during your clinical session.',
   },
   {
     question: 'Is my clinical data secure?',
@@ -35,7 +35,7 @@ const faqs = [
       'Yes, we implement AES-256 level encryption and international data residency protocols. Your medical history and biodata snapshots are accessible only to you and your authorized clinical support team.',
   },
   {
-    question: 'How do I message my assigned therapist?',
+    question: 'How do I message my assigned clinician?',
     answer:
       'Use the secure Messages module in your dashboard. You can send text-based clinical updates or questions directly to your practitioner.',
   },

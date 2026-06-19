@@ -215,7 +215,7 @@ export default async function PatientDashboardPage() {
             </div>
             <div>
               <p className="text-muted-foreground text-xs font-semibold tracking-wider uppercase">
-                Assigned Therapist
+                Assigned Clinician
               </p>
               <h3 className="max-w-37.5 truncate text-lg font-bold">
                 {(() => {
@@ -367,7 +367,7 @@ export default async function PatientDashboardPage() {
                           className="text-muted-foreground px-6 py-12 text-center text-sm italic"
                         >
                           No treatment activities found. Please complete an assessment or
-                          wait for your therapist's assignment.
+                          wait for your clinician's assignment.
                         </td>
                       </tr>
                     )}
