@@ -54,7 +54,7 @@ const INSTRUCTIONAL_PATTERNS = [
 const TEST_PROCEDURE_PATTERNS = [
   /^\w+['']s\s+Test/i, // Named tests like "Spurling's Test"
   /^Instruct\s+/i,
-  /therapist/i,
+  /clinician|therapist/i,
   /^stabilise/i,
   /^The\s+test\s+is/i,
   /^A\s+positive\s+sign/i,

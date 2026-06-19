@@ -453,7 +453,7 @@ const SHOULDER_TESTS = {
     },
     {
       "name": "Lift-Off Test (Subscapularis)",
-      "procedure": "Patient is asked to place hand on the back at the mid-lumbar spine. The therapist then lifts hand from the back and patient is asked to hold it there. Positive sign: inability to maintain hand while removed suggests subscapularis weakness."
+      "procedure": "Patient is asked to place hand on the back at the mid-lumbar spine. The clinician then lifts hand from the back and patient is asked to hold it there. Positive sign: inability to maintain hand while removed suggests subscapularis weakness."
     }
   ],
   "Calcific Tendinitis": [
@@ -561,7 +561,7 @@ const ELBOW_TESTS = {
     },
     {
       "name": "Resisted Wrist Flexion Test",
-      "procedure": "Patient resists wrist flexion with the forearm in extension and supination (i.e. therapist resists wrist extension with the forearm in extension and supination). The test is positive if pain is elicited."
+      "procedure": "Patient resists wrist flexion with the forearm in extension and supination (i.e. clinician resists wrist extension with the forearm in extension and supination). The test is positive if pain is elicited."
     }
   ],
   "Ulnar Nerve Entrapment": [
