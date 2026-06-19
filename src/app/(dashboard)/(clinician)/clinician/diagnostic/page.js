@@ -112,7 +112,7 @@ export default function ClinicianDiagnosticPage() {
       type: 'info',
       title: 'Clinical Rulebook',
       message:
-        'The comprehensive clinical decision rulebook effectively integrates MSK heuristic patterns. Viewing permissions are standard for therapists.',
+        'The comprehensive clinical decision rulebook effectively integrates MSK heuristic patterns. Viewing permissions are standard for clinicians.',
     });
   };
 
