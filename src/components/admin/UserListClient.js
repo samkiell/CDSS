@@ -339,7 +339,7 @@ export default function AdminUserListClient({ initialUsers = [] }) {
                                 className="flex cursor-pointer gap-2 rounded-xl py-3 text-xs font-bold tracking-widest uppercase"
                               >
                                 <Stethoscope className="h-4 w-4" />
-                                Make Therapist
+                                Make Clinician
                               </DropdownMenuItem>
                             )}
 
