@@ -384,7 +384,7 @@ export default function GuidePage() {
             <P>
               After signing in you land on the <B>Patient Dashboard</B>. Across the top
               you will see three summary cards: your <B>next appointment</B>, your{' '}
-              <B>assigned therapist</B>, and your <B>active case</B> (the condition
+              <B>assigned clinician</B>, and your <B>active case</B> (the condition
               currently being looked after). Below them sit a <B>Pain Progress</B> chart
               showing how your pain levels have changed over time, and a{' '}
               <B>Current Treatment Activities</B> table listing your scheduled exercises
@@ -436,13 +436,13 @@ export default function GuidePage() {
                 <>
                   <B>Wait a few seconds.</B> The system analyses your answers (10–30
                   seconds) and shows a confirmation screen: your assessment has been
-                  submitted for a therapist to review.
+                  submitted for a clinician to review.
                 </>,
                 <>
                   <B>Read your preliminary result.</B> The confirmation screen shows the{' '}
                   <B>suspected condition</B>, a <B>confidence percentage</B>, and a{' '}
                   <B>risk level</B> (Low, Moderate, or Urgent). This is an AI-generated
-                  first impression only — a qualified therapist will review it, may
+                  first impression only — a qualified clinician will review it, may
                   contact you for more detail, and will confirm the final diagnosis.
                 </>,
               ]}
@@ -493,7 +493,7 @@ export default function GuidePage() {
                   your message has been read.
                 </>,
                 <>
-                  <B>Notifications</B> — updates about your assessments, therapist
+                  <B>Notifications</B> — updates about your assessments, clinician
                   assignment, treatment plan changes, and appointment reminders.
                 </>,
                 <>
@@ -706,7 +706,7 @@ export default function GuidePage() {
             patients to the right clinician, manage accounts, and send announcements.
             Admins sign in through the dedicated admin page and land on the{' '}
             <B>System Overview</B> dashboard, which shows user activity, a queue of new
-            assessments awaiting assignment, recently approved therapists, and weekly
+            assessments awaiting assignment, recently approved clinicians, and weekly
             sign-up trends.
           </P>
 
@@ -714,7 +714,7 @@ export default function GuidePage() {
             <Steps
               items={[
                 <>
-                  Open <B>Therapists</B> in the sidebar. Clinicians awaiting approval
+                  Open <B>Clinicians</B> in the sidebar. Clinicians awaiting approval
                   show an amber <B>Unverified</B> badge and a note that action is
                   required.
                 </>,

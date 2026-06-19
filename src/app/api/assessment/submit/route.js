@@ -18,13 +18,13 @@ import { extractRecommendedTests } from '@/lib/guided-test-engine';
  * TASK 5 & 6 IMPLEMENTATION:
  * - Receives structured symptom data from branching engine
  * - Triggers AI temporal diagnosis (non-ML)
- * - Stores full assessment trace for therapist review
+ * - Stores full assessment trace for clinician review
  * - Marks assessment as pending_review (locks editing)
  *
  * TASK 7 HANDOFF:
  * - After submission, status is set to 'pending_review'
  * - Patient answers are locked from editing
- * - Assessment becomes visible in therapist dashboard
+ * - Assessment becomes visible in clinician dashboard
  */
 export async function POST(req) {
   try {
@@ -110,15 +110,15 @@ export async function POST(req) {
        * FALLBACK ANALYSIS
        * ==================
        * If AI fails, create a safe fallback that still allows submission
-       * but requires immediate therapist review.
+       * but requires immediate clinician review.
        */
       aiAnalysisResult = {
-        temporalDiagnosis: 'Unable to generate AI analysis - Therapist review required',
+        temporalDiagnosis: 'Unable to generate AI analysis - Clinician review required',
         confidenceScore: 0,
         riskLevel: redFlags?.length > 0 ? 'Urgent' : 'Moderate',
         reasoning: [
           'AI analysis could not be completed',
-          'Manual therapist review is required',
+          'Manual clinician review is required',
           ...(redFlags?.map(
             (rf) => `Red flag detected: ${rf.redFlagText || rf.question}`
           ) || []),
@@ -129,7 +129,7 @@ export async function POST(req) {
       };
     }
 
-    // Convert to therapist-facing format
+    // Convert to clinician-facing format
     let therapistFacingResult;
     try {
       therapistFacingResult = await convertToTherapistFacingAnalysis(aiAnalysisResult);
@@ -141,7 +141,7 @@ export async function POST(req) {
     /**
      * EXTRACT RECOMMENDED TESTS
      * ==========================
-     * Determine physical tests to be performed by therapist based on AI analysis.
+     * Determine physical tests to be performed by clinician based on AI analysis.
      * Captured at submission time to ensure immutability and traceability.
      */
     let recommendedTests = [];
@@ -189,7 +189,7 @@ export async function POST(req) {
     /**
      * ASSESSMENT TRACE
      * =================
-     * Full traceability record for therapist review.
+     * Full traceability record for clinician review.
      *
      * TASK 6: Stores the following per assessment:
      * - Biodata snapshot
@@ -218,7 +218,7 @@ export async function POST(req) {
      *
      * TASK 7: Status is set to 'pending_review'
      * - Locks patient answers from editing
-     * - Makes assessment visible in therapist dashboard
+     * - Makes assessment visible in clinician dashboard
      */
     const diagnosisSession = await DiagnosisSession.create({
       patientId: session.user.id,
@@ -227,7 +227,7 @@ export async function POST(req) {
       symptomData: symptomData,
       mediaUrls: mediaUrls || [],
       assessmentTrace,
-      recommendedTests, // Storing pre-determined tests for therapist guidance
+      recommendedTests, // Storing pre-determined tests for clinician guidance
       aiAnalysis: {
         temporalDiagnosis: therapistFacingResult.temporalDiagnosis,
         confidenceScore: therapistFacingResult.confidenceScore,
@@ -237,16 +237,16 @@ export async function POST(req) {
         isProvisional: true, // ALWAYS provisional - medical disclaimer requirement
         disclaimer:
           'This is a preliminary AI-generated assessment and not a final diagnosis. ' +
-          'A qualified therapist will review your case and provide clinical confirmation.',
+          'A qualified clinician will review your case and provide clinical confirmation.',
       },
       patientFacingAnalysis: aiAnalysisResult,
-      /* TASK 7: Handoff to Therapist - status set to pending_review */
+      /* TASK 7: Handoff to Clinician - status set to pending_review */
       status: 'pending_review',
       submittedToTherapistAt: new Date(),
       assessmentType: 'MSK_BRANCHING_ENGINE_V1',
     });
 
-    // Create CaseFile entry for Admin/Therapist dashboard
+    // Create CaseFile entry for Admin/Clinician dashboard
     const caseFileId = `${user.firstName?.toLowerCase() || 'patient'}_${user.lastName?.toLowerCase() || 'unknown'}-${diagnosisSession._id.toString().slice(-6)}`;
 
     await CaseFile.create({
@@ -276,16 +276,16 @@ export async function POST(req) {
           riskLevel: aiAnalysisResult.riskLevel,
           reasoning: aiAnalysisResult.reasoning,
           disclaimer:
-            'This is a preliminary assessment. A therapist will review your case.',
+            'This is a preliminary assessment. A clinician will review your case.',
         },
         redFlagsCount: redFlags?.length || 0,
         status: 'pending_review',
         caseFileId,
         /**
-         * TODO: THERAPIST-GUIDED TESTING
+         * TODO: CLINICIAN-GUIDED TESTING
          * ===============================
-         * After this point, the therapist dashboard will show the case.
-         * Implementation of therapist-side logic is pending.
+         * After this point, the clinician dashboard will show the case.
+         * Implementation of clinician-side logic is pending.
          */
       },
       { status: 201 }
