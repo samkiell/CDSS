@@ -100,7 +100,7 @@ export default async function SearchPage({ searchParams }) {
               No matches found
             </h3>
             <p className="text-muted-foreground mt-2 max-w-sm">
-              We couldn't find any therapists or patients matching "{query}". Try checking
+              We couldn't find any clinicians or patients matching "{query}". Try checking
               for typos or use a different keyword.
             </p>
           </CardContent>

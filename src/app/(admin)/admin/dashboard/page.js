@@ -37,7 +37,7 @@ export default async function AdminDashboardPage() {
 
   const newCases = JSON.parse(JSON.stringify(newCasesRaw));
 
-  // Fetch Therapists for Management
+  // Fetch Clinicians for Management
   const approvedTherapistsRaw = await User.find({ role: ROLES.CLINICIAN })
     .sort({ createdAt: -1 })
     .limit(5)
@@ -132,11 +132,11 @@ export default async function AdminDashboardPage() {
         <TriageQueue cases={newCases} />
       </section>
 
-      {/* Row 3: Therapist Management */}
+      {/* Row 3: Clinician Management */}
       <section>
         <div className="mb-6 flex items-center justify-between">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-            Therapist Management
+            Clinician Management
           </h3>
           <Link
             href="/admin/users"
@@ -147,7 +147,7 @@ export default async function AdminDashboardPage() {
         </div>
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <TherapistManagement
-            title="Newly Approved Therapists"
+            title="Newly Approved Clinicians"
             therapists={approvedTherapists}
             type="approved"
           />
@@ -166,7 +166,7 @@ export default async function AdminDashboardPage() {
             Growth Analytics
           </h3>
           <p className="text-sm text-gray-400">
-            Weekly signup trends for Patients vs Therapists
+            Weekly signup trends for Patients vs Clinicians
           </p>
         </div>
         <div className="rounded-3xl border border-gray-100 bg-white p-8 shadow-sm dark:border-gray-800 dark:bg-gray-900">
