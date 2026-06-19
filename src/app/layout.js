@@ -1,4 +1,5 @@
 import { Inter } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from '@/components/providers/ThemeProvider';
 import QueryProvider from '@/components/providers/QueryProvider';
 import { Toaster } from 'sonner';
@@ -37,6 +38,7 @@ export default function RootLayout({ children }) {
                 {children}
                 <Toaster position="top-right" richColors />
                 <OfflineStatus />
+                <Analytics />
               </ThemeProvider>
             </QueryProvider>
           </AuthProvider>
