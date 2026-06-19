@@ -35,7 +35,7 @@ export async function PATCH(request, { params }) {
         userId: updatedUser._id,
         title: 'Role Upgraded',
         description:
-          'Your account has been upgraded to Clinician (Therapist). You can now manage patient cases.',
+          'Your account has been upgraded to Clinician. You can now manage patient cases.',
         type: 'SYSTEM',
         link: '/clinician/dashboard',
       });

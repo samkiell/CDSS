@@ -13,7 +13,7 @@ import { serializeState, deserializeState } from '@/lib/branching-assessment-eng
  * 3. questions → Dynamic branching questions based on region and JSON rules
  * 4. summary   → Review all answers before AI analysis
  * 5. analyzing → AI temporal diagnosis in progress
- * 6. complete  → Final confirmation and handoff to therapist
+ * 6. complete  → Final confirmation and handoff to clinician
  *
  * BIODATA SNAPSHOT:
  * The biodata is snapshotted per assessment to preserve historical accuracy.
@@ -68,7 +68,7 @@ const useAssessmentStore = create(
       /**
        * TRACEABILITY STATE
        * ===================
-       * Full assessment trace for therapist review.
+       * Full assessment trace for clinician review.
        * Stored per assessment for audit and clinical review.
        */
       assessmentTrace: null,
@@ -271,7 +271,7 @@ const useAssessmentStore = create(
       /**
        * SET ASSESSMENT TRACE
        * =====================
-       * Stores the full assessment trace for therapist review.
+       * Stores the full assessment trace for clinician review.
        * Called before submission to ensure traceability.
        */
       setAssessmentTrace: (trace) =>
@@ -280,7 +280,7 @@ const useAssessmentStore = create(
         }),
 
       /**
-       * SUBMIT TO THERAPIST
+       * SUBMIT TO CLINICIAN
        * =====================
        * Marks the assessment as submitted and locks answers.
        * After this, patient cannot edit their responses.
