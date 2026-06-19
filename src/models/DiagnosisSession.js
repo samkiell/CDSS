@@ -103,7 +103,7 @@ const SymptomDataSchema = new mongoose.Schema(
  * CONDITION ANALYSIS SCHEMA
  * ==========================
  * Stores the engine's analysis of each potential condition.
- * Used for traceability and therapist review.
+ * Used for traceability and clinician review.
  */
 const ConditionAnalysisSchema = new mongoose.Schema(
   {
@@ -154,7 +154,7 @@ const RedFlagSchema = new mongoose.Schema(
 /**
  * ASSESSMENT TRACE SCHEMA
  * ========================
- * Full traceability record for therapist review.
+ * Full traceability record for clinician review.
  *
  * TASK 6 IMPLEMENTATION:
  * Stores the following per assessment:
@@ -183,7 +183,7 @@ const AssessmentTraceSchema = new mongoose.Schema(
 /**
  * GUIDED TEST RESULT SCHEMA
  * ==========================
- * Stores individual physical test results performed by the therapist.
+ * Stores individual physical test results performed by the clinician.
  * These tests are part of the guided diagnosis flow.
  *
  * DATA INTEGRITY:
@@ -223,7 +223,7 @@ const GuidedTestResultSchema = new mongoose.Schema(
     recordedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
-      default: null, // TherapistId who recorded this result
+      default: null, // ClinicianId who recorded this result
     },
     assessmentId: {
       type: String,
@@ -273,7 +273,7 @@ const RefinedDiagnosisSchema = new mongoose.Schema(
 /**
  * GUIDED TEST FLOW SCHEMA
  * ========================
- * Complete record of the therapist-guided testing session.
+ * Complete record of the clinician-guided testing session.
  *
  * LOCK MECHANISM:
  * - isLocked prevents re-running tests for this assessment
@@ -375,7 +375,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
      * - This is a TEMPORAL diagnosis, not a final diagnosis
      * - The AI reasons over structured answers, not ML prediction
      * - Always includes disclaimer about preliminary nature
-     * - Therapist review is required before finalization
+     * - Clinician review is required before finalization
      */
     aiAnalysis: {
       temporalDiagnosis: {
@@ -441,7 +441,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
     /**
      * GUIDED TEST RESULTS
      * ====================
-     * Therapist-performed physical tests and refined diagnosis.
+     * Clinician-performed physical tests and refined diagnosis.
      *
      * COEXISTENCE RULE:
      * - This does NOT overwrite aiAnalysis (temporal diagnosis)
@@ -462,7 +462,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
      * ===========================
      * Determined by the assessment engine upon submission.
      * These are immutable and traceable back to the initial assessment.
-     * Therapist uses these as the primary guidance for physical examination.
+     * Clinician uses these as the primary guidance for physical examination.
      */
     recommendedTests: [
       {
@@ -502,7 +502,7 @@ const DiagnosisSessionSchema = new mongoose.Schema(
     /**
      * HANDOFF TIMESTAMP
      * ==================
-     * When the assessment was submitted to therapist.
+     * When the assessment was submitted to clinician.
      * After this, patient cannot edit their answers.
      */
     submittedToTherapistAt: {
@@ -524,10 +524,10 @@ const DiagnosisSessionSchema = new mongoose.Schema(
       prescriptions: [String],
       recommendedPlan: String,
       /**
-       * TODO: THERAPIST-GUIDED TESTING
+       * TODO: CLINICIAN-GUIDED TESTING
        * ===============================
-       * This is where therapist-guided physical testing results will be stored.
-       * Implementation pending therapist-side logic.
+       * This is where clinician-guided physical testing results will be stored.
+       * Implementation pending clinician-side logic.
        */
       physicalTestResults: [
         {

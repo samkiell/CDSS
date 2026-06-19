@@ -4,7 +4,7 @@ import provocativeTests from './decision-engine/test-library.json';
 /**
  * GUIDED DIAGNOSIS TEST ENGINE (FLOWCHART DRIVEN)
  * =============================================
- * Implements therapist-guided physical testing using a state-driven decision graph.
+ * Implements clinician-guided physical testing using a state-driven decision graph.
  */
 
 /**
